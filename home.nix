@@ -2,12 +2,12 @@
 
 {
    imports = [
-     ./xmonad.nix
-     ./alacritty.nix
-     ./emacs.nix
-     ./nvim.nix
-     ./git.nix
-     ./ncmpcpp.nix
+     ./modules/xmonad.nix
+     ./modules/alacritty.nix
+     ./modules/emacs.nix
+     ./modules/nvim.nix
+     ./modules/git.nix
+     ./modules/ncmpcpp.nix
    ];
 
   # Let Home Manager install and manage itself.
@@ -36,6 +36,10 @@ nixpkgs.config.allowUnfree = true;
       telnet
       jq
 
+      krita
+      gimp
+      inkscape
+
       pulsemixer
       scrot
       ueberzug
@@ -62,6 +66,11 @@ nixpkgs.config.allowUnfree = true;
 
       zathura
 
+      teams
+      libreoffice
+
+      signal-desktop
+
       exa
       procs
       ripgrep
@@ -77,11 +86,14 @@ nixpkgs.config.allowUnfree = true;
       dwarf-fortress
     ];
 
-  services.gpg-agent = {
-    enable = true;
-    defaultCacheTtl = 1800;
-    enableSshSupport = true;
-  };
+    # home.file.".mbsyncrc".source = ./mbsyncrc;
+
+
+    services.gpg-agent = {
+      enable = true;
+      defaultCacheTtl = 1800;
+      enableSshSupport = true;
+    };
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage

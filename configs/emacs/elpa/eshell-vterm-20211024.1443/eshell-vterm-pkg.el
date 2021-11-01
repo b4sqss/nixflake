@@ -1,0 +1,2 @@
+;;; Generated package description from eshell-vterm.el  -*- no-byte-compile: t -*-
+(define-package "eshell-vterm" "20211024.1443" "Vterm for visual commands in eshell" '((emacs "27.1") (vterm "0.0.1")) :commit "f2212dbfa51aa4b67efda55304b2b3811e8e0625" :authors '(("Illia Ostapyshyn" . "ilya.ostapyshyn@gmail.com")) :maintainer '("Illia Ostapyshyn" . "ilya.ostapyshyn@gmail.com") :keywords '("eshell" "vterm" "terminals" "shell" "visual" "tools" "processes") :url "https://github.com/iostapyshyn/eshell-vterm")

@@ -1,0 +1,1 @@
+("~/nixfiles/" "~/Projects/startpage/" "~/Projects/emacs-from-scratch/")

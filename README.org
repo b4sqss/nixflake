@@ -1,6 +1,8 @@
 #+TITLE: NIXFILES
+* General info
 My desktop configuration using nixos + home-manager
 
+* Table of contents
 It's still pretty simple but I like it and it has everything I need, which is:
 - my configuration.nix
 - my home-manager configuration

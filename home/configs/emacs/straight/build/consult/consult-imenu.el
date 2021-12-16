@@ -1,0 +1,1 @@
+/home/basqs/.emacs.d/straight/repos/consult/consult-imenu.el

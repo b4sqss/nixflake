@@ -1,0 +1,19 @@
+IMAPStore gmail-remote
+Host imap.gmail.com
+SSLType IMAPS
+AuthMechs LOGIN
+User bequintao@gmail.com
+PassCmd "pass email/bequintao@gmail.com"
+
+MaildirStore gmail-local
+Path ~/Documents/Mail/gmail/
+Inbox ~/Documents/Mail/gmail/INBOX
+Subfolders Verbatim
+
+Channel gmail
+Master :gmail-remote:
+Slave :gmail-local:
+Create Both
+Expunge Both
+Patterns * !"[Gmail]/All Mail" !"[Gmail]/Important" !"[Gmail]/Starred" !"[Gmail]/Bin"
+SyncState *

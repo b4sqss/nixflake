@@ -1,0 +1,1 @@
+/home/basqs/.emacs.d/straight/repos/embark/embark-consult.el

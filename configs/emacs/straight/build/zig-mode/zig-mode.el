@@ -1,1 +1,0 @@
-/home/basqs/.config/emacs/straight/repos/zig-mode/zig-mode.el

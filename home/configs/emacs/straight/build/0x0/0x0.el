@@ -1,0 +1,1 @@
+/home/basqs/.emacs.d/straight/repos/emacs-0x0/0x0.el

@@ -1,1 +1,0 @@
-/home/basqs/.emacs.d/straight/repos/alduin-emacs/alduin-theme.el

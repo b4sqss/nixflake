@@ -1,0 +1,6 @@
+#!/bin/sh
+
+pushd ~/.nixfiles
+nix build .#homeManagerConfigurations.basqs.activationPackage
+./result/activate
+popd

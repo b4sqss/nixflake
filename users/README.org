@@ -1,0 +1,4 @@
+#+TITLE: NIXFILES
+My desktop configuration using nixos + home-manager
+
+It's still pretty simple but I like it and it has everything I need

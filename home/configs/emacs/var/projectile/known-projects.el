@@ -1,1 +1,0 @@
-("~/.config/nixpkgs/" "~/Projects/startpage/" "~/Projects/emacs-from-scratch/")

@@ -1,2 +1,0 @@
-;;; Generated package description from mode-line-idle.el  -*- no-byte-compile: t -*-
-(define-package "mode-line-idle" "20210215.2345" "Evaluate mode line content when idle" '((emacs "26.1")) :commit "8454a5ef404c6f4fe954a10da6ce4fd4311decfa" :authors '(("Campbell Barton" . "ideasman42@gmail.com")) :maintainer '("Campbell Barton" . "ideasman42@gmail.com") :url "https://gitlab.com/ideasman42/emacs-mode-line-idle")

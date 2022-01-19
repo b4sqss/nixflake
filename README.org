@@ -1,0 +1,14 @@
+#+TITLE: My nixos configuration
+This is a simple nixos configuration I use as my daily driver. It also has a flake and a home-manager configuration.
+
+* Nixos configuration
+This can be found on system/configuration.nix and it has a few packages and services.
+
+* Home-manager
+On the home manager configuration there is my shell, vim, xmonad, tmux...
+Nothing to fancy either, but usefull
+
+* flake
+The flake.nix is usefull foreasily building both configs(using the scripts) and also for updating both of them in a easier way.
+
+It looks like this when it's built: [[./user/configs/2022-01-19-171640_1920x1080_scrot.png]]

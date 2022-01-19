@@ -11,4 +11,4 @@ Nothing to fancy either, but usefull
 * flake
 The flake.nix is usefull foreasily building both configs(using the scripts) and also for updating both of them in a easier way.
 
-It looks like this when it's built: [[./user/configs/2022-01-19-171640_1920x1080_scrot.png]]
+It looks like this when it's built: [[./user/configs/screenshot.png]]

@@ -7,6 +7,7 @@
 (setq visible-bell nil)
 (setq tab-width 4)
 (setq evil-shift-width tab-width)
+(setq comp-async-report-warnings-errors nil)
 
 
 (scroll-bar-mode -1)
@@ -313,19 +314,23 @@
 (use-package smartparens
   :hook (prog-mode . smartparens-mode))
 
-(setq display-time-format "%l:%M %p %b %y"
+(setq display-time-format "%H:%M"
       display-time-default-load-average nil)
 
-  (use-package doom-modeline
-    :hook (after-init . doom-modeline-mode)
-    :custom (setq doom-modeline-height 20
-                  doom-modeline-lsp t
-                  doom-modeline-github t
-                  doom-modeline-minor-modes t
-                  doom-modeline-major-mode-icon t)
+;; (use-package doom-modeline
+;;   :hook (after-init . doom-modeline-mode)
+;;   :custom (setq doom-modeline-height 20
+;;                 doom-modeline-lsp t
+;;                 doom-modeline-github t
+;;                 doom-modeline-minor-modes t
+;;                 doom-modeline-major-mode-icon t)
 
-    (use-package minions
-      (:hook doom-modeline-mode)))
+;;   (use-package minions
+;;     (:hook doom-modeline-mode)))
+
+
+(use-package mood-line
+  :init (mood-line-mode)(display-time-mode))
 
 (use-package doom-themes)
 (consult-theme 'doom-tomorrow-night)

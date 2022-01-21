@@ -16,70 +16,42 @@ else
 fi
 '';
 
-  emacs-opent = pkgs.writeShellScriptBin "emacs-opent" '' 
-if [ $# -eq 0 ]; then
-    emacsclient -n -t
-    exit
-fi
-
-emacsclient -e "(frames-on-display-list \"$DISPLAY\")" &>/dev/null
-
-if [ $? -eq 0 ]; then
-    emacsclient -n -t "$*"
-else
-    emacsclient -t -n "$*"
-fi
-'';
-
-#   bintools = binutils.bintools;
-#   emacs' = emacs.overrideAttrs (old: rec {
-#     # emacs' = (import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/master.tar.gz") {}).emacs.overrideDerivation (old: rec {
-#     withXwidgets = true;
-#     postInstall = 
-#       (old.postInstall + ''
-#         # mu4e
-#         wrapProgram $out/bin/emacs --prefix PATH : ${lib.makeBinPath [ mu ]}
-#         wrapProgram $out/bin/emacs --set MU4E ${mu}
-#       '');
-#   });
-
-#   mu4e = emacsPackages.trivialBuild {
-#     pname = "mu4e";
-#     src = "${mu}/share/emacs/site-lisp/mu4e/";
-#     # packageRequires = [ mu ];
-#   };
-    
 in {
-#   nixpkgs.overlays = [
-# (self: super: {
-#   emacs = super.emacs.overrideAttrs (old: {
-#     configureFlags = (old.configureFlags or []) ++ ["--with-x-toolkit=lucid"];
-#   });
-#   })
-#   ];
 
   home.sessionVariables = {
-    EDITOR = "emacs-opent";
+    EDITOR = "emacs-open";
     VISUAL = "emacs-open";
 
   };
   home.packages = with pkgs; [
     emacs-open
-    emacs-opent
     sqlite
     gopls
     emacs-all-the-icons-fonts
     auctex
     rnix-lsp
     libvterm
-    (aspellWithDicts (ds: with ds; [ en pl ]))
+    # (aspellWithDicts (ds: with ds; [ en pl ]))
     languagetool
     coreutils
   ];
 
+  # environment.systemPackages = [
+  #   (emacsWithPackagesFromUsePackage {
+  #     config = ../configs/emacs/emacs.org;
+  #     package = pkgs.emacsGcc;
+  #     alwaysEnsure = true;
+  #     alwaysTangle = true;
+
+  #     # extraEmacsPackages = epkgs: [
+  #     #   epkgs.cask
+  #     # ];
+  #   })
+  # ];
+
   programs.emacs = {
     enable = true;
-    # package = emacs';
+    package = pkgs.emacsGcc;
     extraPackages = (epkgs:
       (with epkgs.melpaPackages; [
         evil
@@ -150,8 +122,6 @@ in {
         ])
     );
   };
-
-   # home.file.".emacs.d/".source = ../configs/emacs;
 
   services.emacs.enable = true;
 

@@ -1,4 +1,5 @@
 #+TITLE:Emacs configuration
+
 * better defaults
 #+begin_src emacs-lisp :tangle ./init.el
 
@@ -11,6 +12,7 @@
   (setq visible-bell nil)
   (setq tab-width 4)
   (setq evil-shift-width tab-width)
+  (setq comp-async-report-warnings-errors nil)
 
 
   (scroll-bar-mode -1)
@@ -364,19 +366,23 @@
 ** modeline
 #+begin_src emacs-lisp :tangle ./init.el
 
-(setq display-time-format "%l:%M %p %b %y"
-      display-time-default-load-average nil)
+  (setq display-time-format "%H:%M"
+        display-time-default-load-average nil)
 
-  (use-package doom-modeline
-    :hook (after-init . doom-modeline-mode)
-    :custom (setq doom-modeline-height 20
-                  doom-modeline-lsp t
-                  doom-modeline-github t
-                  doom-modeline-minor-modes t
-                  doom-modeline-major-mode-icon t)
+  ;; (use-package doom-modeline
+  ;;   :hook (after-init . doom-modeline-mode)
+  ;;   :custom (setq doom-modeline-height 20
+  ;;                 doom-modeline-lsp t
+  ;;                 doom-modeline-github t
+  ;;                 doom-modeline-minor-modes t
+  ;;                 doom-modeline-major-mode-icon t)
 
-    (use-package minions
-      (:hook doom-modeline-mode)))
+  ;;   (use-package minions
+  ;;     (:hook doom-modeline-mode)))
+
+
+  (use-package mood-line
+    :init (mood-line-mode)(display-time-mode))
 
 #+end_src
 ** Colorscheme
@@ -513,30 +519,30 @@
 ** org present
 #+begin_src emacs-lisp :tangle ./init.el
 
-(defun org-start-presentation ()
-  (interactive)
-  (org-tree-slide-mode 1)
-  (setq text-scale-mode-amount 3)
-  (text-scale-mode 1))
+  (defun org-start-presentation ()
+    (interactive)
+    (org-tree-slide-mode 1)
+    (setq text-scale-mode-amount 3)
+    (text-scale-mode 1))
 
-(defun org-end-presentation ()
-  (interactive)
-  (text-scale-mode 0)
-  (org-tree-slide-mode 0))
+  (defun org-end-presentation ()
+    (interactive)
+    (text-scale-mode 0)
+    (org-tree-slide-mode 0))
 
-(use-package org-tree-slide
-  :defer t
-  :after org
-  :commands org-tree-slide-mode
-  :config
-  (evil-define-key 'normal org-tree-slide-mode-map
-    (kbd "q") 'org-end-presentation
-    (kbd "C-j") 'org-tree-slide-move-next-tree
-    (kbd "C-k") 'org-tree-slide-move-previous-tree)
-  (setq org-tree-slide-slide-in-effect nil
-        org-tree-slide-activate-message "Presentation started."
-        org-tree-slide-deactivate-message "Presentation ended."
-        org-tree-slide-header t))
+  (use-package org-tree-slide
+    :defer t
+    :after org
+    :commands org-tree-slide-mode
+    :config
+    (evil-define-key 'normal org-tree-slide-mode-map
+      (kbd "q") 'org-end-presentation
+      (kbd "C-j") 'org-tree-slide-move-next-tree
+      (kbd "C-k") 'org-tree-slide-move-previous-tree)
+    (setq org-tree-slide-slide-in-effect nil
+          org-tree-slide-activate-message "Presentation started."
+          org-tree-slide-deactivate-message "Presentation ended."
+          org-tree-slide-header t))
 
 #+end_src
 ** export org

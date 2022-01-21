@@ -5,10 +5,10 @@
     nixpkgs.url = "nixpkgs/nixos-21.11";
     home-manager.url = "github:nix-community/home-manager/release-21.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    nix-gaming.url = "github:fufexan/nix-gaming";
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
   };
 
-  outputs = { nixpkgs, home-manager, ... }: 
+  outputs = { nixpkgs, home-manager, emacs-overlay, ... }: 
   let 
     system = "x86_64-linux";
 
@@ -27,7 +27,10 @@
         homeDirectory = "/home/basqs";
         stateVersion = "21.11";
         configuration = {
-          imports = [ ./users/home.nix ];
+          imports = [
+          ({ config, pkgs, ... }: { nixpkgs.overlays = [ emacs-overlay.overlay ]; })
+          ./users/home.nix 
+          ];
         };
       };
     };
@@ -37,7 +40,7 @@
         inherit system;
 
         modules = [ ./system/configuration.nix ];
-               };
-             };
-           };
-         }
+      };
+    };
+  };
+}

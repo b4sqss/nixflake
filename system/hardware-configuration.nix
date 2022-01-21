@@ -23,6 +23,11 @@
       fsType = "vfat";
     };
 
+  # fileSystems."/mnt/pendrive" =
+  #   { device = "/dev/disk/by-uuid/847d3ef6-627f-4364-9f0c-7e3e49f17ce9";
+  #     fsType = "ext4";
+  #   };
+
   swapDevices = [ ];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";

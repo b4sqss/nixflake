@@ -24,7 +24,7 @@
     gdu fzf newsboat 
 
     ## Cli
-    exa fd duf youtube-dl pfetch rdfind imagemagick ffmpeg 
+    exa fd duf youtube-dl pfetch rdfind imagemagick ffmpeg bc
 
     ## Documents
     zathura texlive.combined.scheme-full pandoc libreoffice-fresh
@@ -65,7 +65,7 @@
     ## Scheme
     scheme-manpages mitscheme
   ];
-
+  
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards

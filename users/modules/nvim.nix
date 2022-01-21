@@ -10,13 +10,12 @@
       nerdtree
       nerdtree-git-plugin
       nvim-base16
-      # vim-devicons
+      vim-devicons
       vim-fugitive
       # goyo
-      # nerdcommenter
-      # Hop
+      nerdcommenter
+      hop-nvim
       # nvim-cmp
-      # vim-symlink
     ];
     extraConfig = ''
       set history=500
@@ -70,6 +69,10 @@
       let g:NERDTreeDirArrowExpandable = '▸'
       let g:NERDTreeDirArrowCollapsible = '▾'
       let NERDTreeShowHidden=0
+
+      map <m-/> :NERDCommenterComment
+
+      map <"> :HopChar1
 
         let mapleader = ","
 

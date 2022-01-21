@@ -1,27 +1,31 @@
 (setq gc-cons-threshold (* 50 1000 1000))
 
 ;; if not using dashboard
-(setq inhibit-startup-message t)
+;; (setq inhibit-startup-message t)
+
+(setq backup-directory-alist `(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory))))
+(setq visible-bell nil)
+(setq tab-width 4)
+(setq evil-shift-width tab-width)
+
 
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (tooltip-mode -1)
 (set-fringe-mode 10)
-
 (menu-bar-mode -1)
-
-(setq visible-bell nil)
+(set-language-environment "UTF-8")
+(set-face-bold-p 'bold nil)
+(set-face-attribute 'default nil
+                    :family "JetBrains Mono Nerd Font"
+                    :height 110
+                    :width 'normal)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 (dolist (mode '(org-mode-hook
                 term-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
-
-(setq backup-directory-alist `(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory))))
-
-(global-visual-line-mode)
-(setq require-final-newline t)
 
 (require 'package)
 
@@ -39,7 +43,6 @@
 (require 'use-package)
 (setq warning-suppress-types '((use-package) (use-package)))
 (setq use-package-always-ensure t)
-;; (setq use-package-always-defer t)
 
 (defvar bootstrap-version)
 (let ((bootstrap-file
@@ -54,28 +57,12 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-(set-language-environment "UTF-8")
-(set-face-bold-p 'bold nil)
-(set-face-attribute 'default nil
-                    :font "JetBrains Mono Nerd Font:antialias=true"
-                    :height 110)
-(set-face-bold-p 'bold nil)
-
-;; (custom-set-faces
-;;  '(default ((t (:inherit nil :height 100 :family "JetBrains Mono")))))
-
-(use-package no-littering)
-
-(setq auto-save-file-name-transforms
-      `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
-
 (defun evil-hook ()
   (dolist (mode '(custom-mode
                   vterm-mode))
     (add-to-list 'evil-emacs-state-modes mode)))
 
 (use-package evil
-  :defer nil
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
@@ -89,55 +76,30 @@
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
   (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
 
-  ;; Use visual line motions even outside of visual-line-mode buffers
-  ;; (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-  ;; (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
-
-  ;; (evil-global-set-key 'motion "j" 'evil-next-line)
-  ;; (evil-global-set-key 'motion "k" 'evil-previous-line)
   (use-package ace-jump-mode)
   (evil-global-set-key 'motion ";" 'ace-jump-mode)
+  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
   (evil-set-initial-state 'messages-buffer-mode 'normal)
   (evil-set-initial-state 'dashboard-mode 'normal))
 
 (use-package evil-collection
-  :diminish
-  :defer nil
-  :init
-  (setq evil-collection-company-use-tng nil)  ;; Is this a bug in evil-collection?
-  :custom
-  (evil-collection-outline-bind-tab-p nil)
   :config
   (evil-collection-init))
 
 (use-package undo-tree
   :after evil
-  :diminish
-  :defer nil
   :init
   (global-undo-tree-mode 1))
 
 (use-package evil-nerd-commenter
-  :defer nil
-  :diminish
   :bind ("M-/" . evilnc-comment-or-uncomment-lines))
 
 (use-package evil-leader
-  :defer nil
-  :diminish
   :config
   (global-evil-leader-mode)
   (evil-leader/set-leader "<SPC>")
   (evil-leader/set-key
-    ;; General
-    ".q" 'delete-frame
-    "c" 'kill-buffer-and-window
-    "e" 'eshell-toggle
-    ;; Undo
-    "uv" 'undo-tree-visualize
-    "uu" 'undo-tree-undo
-    "ur" 'undo-tree-redo
     ;; Files
     "d" 'dired
     ;; Bufffers
@@ -157,10 +119,6 @@
     ;; Export
     "oep" 'org-latex-export-to-pdf
     "oeh" 'org-html-export-to-html
-    ;; Roam
-    "orf" 'org-roam-node-find
-    "ori" 'org-roam-node-insert
-    "oru" 'org-roam-db-sync
     ;; Babel
     "obs" 'org-babel-execute-src-block
     "obb" 'org-babel-execute-buffer
@@ -174,48 +132,35 @@
     "hs" 'helpful-symbol
     "hm" 'describe-mode
     ;; Magit
-    "gs" 'magit-status
     "gs"  'magit-status
-    "gd"  'magit-diff-unstaged
     "gc"  'magit-commit
-    "glc" 'magit-log-current
-    "glf" 'magit-log-buffer-file
     "gb"  'magit-branch
     "gP"  'magit-push-current
-    "gp"  'magit-pull-branch
     "gf"  'magit-fetch
-    "gF"  'magit-fetch-all
-    "gr"  'magit-rebase))
+    "gF"  'magit-fetch-all))
 
 (use-package vertico
   :bind (:map vertico-map
               ("C-j" . vertico-next)
               ("C-k" . vertico-previous)
-              ("C-f" . vertico-exit)
-              :map minibuffer-local-map
-              ("M-h" . backward-kill-word))
+              ("C-f" . vertico-exit))
   :custom
   (vertico-cicle t)
   :init
   (vertico-mode))
 
 (use-package savehist
-  :diminish
   :init (savehist-mode))
 
 (use-package which-key
-  :defer 0
-  :diminish
   :config
   (which-key-mode)
   (setq which-key-idle-delay 0.2))
 
 (use-package helpful
-  :diminish
   :commands helpful-mode)
 
 (use-package consult
-  ;; Replace bindings. Lazily loaded due by `use-package'.
   :bind (("C-s" . consult-line)
          ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
          ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
@@ -239,19 +184,35 @@
    :preview-key '(:debounce 0.2 any)
    consult-ripgrep consult-git-grep consult-grep)
 
-  (setq consult-narrow-key "<") ;; (kbd "C-+")
+  (setq consult-narrow-key "<")) ;; (kbd "C-+")
 
-  (setq consult-project-root-function
-        (lambda ()
-          (when-let (project (project-current))
-            (car (project-roots project))))))
+(use-package embark
+  :straight t
+  :bind
+  (("C-." . embark-act)
+   ("M-." . embark-dwim)
+   ("C-h B" . embark-bindings))
+  :init
+  (setq prefix-help-command #'embark-prefix-help-command))
+
+(use-package embark-consult
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode))
+
+(use-package marginalia
+  :custom
+  (marginalia-annotators
+   '(marginalia-annotators-heavy marginalia-annotators-light nil))
+  :init
+  (marginalia-mode))
 
 (use-package orderless
   :custom (completion-styles '(orderless)))
 
-(use-package vterm)
-(use-package vterm-toggle
-  :bind ("C-M-'" . vterm-toggle))
+(use-package term
+  :config
+  (setq explicit-shell-file-name "zsh") ;; Change this to zsh, etc
+  (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *"))
 
 (use-package dired
   :ensure nil
@@ -271,14 +232,7 @@
   (evil-collection-define-key 'normal 'dired-mode-map
     "H" 'dired-hide-dotfiles-mode))
 
-(use-package olivetti
-  :bind ("C-c o" . olivetti-mode))
-
 (use-package treemacs
-  :init 
-  (with-eval-after-load 'treemacs
-    (define-key treemacs-mode-map [mouse-1] #'treemacs-single-click-expand-action)
-    (treemacs-toggle-show-dotfiles))
   :bind(("C-t" . treemacs)))
 
 (use-package treemacs-evil
@@ -293,82 +247,42 @@
   :after (treemacs magit)
   :ensure t)
 
-(use-package aggressive-indent
-  :hook ((emacs-lisp-mode
-          inferior-emacs-lisp-mode
-          ielm-mode
-          lisp-mode
-          inferior-lisp-mode
-          isp-interaction-mode
-          slime-repl-mode) . aggressive-indent-mode))
-
 (use-package magit
   :bind ("C-M-;" . magit-status)
   :commands (magit-status magit-get-current-branch)
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
-(use-package embark
-  :straight t
-  :bind
-  (("C-." . embark-act)
-   ("M-." . embark-dwim)
-   ("C-h B" . embark-bindings))
-  :init
-  (setq prefix-help-command #'embark-prefix-help-command))
+(use-package no-littering)
 
-(use-package embark-consult
-  :straight t)
+(setq auto-save-file-name-transforms
+      `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
 
 (use-package crux
   :bind (("C-c D" . crux-delete-file-and-buffer)))
 
-(setq browse-url-browser-function 'xwidget-webkit-browse-url)
-
-(setq ispell-dictionary "pt_BR")
-
-(use-package flycheck
-  :hook (lsp-mode)
-  :ensure t)
-(add-hook 'after-init-hook #'global-flycheck-mode)
-
 (use-package bug-hunter)
 
-(setq-default tab-width 4)
-(setq-default evil-shift-width tab-width)
-
-(use-package sudo-edit
-  :bind (("C-c C-r" . sudo-edit)))
+(use-package olivetti
+  :bind ("C-c o" . olivetti-mode))
 
 (use-package dashboard
-  :ensure t
-  :defer nil
   :preface
   (defun create-scratch-buffer ()
     "Create a scratch buffer"
     (interactive)
     (switch-to-buffer (get-buffer-create "*scratch*"))
     (lisp-interaction-mode))
-  :config (dashboard-setup-startup-hook)
-                                        ;      :bind (("C-z d" . open-dashboard))
-  )
+  :config (dashboard-setup-startup-hook))
 
-(setq dashboard-projects-switch-function 'projectile-switch-project)
-(setq dashboard-banner-logo-title "")
-(setq dashboard-init-info (format "%d packages loaded in %s"
-                                  (length package-activated-list) (emacs-init-time)))
+(setq dashboard-startup-banner "./etc/nix.txt")
 (setq dashboard-center-content t)
 (setq dashboard-set-navigator t)
 (setq dashboard-show-shortcuts t)
-
 (setq dashboard-items '((recents  . 5)
                         (bookmarks . 5)
                         (agenda . 10)))
-
-
-(setq dashboard-set-heading-icons t)
 (setq dashboard-set-file-icons t)
-
 (setq dashboard-set-navigator t)
 (setq dashboard-navigator-buttons
       `(;; line1
@@ -399,21 +313,19 @@
 (use-package smartparens
   :hook (prog-mode . smartparens-mode))
 
- (use-package doom-modeline
-   :hook (after-init . doom-modeline-mode)
-   :custom (setq doom-modeline-height 20
-                 doom-modeline-bar-width 6
-                 doom-modeline-lsp t
-                 setq doom-modeline-buffer-encoding nil
-                 doom-modeline-github t
-                 doom-modeline-mu4e nil
-                 doom-modeline-irc t
-                 doom-modeline-minor-modes t
-                 doom-modeline-major-mode-icon t)
-   (custom-set-faces '(mode-line ((t (:height 0.85))))
-                     '(mode-line-inactive ((t (:height 0.85)))))
- (use-package minions
-   (:hook doom-modeline-mode)))
+(setq display-time-format "%l:%M %p %b %y"
+      display-time-default-load-average nil)
+
+  (use-package doom-modeline
+    :hook (after-init . doom-modeline-mode)
+    :custom (setq doom-modeline-height 20
+                  doom-modeline-lsp t
+                  doom-modeline-github t
+                  doom-modeline-minor-modes t
+                  doom-modeline-major-mode-icon t)
+
+    (use-package minions
+      (:hook doom-modeline-mode)))
 
 (use-package doom-themes)
 (consult-theme 'doom-tomorrow-night)
@@ -425,13 +337,9 @@
   (setq org-hide-emphasis-markers t)
   (setq truncate-lines t)
   (setq evil-auto-indent nil)
+  (setq left-margin-width 2)
+  (setq right-margin-width 2)
   (diminish org-indent-mode))
-
-(defun side-padding ()
-  (lambda () (progn
-               (setq left-margin-width 2)
-               (setq right-margin-width 2)
-               (set-window-buffer nil (current-buffer)))))
 
 (defun org-toggle-todo-and-fold ()
   (interactive)
@@ -448,33 +356,54 @@
 
 ;; (define-key org-mode-map (kbd "C-c C-d") 'org-toggle-todo-and-fold)
 
-
 (use-package org
-  :defer nil
   :hook (org-mode . org-mode-setup))
 
+(setq org-ellipsis " ▾"
+      org-hide-emphasis-markers t
+      org-special-ctrl-a/e t
+      org-special-ctrl-k t
+      org-src-fontify-natively t
+      org-fontify-whole-heading-line t
+      org-fontify-quote-and-verse-blocks t
+      org-src-tab-acts-natively t
+      org-edit-src-content-indentation 2
+      org-hide-block-startup nil
+      org-src-preserve-indentation nil
+      org-startup-folded 'content
+      org-cycle-separator-lines 2
+      org-agenda-files '("~/Documents/org/org-agenda.org"))
 
-(setq org-ellipsis " ▾")
-(setq org-agenda-files '("~/Documents/org/org-agenda.org"))
+(defun my-org-archive-done-tasks ()
+  (interactive)
+  (org-map-entries 'org-archive-subtree "/DONE" 'file)
+  (org-map-entries 'org-archive-subtree "/CANCELLED" 'file))
 
+(require 'org-tempo)
+
+(add-to-list 'org-structure-template-alist '("sh" . "src sh"))
+(add-to-list 'org-structure-template-alist '("scm" . "src scheme"))
+(add-to-list 'org-structure-template-alist '("py" . "src python"))
+(add-to-list 'org-structure-template-alist '("tex" . "src latex"))
+(add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+
+(setq org-confirm-babel-evaluate nil)
 
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp .t)
+   (python . t)
+   (scheme . t)
    (shell . t)))
-
-(use-package org-evil
-  :defer nil)
 
 (use-package org-pomodoro
   :bind (("C-c p s" . org-timer-set-timer)
          ("C-c p p" . org-timer-pause-or-continue)))
 
 (use-package org-bullets
-  :defer nil
   :hook (org-mode . org-bullets-mode)
   :custom
-  (org-bullets-bullet-list '("◉" "○" "•" "◆" "○" "●" "◆")))
+  (org-bullets-bullet-list '("◉" "●" "○" "•" "●" "○" "•")))
 
 (let* ((base-font-color     (face-foreground 'default nil 'default))
        (headline           `(:inherit default :weight bold :foreground ,base-font-color)))
@@ -490,20 +419,6 @@
                           `(org-level-1 ((t (,@headline , :height 1.75))))
                           `(org-document-title ((t (,@headline , :height 1.5 :underline nil))))))
 
-(setq org-todo-keywords
-      '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
-        (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
-
-(require 'org-tempo)
-
-(add-to-list 'org-structure-template-alist '("sh" . "src sh"))
-(add-to-list 'org-structure-template-alist '("scm" . "src scheme"))
-(add-to-list 'org-structure-template-alist '("py" . "src python"))
-(add-to-list 'org-structure-template-alist '("tex" . "src latex"))
-(add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
-
-(setq org-confirm-babel-evaluate nil)
-
 (require 'org-habit)
 (add-to-list 'org-modules 'org-habit)
 (setq org-habit-graph-column 60)
@@ -513,12 +428,44 @@
   :bind (("C-c j n" . org-journal-new-entry)
          ("C-c j s" . org-journal-search)))
 
+(defun org-start-presentation ()
+  (interactive)
+  (org-tree-slide-mode 1)
+  (setq text-scale-mode-amount 3)
+  (text-scale-mode 1))
+
+(defun org-end-presentation ()
+  (interactive)
+  (text-scale-mode 0)
+  (org-tree-slide-mode 0))
+
+(use-package org-tree-slide
+  :defer t
+  :after org
+  :commands org-tree-slide-mode
+  :config
+  (evil-define-key 'normal org-tree-slide-mode-map
+    (kbd "q") 'org-end-presentation
+    (kbd "C-j") 'org-tree-slide-move-next-tree
+    (kbd "C-k") 'org-tree-slide-move-previous-tree)
+  (setq org-tree-slide-slide-in-effect nil
+        org-tree-slide-activate-message "Presentation started."
+        org-tree-slide-deactivate-message "Presentation ended."
+        org-tree-slide-header t))
+
 (use-package org-ql)
 
 (use-package ox-reveal)
 
 (use-package pandoc)
 (use-package ox-pandoc)
+(use-package pdf-tools
+  :commands (pdf-view-mode pdf-tools-install)
+  :mode ("\\.[pP][dD][fF]\\'" . pdf-view-mode)
+  :magic ("%PDF" . pdf-view-mode)
+  :config
+  (pdf-tools-install)
+  (define-pdf-cache-function pagelabels))
 
 (use-package org-roam
   :ensure t
@@ -553,7 +500,6 @@
   :straight t
   :hook (typescript-mode js2-mode web-mode)
   :bind
-  ("TAB" . completion-at-point)
   ("C-c l n" . lsp-ui-find-next-reference)
   ("C-c l p" . lsp-ui-find-prev-reference)
   ("C-c l s" . counsel-imenu)
@@ -568,9 +514,6 @@
    (setq lsp-ui-sideline-show-hover t)
    (setq lsp-ui-doc-position 'bottom)
    (lsp-ui-doc-show)))
-
-(use-package lsp-treemacs
-  :after lsp)
 
 (use-package dap-mode
   :straight t
@@ -598,10 +541,9 @@
     :init (add-hook 'irony-mode-hook 'irony-eldoc)))
 
 (use-package go-mode
-  :hook (lsp-deferred))
+  :hook (go-mode . lsp-deferred))
 
-(use-package flycheck-golangci-lint
-  :hook (go-mode))
+(use-package flycheck-golangci-lint)
 
 (use-package python-mode
   :ensure t
@@ -632,20 +574,38 @@
   :config
   (setq typescript-indent-level 2))
 
+(use-package geiser-mit)
+
+(use-package lispy
+  :hook ((emacs-lisp-mode scheme-mode) . lispy-mode))
+
+(use-package lispyville
+  :hook (lispy-mode . lispyville-mode))
+
 (use-package nix-mode
   :mode "\\.nix\\'")
 
-(use-package geiser-mit)
+(use-package haskell-mode
+  :hook (haskell-mode . lsp-deferred)
+  :mode "\\.hs\\'")
+
+(use-package aggressive-indent
+  :hook ((emacs-lisp-mode
+          inferior-emacs-lisp-mode
+          scheme-mode
+          ielm-mode
+          python-mode
+          lisp-mode
+          inferior-lisp-mode
+          isp-interaction-mode
+          slime-repl-mode) . aggressive-indent-mode))
 
 (setq company-format-margin-function nil)
 (add-hook 'after-init-hook 'global-company-mode)
 
-(add-hook 'c-mode-hook 'lsp)
-(add-hook 'js2-mode-hook 'lsp)
-(add-hook 'go-mode-hook 'lsp)
-(add-hook 'haskell-mode-hook 'lsp)
-(add-hook 'JavaScript-mode-hook 'lsp)
-
+(use-package flycheck
+  :hook (lsp-mode)
+  :ensure t)
 
 (use-package company
   :after lsp-mode
@@ -659,8 +619,31 @@
 (use-package company-box
   :hook (company-mode . company-box-mode))
 
+;; (use-package corfu
+;;   ;; Optional customizations
+;;   :custom
+;;   (corfu-cycle t)                ; Enable cycling for `corfu-next/previous'
+;;   ;; (corfu-auto t)                 ; Enable auto completion
+;;   ;; (corfu-auto-prefix 1)                ; Enable auto completion
+;;   ;; (corfu-auto-delay 0.1)                 ; Enable auto completion
+;;   (corfu-echo-documentation 0.25)                 ; Enable auto completion
+;;   (corfu-scroll-margin 5)        ; Use scroll margin
+;;   (corfu-preview-current t)    ; Do not preview current candidate
+;;   (corfu-preselect-first nil)
 
-(use-package xref)
+;;   ;; Optionally use TAB for cycling, default is `corfu-complete'.
+;;   :bind (:map corfu-map
+;; 			  ("TAB"     . corfu-next)
+;; 			  ([tab]     . corfu-next)
+;; 			  ("S-SPC"   . corfu-next)
+;; 			  ("S-TAB"   . corfu-previous)
+;; 			  ([backtab] . corfu-previous)
+;; 			  ( "C-f"    . corfu-insert))
+
+;;   ;; Recommended: Enable Corfu globally.
+;;   ;; This is recommended since dabbrev can be used globally (M-/).
+;;   :init
+;;   (corfu-global-mode))
 
 (use-package eldoc
   :custom (lsp-eldoc-render-all t))

@@ -8,8 +8,6 @@ let
     exec -a "$0" "$@"
   '';
 
-  # nix-gaming = import (builtins.fetchTarball "https://github.com/fufexan/nix-gaming/archive/master.tar.gz");
-
 in {
   imports = [
     ./hardware-configuration.nix
@@ -36,14 +34,14 @@ in {
     interfaces.wlp61s0.useDHCP = true;
   };
 
-#  powerManagement = {
-#    enable = true;
-#    powertop.enable = true;
-#  };
+  powerManagement = {
+    enable = true;
+    powertop.enable = true;
+  };
 
   services = {
-    # upower.enable = true;
-    # acpid.enable = true;
+    upower.enable = true;
+    acpid.enable = true;
 
     pipewire = {
       enable = true;
@@ -80,9 +78,9 @@ in {
       videoDrivers = [ "nvidia" ];
       useGlamor = true;
       deviceSection = ''
-    Option "DRI" "2"
-    Option "TearFree" "true"
-    '';
+        Option "DRI" "2"
+        Option "TearFree" "true"
+      '';
       layout = "br";
       xkbOptions = "caps:swapescape";
 
@@ -92,7 +90,7 @@ in {
       };
     };
   };
-  
+
   hardware = {
     cpu.intel.updateMicrocode = true;
     nvidia.prime = {
@@ -127,6 +125,13 @@ in {
     keepEnv = true;
     persist = true;
   }];
+  security.doas.extraConfig = ''
+permit nopass :wheel as root cmd /run/current-system/sw/bin/reboot
+permit nopass :wheel as root cmd /run/current-system/sw/bin/poweroff
+permit nopass :wheel as root cmd /run/current-system/sw/bin/mount
+permit nopass :wheel as root cmd /run/current-system/sw/bin/umount
+permit nopass :wheel as root cmd /run/current-system/sw/bin/nixos-rebuild
+'';
 
   documentation.dev.enable = true;
   documentation.man.enable = true;
@@ -185,13 +190,14 @@ in {
   ];
 
   fonts.fonts = with pkgs; [
-    (nerdfonts.override { fonts = [ "JetBrainsMono" "Iosevka" "Terminus" ]; })
+    (nerdfonts.override { fonts = [ "JetBrainsMono" "SourceCodePro" "IBMPlexMono" "CascadiaCode" "Terminus" ]; })
     scientifica
+    cozette
   ];
 
   nix = {
     extraOptions = "experimental-features = nix-command flakes";
-      package = pkgs.nixFlakes;
+    package = pkgs.nixFlakes;
     gc = {
       automatic = true;
       options = "--delete-older-than 14d";    };

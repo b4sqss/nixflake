@@ -9,6 +9,7 @@ in {
     brightnessctl
     libnotify
     foliate
+    gtk3
     qbittorrent
     tint2
     dmenu
@@ -156,7 +157,7 @@ super + {s,n,m,z}
   };
 
   home.sessionVariables = {
-    TERMINAL = "kitty";
+    TERMINAL = "alacritty";
     PAGER = "less";
   };
 
@@ -191,36 +192,58 @@ super + {s,n,m,z}
   #   };
   # };
 
-  programs.kitty = {
+  programs.alacritty = {
     enable = true;
-    font.name = "JetBrains Mono Nerd Font";
-    font.size = 10;
-    keybindings = {
-      "alt+c" = "copy";
-      "alt+v" = "paste";
-    };
     settings = {
-      "background" = clr.base00;
-      "foreground" = clr.base05;
-      "cursor" = clr.base05;
-      "selection_background" = clr.base02;
-      "color0"  = clr.base00;
-      "color8"  = clr.base00;
-      "color1"  = clr.base08; 
-      "color9"  = clr.base08;
-      "color2"  = clr.base11;
-      "color10" = clr.base11;
-      "color3"  = clr.base10;
-      "color11" = clr.base10;
-      "color4"  = clr.base13;
-      "color12" = clr.base13;
-      "color5"  = clr.base14;
-      "color13" = clr.base14;
-      "color6"  = clr.base12;
-      "color14" = clr.base12;
-      "color7"  = clr.base05;
-      "color15" = clr.base05;
-      "selection_foreground" = clr.base05;
+      window.dimensions = {
+        lines = 3;
+        columns = 200;
+      };
+      font = {
+        normal = {
+          family = "JetBrains mono Nerd Font";
+        style = "regular";
+        };
+        size = 8;
+      };
+      colors = {
+        primary = {
+          background = clr.background;
+          foreground = clr.foreground;
+        };
+        normal = {
+          black =  clr.black;
+          red =  clr.red;
+          green =  clr.green;
+          yellow =  clr.yellow;
+          blue  =  clr.blue;
+          magenta  =  clr.magenta;
+          cyan =  clr.cyan;
+          white =  clr.white;
+        };
+        bright = {
+          black =  clr.black-br;
+          red =  clr.red-br;
+          green = clr.green-br;
+          yellow  = clr.yellow-br;
+          blue = clr.blue-br;
+          magenta = clr.magenta-br;
+          cyan = clr.cyan-br;
+          white = clr.white-br;
+        };
+      };
+      key_bindings = [
+        {
+          key = "V";
+          mods = "Alt";
+          action = "Paste";
+        }
+        {
+          key = "C";
+          mods = "Alt";
+          action = "Copy";
+        }
+      ];
     };
   };
 

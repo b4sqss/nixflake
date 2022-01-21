@@ -21,9 +21,9 @@ set-window-option -g automatic-rename on
    set -g status-position bottom
    set -g pane-active-border-style bg=default,fg=default
    set -g pane-border-style fg=default
-   set -g window-status-current-format "#[fg=cyan]#[fg=black]#[bg=cyan]#I #[bg=brightblack]#[fg=white] #W#[fg=brightblack]#[bg=default] #[bg=default] #[fg=magenta]#[fg=black]#[bg=magenta]λ #[fg=white]#[bg=brightblack] %a %d %b #[fg=magenta]%R#[fg=brightblack]#[bg=default]"
+   set -g window-status-current-format "#[fg=yellow] #[fg=black]#[bg=yellow]#I #[bg=brightblack]#[fg=white] #W#[fg=brightblack]#[bg=default] #[bg=default] #[fg=green]#[fg=black]#[bg=green]λ #[fg=white]#[bg=brightblack] %a %d %b #[fg=black]%R#[fg=brightblack]#[bg=default]"
 
-   set -g window-status-format "#[fg=magenta]#[fg=black]#[bg=magenta]#I #[bg=brightblack]#[fg=white] #W#[fg=brightblack]#[bg=default] "
+   set -g window-status-format "#[fg=green] #[fg=black]#[bg=green]#I #[bg=brightblack]#[fg=white] #W#[fg=brightblack]#[bg=default] "
 
 # set -g status-fg black
 # set -g status-style bg=black
@@ -107,7 +107,7 @@ bind ^F select-pane -t :.+
   #  set -g status-position bottom
   #  set -g pane-active-border-style bg=default,fg=default
   #  set -g pane-border-style fg=default
-  #  set -g window-status-current-format "#[fg=cyan]#[fg=black]#[bg=cyan]#I #[bg=brightblack]#[fg=white] #W#[fg=brightblack]#[bg=default] #[bg=default] #[fg=magenta]#[fg=black]#[bg=magenta]λ #[fg=white]#[bg=brightblack] %a %d %b #[fg=magenta]%R#[fg=brightblack]#[bg=default]"
-  #  set -g window-status-format "#[fg=magenta]#[fg=black]#[bg=magenta]#I #[bg=brightblack]#[fg=white] #W#[fg=brightblack]#[bg=default] "
+  #  set -g window-status-current-format "#[fg=yellow]#[fg=black]#[bg=yellow]#I #[bg=brightblack]#[fg=white] #W#[fg=brightblack]#[bg=default] #[bg=default] #[fg=green]#[fg=black]#[bg=green]λ #[fg=white]#[bg=brightblack] %a %d %b #[fg=green]%R#[fg=brightblack]#[bg=default]"
+  #  set -g window-status-format "#[fg=green]#[fg=black]#[bg=green]#I #[bg=brightblack]#[fg=white] #W#[fg=brightblack]#[bg=default] "
   # '';
 }

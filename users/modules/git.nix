@@ -15,7 +15,7 @@
       ".postgres" 
       ".envrc" 
       ".direnv"
-      "shell.nix"
+      ".ccls-cache/"
     ];
     aliases = {
       co = "checkout";

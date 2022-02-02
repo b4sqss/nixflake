@@ -1,0 +1,1 @@
+/home/basqs/.config/emacs/straight/repos/treemacs/src/scripts/treemacs-git-status.py

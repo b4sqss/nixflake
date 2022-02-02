@@ -1,0 +1,1 @@
+/home/basqs/.config/emacs/straight/repos/lsp-ui/lsp-ui-flycheck.el

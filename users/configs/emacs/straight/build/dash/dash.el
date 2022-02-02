@@ -1,0 +1,1 @@
+/home/basqs/.config/emacs/straight/repos/dash.el/dash.el

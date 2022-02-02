@@ -28,118 +28,73 @@ in {
       { key = "K"; command = [ "select_item" "scroll_up" ]; }
     ];
     settings = {
-      # message_delay_time = 1;
-      # playlist_disable_highlight_delay = 2;
-      # autocenter_mode = "yes";
-      # centered_cursor = "yes";
-      # ignore_leading_the = "yes";
-      # allow_for_physical_item_deletion = "no";
+      # General;
+      lyrics_directory = "/home/basqs/.cache/lyrics/";
+      external_editor = "vim";
+      message_delay_time = "1";
+      playlist_disable_highlight_delay = 1;
+      enable_window_title = "yes";
+      media_library_hide_album_dates = "yes";
+      connected_message_on_startup = "no";
+      space_add_mode = "add_remove";
+      ignore_diacritics = "yes";
+      screen_switcher_mode = "previous";
+      cyclic_scrolling = "no";
+      use_console_editor = "yes";
+      follow_now_playing_lyrics = "yes";
+      lines_scrolled = 1;
 
-      # # Appearance;
-      # colors_enabled = "yes";
-      # playlist_display_mode = "columns";
-      # user_interface = "classic";
-      # volume_color = "white";
+      # Aesthetics;
+      user_interface = "classic";
+      playlist_display_mode = "columns";
+      song_columns_list_format = "(20)[4]{a} (25)[]{t} (20)[9]{b} (5)[]{l}";
+      song_status_format = "$8%a '%b' - %t$9";
 
-      # # Window;
-      # song_window_title_format = "Music";
-      # statusbar_visibility = "yes";
-      # header_visibility = "no";
-      # titles_visibility = "no";
-      # # now_playing_prefix = "$3> $b";
+      colors_enabled = "yes";
+      discard_colors_if_item_is_selected = "yes";
 
-      # # Progress bar;
-      # progressbar_look = "▂▂▂";
-      # progressbar_color = "black";
-      # progressbar_elapsed_color = "cyan";
+      header_visibility = "yes";
+      titles_visibility = "no";
+      statusbar_visibility = "yes";
+      display_remaining_time = "no";
+      browser_display_mode = "columns";
+      search_engine_display_mode = "columns";
+      playlist_editor_display_mode = "columns";
 
-      # # Alternative UI;
-      # alternative_ui_separator_color = "black";
-      # alternative_header_first_line_format = "$b$5«$/b$5« $b$8{%t}|{%f}$/b $5»$b$5»$/b";
-      # alternative_header_second_line_format = "{$b{$2%a$9}{ - $7%b$9}{ ($2%y$9)}}|{%D}";
+      volume_color = "2";
+      statusbar_color = "4";
+      statusbar_time_color = "9";
+      header_window_color = "2";
+      main_window_color = "8";
+      empty_tag_color = "9";
+      color1 = "8";
+      color2 = "8";
 
-      # # Song list;
-      # song_list_format = " $8%a • %t";
-      # song_status_format = " $6%a  $7%t  $5%b ";
-      # song_columns_list_format = "  (15)[blue]{t} (5)[green]{a}(8f) [black]{l}";
+      now_playing_prefix = "$2$b";
+      now_playing_suffix = "$9$/b";
+      current_item_prefix = "$(2_1)$b";
+      current_item_suffix = "$/b$(end)";
+      current_item_inactive_column_prefix = "$(4_1)";
+      current_item_inactive_column_suffix = "$(end)";
+      state_line_color = "1";
+      state_flags_color = "4";
+      window_border_color = "9";
+      active_window_border = "9";
+      player_state_color = "9";
 
-      # # Colors;
-      # main_window_color = "blue";
-      # current_item_prefix = "$(blue)$r";
-      # current_item_suffix = "$/r$(end)";
-      # current_item_inactive_column_prefix = "red";
-      # current_item_inactive_column_suffix = "red";
+      progressbar_color = "1"  ;
+      progressbar_look= "━━━";
+      #progressbar_look = "─╼ ";
+      progressbar_elapsed_color = "6";
 
-      # color1 = "white";
-      # color2 = "red";
-
-# General;
-lyrics_directory = "/home/basqs/.cache/lyrics/";
-external_editor = "vim";
-message_delay_time = "1";
-playlist_disable_highlight_delay = 1;
-enable_window_title = "yes";
-media_library_hide_album_dates = "yes";
-connected_message_on_startup = "no";
-space_add_mode = "add_remove";
-ignore_diacritics = "yes";
-screen_switcher_mode = "previous";
-cyclic_scrolling = "no";
-use_console_editor = "yes";
-follow_now_playing_lyrics = "yes";
-lines_scrolled = 1;
-
-# Aesthetics;
-user_interface = "classic";
-playlist_display_mode = "columns";
-song_columns_list_format = "(20)[4]{a} (25)[]{t} (20)[9]{b} (5)[]{l}";
-song_status_format = "$8%a '%b' - %t$9";
-
-colors_enabled = "yes";
-discard_colors_if_item_is_selected = "yes";
-
-header_visibility = "yes";
-titles_visibility = "no";
-statusbar_visibility = "yes";
-display_remaining_time = "no";
-browser_display_mode = "columns";
-search_engine_display_mode = "columns";
-playlist_editor_display_mode = "columns";
-
-volume_color = "2";
-statusbar_color = "4";
-statusbar_time_color = "9";
-header_window_color = "2";
-main_window_color = "8";
-empty_tag_color = "9";
-color1 = "8";
-color2 = "8";
-
-now_playing_prefix = "$2$b";
-now_playing_suffix = "$9$/b";
-current_item_prefix = "$(2_1)$b";
-current_item_suffix = "$/b$(end)";
-current_item_inactive_column_prefix = "$(4_1)";
-current_item_inactive_column_suffix = "$(end)";
-state_line_color = "1";
-state_flags_color = "4";
-window_border_color = "9";
-active_window_border = "9";
-player_state_color = "9";
-
-progressbar_color = "1"  ;
-progressbar_look= "━━━";
-#progressbar_look = "─╼ ";
-progressbar_elapsed_color = "6";
-
-# Visualizer settings;
-visualizer_data_source = "/tmp/mpd.fifo";
-visualizer_output_name = "visulaizer";
-visualizer_in_stereo = "yes";
-visualizer_type = "wave_filled";
-visualizer_look = "┃┃";
-visualizer_color = "9, yellow, red";
-visualizer_fps = 30;
+      # Visualizer settings;
+      visualizer_data_source = "/tmp/mpd.fifo";
+      visualizer_output_name = "visulaizer";
+      visualizer_in_stereo = "yes";
+      visualizer_type = "wave_filled";
+      visualizer_look = "┃┃";
+      visualizer_color = "9, yellow, red";
+      visualizer_fps = 30;
     };
   };
 
@@ -157,11 +112,9 @@ visualizer_fps = 30;
     hydrogen
     lsp-plugins
 
-    spotify-unwrapped # spotify-tui 
+    spotify-unwrapped spotify-tui
     discord discocss
     obsidian
-    #ue4
-    unity3d
     vscode-with-extensions
 
     mpd
@@ -233,115 +186,121 @@ visualizer_fps = 30;
     reloadTime = 120;
     urls = [
       { tags = [ "linux" ] ;
-      url = "";
-      title = "linux"; }
+        url = "";
+        title = "linux"; }
       { tags = [ "linux" ] ;
-      url = "https://weekly.nixos.org/feeds/all.rss.xml";
-      title = "nixos"; }
+        url = "https://weekly.nixos.org/feeds/all.rss.xml";
+        title = "nixos"; }
       { tags = [ "linux" ] ;
-      url = "https://www.phoronix.com/rss.php";
-      title = "phoronix"; }
+        url = "https://www.phoronix.com/rss.php";
+        title = "phoronix"; }
       { tags = [ "linux" ] ;
-      url = "https://suckless.org/atom.xml";
-      title = "suckless"; }
+        url = "https://suckless.org/atom.xml";
+        title = "suckless"; }
+      { tags = [ "linux" ] ;
+        url = "https://lwn.net/headlines/rss";
+        title = "lwn"; }
+      { tags = [ "linux" ] ;
+        url = "https://www.technologyreview.com/feed/";
+        title = "mit"; }
 
       { tags = [ "foss" ] ;
-      url = "";
-      title = "foss"; }
+        url = "";
+        title = "foss"; }
       { tags = [ "foss" ] ;
-      url = "https://act.eff.org/action.atom";
-      title = "act eff"; }
+        url = "https://act.eff.org/action.atom";
+        title = "act eff"; }
       { tags = [ "foss" ] ;
-      url = "https://planet.gnu.org/atom.xml";
-      title = "planet gnu"; }
+        url = "https://planet.gnu.org/atom.xml";
+        title = "planet gnu"; }
       { tags = [ "foss" ] ;
-      url = "https://itsfoss.com/feed/";
-      title = "itsfoss"; }
+        url = "https://itsfoss.com/feed/";
+        title = "itsfoss"; }
 
       { tags = [ "blogs" ] ;
-      url = "";
-      title = "blogs"; }
+        url = "";
+        title = "blogs"; }
       { tags = [ "blogs" ] ;
-      url = "https://seirdy.one/";
-      title = "seirdy"; }
+        url = "https://seirdy.one/";
+        title = "seirdy"; }
       { tags = [ "blogs" ] ;
-      url = "https://yujiri.xyz/rss.xml";
-      title = "yujiri"; }
+        url = "https://yujiri.xyz/rss.xml";
+        title = "yujiri"; }
       { tags = [ "blogs" ] ;
-      url = "https://karl-voit.at/feeds/lazyblorg-all.atom_1.0.links-and-content.xml";
-      title = "karl voit"; }
+        url = "https://karl-voit.at/feeds/lazyblorg-all.atom_1.0.links-and-content.xml";
+        title = "karl voit"; }
       { tags = [ "blogs" ] ;
-      url = "https://lukesmith.xyz/rss.xml";
-      title = "luke smith"; }
+        url = "https://lukesmith.xyz/rss.xml";
+        title = "luke smith"; }
       { tags = [ "blogs" ] ;
-      url = "https://drewdevault.com/blog/index.xml";
-      title = "drewdevault"; }
+        url = "https://drewdevault.com/blog/index.xml";
+        title = "drewdevault"; }
 
       { tags = [ "comics" ] ;
-      url = "";
-      title = "comics"; }
+        url = "";
+        title = "comics"; }
       { tags = [ "comics" ] ;
-      url = "https://xkcd.com/atom.xml";
-      title = "xkcd"; }
+        url = "https://xkcd.com/atom.xml";
+        title = "xkcd"; }
       { tags = [ "comics" ] ;
-      url = "https://www.smbc-comics.com/comic/rss";
-      title = "smbc"; }
+        url = "https://www.smbc-comics.com/comic/rss";
+        title = "smbc"; }
 
       { tags = [ "science" ] ;
-      url = "";
-      title = "science"; }
+        url = "";
+        title = "science"; }
       { tags = [ "science" ] ;
-      url = "https://www.cell.com/AJHG/inpress.rss "; }
+        url = "https://www.cell.com/AJHG/inpress.rss "; }
       { tags = [ "science" ] ;
-      url = "https://academic.oup.com/rss/site_5325/3191.xml";
-      title = ""; }
+        url = "https://academic.oup.com/rss/site_5325/3191.xml";
+        title = ""; }
       { tags = [ "science" ] ;
-      url = "https://academic.oup.com/rss/site_5281/3147.xml";
-      title = ""; }
+        url = "https://academic.oup.com/rss/site_5281/3147.xml";
+        title = ""; }
       { tags = [ "science" ] ;
-      url = "http://feeds.plos.org/plosgenetics/NewArticles";
-      title = ""; }
+        url = "http://feeds.plos.org/plosgenetics/NewArticles";
+        title = ""; }
       { tags = [ "science" ] ;
-      url = "https://academic.oup.com/rss/site_5139/3001.xml";
-      title = ""; }
+        url = "https://academic.oup.com/rss/site_5139/3001.xml";
+        title = ""; }
       { tags = [ "science" ] ;
-      url = "https://science.sciencemag.org/rss/twis.xml";
-      title = ""; }
+        url = "https://science.sciencemag.org/rss/twis.xml";
+        title = ""; }
 
       { tags = [ "noticias" ] ;
-      url = "";
-      title = "noticias"; }
+        url = "";
+        title = "noticias"; }
       { tags = [ "noticias" ] ;
-      url = "https://www.em.com.br/rss/noticia/internacional/rss.xml";
-      title = "em"; }
+        url = "https://www.em.com.br/rss/noticia/internacional/rss.xml";
+        title = "em"; }
       { tags = [ "noticias" ] ;
-      url = "https://veja.abril.com.br/feed/";
-      title = "veja"; }
+        url = "https://veja.abril.com.br/feed/";
+        title = "veja"; }
       { tags = [ "noticias" ] ;
-      url = "https://feeds.folha.uol.com.br/mundo/rss091.xml";
-      title = "folha"; }
+        url = "https://feeds.folha.uol.com.br/mundo/rss091.xml";
+        title = "folha"; }
       { tags = [ "noticias" ] ;
-      url = "https://www.gazetadopovo.com.br/feed/rss/mundo.xml";
-      title = "gazetadopovo"; }
+        url = "https://www.gazetadopovo.com.br/feed/rss/mundo.xml";
+        title = "gazetadopovo"; }
       { tags = [ "noticias" ] ;
-      url = "https://rss.dw.com/rdf/rss-br-all";
-      title = "dw"; }
+        url = "https://rss.dw.com/rdf/rss-br-all";
+        title = "dw"; }
 
       { tags = [ "astronomy/flight" ] ;
-      url = "";
-      title = "astronomy/flight"; }
+        url = "";
+        title = "astronomy/flight"; }
       { tags = [ "astronomy/flight" ] ;
-      url = "https://apod.nasa.gov/apod.rss";
-      title = "APOD"; }
+        url = "https://apod.nasa.gov/apod.rss";
+        title = "APOD"; }
       { tags = [ "astronomy/flight" ] ;
-      url = "https://aeroflap.com.br/feed";
-      title = "aeroflap"; }
+        url = "https://aeroflap.com.br/feed";
+        title = "aeroflap"; }
       { tags = [ "astronomy/flight" ] ;
-      url = "https://simpleflying.com/feed/";
-      title = "simpleflying"; }
+        url = "https://simpleflying.com/feed/";
+        title = "simpleflying"; }
       { tags = [ "astronomy/flight" ] ;
-      url = "https://theaviationist.com/feed/";
-      title = "aviationist"; }
+        url = "https://theaviationist.com/feed/";
+        title = "aviationist"; }
     ];
   };
 
@@ -380,6 +339,17 @@ visualizer_fps = 30;
 
       recolor = "true";
       recolor-keephue = "true";
+    };
+  };
+
+  services.spotifyd = {
+    enable = true;
+    settings = {
+      global = {
+        username_cmd = "pass spotify/username";
+        password_cmd = "pass spotify/password";
+        device_name = "nix";
+      };
     };
   };
 }

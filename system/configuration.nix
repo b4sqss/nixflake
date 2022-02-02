@@ -11,7 +11,6 @@ let
 in {
   imports = [
     ./hardware-configuration.nix
-    # ./hosts.nix
   ];
 
   boot = {
@@ -64,7 +63,6 @@ in {
       enable = true;
       displayManager.sddm.enable = false;
       displayManager.sx.enable = true;
-      windowManager.bspwm.enable = true;
       windowManager.xmonad = {
         enable = true;
         enableContribAndExtras = true;
@@ -89,6 +87,7 @@ in {
         touchpad.naturalScrolling = false;
       };
     };
+    blueman.enable = true;
   };
 
   hardware = {
@@ -108,6 +107,7 @@ in {
         pkgs.intel-compute-runtime
       ];
     };
+    bluetooth.enable = true;
   };
 
   virtualisation.libvirtd.enable = true;
@@ -124,7 +124,7 @@ in {
     users = [ "basqs" ];
     keepEnv = true;
     persist = true;
-  }];
+ }];
   security.doas.extraConfig = ''
 permit nopass :wheel as root cmd /run/current-system/sw/bin/reboot
 permit nopass :wheel as root cmd /run/current-system/sw/bin/poweroff
@@ -138,6 +138,21 @@ permit nopass :wheel as root cmd /run/current-system/sw/bin/nixos-rebuild
   documentation.man.generateCaches = true;
   documentation.nixos.enable = true;
   environment.extraOutputsToInstall = [ "info" "man" "devman" ];
+
+programs.sway = {
+  enable = true;
+  wrapperFeatures.gtk = true;
+  extraPackages = with pkgs; [
+    swaylock-fancy
+      swaylock-effects
+      waybar
+      wofi
+      grim
+      slurp
+      mako
+  ];
+};
+
 
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [

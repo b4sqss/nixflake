@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 let
-  clr = import ../theme/tomorrow-night.nix;
+  clr = import ../theme/one.nix;
 in {
   home.packages = with pkgs; [
     xwallpaper
@@ -35,69 +35,6 @@ in {
     lockCmd = "/bin/sh /home/basqs/.local/bin/lock.sh";
   };
 
-  services.sxhkd = {
-    enable = true;
-    extraConfig = ''
-# Take a screenshot
-Print
-  scrot  -e 'mv $f ~/Pictures/screenshots'
-
-XF86AudioLowerVolume
-  pamixer -d 5
-
-XF86AudioMute
-  pamixer -t
-
-XF86AudioNext
-  mpc next
-
-XF86AudioPlay
-  mpc toggle
-
-XF86AudioPrev
-  mpc prev
-
-XF86AudioRaiseVolume
-  pamixer -i 5
-
-XF86MonBrightnessDown
-  brightnessctl set 10%-
-
-XF86MonBrightnessUp
-  brightnessctl set +10%
-
-super + control + {j,n}
-  {emacsclient -c -a emacs -e '(org-roam-dailies-capture-today)',emacsclient -c -a emacs -e '(org-roam-node-find}
-
-super + d
-  emacsclient -c -a emacs -e "(dired \"$@\")"
-
-super + o
-  firefox -P normal
-
-super + shift + Return
-  emacsclient -c -a emacs -e "(vterm)"
-
-super + a
-  emacsclient -c
-
-super + shift + a
-  emacs
-
-super + shift + o
-  firefox -P contas
-
-super + w
-  brave
-
-super + p
-  dmenu_run -fn 'JetBrains Mono nerd font' -nb '#1d1f21' -nf '#969896' -sb '#f0c674' -sf '#1d1f21'
-
-super + {s,n,m,z}
-  {~/.local/bin/dmenu_websearch,~/.local/bin/dmenuumount,~/.local/bin/dmenumount,~/.local/bin/dmenuhandler}
-'';
-  };
-  
   xdg.mime.enable = true;
   xdg.mimeApps.enable = true;
   xdg.mimeApps.defaultApplications = {
@@ -126,32 +63,32 @@ super + {s,n,m,z}
     "video/x-msvideo" = "mpv.desktop";
   };
   xresources.properties = {
-    "*background" = clr.background;
-    "*foreground" = clr.foreground;
+    "*.background" = clr.background;
+    "*.foreground" = clr.foreground;
 
-    "*color0" =  clr.black;
-    "*color8" =  clr.black-br;
+    "*.color0" =  clr.black;
+    "*.color8" =  clr.black-br;
 
-    "*color1" =  clr.red;
-    "*color9" =  clr.red-br;
+    "*.color1" =  clr.red;
+    "*.color9" =  clr.red-br;
 
-    "*color2" =  clr.green;
-    "*color10" = clr.green-br;
+    "*.color2" =  clr.green;
+    "*.color10" = clr.green-br;
 
-    "*color3" =  clr.yellow;
-    "*color11" = clr.yellow-br;
+    "*.color3" =  clr.yellow;
+    "*.color11" = clr.yellow-br;
 
-    "*color4" =  clr.blue;
-    "*color12" = clr.blue-br;
+    "*.color4" =  clr.blue;
+    "*.color12" = clr.blue-br;
 
-    "*color5" =  clr.magenta;
-    "*color13" = clr.magenta-br;
+    "*.color5" =  clr.magenta;
+    "*.color13" = clr.magenta-br;
 
-    "*color6" =  clr.cyan;
-    "*color14" = clr.cyan-br;
+    "*.color6" =  clr.cyan;
+    "*.color14" = clr.cyan-br;
     
-    "*color7" =  clr.white;
-    "*color15" = clr.white-br;
+    "*.color7" =  clr.white;
+    "*.color15" = clr.white-br;
 
     "*.font" = "JetBrains Mono Nerd Font";
   };
@@ -308,4 +245,7 @@ super + {s,n,m,z}
       };
     };
   };
+
+home.file.".xmonad".source = ../configs/xmonad;
+
 }

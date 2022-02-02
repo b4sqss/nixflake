@@ -26,32 +26,34 @@ in {
   home.packages = with pkgs; [
     emacs-open
     sqlite
-    gopls
     emacs-all-the-icons-fonts
     auctex
     rnix-lsp
-    libvterm
-    # (aspellWithDicts (ds: with ds; [ en pl ]))
     languagetool
     coreutils
+
+    ## C
+    clang bear gdb cmake llvmPackages.libcxx ccls rtags llvm gnumake
+
+    ## Python
+    python39 python39Packages.pip nodePackages.pyright
+
+    ## Haskell
+    ghc ghcid haskell-language-server
+
+    ## Js
+    nodejs yarn nodePackages.npm nodePackages.typescript nodePackages.typescript-language-server deno
+
+    ## Go
+    go gopls
+
+    ## Scheme
+    scheme-manpages mitscheme
   ];
-
-  # environment.systemPackages = [
-  #   (emacsWithPackagesFromUsePackage {
-  #     config = ../configs/emacs/emacs.org;
-  #     package = pkgs.emacsGcc;
-  #     alwaysEnsure = true;
-  #     alwaysTangle = true;
-
-  #     # extraEmacsPackages = epkgs: [
-  #     #   epkgs.cask
-  #     # ];
-  #   })
-  # ];
 
   programs.emacs = {
     enable = true;
-    package = pkgs.emacsGcc;
+    # package = pkgs.emacsGcc;
     extraPackages = (epkgs:
       (with epkgs.melpaPackages; [
         evil
@@ -116,10 +118,10 @@ in {
         highlight-indent-guides
         geiser
       ]) ++ (with epkgs.elpaPackages; [
-          rainbow-mode
-          undo-tree
-          xclip
-        ])
+        rainbow-mode
+        undo-tree
+        xclip
+      ])
     );
   };
 

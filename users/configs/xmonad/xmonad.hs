@@ -125,7 +125,6 @@ myStartupHook :: X ()
 myStartupHook = do
   spawnOnce "xsetroot -cursor_name left_ptr" -- Set Cursor
   spawnOnce "xrdb ~/.Xresources"
-  spawnOnce "sxhkd"
   spawnOnce "dunst"
   spawnOnce "xwallpaper --zoom ~/Pictures/wallpapers/1628151473203.jpg"
 
@@ -227,8 +226,14 @@ myKeys =
     ("M-<Return>", spawn myTerminal), -- Terminal
     ("M-o", spawn "firefox"), -- Firefox browser
     ("M-w", spawn "brave"), -- brave browser
+    ("M-S-o", spawn "qutebrowser"),
+
     ("M-a", spawn myEditor), -- Emacs text editor
+    ("M-S-a", spawn "emacs"), -- Emacs text editor
     ("M-d", spawn "emacsclient -c -a 'emacs' --eval '(dired nil)'"), -- Emacs text editor
+    ("M-C-j", spawn "emacsclient -c -a emacs -e '(org-roam-dailies-capture-today)'"),
+    ("M-C-n", spawn "emacsclient -c -a emacs -e '(org-roam-node-find)'"),
+
     ("<Print>", spawn "scrot  -e 'mv $f ~/Pictures/screenshots'"), -- Screenshots
 
     --My function keys

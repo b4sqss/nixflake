@@ -1,0 +1,2 @@
+;;; Generated package description from ancient-one-dark-theme.el  -*- no-byte-compile: t -*-
+(define-package "ancient-one-dark-theme" "20211030.1358" "A color theme based off uetchy's Ancient One Dark Theme" '((emacs "24.1")) :commit "db79f86842c10874ce18c1a1e4496e9d0e28bed9" :authors '(("Daniils Petrovs")) :maintainer '("Daniils Petrovs") :url "https://github.com/DaniruKun/ancient-one-dark-emacs-theme")

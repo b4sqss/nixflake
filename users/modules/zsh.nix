@@ -69,14 +69,12 @@
         gsb = "git status -sb";
         ".." = "cd ..";
         panik = "rm -rf ~/.furry-porn";
-        build_root = "sudo nixos-rebuild switch";
-        delete_gens = "nix-env -p /nix/var/nix/profiles/system --delete-generations old";
-        hms = "home-manager switch";
-        l = "ls -lF --time-style=long-iso --grid --icons";
+        l = "ls -lF";
         la = "l -a";
         ll = "ls -l";
-        ls = "exa -h --git --color=auto --group-directories-first -s extension";
-        lstree = "ls --tree";
+        ls = "ls --group-directories-first --color";
+	cp = "cp -iv";
+	mv = "mv -iv";
         query_vim_pkgs = "nix-env -f '<nixpkgs>' -qaP -A vimPlugins";
         re = "systemctl --user restart emacs.service";
         scu = "systemctl --user";

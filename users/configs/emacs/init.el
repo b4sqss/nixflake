@@ -112,11 +112,11 @@
     ;; Org mode
     "oc" 'org-edit-special
     "ol" 'org-latex-previw
-    "ot" 'org-ctrl-c-ctrl-c
     "oi" 'org-toggle-inline-images
     "oa" 'org-agenda
     "os" 'org-schedule
     "o." 'org-toggle-checkbox
+    "ot" 'org-toggle-todo-and-fold
     ;; Export
     "oep" 'org-latex-export-to-pdf
     "oeh" 'org-html-export-to-html
@@ -267,6 +267,21 @@
 (use-package olivetti
   :bind ("C-c o" . olivetti-mode))
 
+;; (use-package quelpa-use-package)
+;; ;; Don't forget to run M-x eaf-install-dependencies
+;; (use-package eaf
+;;   :demand t
+;;   :quelpa (eaf :fetcher github
+;;               :repo  "manateelazycat/emacs-application-framework"
+;;               :files ("*"))
+;;   :load-path "~/.emacs.d/site-lisp/emacs-application-framework" ; Set to "/usr/share/emacs/site-lisp/eaf" if installed from AUR
+;;   :init
+;;   (use-package epc      :defer t :ensure t)
+;;   (use-package ctable   :defer t :ensure t)
+;;   (use-package deferred :defer t :ensure t)
+;;   (use-package s        :defer t :ensure t)
+;;   (setq browse-url-browser-function 'eaf-open-browser))
+
 (use-package dashboard
   :preface
   (defun create-scratch-buffer ()
@@ -295,7 +310,7 @@
          (nil
           "open the emacs.org"
           "Opens the config file"
-          (lambda (&rest _) (find-file "~/.emacs.d/emacs.org"))
+          (lambda (&rest _) (find-file "~/.config/emacs/emacs.org"))
           'default)
          (nil
           "new scratch buffer"
@@ -332,8 +347,11 @@
 (use-package mood-line
   :init (mood-line-mode)(display-time-mode))
 
-(use-package doom-themes)
-(consult-theme 'doom-tomorrow-night)
+(use-package doom-themes
+  :custom (setq doom-themes-enable-bold t
+                doom-themes-enable-italic t))
+
+(consult-theme 'doom-one)
 
 (defun org-mode-setup ()
   (org-indent-mode)
@@ -344,6 +362,7 @@
   (setq evil-auto-indent nil)
   (setq left-margin-width 2)
   (setq right-margin-width 2)
+  (set-window-margins (selected-window) 1 1=)
   (diminish org-indent-mode))
 
 (defun org-toggle-todo-and-fold ()
@@ -377,7 +396,12 @@
       org-src-preserve-indentation nil
       org-startup-folded 'content
       org-cycle-separator-lines 2
-      org-agenda-files '("~/Documents/org/org-agenda.org"))
+      org-agenda-files '("~/Documents/org/org-agenda.org")
+      org-directory  "~/Documents/org/"
+      org-todo-keywords '((sequence "TODO" "|" "DONE")
+                          (sequence "REPORT" "BUG" "KNOWNCAUSE" "|" "FIXED")
+                          (sequence "|" "CANCELED")))
+
 
 (defun my-org-archive-done-tasks ()
   (interactive)
@@ -471,6 +495,14 @@
   :config
   (pdf-tools-install)
   (define-pdf-cache-function pagelabels))
+
+(setq org-default-notes-file (concat org-directory "/notes.org"))
+
+(setq org-capture-templates
+      '(("t" "Todo" entry (file+headline "~/Documents/org/gtd.org" "Tasks")
+         "* TODO %?\n  %i\n  %a")
+        ("j" "Journal" entry (file+datetree "~/org/journal.org")
+         "* %?\nEntered on %U\n  %i\n  %a")))
 
 (use-package org-roam
   :ensure t

@@ -17,14 +17,12 @@
   home.username = "basqs";
   home.homeDirectory = "/home/basqs";
 
-  # home-manager.useGlobalPkgs = true;
   home.packages = with pkgs; [
-
     ## Tui
     gdu fzf newsboat 
 
     ## Cli
-    exa fd duf youtube-dl pfetch rdfind imagemagick ffmpeg bc
+    exa fd duf youtube-dl pfetch rdfind imagemagick ffmpeg bc bitwarden-cli
 
     ## Documents
     zathura texlive.combined.scheme-full pandoc libreoffice-fresh
@@ -36,34 +34,13 @@
     rambox bitwarden pcmanfm signal-desktop element-desktop calibre gnome.pomodoro anki
 
     ## Open media
-    sxiv 
+    sxiv qimgv
 
     ## Graphics
     inkscape gimp gimpPlugins.resynthesizer krita blender freecad
 
     ## Games
     minecraft crawl dwarf-fortress curseofwar
-
-    ## CC
-    # clang bear gdb cmake llvmPackages.libcxx ccls rtags llvm gnumake
-
-    ## Python
-    python39 python39Packages.pip nodePackages.pyright
-
-    ## Haskell
-    ghc ghcid haskell-language-server
-
-    ## Js
-    nodejs yarn nodePackages.npm nodePackages.typescript nodePackages.typescript-language-server deno
-
-    ## Rust
-    cargo rustc rust-analyzer clippy
-
-    ## Go
-    go gopls
-
-    ## Scheme
-    scheme-manpages mitscheme
   ];
   
   # This value determines the Home Manager release that your

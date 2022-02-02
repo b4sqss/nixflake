@@ -1,0 +1,1 @@
+/home/basqs/.config/emacs/straight/repos/ace-window/ace-window.el

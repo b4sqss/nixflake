@@ -6,36 +6,36 @@
     viAlias = true;
     plugins = with pkgs.vimPlugins; [
       vim-nix
-      vim-go
       nerdtree
       nerdtree-git-plugin
       nvim-base16
+      vim-one
       vim-devicons
       vim-fugitive
-      # goyo
+      goyo
       nerdcommenter
       hop-nvim
-      # nvim-cmp
+      vim-orgmode
+
+      vim-surround
+      vimagit
+      vimwiki
+      vim-commentary
+      vim-css-color
+
+      vim-mucomplete
+      nvim-cmp
+      float-preview-nvim
     ];
     extraConfig = ''
       set history=500
 
-      filetype indent plugin on
+        filetype indent plugin on
 
-      let base16colorspace=256
-      set paste
-      set number relativenumber
-
-      syntax on
-      colorscheme base16-tomorrow-night
-      " colorscheme slate
-
-        " Hardcore mode, disable arrow keys.
-        " noremap <Up> <NOP>
-        " noremap <Down> <NOP>
-        " noremap <Left> <NOP>
-        " noremap <Right> <NOP>
-
+        let base16colorspace=256
+        set paste
+        set title
+        set number " relativenumber
         set encoding=utf8
         set ignorecase
         set smartcase
@@ -48,6 +48,18 @@
         set wildmenu
         set cursorline
         set clipboard=unnamedplus
+
+        syntax on
+        " colorscheme base16-tomorrow-night
+        colorscheme one
+        set background=dark
+        " colorscheme slate
+
+        " Hardcore mode, disable arrow keys.
+        " noremap <Up> <NOP>
+        " noremap <Down> <NOP>
+        " noremap <Left> <NOP>
+        " noremap <Right> <NOP>
 
         set undofile " Maintain undo history between sessions
         set undodir=~/.cache/nvim/undodir
@@ -65,81 +77,55 @@
         set wrap "Wrap lines
         set matchpairs+=<:>
 
-      map <C-t> :NERDTreeToggle<CR>  
-      let g:NERDTreeDirArrowExpandable = '▸'
-      let g:NERDTreeDirArrowCollapsible = '▾'
-      let NERDTreeShowHidden=0
+        let mapleader = " "
 
-      map <m-/> :NERDCommenterComment
+        map <C-t> :NERDTreeToggle<CR>
+        map <leader>t :NERDTreeToggle<CR>
+        let g:NERDTreeDirArrowExpandable = '▸'
+        let g:NERDTreeDirArrowCollapsible = '▾'
+        let NERDTreeShowHidden=0
 
-      map <"> :HopChar1
+        " Goyo plugin makes text more readable when writing prose:
+        map <leader>f :Goyo \| set bg=light \| set linebreak<CR>
 
-        let mapleader = ","
+        map <;> :HopChar1
 
         " Quickly open a buffer
         map <leader>q :e ~/buffer<cr>
-        map <leader>x :e ~/buffer.md<cr>
+        map <leader>x :e ~/buffer.org<cr>
 
         map <leader>gdi :Gdiff<cr>
         map <leader>gst :Git<cr>
         map <leader>dup :diffupdate<cr>
 
+        " Compile document, be it groff/LaTeX/markdown/etc.
+        map <leader>c :w! \| !compiler "<c-r>%"<CR>
+
+        " Open corresponding .pdf/.html or preview
+        map <leader>p :!opout <c-r>%<CR><CR>
+
         " Always show the status line
         set laststatus=2
 
         " Format the status line
-      set statusline=
-      set statusline+=%<\                       " cut at start
-      set statusline+=%2*[%n%H%M%R%W]%*\        " flags and buf no
-      set statusline+=%-40f\                    " path
-      set statusline+=%{FugitiveStatusline()}   " git status
-      set statusline+=%=%1*%y%*%*\              " file type
-      set statusline+=%10((%l,%c)%)\            " line and column
-      set statusline+=%P                        " percentage of file
+        set statusline=
+        set statusline+=%<\                       " cut at start
+        set statusline+=%2*[%n%H%M%R%W]%*\        " flags and buf no
+        set statusline+=%-40f\                    " path
+        set statusline+=%=%1*%y%*%*\              " file type
+        set statusline+=%{FugitiveStatusline()}   " git status
+        " set statusline+=%10((%l,%c)%)\            " line and column
+        " set statusline+=%P                        " percentage of file
 
-      " VIM-GO CONFIGS
-      " Syntax highlighting
-      let g:go_highlight_fields = 1
-      let g:go_highlight_functions = 1
-      let g:go_highlight_function_calls = 1
-      let g:go_highlight_extra_types = 1
-      let g:go_highlight_operators = 1
-      " Enable auto formatting on saving
-      let g:go_fmt_autosave = 1
-      " Run `goimports` on your current file on every save
-      let g:go_fmt_command = "goimports"
-      " Status line types/signatures
-      let g:go_auto_type_info = 1
-
-      " Go Add Tags
-      let g:go_addtags_transform = 'camelcase'
-      noremap gat :GoAddTags<cr>
-
-      function! MyFollowSymlink(...)
-      if exists('w:no_resolve_symlink') && w:no_resolve_symlink
-      return
+        let g:mymu_enabled=1
+        let g:mylsc_enabled=1
+      if has('nvim')
+        " floating preview window for Neovim
+        let g:float_preview#docked = 0
+        set completeopt-=preview
+      else
+        set completeopt+=preview
       endif
-      let fname = a:0 ? a:1 : expand('%')
-      if fname =~ '^\w\+:/'
-      " do not mess with 'fugitive://' etc
-      return
-      endif
-      let fname = simplify(fname)
-
-      let resolvedfile = resolve(fname)
-      if resolvedfile == fname
-      return
-      endif
-      let resolvedfile = fnameescape(resolvedfile)
-      echohl WarningMsg | echomsg 'Resolving symlink' fname '=>' resolvedfile | echohl None
-      " exec 'noautocmd file ' . resolvedfile
-      " XXX: problems with AutojumpLastPosition: line("'\"") is 1 always.
-      exec 'file ' . resolvedfile
-      endfunction
-
-      command! FollowSymlink call MyFollowSymlink()
-      command! ToggleFollowSymlink let w:no_resolve_symlink = !get(w:, 'no_resolve_symlink', 0) | echo "w:no_resolve_symlink =>" w:no_resolve_symlink
-      au BufReadPost * call MyFollowSymlink(expand('<afile>'))
     '';
   };
 }

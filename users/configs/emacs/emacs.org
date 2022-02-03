@@ -413,7 +413,7 @@
 
   (consult-theme 'doom-one)
 
-                  #+end_src
+#+end_src
 * org
 ** general org
 #+begin_src emacs-lisp :tangle ./init.el
@@ -656,12 +656,17 @@
 
   (use-package lsp-ui
     :straight t
-    :hook (lsp-mode)
-    :custom
-    ((setq lsp-ui-sideline-enable t)
-     (setq lsp-ui-sideline-show-hover t)
-     (setq lsp-ui-doc-position 'bottom)
-     (lsp-ui-doc-show)))
+    :hook (lsp-mode . lsp-ui-mode)
+    :config
+    (setq lsp-ui-sideline-enable t
+          lsp-ui-sideline-show-hover t
+          lsp-ui-doc-position 'bottom
+          lsp-lens-enable t
+          lsp-ui-doc-enable t
+          lsp-headerline-breadcrumb-enable nil
+          lsp-ui-peek-enable t
+          lsp-ui-peek-fontify 'on-demand
+          lsp-ui-doc-show))
 
 #+end_src
 ** debuging
@@ -794,9 +799,16 @@
   (use-package company
     :after lsp-mode
     :hook (lsp-mode . company-mode)
-    :custom
-    (company-minimum-prefix-length 1)
-    (company-idle-delay 0.0))
+    :config
+    (setq company-minimum-prefix-length 1
+    company-idle-delay 0.0
+    company-selection-wrap-around t
+    company-require-match 'never
+    company-dabbrev-downcase nil
+    company-dabbrev-ignore-case t
+    company-dabbrev-other-buffers nil
+    company-tooltip-limit 5
+    company-tooltip-minimum-width 40))
 
   (use-package company-irony)
 

@@ -112,11 +112,16 @@ in {
 
   virtualisation.libvirtd.enable = true;
 
+
+environment.binsh = "${pkgs.dash}/bin/dash";
+
   users.users.basqs = {
     shell = pkgs.zsh;
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "libvirtd" ];
   };
+
+  # environment.pathsToLink = [ "/share/zsh" ]; # So that zsh completion works
 
   security.sudo.enable = false;
   security.doas.enable = true;
@@ -138,21 +143,6 @@ permit nopass :wheel as root cmd /run/current-system/sw/bin/nixos-rebuild
   documentation.man.generateCaches = true;
   documentation.nixos.enable = true;
   environment.extraOutputsToInstall = [ "info" "man" "devman" ];
-
-programs.sway = {
-  enable = true;
-  wrapperFeatures.gtk = true;
-  extraPackages = with pkgs; [
-    swaylock-fancy
-      swaylock-effects
-      waybar
-      wofi
-      grim
-      slurp
-      mako
-  ];
-};
-
 
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [

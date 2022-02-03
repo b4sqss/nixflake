@@ -246,6 +246,6 @@ in {
     };
   };
 
-home.file.".xmonad".source = ../configs/xmonad;
+home.file.".xmonad/xmonad.hs".source = ../configs/xmonad/xmonad.hs;
 
 }

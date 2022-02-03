@@ -8,7 +8,6 @@
       vim-nix
       nerdtree
       nerdtree-git-plugin
-      nvim-base16
       vim-one
       vim-devicons
       vim-fugitive
@@ -17,15 +16,15 @@
       hop-nvim
       vim-orgmode
 
+      (nvim-treesitter.withPlugins (plugins: pkgs.tree-sitter.allGrammars))
+
       vim-surround
       vimagit
       vimwiki
       vim-commentary
       vim-css-color
 
-      vim-mucomplete
       nvim-cmp
-      float-preview-nvim
     ];
     extraConfig = ''
       set history=500
@@ -49,11 +48,11 @@
         set cursorline
         set clipboard=unnamedplus
 
+        set termguicolors
         syntax on
         " colorscheme base16-tomorrow-night
         colorscheme one
         set background=dark
-        " colorscheme slate
 
         " Hardcore mode, disable arrow keys.
         " noremap <Up> <NOP>
@@ -117,15 +116,17 @@
         " set statusline+=%10((%l,%c)%)\            " line and column
         " set statusline+=%P                        " percentage of file
 
-        let g:mymu_enabled=1
-        let g:mylsc_enabled=1
-      if has('nvim')
-        " floating preview window for Neovim
-        let g:float_preview#docked = 0
-        set completeopt-=preview
-      else
-        set completeopt+=preview
-      endif
+      function! s:MyFollowSymlink()
+      silent! let s:fname = resolve(expand('%:p'))
+      silent! bwipeout
+      silent! exec "edit " .s:fname
+      endfunction
+      command! FollowSymlink call s:MyFollowSymlink()
+
+      augroup followsymlink
+      autocmd!
+      autocmd BufReadPost * FollowSymlink
+      augroup END
     '';
   };
 }

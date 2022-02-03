@@ -1,5 +1,5 @@
 let
-  clr = import ../theme/tomorrow-night.nix;
+  clr = import ../theme/one.nix;
 in
 
 {

@@ -1,5 +1,4 @@
-# with import <nixpkgs> { };
-{pkgs, config, ...}:
+{pkgs, config, emacs-overlay, ...}:
 let
   emacs-open = pkgs.writeShellScriptBin "emacs-open" '' 
 if [ $# -eq 0 ]; then
@@ -53,75 +52,74 @@ in {
 
   programs.emacs = {
     enable = true;
-    # package = pkgs.emacsGcc;
     extraPackages = (epkgs:
-      (with epkgs.melpaPackages; [
-        evil
-        evil-collection
-        evil-nerd-commenter
-        evil-leader
-        consult
-        marginalia
-        orderless
-        which-key
-        helpful
-        vterm
-        vterm-toggle
-        all-the-icons-dired
-        dired-hide-dotfiles
-        peep-dired
-        magit
-        no-littering
-        olivetti
-        crux
-        emms
-        dashboard
-        doom-modeline
-        doom-themes
-        org-evil
-        org-pomodoro
-        org-bullets
-        org-mime
-        org-journal
-        org-ql
-        pandoc
-        ox-reveal
-        ox-pandoc
-        org-roam
-        lsp-mode
-        lsp-ui
-        company
-        company-box
-        flycheck
-        flycheck-popup-tip
-        yasnippet
-        dap-mode
-        ccls
-        irony
-        c-eldoc
-        irony-eldoc
-        python-mode
-        lsp-pyright
-        js2-mode
-        web-mode
-        typescript-mode
-        tide
-        haskell-mode
-        lsp-haskell
-        go-mode
-        flycheck-gometalinter
-        company-go
-        rustic
-        flycheck-rust
-        nix-mode
-        aggressive-indent
-        highlight-indent-guides
-        geiser
-      ]) ++ (with epkgs.elpaPackages; [
-        rainbow-mode
-        undo-tree
-        xclip
-      ])
+    (with epkgs.melpaPackages; [
+      evil
+      evil-collection
+      evil-nerd-commenter
+      evil-leader
+      consult
+      marginalia
+      orderless
+      which-key
+      helpful
+      vterm
+      vterm-toggle
+      all-the-icons-dired
+      dired-hide-dotfiles
+      peep-dired
+      magit
+      no-littering
+      olivetti
+      crux
+      emms
+      dashboard
+      doom-modeline
+      doom-themes
+      org-evil
+      org-pomodoro
+      org-bullets
+      org-mime
+      org-journal
+      org-ql
+      pandoc
+      ox-reveal
+      ox-pandoc
+      org-roam
+      lsp-mode
+      lsp-ui
+      company
+      company-box
+      flycheck
+      flycheck-popup-tip
+      yasnippet
+      dap-mode
+      ccls
+      irony
+      c-eldoc
+      irony-eldoc
+      python-mode
+      lsp-pyright
+      js2-mode
+      web-mode
+      typescript-mode
+      tide
+      haskell-mode
+      lsp-haskell
+      go-mode
+      flycheck-gometalinter
+      company-go
+      rustic
+      flycheck-rust
+      nix-mode
+      aggressive-indent
+      highlight-indent-guides
+      geiser
+    ]) ++ (with epkgs.elpaPackages; [
+      rainbow-mode
+      undo-tree
+      xclip
+    ])
     );
   };
 

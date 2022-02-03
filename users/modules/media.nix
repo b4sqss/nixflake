@@ -1,5 +1,5 @@
 {config, pkgs, ...}: let
-  clr = import ../theme/tomorrow-night.nix;
+  clr = import ../theme/one.nix;
 in {
   nixpkgs.config.allowUnfree = true;
 

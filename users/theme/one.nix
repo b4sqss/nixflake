@@ -22,24 +22,24 @@
 
 # Alacritty
 
-  background = "#282c34";
-  foreground = "#abb2bf";
+background = "#282c34";
+foreground = "#abb2bf";
 
-  black =   "#5c6370";
-  red =     "#e06c75";
-  green =   "#98c379";
-  yellow =  "#e5c07b";
-  blue =    "#61afef";
-  magenta = "#c678dd";
-  cyan =    "#56b6c2";
-  white =   "#abb2bf";
+black =   "#5c6370";
+red =     "#e06c75";
+green =   "#98c379";
+yellow =  "#e5c07b";
+blue =    "#61afef";
+magenta = "#c678dd";
+cyan =    "#56b6c2";
+white =   "#abb2bf";
 
-  black-br =   "#4b5263";
-  red-br =     "#e06c75";
-  green-br =   "#98c379";
-  yellow-br =  "#e5c07b";
-  blue-br =    "#61afef";
-  magenta-br = "#c678dd";
-  cyan-br =    "#56b6c2";
-  white-br =   "#abb2bf";
+black-br =   "#4b5263";
+red-br =     "#e06c75";
+green-br =   "#98c379";
+yellow-br =  "#e5c07b";
+blue-br =    "#61afef";
+magenta-br = "#c678dd";
+cyan-br =    "#56b6c2";
+white-br =   "#abb2bf";
 }

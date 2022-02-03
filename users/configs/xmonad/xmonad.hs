@@ -78,10 +78,10 @@ myBorderWidth :: Dimension
 myBorderWidth = 1 -- Sets border width for windows
 
 myNormColor :: String
-myNormColor = "#1d1f21" -- Border color of normal windows
+myNormColor = "#282c34" -- Border color of normal windows
 
 myFocusColor :: String
-myFocusColor = "#f0c674" -- Border color of focused windows
+myFocusColor = "#abb2bf" -- Border color of focused windows
 
 altMask :: KeyMask
 altMask = mod1Mask -- Setting this for use in xprompts
@@ -257,7 +257,7 @@ myKeys =
 main :: IO ()
 main = do
     -- Launching xmobar
-    xmproc <- spawnPipe "xmobar /home/basqs/.xmonad/xmobar.hs"
+    xmproc <- spawnPipe "xmobar ~/.nixfiles/users/configs/xmonad/xmobar.hs"
     -- Xmonad Settings
     xmonad $ ewmh $ def
       { manageHook = myManageHook <+> manageDocks,
@@ -275,11 +275,11 @@ main = do
           <+> dynamicLogWithPP
           xmobarPP
           { ppOutput = \x -> hPutStrLn xmproc x,
-          ppCurrent = xmobarColor "#f0c674" "" . wrap "[" "]", -- Current workspace in xmobar
-          ppHidden = xmobarColor "#969896" "", -- Hidden workspaces in xmobar
-          ppTitle = xmobarColor "#b5bd68" "" . shorten 61, -- Title of active window in xmobar
-          ppSep = "<fc=#969896> | </fc>", -- Separators in xmobar
-          ppUrgent = xmobarColor "#cc6666" "" . wrap "!" "!", -- Urgent workspace
+          ppCurrent = xmobarColor "#98c379" "" . wrap "[" "]", -- Current workspace in xmobar
+          ppHidden = xmobarColor "#5c6370" "", -- Hidden workspaces in xmobar
+          ppTitle = xmobarColor "#98c379" "" . shorten 75, -- Title of active window in xmobar
+          ppSep = "<fc=#5c6370> | </fc>", -- Separators in xmobar
+          ppUrgent = xmobarColor "#e06c75" "" . wrap "!" "!", -- Urgent workspace
           -- ppExtras = [windowCount], -- No. of windows current workspace
           ppOrder = \(ws : l : t : ex) -> [ws, l] ++ ex ++ [t]
         }

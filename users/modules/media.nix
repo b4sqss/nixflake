@@ -3,6 +3,25 @@
 in {
   nixpkgs.config.allowUnfree = true;
 
+  home.packages = with pkgs; [
+    foliate
+    qbittorrent
+    sxiv 
+    qimgv
+    inkscape 
+    gimp 
+    krita 
+    blender 
+
+    ardour
+    audacity
+
+    spotify-unwrapped spotify-tui
+    discord discocss
+
+    mpd
+  ];
+
   programs.mpv = {
     package = pkgs.mpv-with-scripts;
     enable = true;
@@ -16,7 +35,6 @@ in {
       keep-open = "yes";
     };
   };
-
 
   programs.ncmpcpp = {
     enable = true;
@@ -103,22 +121,6 @@ in {
     dataDir = "/home/basqs/.local/share/mpd";
     musicDirectory = "/home/basqs/Music";
   };
-
-
-  home.packages = with pkgs; [
-    ardour
-    cadence
-    audacity
-    hydrogen
-    lsp-plugins
-
-    spotify-unwrapped spotify-tui
-    discord discocss
-    obsidian
-    vscode-with-extensions
-
-    mpd
-  ];
 
   programs.newsboat = {
     enable = true;
@@ -346,9 +348,11 @@ in {
     enable = true;
     settings = {
       global = {
-        username_cmd = "pass spotify/username";
+        username = "jk43vcs9j36fn446gi97ucnhj";
         password_cmd = "pass spotify/password";
         device_name = "nix";
+        use_mpris = true;
+        bitrate = 160;
       };
     };
   };

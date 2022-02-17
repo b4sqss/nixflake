@@ -1,4 +1,4 @@
-;;; posframe-autoloads.el --- automatically extracted autoloads
+;;; posframe-autoloads.el --- automatically extracted autoloads  -*- lexical-binding: t -*-
 ;;
 ;;; Code:
 
@@ -240,7 +240,7 @@ Hide all posframe frames." t nil)
 (autoload 'posframe-delete-all "posframe" "\
 Delete all posframe frames and buffers." t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "posframe" '("posframe-")))
+(register-definition-prefixes "posframe" '("posframe-"))
 
 ;;;***
 
@@ -251,7 +251,7 @@ Delete all posframe frames and buffers." t nil)
 (autoload 'posframe-benchmark "posframe-benchmark" "\
 Benchmark tool for posframe." t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "posframe-benchmark" '("posframe-benchmark-alist")))
+(register-definition-prefixes "posframe-benchmark" '("posframe-benchmark-alist"))
 
 ;;;***
 
@@ -260,6 +260,6 @@ Benchmark tool for posframe." t nil)
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
+;; coding: utf-8-emacs-unix
 ;; End:
 ;;; posframe-autoloads.el ends here

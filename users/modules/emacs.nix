@@ -1,19 +1,19 @@
-{pkgs, config, emacs-overlay, ...}:
+{pkgs, config, ...}:
 let
   emacs-open = pkgs.writeShellScriptBin "emacs-open" '' 
-if [ $# -eq 0 ]; then
+    if [ $# -eq 0 ]; then
     emacsclient -c -n
     exit
-fi
+    fi
 
-emacsclient -e "(frames-on-display-list \"$DISPLAY\")" &>/dev/null
+    emacsclient -e "(frames-on-display-list \"$DISPLAY\")" &>/dev/null
 
-if [ $? -eq 0 ]; then
+    if [ $? -eq 0 ]; then
     emacsclient -n "$*"
-else
+    else
     emacsclient -c -n "$*"
-fi
-'';
+    fi
+  '';
 
 in {
 
@@ -48,10 +48,14 @@ in {
 
     ## Scheme
     scheme-manpages mitscheme
+
+    ## Zig 
+    zls zig
   ];
 
   programs.emacs = {
     enable = true;
+    package = pkgs.emacsGit;
     extraPackages = (epkgs:
     (with epkgs.melpaPackages; [
       evil
@@ -95,9 +99,7 @@ in {
       yasnippet
       dap-mode
       ccls
-      irony
       c-eldoc
-      irony-eldoc
       python-mode
       lsp-pyright
       js2-mode
@@ -112,17 +114,11 @@ in {
       rustic
       flycheck-rust
       nix-mode
-      aggressive-indent
-      highlight-indent-guides
       geiser
-    ]) ++ (with epkgs.elpaPackages; [
-      rainbow-mode
-      undo-tree
-      xclip
-    ])
+      pdf-tools
+    ]
+    )
     );
   };
-
-  services.emacs.enable = true;
 
 }

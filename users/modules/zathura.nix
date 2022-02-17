@@ -38,6 +38,9 @@ in
 
       recolor = "true";
       recolor-keephue = "true";
+
+      page-padding = 1;
+      font = "Iosevka";
     };
   };
 }

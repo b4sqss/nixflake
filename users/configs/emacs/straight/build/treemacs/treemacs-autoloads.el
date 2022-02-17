@@ -1,4 +1,4 @@
-;;; treemacs-autoloads.el --- automatically extracted autoloads
+;;; treemacs-autoloads.el --- automatically extracted autoloads  -*- lexical-binding: t -*-
 ;;
 ;;; Code:
 
@@ -83,7 +83,7 @@ installed), then by project.el, then by the current working directory.
 If the project is already registered with treemacs just move point to its root.
 An error message is displayed if the current buffer is not part of any project." t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs" '("treemacs-version")))
+(register-definition-prefixes "treemacs" '("treemacs-version"))
 
 ;;;***
 
@@ -91,7 +91,7 @@ An error message is displayed if the current buffer is not part of any project."
 ;;;;;;  0))
 ;;; Generated autoloads from treemacs-async.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-async" '("treemacs-")))
+(register-definition-prefixes "treemacs-async" '("treemacs-"))
 
 ;;;***
 
@@ -120,7 +120,7 @@ For file and directory nodes their absolute path is saved.  Tag nodes
 additionally also save the tag's position.  A tag can only be bookmarked if the
 treemacs node is pointing to a valid buffer position." t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-bookmarks" '("treemacs--")))
+(register-definition-prefixes "treemacs-bookmarks" '("treemacs--"))
 
 ;;;***
 
@@ -128,7 +128,7 @@ treemacs node is pointing to a valid buffer position." t nil)
 ;;;;;;  (0 0 0 0))
 ;;; Generated autoloads from treemacs-compatibility.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-compatibility" '("treemacs-")))
+(register-definition-prefixes "treemacs-compatibility" '("treemacs-"))
 
 ;;;***
 
@@ -136,7 +136,7 @@ treemacs node is pointing to a valid buffer position." t nil)
 ;;;;;;  (0 0 0 0))
 ;;; Generated autoloads from treemacs-core-utils.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-core-utils" '("treemacs-")))
+(register-definition-prefixes "treemacs-core-utils" '("treemacs-"))
 
 ;;;***
 
@@ -144,7 +144,7 @@ treemacs node is pointing to a valid buffer position." t nil)
 ;;;;;;  (0 0 0 0))
 ;;; Generated autoloads from treemacs-customization.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-customization" '("treemacs-")))
+(register-definition-prefixes "treemacs-customization" '("treemacs-"))
 
 ;;;***
 
@@ -152,14 +152,14 @@ treemacs node is pointing to a valid buffer position." t nil)
 ;;;;;;  (0 0 0 0))
 ;;; Generated autoloads from treemacs-diagnostics.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-diagnostics" '("treemacs-")))
+(register-definition-prefixes "treemacs-diagnostics" '("treemacs-"))
 
 ;;;***
 
 ;;;### (autoloads nil "treemacs-dom" "treemacs-dom.el" (0 0 0 0))
 ;;; Generated autoloads from treemacs-dom.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-dom" '("treemacs-")))
+(register-definition-prefixes "treemacs-dom" '("treemacs-"))
 
 ;;;***
 
@@ -167,7 +167,7 @@ treemacs node is pointing to a valid buffer position." t nil)
 ;;;;;;  (0 0 0 0))
 ;;; Generated autoloads from treemacs-extensions.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-extensions" '("treemacs-")))
+(register-definition-prefixes "treemacs-extensions" '("treemacs-"))
 
 ;;;***
 
@@ -214,7 +214,7 @@ The pre-selection for what directory to create in is based on the \"nearest\"
 path to point - the containing directory for tags and files or the directory
 itself, using $HOME when there is no path at or near point to grab." t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-file-management" '("treemacs-")))
+(register-definition-prefixes "treemacs-file-management" '("treemacs-"))
 
 ;;;***
 
@@ -222,7 +222,7 @@ itself, using $HOME when there is no path at or near point to grab." t nil)
 ;;;;;;  (0 0 0 0))
 ;;; Generated autoloads from treemacs-filewatch-mode.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-filewatch-mode" '("treemacs-")))
+(register-definition-prefixes "treemacs-filewatch-mode" '("treemacs-"))
 
 ;;;***
 
@@ -230,7 +230,7 @@ itself, using $HOME when there is no path at or near point to grab." t nil)
 ;;;;;;  (0 0 0 0))
 ;;; Generated autoloads from treemacs-follow-mode.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-follow-mode" '("treemacs-")))
+(register-definition-prefixes "treemacs-follow-mode" '("treemacs-"))
 
 ;;;***
 
@@ -238,7 +238,7 @@ itself, using $HOME when there is no path at or near point to grab." t nil)
 ;;;;;;  (0 0 0 0))
 ;;; Generated autoloads from treemacs-fringe-indicator.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-fringe-indicator" '("treemacs-")))
+(register-definition-prefixes "treemacs-fringe-indicator" '("treemacs-"))
 
 ;;;***
 
@@ -246,7 +246,7 @@ itself, using $HOME when there is no path at or near point to grab." t nil)
 ;;;;;;  (0 0 0 0))
 ;;; Generated autoloads from treemacs-header-line.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-header-line" '("treemacs-header-buttons-format")))
+(register-definition-prefixes "treemacs-header-line" '("treemacs-header-buttons-format"))
 
 ;;;***
 
@@ -274,7 +274,7 @@ The keybinds shown in this hydra are not static, but reflect the actual
 keybindings currently in use (including evil mode).  If the hydra is unable to
 find the key a command is bound to it will show a blank instead." t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-hydras" '("treemacs-helpful-hydra")))
+(register-definition-prefixes "treemacs-hydras" '("treemacs-helpful-hydra"))
 
 ;;;***
 
@@ -332,7 +332,7 @@ be assigned which treemacs icon, for example
 
 \(fn EXTENSIONS MODE-ICON-ALIST)" nil nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-icons" '("treemacs-")))
+(register-definition-prefixes "treemacs-icons" '("treemacs-"))
 
 ;;;***
 
@@ -340,7 +340,7 @@ be assigned which treemacs icon, for example
 ;;;;;;  (0 0 0 0))
 ;;; Generated autoloads from treemacs-interface.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-interface" '("treemacs-")))
+(register-definition-prefixes "treemacs-interface" '("treemacs-"))
 
 ;;;***
 
@@ -348,7 +348,7 @@ be assigned which treemacs icon, for example
 ;;;;;;  0 0 0))
 ;;; Generated autoloads from treemacs-logging.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-logging" '("treemacs-")))
+(register-definition-prefixes "treemacs-logging" '("treemacs-"))
 
 ;;;***
 
@@ -356,7 +356,7 @@ be assigned which treemacs icon, for example
 ;;;;;;  0 0))
 ;;; Generated autoloads from treemacs-macros.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-macros" '("treemacs-")))
+(register-definition-prefixes "treemacs-macros" '("treemacs-"))
 
 ;;;***
 
@@ -368,7 +368,7 @@ A major mode for displaying the file system in a tree layout.
 
 \(fn)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-mode" '("treemacs-")))
+(register-definition-prefixes "treemacs-mode" '("treemacs-"))
 
 ;;;***
 
@@ -433,7 +433,7 @@ Show a contextual right click menu based on click EVENT.
 
 \(fn EVENT)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-mouse-interface" '("treemacs--")))
+(register-definition-prefixes "treemacs-mouse-interface" '("treemacs--"))
 
 ;;;***
 
@@ -454,10 +454,19 @@ or call the function `treemacs-peek-mode'.")
 (autoload 'treemacs-peek-mode "treemacs-peek-mode" "\
 Minor mode that allows you to peek at buffers before deciding to open them.
 
-If called interactively, enable Treemacs-Peek mode if ARG is
-positive, and disable it if ARG is zero or negative.  If called
-from Lisp, also enable the mode if ARG is omitted or nil, and
-toggle it if ARG is `toggle'; disable the mode otherwise.
+This is a minor mode.  If called interactively, toggle the
+`Treemacs-Peek mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='treemacs-peek-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
 
 While the mode is active treemacs will automatically display the file at point,
 without leaving the treemacs window.
@@ -474,7 +483,7 @@ The peeked window can be scrolled using
 
 \(fn &optional ARG)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-peek-mode" '("treemacs--")))
+(register-definition-prefixes "treemacs-peek-mode" '("treemacs--"))
 
 ;;;***
 
@@ -482,7 +491,7 @@ The peeked window can be scrolled using
 ;;;;;;  (0 0 0 0))
 ;;; Generated autoloads from treemacs-persistence.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-persistence" '("treemacs-")))
+(register-definition-prefixes "treemacs-persistence" '("treemacs-"))
 
 ;;;***
 
@@ -503,10 +512,20 @@ or call the function `treemacs-project-follow-mode'.")
 (autoload 'treemacs-project-follow-mode "treemacs-project-follow-mode" "\
 Toggle `treemacs-only-current-project-mode'.
 
-If called interactively, enable Treemacs-Project-Follow mode if
-ARG is positive, and disable it if ARG is zero or negative.  If
-called from Lisp, also enable the mode if ARG is omitted or nil,
-and toggle it if ARG is `toggle'; disable the mode otherwise.
+This is a minor mode.  If called interactively, toggle the
+`Treemacs-Project-Follow mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='treemacs-project-follow-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
 
 This is a minor mode meant for those who do not care about treemacs' workspace
 features, or its preference to work with multiple projects simultaneously.  When
@@ -530,7 +549,7 @@ This mode requires at least Emacs version 27 since it relies on
 
 \(fn &optional ARG)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-project-follow-mode" '("treemacs--")))
+(register-definition-prefixes "treemacs-project-follow-mode" '("treemacs--"))
 
 ;;;***
 
@@ -538,7 +557,7 @@ This mode requires at least Emacs version 27 since it relies on
 ;;;;;;  (0 0 0 0))
 ;;; Generated autoloads from treemacs-rendering.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-rendering" '("treemacs-")))
+(register-definition-prefixes "treemacs-rendering" '("treemacs-"))
 
 ;;;***
 
@@ -546,7 +565,7 @@ This mode requires at least Emacs version 27 since it relies on
 ;;;;;;  0))
 ;;; Generated autoloads from treemacs-scope.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-scope" '("treemacs-")))
+(register-definition-prefixes "treemacs-scope" '("treemacs-"))
 
 ;;;***
 
@@ -572,10 +591,20 @@ or call the function `treemacs-tag-follow-mode'.")
 (autoload 'treemacs-tag-follow-mode "treemacs-tag-follow-mode" "\
 Toggle `treemacs-tag-follow-mode'.
 
-If called interactively, enable Treemacs-Tag-Follow mode if ARG
-is positive, and disable it if ARG is zero or negative.  If
-called from Lisp, also enable the mode if ARG is omitted or nil,
-and toggle it if ARG is `toggle'; disable the mode otherwise.
+This is a minor mode.  If called interactively, toggle the
+`Treemacs-Tag-Follow mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='treemacs-tag-follow-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
 
 This acts as more fine-grained alternative to `treemacs-follow-mode' and will
 thus disable `treemacs-follow-mode' on activation.  When enabled treemacs will
@@ -599,7 +628,7 @@ longer than it really does.
 
 \(fn &optional ARG)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-tag-follow-mode" '("treemacs--")))
+(register-definition-prefixes "treemacs-tag-follow-mode" '("treemacs--"))
 
 ;;;***
 
@@ -658,7 +687,7 @@ The `imenu-create-index-function' for treemacs buffers." nil nil)
 
 (function-put 'treemacs--create-imenu-index-function 'side-effect-free 't)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-tags" '("treemacs--")))
+(register-definition-prefixes "treemacs-tags" '("treemacs--"))
 
 ;;;***
 
@@ -666,7 +695,7 @@ The `imenu-create-index-function' for treemacs buffers." nil nil)
 ;;;;;;  0 0))
 ;;; Generated autoloads from treemacs-themes.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-themes" '("treemacs-")))
+(register-definition-prefixes "treemacs-themes" '("treemacs-"))
 
 ;;;***
 
@@ -674,7 +703,7 @@ The `imenu-create-index-function' for treemacs buffers." nil nil)
 ;;;;;;  0 0 0))
 ;;; Generated autoloads from treemacs-visuals.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-visuals" '("treemacs-")))
+(register-definition-prefixes "treemacs-visuals" '("treemacs-"))
 
 ;;;***
 
@@ -682,7 +711,7 @@ The `imenu-create-index-function' for treemacs buffers." nil nil)
 ;;;;;;  (0 0 0 0))
 ;;; Generated autoloads from treemacs-workspaces.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-workspaces" '("treemacs-")))
+(register-definition-prefixes "treemacs-workspaces" '("treemacs-"))
 
 ;;;***
 
@@ -695,6 +724,6 @@ The `imenu-create-index-function' for treemacs buffers." nil nil)
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
+;; coding: utf-8-emacs-unix
 ;; End:
 ;;; treemacs-autoloads.el ends here

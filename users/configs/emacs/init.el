@@ -6,6 +6,8 @@
 (setq backup-directory-alist `(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory))))
 (setq visible-bell nil)
 (setq tab-width 4)
+(setq indent-tabs-mode nil)
+(setq standard-indent 4)
 (setq evil-shift-width tab-width)
 (setq comp-async-report-warnings-errors nil)
 
@@ -16,10 +18,14 @@
 (set-fringe-mode 10)
 (menu-bar-mode -1)
 (set-language-environment "UTF-8")
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
 (set-face-bold-p 'bold nil)
 (set-face-attribute 'default nil
-                    :family "JetBrains Mono Nerd Font"
-                    :height 110
+                    :family "Iosevka"
+                    :height 140
                     :width 'normal)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -210,10 +216,48 @@
 (use-package orderless
   :custom (completion-styles '(orderless)))
 
-(use-package term
-  :config
-  (setq explicit-shell-file-name "zsh") ;; Change this to zsh, etc
-  (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *"))
+(use-package vterm
+  :custom (setq explicit-shell-file-name "zsh"
+                term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
+  :bind (("C-c e" . vterm)))
+
+(use-package vterm-toggle
+  :bind (("C-M-'" . vterm-toggle)))
+
+(setq eshell-prompt-regexp "^[^αλ\n]*[αλ] ")
+(setq eshell-prompt-function
+      (lambda nil
+        (concat
+         (if (string= (eshell/pwd) (getenv "HOME"))
+             (propertize "~" 'face `(:foreground "#99CCFF"))
+           (replace-regexp-in-string
+            (getenv "HOME")
+            (propertize "~" 'face `(:foreground "#99CCFF"))
+            (propertize (eshell/pwd) 'face `(:foreground "#99CCFF"))))
+         (if (= (user-uid) 0)
+             (propertize " α " 'face `(:foreground "#FF6666"))
+           (propertize " λ " 'face `(:foreground "#A6E22E"))))))
+
+(setq eshell-highlight-prompt nil) 
+
+(defalias 'open 'find-file-other-window)
+(defalias 'clean 'eshell/clear-scrollback)
+
+(use-package gnus)
+
+(setq user-mail-address "bequintao@gmail.com"
+      user-full-name "Basques")
+
+(add-to-list 'gnus-secondary-select-methods '(nnimap "gmail"
+                                                     (nnimap-address "imap.gmail.com")  ; it could also be imap.googlemail.com if that's your server.
+                                                     (nnimap-server-port "imaps")
+                                                     (nnimap-stream ssl)
+                                                     (nnmail-expiry-target "nnimap+gmail:[Gmail]/Trash")  ; Move expired messages to Gmail's trash.
+                                                     (nnmail-expiry-wait immediate))) ; Mails marked as expired can be processed immediately.
+
+(setq smtpmail-smtp-server "smtp.gmail.com"
+      smtpmail-smtp-service 587
+      gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]")
 
 (use-package dired
   :ensure nil
@@ -234,19 +278,22 @@
     "H" 'dired-hide-dotfiles-mode))
 
 (use-package treemacs
-  :bind(("C-t" . treemacs)))
+  :bind (("C-c t" . treemacs)))
 
 (use-package treemacs-evil
-  :after (treemacs evil)
-  :ensure t)
+  :after (treemacs evil))
 
 (use-package treemacs-all-the-icons
-  :ensure t)
-(treemacs-load-theme "all-the-icons")
+  :after (treemacs))
+
+(use-package treemacs-all-the-icons
+  :after treemacs
+  :init
+  (require 'treemacs-all-the-icons)
+  (treemacs-load-theme 'all-the-icons))
 
 (use-package treemacs-magit
-  :after (treemacs magit)
-  :ensure t)
+  :after (treemacs magit))
 
 (use-package magit
   :bind ("C-M-;" . magit-status)
@@ -256,16 +303,20 @@
 
 (use-package no-littering)
 
-(setq auto-save-file-name-transforms
-      `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
+(use-package async
+  :ensure t
+  :init (dired-async-mode 1))
 
-(use-package crux
-  :bind (("C-c D" . crux-delete-file-and-buffer)))
+  (setq auto-save-file-name-transforms
+        `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
 
-(use-package bug-hunter)
+  (use-package crux
+    :bind (("C-c D" . crux-delete-file-and-buffer)))
 
-(use-package olivetti
-  :bind ("C-c o" . olivetti-mode))
+  (use-package bug-hunter)
+
+  (use-package olivetti
+    :bind ("C-c o" . olivetti-mode))
 
 ;; (use-package quelpa-use-package)
 ;; ;; Don't forget to run M-x eaf-install-dependencies
@@ -289,6 +340,18 @@
     (interactive)
     (switch-to-buffer (get-buffer-create "*scratch*"))
     (lisp-interaction-mode))
+
+  (defun config-visit()
+    (interactive)
+    (find-file "~/.config/emacs/emacs.org"))
+   (global-set-key (kbd "C-c e") 'config-visit)
+
+  (defun reload-config()
+    (interactive)
+    (org-babel-load-file "~/.config/emacs/emacs.org")
+    (load-file "~/.config/emacs/init.el"))
+  (global-set-key (kbd "C-c r") 'reload-config)
+
   :config (dashboard-setup-startup-hook))
 
 (setq dashboard-startup-banner "./etc/nix.txt")
@@ -310,7 +373,7 @@
          (nil
           "open the emacs.org"
           "Opens the config file"
-          (lambda (&rest _) (find-file "~/.config/emacs/emacs.org"))
+          (lambda (&rest _) (config-visit))
           'default)
          (nil
           "new scratch buffer"
@@ -321,6 +384,9 @@
 
 (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
 
+(use-package page-break-lines
+  :requires dashboard)
+
 (use-package all-the-icons)
 
 (use-package rainbow-delimiters
@@ -329,27 +395,21 @@
 (use-package smartparens
   :hook (prog-mode . smartparens-mode))
 
+(use-package highlight-indent-guides
+  ;; :custom (setq highlight-indent-guides-method 'bitmap)
+  :hook (prog-mode . highlight-indent-guides-mode))
+
+(setq highlight-indent-guides-method 'bitmap)
+
 (setq display-time-format "%H:%M"
       display-time-default-load-average nil)
 
-;; (use-package doom-modeline
-;;   :hook (after-init . doom-modeline-mode)
-;;   :custom (setq doom-modeline-height 20
-;;                 doom-modeline-lsp t
-;;                 doom-modeline-github t
-;;                 doom-modeline-minor-modes t
-;;                 doom-modeline-major-mode-icon t)
-
-;;   (use-package minions
-;;     (:hook doom-modeline-mode)))
-
-
 (use-package mood-line
-  :init (mood-line-mode)(display-time-mode))
+  :init (mood-line-mode)(display-time-mode)(display-battery-mode))
 
-(use-package doom-themes
-  :custom (setq doom-themes-enable-bold t
-                doom-themes-enable-italic t))
+(use-package doom-themes :defer t)
+(use-package spacemacs-theme :defer t)
+(use-package nano-theme :defer t)
 
 (consult-theme 'doom-one)
 
@@ -362,7 +422,7 @@
   (setq evil-auto-indent nil)
   (setq left-margin-width 2)
   (setq right-margin-width 2)
-  (set-window-margins (selected-window) 1 1=)
+  (set-window-margins (selected-window) 1 1)
   (diminish org-indent-mode))
 
 (defun org-toggle-todo-and-fold ()
@@ -396,11 +456,9 @@
       org-src-preserve-indentation nil
       org-startup-folded 'content
       org-cycle-separator-lines 2
-      org-agenda-files '("~/Documents/org/org-agenda.org")
-      org-directory  "~/Documents/org/"
-      org-todo-keywords '((sequence "TODO" "|" "DONE")
-                          (sequence "REPORT" "BUG" "KNOWNCAUSE" "|" "FIXED")
-                          (sequence "|" "CANCELED")))
+      org-agenda-files '("~/Docs/org/org-agenda.org")
+      org-directory  "~/Docs/org/"
+      org-todo-keywords '((sequence "TODO" "|" "DONE")))
 
 
 (defun my-org-archive-done-tasks ()
@@ -414,6 +472,7 @@
 (add-to-list 'org-structure-template-alist '("scm" . "src scheme"))
 (add-to-list 'org-structure-template-alist '("py" . "src python"))
 (add-to-list 'org-structure-template-alist '("tex" . "src latex"))
+(add-to-list 'org-structure-template-alist '("go" . "src go"))
 (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
 
 (setq org-confirm-babel-evaluate nil)
@@ -453,7 +512,7 @@
 (setq org-habit-graph-column 60)
 
 (use-package org-journal
-  :config (setq org-journal-dir "~/Documents/org/journal/")
+  :config (setq org-journal-dir "~/Docs/org/journal/")
   :bind (("C-c j n" . org-journal-new-entry)
          ("C-c j s" . org-journal-search)))
 
@@ -489,7 +548,6 @@
 (use-package pandoc)
 (use-package ox-pandoc)
 (use-package pdf-tools
-  :commands (pdf-view-mode pdf-tools-install)
   :mode ("\\.[pP][dD][fF]\\'" . pdf-view-mode)
   :magic ("%PDF" . pdf-view-mode)
   :config
@@ -499,7 +557,7 @@
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 
 (setq org-capture-templates
-      '(("t" "Todo" entry (file+headline "~/Documents/org/gtd.org" "Tasks")
+      '(("t" "Todo" entry (file+headline "~/Docs/org/gtd.org" "Tasks")
          "* TODO %?\n  %i\n  %a")
         ("j" "Journal" entry (file+datetree "~/org/journal.org")
          "* %?\nEntered on %U\n  %i\n  %a")))
@@ -507,7 +565,7 @@
 (use-package org-roam
   :ensure t
   :custom
-  (org-roam-directory "~/Documents/org/roam")
+  (org-roam-directory "~/Docs/org/roam")
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
          ("C-c n i" . org-roam-node-insert)
@@ -548,14 +606,9 @@
   :hook (lsp-mode . lsp-ui-mode)
   :config
   (setq lsp-ui-sideline-enable t
-        lsp-ui-sideline-show-hover t
-        lsp-ui-doc-position 'bottom
-        lsp-lens-enable t
         lsp-ui-doc-enable t
-        lsp-headerline-breadcrumb-enable nil
-        lsp-ui-peek-enable t
-        lsp-ui-peek-fontify 'on-demand
-        lsp-ui-doc-show))
+        lsp-ui-doc-delay 0.2
+        lsp-ui-flycheck-enable t))
 
 (use-package dap-mode
   :straight t
@@ -627,9 +680,86 @@
 (use-package nix-mode
   :mode "\\.nix\\'")
 
+(use-package zig-mode
+  :custom (setq lsp-zig-zls-executable "/usr/bin/env= zls")
+  :hook (zig-mode . lsp-deferred)
+  :mode "\\.zig\\'"
+  :config
+  (add-to-list 'lsp-language-id-configuration '(zig-mode . "zig"))
+  (lsp-register-client
+   (make-lsp-client
+    :new-connection (lsp-stdio-connection "<path to zls>")
+    :major-modes '(zig-mode)
+    :server-id 'zls)))
+
+(use-package auctex
+  :hook
+  (TeX-mode . TeX-PDF-mode)
+  (TeX-mode . company-mode)
+  :init
+  (setq reftex-plug-into-AUCTeX t)
+  (setq TeX-parse-self t)
+  (setq-default TeX-master nil)
+
+  (setq TeX-open-quote  "<<")
+  (setq TeX-close-quote ">>")
+  (setq TeX-electric-sub-and-superscript t)
+  (setq font-latex-fontify-script nil)
+  (setq TeX-show-compilation nil)
+
+  (setq preview-scale-function 1.5)
+  (setq preview-gs-options
+        '("-q" "-dNOSAFER" "-dNOPAUSE" "-DNOPLATFONTS"
+          "-dPrinted" "-dTextAlphaBits=4" "-dGraphicsAlphaBits=4"))
+
+  (setq reftex-label-alist '(AMSTeX)))
+
+(use-package company-auctex
+  :init
+  (company-auctex-init))
+
+(use-package company-math
+  :init
+  (add-to-list 'company-backends 'company-math))
+
+(use-package company-reftex
+  :init
+  (add-to-list 'company-backends 'company-reftex-citations)
+  (add-to-list 'company-backends 'company-reftex-labels))
+
+(use-package rustic
+  :init
+  (setq rustic-lsp-server 'rust-analyzer)
+  (setq rustic-flycheck-setup-mode-line-p nil)
+  :hook ((rustic-mode . (lambda ()
+                          (lsp-ui-doc-mode)
+                          (company-mode))))
+  :bind (:map rustic-mode-map
+              ("M-j" . lsp-ui-imenu)
+              ("M-?" . lsp-find-references)
+              ("C-c C-c l" . flycheck-list-errors)
+              ("C-c C-c a" . lsp-execute-code-action)
+              ("C-c C-c r" . lsp-rename)
+              ("C-c C-c q" . lsp-workspace-restart)
+              ("C-c C-c Q" . lsp-workspace-shutdown)
+              ("C-c C-c s" . lsp-rust-analyzer-status))
+  :config
+  (setq rust-indent-method-chain t)
+  (setq rustic-format-on-save t))
+
+(use-package flycheck-rust)
+
 (use-package haskell-mode
   :hook (haskell-mode . lsp-deferred)
-  :mode "\\.hs\\'")
+  :mode "\\.hs\\'"
+  :config
+  (use-package lsp-haskell)
+  (require 'lsp)
+  (require 'lsp-haskell)
+  (add-hook 'haskell-mode-hook #'haskell-indentation-mode)
+  (add-hook 'haskell-mode-hook #'yas-minor-mode)
+  (add-hook 'haskell-mode-hook #'lsp)
+  (setq haskell-stylish-on-save t))
 
 (use-package aggressive-indent
   :hook ((emacs-lisp-mode
@@ -646,53 +776,38 @@
 (add-hook 'after-init-hook 'global-company-mode)
 
 (use-package flycheck
-  :hook (lsp-mode)
-  :ensure t)
+  :diminish
+  :hook (after-init . global-flycheck-mode)
+  :custom
+  (flycheck-check-syntax-automatically '(save mode-enabled)))
+
+(use-package guess-language
+  :config
+  (setq guess-language-languages '(en pt))
+  (setq guess-language-min-paragraph-length 10)
+  :hook
+  (text-mode . guess-language-mode))
+
+(add-hook 'text-mode-hook 'flycheck-mode)
+(add-hook 'org-mode-hook 'flycheck-mode)
 
 (use-package company
-  :after lsp-mode
-  :hook (lsp-mode . company-mode)
+  :diminish
+  :bind
+  (:map company-active-map
+        ("C-n". company-select-next)
+        ("C-p". company-select-previous))
   :config
-  (setq company-minimum-prefix-length 1
-  company-idle-delay 0.0
-  company-selection-wrap-around t
-  company-require-match 'never
-  company-dabbrev-downcase nil
-  company-dabbrev-ignore-case t
-  company-dabbrev-other-buffers nil
-  company-tooltip-limit 5
-  company-tooltip-minimum-width 40))
+  (setq company-dabbrev-other-buffers t
+        company-dabbrev-code-other-buffers t)
+  :hook ((prog-mode . company-mode)
+         (org-mode . company-mode)
+         (company-mode . yas-minor-mode)))
 
 (use-package company-irony)
 
 (use-package company-box
   :hook (company-mode . company-box-mode))
-
-;; (use-package corfu
-;;   ;; Optional customizations
-;;   :custom
-;;   (corfu-cycle t)                ; Enable cycling for `corfu-next/previous'
-;;   ;; (corfu-auto t)                 ; Enable auto completion
-;;   ;; (corfu-auto-prefix 1)                ; Enable auto completion
-;;   ;; (corfu-auto-delay 0.1)                 ; Enable auto completion
-;;   (corfu-echo-documentation 0.25)                 ; Enable auto completion
-;;   (corfu-scroll-margin 5)        ; Use scroll margin
-;;   (corfu-preview-current t)    ; Do not preview current candidate
-;;   (corfu-preselect-first nil)
-
-;;   ;; Optionally use TAB for cycling, default is `corfu-complete'.
-;;   :bind (:map corfu-map
-;; 			  ("TAB"     . corfu-next)
-;; 			  ([tab]     . corfu-next)
-;; 			  ("S-SPC"   . corfu-next)
-;; 			  ("S-TAB"   . corfu-previous)
-;; 			  ([backtab] . corfu-previous)
-;; 			  ( "C-f"    . corfu-insert))
-
-;;   ;; Recommended: Enable Corfu globally.
-;;   ;; This is recommended since dabbrev can be used globally (M-/).
-;;   :init
-;;   (corfu-global-mode))
 
 (use-package eldoc
   :custom (lsp-eldoc-render-all t))

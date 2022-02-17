@@ -1,4 +1,4 @@
-;;; apheleia-autoloads.el --- automatically extracted autoloads
+;;; apheleia-autoloads.el --- automatically extracted autoloads  -*- lexical-binding: t -*-
 ;;
 ;;; Code:
 
@@ -45,11 +45,7 @@ and `apheleia-formatters'." :lighter " Apheleia" (if apheleia-mode (add-hook 'af
 
 (put 'apheleia-mode 'safe-local-variable #'booleanp)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "apheleia" '("apheleia-")))
-
-;;;***
-
-;;;### (autoloads nil nil ("apheleia-pkg.el") (0 0 0 0))
+(register-definition-prefixes "apheleia" '("apheleia-"))
 
 ;;;***
 
@@ -57,6 +53,6 @@ and `apheleia-formatters'." :lighter " Apheleia" (if apheleia-mode (add-hook 'af
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
+;; coding: utf-8-emacs-unix
 ;; End:
 ;;; apheleia-autoloads.el ends here

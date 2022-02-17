@@ -3,36 +3,28 @@ let
   clr = import ../theme/one.nix;
 in {
   home.packages = with pkgs; [
-    xwallpaper
-    pamixer
-    i3lock-color
-    brightnessctl
     libnotify
-    foliate
     gtk3
-    qbittorrent
-    tint2
-    dmenu
+    gtk-engine-murrine
+    gtk_engines
+    gsettings-desktop-schemas
     xsel
-    rofi
-    xautolock
-    xcompmgr
-    scrot 
+    lxappearance
   ];
 
   gtk = {
     font = {
-      name = "JetBrains Mono Nerd Font";
+      name = "Iosevka";
       size = "10";
     };
-    # theme = "everforest-gtk";
-    theme = "tomorrow-night";
-    iconTheme.name = "Vimix";
-  };
-  services.screen-locker = {
-    enable = true;
-    inactiveInterval = 5;
-    lockCmd = "/bin/sh /home/basqs/.local/bin/lock.sh";
+    theme = {
+      ## name = "Palenight-theme";
+      package = pkgs.palenight-theme;
+    };
+    iconTheme = {
+    ##name "papirus";
+    package = pkgs.papirus-icon-theme;
+    };
   };
 
   xdg.mime.enable = true;
@@ -86,48 +78,17 @@ in {
 
     "*.color6" =  clr.cyan;
     "*.color14" = clr.cyan-br;
-    
+
     "*.color7" =  clr.white;
     "*.color15" = clr.white-br;
 
-    "*.font" = "JetBrains Mono Nerd Font";
+    "*.font" = "Iosevka";
   };
 
   home.sessionVariables = {
     TERMINAL = "alacritty";
     PAGER = "less";
   };
-
-  # programs.urxvt = {
-  #   enable = true;
-  #   extraConfig = {
-  #     urgentOnBell = true;
-  #     lineSpace=  "0";
-  #     geometry = "92x24";
-  #     internalBorder = "10";
-  #     cursorBlink = "true";
-  #     cursorUnderline = "false";
-  #     saveline = "2048";
-  #     perl-ext-common = "default,clipboard,font-size,url-select,keyboard-select";
-  #     urlLauncher = "firefox";
-  #     underlineURLs = true;
-  #   };
-  #   fonts = ["xft:JetBrains Mono Nerd Font:size=9"];
-  #   iso14755 = false;
-  #   scroll.bar.enable = false;
-  #   keybindings = {
-  #     "M-c" = "perl:clipboard:copy";
-  #     "M-v" = "perl:clipboard:paste";
-
-  #     "M-u" = "perl:url-select:select_next";
-
-  #     "M-Escape" = "perl:keyboard-select:activate";
-  #     "M-s" = "perl:keyboard-select:search";
-
-  #     "Control-Right" = "\\033[1;5C";
-  #     "Control-Left" = "\\033[1;5D";
-  #   };
-  # };
 
   programs.alacritty = {
     enable = true;
@@ -138,10 +99,10 @@ in {
       };
       font = {
         normal = {
-          family = "JetBrains mono Nerd Font";
-        style = "regular";
+          family = "Iosevka";
+          style = "regular";
         };
-        size = 8;
+        size = 10;
       };
       colors = {
         primary = {
@@ -205,7 +166,7 @@ in {
         separator_color = clr.background;
 
         sort = false;
-        font = "JetBrains Mono Nerd Font 10";
+        font = "Iosevka 10";
         markup = "full";
         format = "<b>%s</b>\n%b";
         alignment = "left";
@@ -245,7 +206,56 @@ in {
       };
     };
   };
+  programs.qutebrowser = {
+    enable = true;
+    extraConfig = ''
+      from qutebrowser.api import interceptor
 
-home.file.".xmonad/xmonad.hs".source = ../configs/xmonad/xmonad.hs;
+# Youtube add blocking
+      def filter_yt(info: interceptor.Request):
+      """Block the given request if necessary."""
+      url = info.request_url
+      if (
+            url.host() == "www.youtube.com"
+            and url.path() == "/get_video_info"
+            and "&adformat=" in url.query()
+      ):
+        info.block()
 
+
+      interceptor.register(filter_yt)
+    '';
+    settings = {
+      colors = {
+        statusbar = {
+          normal.bg = clr.background;
+          command.bg = clr.background;
+          command.fg = clr.foreground;
+          normal.fg = clr.foreground;
+        };
+        tabs = {
+          even.bg = clr.background;
+          odd.bg = clr.background;
+          even.fg = clr.foreground;
+          odd.fg = clr.foreground;
+          selected.even.bg = clr.background;
+          selected.odd.bg = clr.background;
+        };
+        hints = {
+          bg = clr.background;
+          fg = clr.foreground;
+        };
+      };
+      statusbar.show = "always";
+      tabs.show = "multiple";
+    };
+    keyBindings = {
+      normal = {
+        "<Ctrl-v>" = "spawn mpv {url}";
+        ",p" = "spawn --userscript qute-pass";
+        ",l" = ''config-cycle spellcheck.languages ["pt-BR"] ["en-US"]'';
+        "yo" = "yank inline [[{url}][{title}]]";
+      };
+    };
+  };
 }

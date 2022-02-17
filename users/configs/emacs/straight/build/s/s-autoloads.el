@@ -1,4 +1,4 @@
-;;; s-autoloads.el --- automatically extracted autoloads
+;;; s-autoloads.el --- automatically extracted autoloads  -*- lexical-binding: t -*-
 ;;
 ;;; Code:
 
@@ -6,7 +6,7 @@
 ;;;### (autoloads nil "s" "s.el" (0 0 0 0))
 ;;; Generated autoloads from s.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "s" '("s-")))
+(register-definition-prefixes "s" '("s-"))
 
 ;;;***
 
@@ -15,6 +15,6 @@
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
+;; coding: utf-8-emacs-unix
 ;; End:
 ;;; s-autoloads.el ends here

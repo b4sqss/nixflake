@@ -1,4 +1,4 @@
-;;; swiper-autoloads.el --- automatically extracted autoloads
+;;; swiper-autoloads.el --- automatically extracted autoloads  -*- lexical-binding: t -*-
 ;;
 ;;; Code:
 
@@ -45,11 +45,7 @@ Like `swiper-isearch' but the first result is before the point.
 
 \(fn &optional INITIAL-INPUT)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "swiper" '("swiper-")))
-
-;;;***
-
-;;;### (autoloads nil nil ("swiper-pkg.el") (0 0 0 0))
+(register-definition-prefixes "swiper" '("swiper-"))
 
 ;;;***
 
@@ -57,6 +53,6 @@ Like `swiper-isearch' but the first result is before the point.
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
+;; coding: utf-8-emacs-unix
 ;; End:
 ;;; swiper-autoloads.el ends here

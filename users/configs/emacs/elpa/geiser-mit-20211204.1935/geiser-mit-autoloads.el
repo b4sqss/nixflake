@@ -1,4 +1,4 @@
-;;; geiser-mit-autoloads.el --- automatically extracted autoloads
+;;; geiser-mit-autoloads.el --- automatically extracted autoloads  -*- lexical-binding: t -*-
 ;;
 ;;; Code:
 
@@ -19,7 +19,7 @@ Start a Geiser MIT/GNU Scheme REPL." t)
 (autoload 'switch-to-mit "geiser-mit" "\
 Start a Geiser MIT/GNU Scheme REPL, or switch to a running one." t)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "geiser-mit" '("geiser-mit-" "mit")))
+(register-definition-prefixes "geiser-mit" '("geiser-mit-" "mit"))
 
 ;;;***
 
@@ -31,6 +31,6 @@ Start a Geiser MIT/GNU Scheme REPL, or switch to a running one." t)
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
+;; coding: utf-8-emacs-unix
 ;; End:
 ;;; geiser-mit-autoloads.el ends here

@@ -1,4 +1,4 @@
-;;; bug-hunter-autoloads.el --- automatically extracted autoloads
+;;; bug-hunter-autoloads.el --- automatically extracted autoloads  -*- lexical-binding: t -*-
 ;;
 ;;; Code:
 
@@ -24,7 +24,7 @@ ASSERTION.
 
 \(fn &optional ASSERTION)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "bug-hunter" '("bug-hunter-")))
+(register-definition-prefixes "bug-hunter" '("bug-hunter-"))
 
 ;;;***
 
@@ -37,6 +37,6 @@ ASSERTION.
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
+;; coding: utf-8-emacs-unix
 ;; End:
 ;;; bug-hunter-autoloads.el ends here

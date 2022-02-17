@@ -1,4 +1,4 @@
-;;; company-irony-autoloads.el --- automatically extracted autoloads
+;;; company-irony-autoloads.el --- automatically extracted autoloads  -*- lexical-binding: t -*-
 ;;
 ;;; Code:
 
@@ -23,11 +23,7 @@ accesses (obj.|, obj->|, ...).
 This may be useful to company < `0.8.4', newer version of company
 include these commands by default." nil nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-irony" '("company-irony-")))
-
-;;;***
-
-;;;### (autoloads nil nil ("company-irony-pkg.el") (0 0 0 0))
+(register-definition-prefixes "company-irony" '("company-irony-"))
 
 ;;;***
 
@@ -35,6 +31,6 @@ include these commands by default." nil nil)
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
+;; coding: utf-8-emacs-unix
 ;; End:
 ;;; company-irony-autoloads.el ends here

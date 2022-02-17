@@ -1,9 +1,9 @@
 
 :tanat
 
-"27.2"
+"29.0.50"
 
-#s(hash-table size 65 test equal rehash-size 1.5 rehash-threshold 0.8125 data ("org-elpa" ("2022-02-03 09:42:53" nil (:local-repo nil :package "org-elpa" :type git)) "melpa" ("2022-02-03 09:42:53" nil (:type git :host github :repo "melpa/melpa" :build nil :package "melpa" :local-repo "melpa")) "gnu-elpa-mirror" ("2022-02-03 09:42:53" nil (:type git :host github :repo "emacs-straight/gnu-elpa-mirror" :build nil :package "gnu-elpa-mirror" :local-repo "gnu-elpa-mirror")) "el-get" ("2022-02-03 09:42:53" nil (:type git :host github :repo "dimitri/el-get" :build nil :files ("*.el" ("recipes" "recipes/el-get.rcp") "methods" "el-get-pkg.el") :flavor melpa :package "el-get" :local-repo "el-get")) "emacsmirror-mirror" ("2022-02-03 09:42:53" nil (:type git :host github :repo "emacs-straight/emacsmirror-mirror" :build nil :package "emacsmirror-mirror" :local-repo "emacsmirror-mirror")) "straight" ("2022-02-03 09:42:53" ("emacs") (:type git :host github :repo "raxod502/straight.el" :files ("straight*.el") :branch "master" :package "straight" :local-repo "straight.el")) "embark" ("2022-02-03 09:42:53" ("emacs") (:type git :flavor melpa :files ("embark.el" "embark.texi" "embark-pkg.el") :host github :repo "oantolin/embark" :package "embark" :local-repo "embark")) "rose-pine-emacs" ("2022-01-25 16:23:29" nil (:host github :repo "thongpv87/rose-pine-emacs" :branch "master" :package "rose-pine-emacs" :type git :local-repo "rose-pine-emacs")) "lsp-mode" ("2022-02-03 09:42:55" ("emacs" "dash" "f" "ht" "spinner" "markdown-mode" "lv") (:type git :flavor melpa :files (:defaults "clients/*.el" "lsp-mode-pkg.el") :host github :repo "emacs-lsp/lsp-mode" :package "lsp-mode" :local-repo "lsp-mode")) "dash" ("2022-02-03 09:42:55" ("emacs") (:type git :flavor melpa :files ("dash.el" "dash.texi" "dash-pkg.el") :host github :repo "magnars/dash.el" :package "dash" :local-repo "dash.el")) "f" ("2022-02-03 09:42:55" ("s" "dash") (:type git :flavor melpa :files ("f.el" "f-pkg.el") :host github :repo "rejeep/f.el" :package "f" :local-repo "f.el")) "ht" ("2022-02-03 09:42:55" ("dash") (:type git :flavor melpa :files ("ht.el" "ht-pkg.el") :host github :repo "Wilfred/ht.el" :package "ht" :local-repo "ht.el")) "spinner" ("2022-02-03 09:42:55" ("emacs") (:type git :host github :repo "emacs-straight/spinner" :files ("*" (:exclude ".git")) :package "spinner" :local-repo "spinner")) "markdown-mode" ("2022-02-03 09:42:55" ("emacs") (:type git :flavor melpa :host github :repo "jrblevin/markdown-mode" :package "markdown-mode" :local-repo "markdown-mode")) "lv" ("2022-02-03 09:42:55" nil (:type git :flavor melpa :files ("lv.el" "lv-pkg.el") :host github :repo "abo-abo/hydra" :package "lv" :local-repo "hydra")) "lsp-ui" ("2022-02-03 09:42:55" ("emacs" "dash" "lsp-mode" "markdown-mode") (:type git :flavor melpa :files (:defaults "lsp-ui-doc.html" "resources" "lsp-ui-pkg.el") :host github :repo "emacs-lsp/lsp-ui" :package "lsp-ui" :local-repo "lsp-ui")) "dap-mode" ("2022-02-03 09:42:55" ("emacs" "dash" "lsp-mode" "bui" "f" "s" "lsp-treemacs" "posframe" "ht") (:type git :flavor melpa :files (:defaults "icons" "dap-mode-pkg.el") :host github :repo "emacs-lsp/dap-mode" :package "dap-mode" :local-repo "dap-mode")) "bui" ("2022-02-03 09:42:55" ("emacs" "dash") (:type git :flavor melpa :host github :repo "alezost/bui.el" :package "bui" :local-repo "bui.el")) "s" ("2022-02-03 09:42:55" nil (:type git :flavor melpa :files ("s.el" "s-pkg.el") :host github :repo "magnars/s.el" :package "s" :local-repo "s.el")) "lsp-treemacs" ("2022-02-03 09:42:55" ("emacs" "dash" "f" "ht" "treemacs" "lsp-mode") (:type git :flavor melpa :files (:defaults "icons" "lsp-treemacs-pkg.el") :host github :repo "emacs-lsp/lsp-treemacs" :package "lsp-treemacs" :local-repo "lsp-treemacs")) "treemacs" ("2022-02-03 09:42:55" ("emacs" "cl-lib" "dash" "s" "ace-window" "pfuture" "hydra" "ht" "cfrs") (:type git :flavor melpa :files (:defaults "Changelog.org" "icons" "src/elisp/treemacs*.el" "src/scripts/treemacs*.py" (:exclude "src/extra/*") "treemacs-pkg.el") :host github :repo "Alexander-Miller/treemacs" :package "treemacs" :local-repo "treemacs")) "ace-window" ("2022-02-03 09:42:55" ("avy") (:type git :flavor melpa :host github :repo "abo-abo/ace-window" :package "ace-window" :local-repo "ace-window")) "avy" ("2022-02-03 09:42:55" ("emacs" "cl-lib") (:type git :flavor melpa :host github :repo "abo-abo/avy" :package "avy" :local-repo "avy")) "pfuture" ("2022-02-03 09:42:55" ("emacs") (:type git :flavor melpa :host github :repo "Alexander-Miller/pfuture" :package "pfuture" :local-repo "pfuture")) "hydra" ("2022-02-03 09:42:55" ("cl-lib" "lv") (:flavor melpa :files (:defaults (:exclude "lv.el") "hydra-pkg.el") :package "hydra" :local-repo "hydra" :type git :repo "abo-abo/hydra" :host github)) "cfrs" ("2022-02-03 09:42:55" ("emacs" "dash" "s" "posframe") (:type git :flavor melpa :host github :repo "Alexander-Miller/cfrs" :package "cfrs" :local-repo "cfrs")) "posframe" ("2022-02-03 09:42:55" ("emacs") (:type git :flavor melpa :host github :repo "tumashu/posframe" :package "posframe" :local-repo "posframe"))))
+#s(hash-table size 65 test equal rehash-size 1.5 rehash-threshold 0.8125 data ("org-elpa" ("2022-02-17 17:52:45" nil (:local-repo nil :package "org-elpa" :type git)) "melpa" ("2022-02-17 17:52:45" nil (:type git :host github :repo "melpa/melpa" :build nil :package "melpa" :local-repo "melpa")) "gnu-elpa-mirror" ("2022-02-17 17:52:45" nil (:type git :host github :repo "emacs-straight/gnu-elpa-mirror" :build nil :package "gnu-elpa-mirror" :local-repo "gnu-elpa-mirror")) "el-get" ("2022-02-17 17:52:45" nil (:type git :host github :repo "dimitri/el-get" :build nil :files ("*.el" ("recipes" "recipes/el-get.rcp") "methods" "el-get-pkg.el") :flavor melpa :package "el-get" :local-repo "el-get")) "emacsmirror-mirror" ("2022-02-17 17:52:45" nil (:type git :host github :repo "emacs-straight/emacsmirror-mirror" :build nil :package "emacsmirror-mirror" :local-repo "emacsmirror-mirror")) "straight" ("2022-02-17 17:52:45" ("emacs") (:type git :host github :repo "raxod502/straight.el" :files ("straight*.el") :branch "master" :package "straight" :local-repo "straight.el")) "embark" ("2022-02-17 17:52:45" ("emacs") (:type git :flavor melpa :files ("embark.el" "embark.texi" "embark-pkg.el") :host github :repo "oantolin/embark" :package "embark" :local-repo "embark")) "lsp-mode" ("2022-02-17 17:52:46" ("emacs" "dash" "f" "ht" "spinner" "markdown-mode" "lv") (:type git :flavor melpa :files (:defaults "clients/*.el" "lsp-mode-pkg.el") :host github :repo "emacs-lsp/lsp-mode" :package "lsp-mode" :local-repo "lsp-mode")) "dash" ("2022-02-17 17:52:46" ("emacs") (:type git :flavor melpa :files ("dash.el" "dash.texi" "dash-pkg.el") :host github :repo "magnars/dash.el" :package "dash" :local-repo "dash.el")) "f" ("2022-02-17 17:52:46" ("s" "dash") (:type git :flavor melpa :files ("f.el" "f-pkg.el") :host github :repo "rejeep/f.el" :package "f" :local-repo "f.el")) "s" ("2022-02-17 17:52:46" nil (:type git :flavor melpa :files ("s.el" "s-pkg.el") :host github :repo "magnars/s.el" :package "s" :local-repo "s.el")) "ht" ("2022-02-17 17:52:46" ("dash") (:type git :flavor melpa :files ("ht.el" "ht-pkg.el") :host github :repo "Wilfred/ht.el" :package "ht" :local-repo "ht.el")) "spinner" ("2022-02-17 17:52:46" ("emacs") (:type git :host github :repo "emacs-straight/spinner" :files ("*" (:exclude ".git")) :package "spinner" :local-repo "spinner")) "markdown-mode" ("2022-02-17 17:52:46" ("emacs") (:type git :flavor melpa :host github :repo "jrblevin/markdown-mode" :package "markdown-mode" :local-repo "markdown-mode")) "lv" ("2022-02-17 17:52:46" nil (:type git :flavor melpa :files ("lv.el" "lv-pkg.el") :host github :repo "abo-abo/hydra" :package "lv" :local-repo "hydra")) "lsp-ui" ("2022-02-17 17:52:46" ("emacs" "dash" "lsp-mode" "markdown-mode") (:type git :flavor melpa :files (:defaults "lsp-ui-doc.html" "resources" "lsp-ui-pkg.el") :host github :repo "emacs-lsp/lsp-ui" :package "lsp-ui" :local-repo "lsp-ui")) "dap-mode" ("2022-02-17 17:52:46" ("emacs" "dash" "lsp-mode" "bui" "f" "s" "lsp-treemacs" "posframe" "ht") (:type git :flavor melpa :files (:defaults "icons" "dap-mode-pkg.el") :host github :repo "emacs-lsp/dap-mode" :package "dap-mode" :local-repo "dap-mode")) "bui" ("2022-02-17 17:52:46" ("emacs" "dash") (:type git :flavor melpa :host github :repo "alezost/bui.el" :package "bui" :local-repo "bui.el")) "lsp-treemacs" ("2022-02-17 17:52:46" ("emacs" "dash" "f" "ht" "treemacs" "lsp-mode") (:type git :flavor melpa :files (:defaults "icons" "lsp-treemacs-pkg.el") :host github :repo "emacs-lsp/lsp-treemacs" :package "lsp-treemacs" :local-repo "lsp-treemacs")) "treemacs" ("2022-02-17 17:52:46" ("emacs" "cl-lib" "dash" "s" "ace-window" "pfuture" "hydra" "ht" "cfrs") (:type git :flavor melpa :files (:defaults "Changelog.org" "icons" "src/elisp/treemacs*.el" "src/scripts/treemacs*.py" (:exclude "src/extra/*") "treemacs-pkg.el") :host github :repo "Alexander-Miller/treemacs" :package "treemacs" :local-repo "treemacs")) "ace-window" ("2022-02-17 17:52:46" ("avy") (:type git :flavor melpa :host github :repo "abo-abo/ace-window" :package "ace-window" :local-repo "ace-window")) "avy" ("2022-02-17 17:52:46" ("emacs" "cl-lib") (:type git :flavor melpa :host github :repo "abo-abo/avy" :package "avy" :local-repo "avy")) "pfuture" ("2022-02-17 17:52:46" ("emacs") (:type git :flavor melpa :host github :repo "Alexander-Miller/pfuture" :package "pfuture" :local-repo "pfuture")) "hydra" ("2022-02-17 17:52:46" ("cl-lib" "lv") (:flavor melpa :files (:defaults (:exclude "lv.el") "hydra-pkg.el") :package "hydra" :local-repo "hydra" :type git :repo "abo-abo/hydra" :host github)) "cfrs" ("2022-02-17 17:52:46" ("emacs" "dash" "s" "posframe") (:type git :flavor melpa :host github :repo "Alexander-Miller/cfrs" :package "cfrs" :local-repo "cfrs")) "posframe" ("2022-02-17 17:52:46" ("emacs") (:type git :flavor melpa :host github :repo "tumashu/posframe" :package "posframe" :local-repo "posframe"))))
 
 #s(hash-table size 65 test equal rehash-size 1.5 rehash-threshold 0.8125 data ("straight" ((straight-x straight straight-autoloads) (autoload 'straight-remove-unused-repos "straight" "Remove unused repositories from the repos directory.
 A repo is considered \"unused\" if it was not explicitly requested via
@@ -294,7 +294,7 @@ locally bound plist, straight-bug-report-args.
 
 (fn &optional PACKAGE)" t nil) (autoload 'straight-dependents "straight" "Return a list PACKAGE's dependents.
 
-(fn &optional PACKAGE)" t nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "straight" '("straight-"))) (defvar straight-x-pinned-packages nil "List of pinned packages.") (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "straight-x" '("straight-x-"))) (provide 'straight-autoloads)) "embark" ((embark-autoloads embark) (defun embark--record-this-command nil "Record command which opened the minibuffer.
+(fn &optional PACKAGE)" t nil) (register-definition-prefixes "straight" '("straight-")) (defvar straight-x-pinned-packages nil "List of pinned packages.") (register-definition-prefixes "straight-x" '("straight-x-")) (provide 'straight-autoloads)) "embark" ((embark-autoloads embark) (defun embark--record-this-command nil "Record command which opened the minibuffer.
 We record this because it will be the default action.
 This function is meant to be added to `minibuffer-setup-hook'." (setq-local embark--command this-command)) (add-hook 'minibuffer-setup-hook #'embark--record-this-command) (autoload 'embark-bindings-in-keymap "embark" "Explore command key bindings in KEYMAP with `completing-read'.
 The selected command will be executed.  Interactively, prompt the
@@ -422,12 +422,21 @@ Live Collect buffer popup soon after you type something in the
 minibuffer; the length of the delay after typing is given by
 `embark-collect-live-initial-delay'." nil nil) (autoload 'embark-switch-to-collect-completions "embark" "Switch to the Embark Collect Completions buffer, creating it if necessary." t nil) (autoload 'embark-export "embark" "Create a type-specific buffer to manage current candidates.
 The variable `embark-exporters-alist' controls how to make the
-buffer for each type of completion." t nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "embark" '("embark-"))) (provide 'embark-autoloads)) "rose-pine-emacs" ((rose-pine-color-theme rose-pine-dawn-theme rose-pine-emacs-autoloads rose-pine-moon-theme) (and load-file-name (boundp 'custom-theme-load-path) (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name)))) (and load-file-name (boundp 'custom-theme-load-path) (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name)))) (and load-file-name (boundp 'custom-theme-load-path) (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name)))) (provide 'rose-pine-emacs-autoloads)) "dash" ((dash-autoloads dash) (autoload 'dash-fontify-mode "dash" "Toggle fontification of Dash special variables.
+buffer for each type of completion." t nil) (register-definition-prefixes "embark" '("embark-")) (provide 'embark-autoloads)) "dash" ((dash-autoloads dash) (autoload 'dash-fontify-mode "dash" "Toggle fontification of Dash special variables.
 
-If called interactively, enable Dash-Fontify mode if ARG is
-positive, and disable it if ARG is zero or negative.  If called
-from Lisp, also enable the mode if ARG is omitted or nil, and
-toggle it if ARG is `toggle'; disable the mode otherwise.
+This is a minor mode.  If called interactively, toggle the
+`Dash-Fontify mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `dash-fontify-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
 
 Dash-Fontify mode is a buffer-local minor mode intended for Emacs
 Lisp buffers.  Enabling it causes the special variables bound in
@@ -446,15 +455,19 @@ Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `global-dash-fontify-mode'.") (custom-autoload 'global-dash-fontify-mode "dash" nil) (autoload 'global-dash-fontify-mode "dash" "Toggle Dash-Fontify mode in all buffers.
 With prefix ARG, enable Global Dash-Fontify mode if ARG is positive;
-otherwise, disable it.  If called from Lisp, enable the mode if
-ARG is omitted or nil.
+otherwise, disable it.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.
+Enable the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
 
 Dash-Fontify mode is enabled in all buffers where
 `dash--turn-on-fontify-mode' would do it.
+
 See `dash-fontify-mode' for more information on Dash-Fontify mode.
 
 (fn &optional ARG)" t nil) (autoload 'dash-register-info-lookup "dash" "Register the Dash Info manual with `info-lookup-symbol'.
-This allows Dash symbols to be looked up with \\[info-lookup-symbol]." t nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dash" '("!cdr" "!cons" "--" "->" "-a" "-butlast" "-c" "-d" "-e" "-f" "-gr" "-i" "-juxt" "-keep" "-l" "-m" "-no" "-o" "-p" "-r" "-s" "-t" "-u" "-value-to-list" "-when-let" "-zip" "dash-"))) (provide 'dash-autoloads)) "f" ((f-autoloads f) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "f" '("f-"))) (provide 'f-autoloads)) "ht" ((ht-autoloads ht) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ht" 'nil)) (provide 'ht-autoloads)) "spinner" ((spinner-autoloads spinner) (autoload 'spinner-create "spinner" "Create a spinner of the given TYPE.
+This allows Dash symbols to be looked up with \\[info-lookup-symbol]." t nil) (register-definition-prefixes "dash" '("!cdr" "!cons" "--" "->" "-a" "-butlast" "-c" "-d" "-e" "-f" "-gr" "-i" "-juxt" "-keep" "-l" "-m" "-no" "-o" "-p" "-r" "-s" "-t" "-u" "-value-to-list" "-when-let" "-zip" "dash-")) (provide 'dash-autoloads)) "s" ((s-autoloads s) (register-definition-prefixes "s" '("s-")) (provide 's-autoloads)) "f" ((f-autoloads f) (register-definition-prefixes "f" '("f-")) (provide 'f-autoloads)) "ht" ((ht-autoloads ht) (register-definition-prefixes "ht" 'nil) (provide 'ht-autoloads)) "spinner" ((spinner-autoloads spinner) (autoload 'spinner-create "spinner" "Create a spinner of the given TYPE.
 The possible TYPEs are described in `spinner--type-to-frames'.
 
 FPS, if given, is the number of desired frames per second.
@@ -499,7 +512,7 @@ DELAY, if given, is the number of seconds to wait until actually
 displaying the spinner. It is safe to cancel the spinner before
 this time, in which case it won't display at all.
 
-(fn &optional TYPE-OR-OBJECT FPS DELAY)" nil nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "spinner" '("spinner-"))) (provide 'spinner-autoloads)) "markdown-mode" ((markdown-mode markdown-mode-autoloads) (autoload 'markdown-mode "markdown-mode" "Major mode for editing Markdown files.
+(fn &optional TYPE-OR-OBJECT FPS DELAY)" nil nil) (register-definition-prefixes "spinner" '("spinner-")) (provide 'spinner-autoloads)) "markdown-mode" ((markdown-mode markdown-mode-autoloads) (autoload 'markdown-mode "markdown-mode" "Major mode for editing Markdown files.
 
 (fn)" t nil) (add-to-list 'auto-mode-alist '("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'" . markdown-mode)) (autoload 'gfm-mode "markdown-mode" "Major mode for editing GitHub Flavored Markdown files.
 
@@ -509,58 +522,105 @@ this time, in which case it won't display at all.
 
 (fn)" t nil) (autoload 'markdown-live-preview-mode "markdown-mode" "Toggle native previewing on save for a specific markdown file.
 
-If called interactively, enable Markdown-Live-Preview mode if ARG
-is positive, and disable it if ARG is zero or negative.  If
-called from Lisp, also enable the mode if ARG is omitted or nil,
-and toggle it if ARG is `toggle'; disable the mode otherwise.
+This is a minor mode.  If called interactively, toggle the
+`Markdown-Live-Preview mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
 
-(fn &optional ARG)" t nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "markdown-mode" '("defun-markdown-" "gfm-" "markdown"))) (provide 'markdown-mode-autoloads)) "lv" ((lv lv-autoloads) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lv" '("lv-"))) (provide 'lv-autoloads)) "lsp-mode" ((lsp-d lsp-eslint lsp-solargraph lsp-lua lsp-clojure lsp-pyls lsp-semantic-tokens lsp-ocaml lsp-headerline lsp-nix lsp-fsharp lsp-icons lsp-steep lsp-graphql lsp-go lsp-markdown lsp-toml lsp-vala lsp-pwsh lsp-haxe lsp-racket lsp lsp-ada lsp-css lsp-remark lsp-dired lsp-completion lsp-rust lsp-html lsp-yaml lsp-sorbet lsp-crystal lsp-hack lsp-elixir lsp-dockerfile lsp-perl lsp-json lsp-ido lsp-iedit lsp-rf lsp-lens lsp-mode-autoloads lsp-gdscript lsp-protocol lsp-clangd lsp-dhall lsp-nginx lsp-prolog lsp-angular lsp-tex lsp-r lsp-mode lsp-javascript lsp-purescript lsp-svelte lsp-erlang lsp-php lsp-elm lsp-diagnostics lsp-pylsp lsp-modeline lsp-kotlin lsp-sqls lsp-csharp lsp-cmake lsp-groovy lsp-zig lsp-terraform lsp-fortran lsp-nim lsp-bash lsp-actionscript lsp-vetur lsp-vimscript lsp-verilog lsp-vhdl lsp-beancount lsp-v lsp-xml) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-actionscript" '("lsp-actionscript-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-ada" '("lsp-ada-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-angular" '("lsp-client"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-bash" '("lsp-bash-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-beancount" '("lsp-beancount-"))) (autoload 'lsp-cpp-flycheck-clang-tidy-error-explainer "lsp-clangd" "Explain a clang-tidy ERROR by scraping documentation from llvm.org.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
 
-(fn ERROR)" nil nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-clangd" '("lsp-c"))) (autoload 'lsp-clojure-show-test-tree "lsp-clojure" "Show a test tree and focus on it if IGNORE-FOCUS? is nil.
+To check whether the minor mode is enabled in the current buffer,
+evaluate `markdown-live-preview-mode'.
 
-(fn IGNORE-FOCUS\\=\\?)" t nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-clojure" '("lsp-clojure-"))) (define-obsolete-variable-alias 'lsp-prefer-capf 'lsp-completion-provider "lsp-mode 7.0.1") (define-obsolete-variable-alias 'lsp-enable-completion-at-point 'lsp-completion-enable "lsp-mode 7.0.1") (autoload 'lsp-completion-at-point "lsp-completion" "Get lsp completions." nil nil) (autoload 'lsp-completion--enable "lsp-completion" "Enable LSP completion support." nil nil) (autoload 'lsp-completion-mode "lsp-completion" "Toggle LSP completion support.
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
 
-If called interactively, enable Lsp-Completion mode if ARG is
-positive, and disable it if ARG is zero or negative.  If called
-from Lisp, also enable the mode if ARG is omitted or nil, and
-toggle it if ARG is `toggle'; disable the mode otherwise.
+(fn &optional ARG)" t nil) (register-definition-prefixes "markdown-mode" '("defun-markdown-" "gfm-" "markdown")) (provide 'markdown-mode-autoloads)) "lv" ((lv lv-autoloads) (register-definition-prefixes "lv" '("lv-")) (provide 'lv-autoloads)) "lsp-mode" ((lsp-d lsp-eslint lsp-solargraph lsp-lua lsp-clojure lsp-pyls lsp-semantic-tokens lsp-ocaml lsp-headerline lsp-nix lsp-fsharp lsp-icons lsp-steep lsp-graphql lsp-go lsp-markdown lsp-toml lsp-vala lsp-pwsh lsp-haxe lsp-racket lsp lsp-ada lsp-css lsp-remark lsp-dired lsp-completion lsp-rust lsp-html lsp-yaml lsp-sorbet lsp-crystal lsp-hack lsp-elixir lsp-dockerfile lsp-perl lsp-json lsp-ido lsp-iedit lsp-rf lsp-lens lsp-mode-autoloads lsp-gdscript lsp-protocol lsp-clangd lsp-dhall lsp-nginx lsp-prolog lsp-angular lsp-tex lsp-r lsp-mode lsp-javascript lsp-purescript lsp-svelte lsp-erlang lsp-php lsp-elm lsp-diagnostics lsp-pylsp lsp-modeline lsp-kotlin lsp-sqls lsp-csharp lsp-cmake lsp-groovy lsp-zig lsp-terraform lsp-fortran lsp-nim lsp-bash lsp-actionscript lsp-vetur lsp-vimscript lsp-verilog lsp-vhdl lsp-beancount lsp-v lsp-xml) (register-definition-prefixes "lsp-actionscript" '("lsp-actionscript-")) (register-definition-prefixes "lsp-ada" '("lsp-ada-")) (register-definition-prefixes "lsp-angular" '("lsp-client")) (register-definition-prefixes "lsp-bash" '("lsp-bash-")) (register-definition-prefixes "lsp-beancount" '("lsp-beancount-")) (autoload 'lsp-cpp-flycheck-clang-tidy-error-explainer "lsp-clangd" "Explain a clang-tidy ERROR by scraping documentation from llvm.org.
 
-(fn &optional ARG)" t nil) (add-hook 'lsp-configure-hook (lambda nil (when (and lsp-auto-configure lsp-completion-enable) (lsp-completion--enable)))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-completion" '("lsp-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-crystal" '("lsp-clients-crystal-executable"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-csharp" '("lsp-csharp-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-css" '("lsp-css-"))) (define-obsolete-variable-alias 'lsp-diagnostic-package 'lsp-diagnostics-provider "lsp-mode 7.0.1") (define-obsolete-variable-alias 'lsp-flycheck-default-level 'lsp-diagnostics-flycheck-default-level "lsp-mode 7.0.1") (autoload 'lsp-diagnostics-lsp-checker-if-needed "lsp-diagnostics" nil nil nil) (autoload 'lsp-diagnostics--enable "lsp-diagnostics" "Enable LSP checker support." nil nil) (autoload 'lsp-diagnostics-mode "lsp-diagnostics" "Toggle LSP diagnostics integration.
+(fn ERROR)" nil nil) (register-definition-prefixes "lsp-clangd" '("lsp-c")) (autoload 'lsp-clojure-show-test-tree "lsp-clojure" "Show a test tree and focus on it if IGNORE-FOCUS? is nil.
 
-If called interactively, enable Lsp-Diagnostics mode if ARG is
-positive, and disable it if ARG is zero or negative.  If called
-from Lisp, also enable the mode if ARG is omitted or nil, and
-toggle it if ARG is `toggle'; disable the mode otherwise.
+(fn IGNORE-FOCUS\\=\\?)" t nil) (register-definition-prefixes "lsp-clojure" '("lsp-clojure-")) (define-obsolete-variable-alias 'lsp-prefer-capf 'lsp-completion-provider "lsp-mode 7.0.1") (define-obsolete-variable-alias 'lsp-enable-completion-at-point 'lsp-completion-enable "lsp-mode 7.0.1") (autoload 'lsp-completion-at-point "lsp-completion" "Get lsp completions." nil nil) (autoload 'lsp-completion--enable "lsp-completion" "Enable LSP completion support." nil nil) (autoload 'lsp-completion-mode "lsp-completion" "Toggle LSP completion support.
 
-(fn &optional ARG)" t nil) (add-hook 'lsp-configure-hook (lambda nil (when lsp-auto-configure (lsp-diagnostics--enable)))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-diagnostics" '("lsp-diagnostics-"))) (defvar lsp-dired-mode nil "Non-nil if Lsp-Dired mode is enabled.
+This is a minor mode.  If called interactively, toggle the
+`Lsp-Completion mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `lsp-completion-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t nil) (add-hook 'lsp-configure-hook (lambda nil (when (and lsp-auto-configure lsp-completion-enable) (lsp-completion--enable)))) (register-definition-prefixes "lsp-completion" '("lsp-")) (register-definition-prefixes "lsp-crystal" '("lsp-clients-crystal-executable")) (register-definition-prefixes "lsp-csharp" '("lsp-csharp-")) (register-definition-prefixes "lsp-css" '("lsp-css-")) (define-obsolete-variable-alias 'lsp-diagnostic-package 'lsp-diagnostics-provider "lsp-mode 7.0.1") (define-obsolete-variable-alias 'lsp-flycheck-default-level 'lsp-diagnostics-flycheck-default-level "lsp-mode 7.0.1") (autoload 'lsp-diagnostics-lsp-checker-if-needed "lsp-diagnostics" nil nil nil) (autoload 'lsp-diagnostics--enable "lsp-diagnostics" "Enable LSP checker support." nil nil) (autoload 'lsp-diagnostics-mode "lsp-diagnostics" "Toggle LSP diagnostics integration.
+
+This is a minor mode.  If called interactively, toggle the
+`Lsp-Diagnostics mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `lsp-diagnostics-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t nil) (add-hook 'lsp-configure-hook (lambda nil (when lsp-auto-configure (lsp-diagnostics--enable)))) (register-definition-prefixes "lsp-diagnostics" '("lsp-diagnostics-")) (defvar lsp-dired-mode nil "Non-nil if Lsp-Dired mode is enabled.
 See the `lsp-dired-mode' command
 for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `lsp-dired-mode'.") (custom-autoload 'lsp-dired-mode "lsp-dired" nil) (autoload 'lsp-dired-mode "lsp-dired" "Display `lsp-mode' icons for each file in a dired buffer.
 
-If called interactively, enable Lsp-Dired mode if ARG is
-positive, and disable it if ARG is zero or negative.  If called
-from Lisp, also enable the mode if ARG is omitted or nil, and
-toggle it if ARG is `toggle'; disable the mode otherwise.
+This is a minor mode.  If called interactively, toggle the
+`Lsp-Dired mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
 
-(fn &optional ARG)" t nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-dired" '("lsp-dired-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-dockerfile" '("lsp-dockerfile-language-server-command"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-elixir" '("lsp-elixir-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-elm" '("lsp-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-erlang" '("lsp-erlang-server-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-eslint" '("lsp-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-fortran" '("lsp-clients-"))) (autoload 'lsp-fsharp--workspace-load "lsp-fsharp" "Load all of the provided PROJECTS.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
 
-(fn PROJECTS)" nil nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-fsharp" '("lsp-fsharp-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-gdscript" '("lsp-gdscript-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-go" '("lsp-go-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-graphql" '("lsp-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-groovy" '("lsp-groovy-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-hack" '("lsp-clients-hack-command"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-haxe" '("lsp-"))) (autoload 'lsp-headerline-breadcrumb-mode "lsp-headerline" "Toggle breadcrumb on headerline.
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='lsp-dired-mode)'.
 
-If called interactively, enable Lsp-Headerline-Breadcrumb mode if
-ARG is positive, and disable it if ARG is zero or negative.  If
-called from Lisp, also enable the mode if ARG is omitted or nil,
-and toggle it if ARG is `toggle'; disable the mode otherwise.
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t nil) (register-definition-prefixes "lsp-dired" '("lsp-dired-")) (register-definition-prefixes "lsp-dockerfile" '("lsp-dockerfile-language-server-command")) (register-definition-prefixes "lsp-elixir" '("lsp-elixir-")) (register-definition-prefixes "lsp-elm" '("lsp-")) (register-definition-prefixes "lsp-erlang" '("lsp-erlang-server-")) (register-definition-prefixes "lsp-eslint" '("lsp-")) (register-definition-prefixes "lsp-fortran" '("lsp-clients-")) (autoload 'lsp-fsharp--workspace-load "lsp-fsharp" "Load all of the provided PROJECTS.
+
+(fn PROJECTS)" nil nil) (register-definition-prefixes "lsp-fsharp" '("lsp-fsharp-")) (register-definition-prefixes "lsp-gdscript" '("lsp-gdscript-")) (register-definition-prefixes "lsp-go" '("lsp-go-")) (register-definition-prefixes "lsp-graphql" '("lsp-")) (register-definition-prefixes "lsp-groovy" '("lsp-groovy-")) (register-definition-prefixes "lsp-hack" '("lsp-clients-hack-command")) (register-definition-prefixes "lsp-haxe" '("lsp-")) (autoload 'lsp-headerline-breadcrumb-mode "lsp-headerline" "Toggle breadcrumb on headerline.
+
+This is a minor mode.  If called interactively, toggle the
+`Lsp-Headerline-Breadcrumb mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `lsp-headerline-breadcrumb-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
 
 (fn &optional ARG)" t nil) (autoload 'lsp-breadcrumb-go-to-symbol "lsp-headerline" "Go to the symbol on breadcrumb at SYMBOL-POSITION.
 
 (fn SYMBOL-POSITION)" t nil) (autoload 'lsp-breadcrumb-narrow-to-symbol "lsp-headerline" "Narrow to the symbol range on breadcrumb at SYMBOL-POSITION.
 
-(fn SYMBOL-POSITION)" t nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-headerline" '("lsp-headerline-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-html" '("lsp-html-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-icons" '("lsp-"))) (autoload 'lsp-ido-workspace-symbol "lsp-ido" "`ido' for lsp workspace/symbol.
+(fn SYMBOL-POSITION)" t nil) (register-definition-prefixes "lsp-headerline" '("lsp-headerline-")) (register-definition-prefixes "lsp-html" '("lsp-html-")) (register-definition-prefixes "lsp-icons" '("lsp-")) (autoload 'lsp-ido-workspace-symbol "lsp-ido" "`ido' for lsp workspace/symbol.
 When called with prefix ARG the default selection will be symbol at point.
 
-(fn ARG)" t nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-ido" '("lsp-ido-"))) (autoload 'lsp-iedit-highlights "lsp-iedit" "Start an `iedit' operation on the documentHighlights at point.
+(fn ARG)" t nil) (register-definition-prefixes "lsp-ido" '("lsp-ido-")) (autoload 'lsp-iedit-highlights "lsp-iedit" "Start an `iedit' operation on the documentHighlights at point.
 This can be used as a primitive `lsp-rename' replacement if the
 language server doesn't support renaming.
 
@@ -568,14 +628,25 @@ See also `lsp-enable-symbol-highlighting'." t nil) (autoload 'lsp-iedit-linked-r
 This can be used as a primitive `lsp-rename' replacement if the
 language server doesn't support renaming.
 
-See also `lsp-enable-symbol-highlighting'." t nil) (autoload 'lsp-evil-multiedit-linked-ranges "lsp-iedit" "Start an `evil-multiedit' for `textDocument/linkedEditingRange'" t nil) (autoload 'lsp-evil-state-highlights "lsp-iedit" "Start `iedit-mode'. for `textDocument/documentHighlight'" t nil) (autoload 'lsp-evil-state-linked-ranges "lsp-iedit" "Start `iedit-mode'. for `textDocument/linkedEditingRange'" t nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-iedit" '("lsp-iedit--on-ranges"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-javascript" '("lsp-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-json" '("lsp-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-kotlin" '("lsp-"))) (autoload 'lsp-lens--enable "lsp-lens" "Enable lens mode." nil nil) (autoload 'lsp-lens-show "lsp-lens" "Display lenses in the buffer." t nil) (autoload 'lsp-lens-hide "lsp-lens" "Delete all lenses." t nil) (autoload 'lsp-lens-mode "lsp-lens" "Toggle code-lens overlays.
+See also `lsp-enable-symbol-highlighting'." t nil) (autoload 'lsp-evil-multiedit-linked-ranges "lsp-iedit" "Start an `evil-multiedit' for `textDocument/linkedEditingRange'" t nil) (autoload 'lsp-evil-state-highlights "lsp-iedit" "Start `iedit-mode'. for `textDocument/documentHighlight'" t nil) (autoload 'lsp-evil-state-linked-ranges "lsp-iedit" "Start `iedit-mode'. for `textDocument/linkedEditingRange'" t nil) (register-definition-prefixes "lsp-iedit" '("lsp-iedit--on-ranges")) (register-definition-prefixes "lsp-javascript" '("lsp-")) (register-definition-prefixes "lsp-json" '("lsp-")) (register-definition-prefixes "lsp-kotlin" '("lsp-")) (autoload 'lsp-lens--enable "lsp-lens" "Enable lens mode." nil nil) (autoload 'lsp-lens-show "lsp-lens" "Display lenses in the buffer." t nil) (autoload 'lsp-lens-hide "lsp-lens" "Delete all lenses." t nil) (autoload 'lsp-lens-mode "lsp-lens" "Toggle code-lens overlays.
 
-If called interactively, enable Lsp-Lens mode if ARG is positive,
-and disable it if ARG is zero or negative.  If called from Lisp,
-also enable the mode if ARG is omitted or nil, and toggle it if
-ARG is `toggle'; disable the mode otherwise.
+This is a minor mode.  If called interactively, toggle the
+`Lsp-Lens mode' mode.  If the prefix argument is positive, enable
+the mode, and if it is zero or negative, disable the mode.
 
-(fn &optional ARG)" t nil) (autoload 'lsp-avy-lens "lsp-lens" "Click lsp lens using `avy' package." t nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-lens" '("lsp-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-lua" '("lsp-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-markdown" '("lsp-markdown-"))) (put 'lsp-enable-file-watchers 'safe-local-variable #'booleanp) (put 'lsp-file-watch-threshold 'safe-local-variable (lambda (i) (or (numberp i) (not i)))) (autoload 'lsp-load-vscode-workspace "lsp-mode" "Load vscode workspace from FILE
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `lsp-lens-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t nil) (autoload 'lsp-avy-lens "lsp-lens" "Click lsp lens using `avy' package." t nil) (register-definition-prefixes "lsp-lens" '("lsp-")) (register-definition-prefixes "lsp-lua" '("lsp-")) (register-definition-prefixes "lsp-markdown" '("lsp-markdown-")) (put 'lsp-enable-file-watchers 'safe-local-variable #'booleanp) (put 'lsp-file-watch-ignored-directories 'safe-local-variable 'lsp--string-listp) (put 'lsp-file-watch-ignored-files 'safe-local-variable 'lsp--string-listp) (put 'lsp-file-watch-threshold 'safe-local-variable (lambda (i) (or (numberp i) (not i)))) (autoload 'lsp--string-listp "lsp-mode" "Return t if all elements of SEQUENCE are strings, else nil.
+
+(fn SEQUENCE)" nil nil) (autoload 'lsp-load-vscode-workspace "lsp-mode" "Load vscode workspace from FILE
 
 (fn FILE)" t nil) (autoload 'lsp-save-vscode-workspace "lsp-mode" "Save vscode workspace to FILE
 
@@ -597,46 +668,85 @@ argument ask the user to select which language server to start.
 `lsp-deferred' will wait until the buffer is visible before invoking `lsp'.
 This avoids overloading the server with many files when starting Emacs." nil nil) (autoload 'lsp-start-plain "lsp-mode" "Start `lsp-mode' using mininal configuration using the latest `melpa' version of the packages.
 
-In case the major-mode that you are using for " t nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-mode" '("defcustom-lsp" "lsp-" "make-lsp-client" "when-lsp-workspace" "with-lsp-workspace"))) (define-obsolete-variable-alias 'lsp-diagnostics-modeline-scope 'lsp-modeline-diagnostics-scope "lsp-mode 7.0.1") (autoload 'lsp-modeline-code-actions-mode "lsp-modeline" "Toggle code actions on modeline.
+In case the major-mode that you are using for " t nil) (register-definition-prefixes "lsp-mode" '("defcustom-lsp" "lsp-" "make-lsp-client" "when-lsp-workspace" "with-lsp-workspace")) (define-obsolete-variable-alias 'lsp-diagnostics-modeline-scope 'lsp-modeline-diagnostics-scope "lsp-mode 7.0.1") (autoload 'lsp-modeline-code-actions-mode "lsp-modeline" "Toggle code actions on modeline.
 
-If called interactively, enable Lsp-Modeline-Code-Actions mode if
-ARG is positive, and disable it if ARG is zero or negative.  If
-called from Lisp, also enable the mode if ARG is omitted or nil,
-and toggle it if ARG is `toggle'; disable the mode otherwise.
+This is a minor mode.  If called interactively, toggle the
+`Lsp-Modeline-Code-Actions mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `lsp-modeline-code-actions-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
 
 (fn &optional ARG)" t nil) (define-obsolete-function-alias 'lsp-diagnostics-modeline-mode 'lsp-modeline-diagnostics-mode "lsp-mode 7.0.1") (autoload 'lsp-modeline-diagnostics-mode "lsp-modeline" "Toggle diagnostics modeline.
 
-If called interactively, enable Lsp-Modeline-Diagnostics mode if
-ARG is positive, and disable it if ARG is zero or negative.  If
-called from Lisp, also enable the mode if ARG is omitted or nil,
-and toggle it if ARG is `toggle'; disable the mode otherwise.
+This is a minor mode.  If called interactively, toggle the
+`Lsp-Modeline-Diagnostics mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `lsp-modeline-diagnostics-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
 
 (fn &optional ARG)" t nil) (autoload 'lsp-modeline-workspace-status-mode "lsp-modeline" "Toggle workspace status on modeline.
 
-If called interactively, enable Lsp-Modeline-Workspace-Status
-mode if ARG is positive, and disable it if ARG is zero or
-negative.  If called from Lisp, also enable the mode if ARG is
-omitted or nil, and toggle it if ARG is `toggle'; disable the
-mode otherwise.
+This is a minor mode.  If called interactively, toggle the
+`Lsp-Modeline-Workspace-Status mode' mode.  If the prefix
+argument is positive, enable the mode, and if it is zero or
+negative, disable the mode.
 
-(fn &optional ARG)" t nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-modeline" '("lsp-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-nginx" '("lsp-nginx-server-command"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-nix" '("lsp-nix-server-path"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-ocaml" '("lsp-ocaml-l"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-perl" '("lsp-perl-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-php" '("lsp-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-prolog" '("lsp-prolog-server-command"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-protocol" '("dash-expand:&RangeToPoint" "lsp"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-purescript" '("lsp-purescript-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-pwsh" '("lsp-pwsh-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-pyls" '("lsp-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-pylsp" '("lsp-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-r" '("lsp-clients-r-server-command"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-racket" '("lsp-racket-lang"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-remark" '("lsp-remark-server-command"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-rf" '("expand-start-command" "lsp-rf-language-server-" "parse-rf-language-server-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-rust" '("lsp-"))) (autoload 'lsp--semantic-tokens-initialize-buffer "lsp-semantic-tokens" "Initialize the buffer for semantic tokens.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `lsp-modeline-workspace-status-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t nil) (register-definition-prefixes "lsp-modeline" '("lsp-")) (register-definition-prefixes "lsp-nginx" '("lsp-nginx-server-command")) (register-definition-prefixes "lsp-nix" '("lsp-nix-server-path")) (register-definition-prefixes "lsp-ocaml" '("lsp-ocaml-l")) (register-definition-prefixes "lsp-perl" '("lsp-perl-")) (register-definition-prefixes "lsp-php" '("lsp-")) (register-definition-prefixes "lsp-prolog" '("lsp-prolog-server-command")) (register-definition-prefixes "lsp-protocol" '("dash-expand:&RangeToPoint" "lsp")) (register-definition-prefixes "lsp-purescript" '("lsp-purescript-")) (register-definition-prefixes "lsp-pwsh" '("lsp-pwsh-")) (register-definition-prefixes "lsp-pyls" '("lsp-")) (register-definition-prefixes "lsp-pylsp" '("lsp-")) (register-definition-prefixes "lsp-r" '("lsp-clients-r-server-command")) (register-definition-prefixes "lsp-racket" '("lsp-racket-lang")) (register-definition-prefixes "lsp-remark" '("lsp-remark-server-command")) (register-definition-prefixes "lsp-rf" '("expand-start-command" "lsp-rf-language-server-" "parse-rf-language-server-")) (register-definition-prefixes "lsp-rust" '("lsp-")) (autoload 'lsp--semantic-tokens-initialize-buffer "lsp-semantic-tokens" "Initialize the buffer for semantic tokens.
 IS-RANGE-PROVIDER is non-nil when server supports range requests." nil nil) (autoload 'lsp--semantic-tokens-initialize-workspace "lsp-semantic-tokens" "Initialize semantic tokens for WORKSPACE.
 
 (fn WORKSPACE)" nil nil) (autoload 'lsp-semantic-tokens--warn-about-deprecated-setting "lsp-semantic-tokens" "Warn about deprecated semantic highlighting variable." nil nil) (autoload 'lsp-semantic-tokens--enable "lsp-semantic-tokens" "Enable semantic tokens mode." nil nil) (autoload 'lsp-semantic-tokens-mode "lsp-semantic-tokens" "Toggle semantic-tokens support.
 
-If called interactively, enable Lsp-Semantic-Tokens mode if ARG
-is positive, and disable it if ARG is zero or negative.  If
-called from Lisp, also enable the mode if ARG is omitted or nil,
-and toggle it if ARG is `toggle'; disable the mode otherwise.
+This is a minor mode.  If called interactively, toggle the
+`Lsp-Semantic-Tokens mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
 
-(fn &optional ARG)" t nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-semantic-tokens" '("lsp-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-solargraph" '("lsp-solargraph-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-sorbet" '("lsp-sorbet-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-sqls" '("lsp-sql"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-steep" '("lsp-steep-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-svelte" '("lsp-svelte-plugin-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-terraform" '("lsp-terraform-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-tex" '("lsp-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-toml" '("lsp-toml-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-v" '("lsp-v-vls-executable"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-vala" '("lsp-clients-vala-ls-executable"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-verilog" '("lsp-clients-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-vetur" '("lsp-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-vhdl" '("ghdl-ls-bin-name" "hdl-checker-bin-name" "lsp-vhdl-" "vhdl-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-vimscript" '("lsp-clients-vim-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-xml" '("lsp-xml-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-yaml" '("lsp-yaml-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-zig" '("lsp-zig-zls-executable"))) (provide 'lsp-mode-autoloads)) "lsp-ui" ((lsp-ui-flycheck lsp-ui-autoloads lsp-ui-util lsp-ui-sideline lsp-ui-imenu lsp-ui-doc lsp-ui lsp-ui-peek) (autoload 'lsp-ui-mode "lsp-ui" "Toggle language server UI mode on or off.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `lsp-semantic-tokens-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t nil) (register-definition-prefixes "lsp-semantic-tokens" '("lsp-")) (register-definition-prefixes "lsp-solargraph" '("lsp-solargraph-")) (register-definition-prefixes "lsp-sorbet" '("lsp-sorbet-")) (register-definition-prefixes "lsp-sqls" '("lsp-sql")) (register-definition-prefixes "lsp-steep" '("lsp-steep-")) (register-definition-prefixes "lsp-svelte" '("lsp-svelte-plugin-")) (register-definition-prefixes "lsp-terraform" '("lsp-terraform-")) (register-definition-prefixes "lsp-tex" '("lsp-")) (register-definition-prefixes "lsp-toml" '("lsp-toml-")) (register-definition-prefixes "lsp-v" '("lsp-v-vls-executable")) (register-definition-prefixes "lsp-vala" '("lsp-clients-vala-ls-executable")) (register-definition-prefixes "lsp-verilog" '("lsp-clients-")) (register-definition-prefixes "lsp-vetur" '("lsp-")) (register-definition-prefixes "lsp-vhdl" '("ghdl-ls-bin-name" "hdl-checker-bin-name" "lsp-vhdl-" "vhdl-")) (register-definition-prefixes "lsp-vimscript" '("lsp-clients-vim-")) (register-definition-prefixes "lsp-xml" '("lsp-xml-")) (register-definition-prefixes "lsp-yaml" '("lsp-yaml-")) (register-definition-prefixes "lsp-zig" '("lsp-zig-zls-executable")) (provide 'lsp-mode-autoloads)) "lsp-ui" ((lsp-ui-flycheck lsp-ui-autoloads lsp-ui-util lsp-ui-sideline lsp-ui-imenu lsp-ui-doc lsp-ui lsp-ui-peek) (autoload 'lsp-ui-mode "lsp-ui" "Toggle language server UI mode on or off.
 \342\200\230lsp-ui-mode\342\200\231 is a minor mode that contains a series of useful UI
 integrations for \342\200\230lsp-mode\342\200\231.  With a prefix argument ARG, enable
 language server UI mode if ARG is positive, and disable it
 otherwise.  If called from Lisp, enable the mode if ARG is
 omitted or nil, and toggle it if ARG is \342\200\230toggle\342\200\231.
 
-(fn &optional ARG)" t nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-ui" '("lsp-ui-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-ui-doc" '("lsp-ui-doc-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-ui-flycheck" '("lsp-ui-flycheck-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-ui-imenu" '("lsp-ui-imenu"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-ui-peek" '("lsp-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-ui-sideline" '("lsp-ui-sideline"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-ui-util" '("lsp-ui-util-"))) (provide 'lsp-ui-autoloads)) "bui" ((bui-list bui bui-core bui-history bui-info bui-utils bui-autoloads bui-entry bui-button) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "bui" '("bui-define-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "bui-button" '("bui"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "bui-core" '("bui-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "bui-entry" '("bui-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "bui-history" '("bui-history"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "bui-info" '("bui-info-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "bui-list" '("bui-list-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "bui-utils" '("bui-"))) (provide 'bui-autoloads)) "s" ((s-autoloads s) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "s" '("s-"))) (provide 's-autoloads)) "avy" ((avy-autoloads avy) (autoload 'avy-process "avy" "Select one of CANDIDATES using `avy-read'.
+(fn &optional ARG)" t nil) (register-definition-prefixes "lsp-ui" '("lsp-ui-")) (register-definition-prefixes "lsp-ui-doc" '("lsp-ui-doc-")) (register-definition-prefixes "lsp-ui-flycheck" '("lsp-ui-flycheck-")) (register-definition-prefixes "lsp-ui-imenu" '("lsp-ui-imenu")) (register-definition-prefixes "lsp-ui-peek" '("lsp-")) (register-definition-prefixes "lsp-ui-sideline" '("lsp-ui-sideline")) (register-definition-prefixes "lsp-ui-util" '("lsp-ui-util-")) (provide 'lsp-ui-autoloads)) "bui" ((bui-list bui bui-core bui-history bui-info bui-utils bui-autoloads bui-entry bui-button) (register-definition-prefixes "bui" '("bui-define-")) (register-definition-prefixes "bui-button" '("bui")) (register-definition-prefixes "bui-core" '("bui-")) (register-definition-prefixes "bui-entry" '("bui-")) (register-definition-prefixes "bui-history" '("bui-history")) (register-definition-prefixes "bui-info" '("bui-info-")) (register-definition-prefixes "bui-list" '("bui-list-")) (register-definition-prefixes "bui-utils" '("bui-")) (provide 'bui-autoloads)) "avy" ((avy-autoloads avy) (autoload 'avy-process "avy" "Select one of CANDIDATES using `avy-read'.
 Use OVERLAY-FN to visualize the decision overlay.
 CLEANUP-FN should take no arguments and remove the effects of
 multiple OVERLAY-FN invocations.
@@ -790,7 +900,7 @@ newline.
 (fn ARG)" t nil) (autoload 'avy-setup-default "avy" "Setup the default shortcuts." nil nil) (autoload 'avy-goto-char-timer "avy" "Read one or many consecutive chars and jump to the first one.
 The window scope is determined by `avy-all-windows' (ARG negates it).
 
-(fn &optional ARG)" t nil) (autoload 'avy-transpose-lines-in-region "avy" "Transpose lines in the active region." t nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "avy" '("avy-"))) (provide 'avy-autoloads)) "ace-window" ((ace-window ace-window-autoloads) (autoload 'ace-select-window "ace-window" "Ace select window." t nil) (autoload 'ace-delete-window "ace-window" "Ace delete window." t nil) (autoload 'ace-swap-window "ace-window" "Ace swap window." t nil) (autoload 'ace-delete-other-windows "ace-window" "Ace delete other windows." t nil) (autoload 'ace-display-buffer "ace-window" "Make `display-buffer' and `pop-to-buffer' select using `ace-window'.
+(fn &optional ARG)" t nil) (autoload 'avy-transpose-lines-in-region "avy" "Transpose lines in the active region." t nil) (register-definition-prefixes "avy" '("avy-")) (provide 'avy-autoloads)) "ace-window" ((ace-window ace-window-autoloads) (autoload 'ace-select-window "ace-window" "Ace select window." t nil) (autoload 'ace-delete-window "ace-window" "Ace delete window." t nil) (autoload 'ace-swap-window "ace-window" "Ace swap window." t nil) (autoload 'ace-delete-other-windows "ace-window" "Ace delete other windows." t nil) (autoload 'ace-display-buffer "ace-window" "Make `display-buffer' and `pop-to-buffer' select using `ace-window'.
 See sample config for `display-buffer-base-action' and `display-buffer-alist':
 https://github.com/abo-abo/ace-window/wiki/display-buffer.
 
@@ -815,12 +925,22 @@ Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `ace-window-display-mode'.") (custom-autoload 'ace-window-display-mode "ace-window" nil) (autoload 'ace-window-display-mode "ace-window" "Minor mode for showing the ace window key in the mode line.
 
-If called interactively, enable Ace-Window-Display mode if ARG is
-positive, and disable it if ARG is zero or negative.  If called
-from Lisp, also enable the mode if ARG is omitted or nil, and
-toggle it if ARG is `toggle'; disable the mode otherwise.
+This is a minor mode.  If called interactively, toggle the
+`Ace-Window-Display mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
 
-(fn &optional ARG)" t nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ace-window" '("ace-window-mode" "aw-"))) (provide 'ace-window-autoloads)) "pfuture" ((pfuture-autoloads pfuture) (autoload 'pfuture-new "pfuture" "Create a new future process for command CMD.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='ace-window-display-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t nil) (register-definition-prefixes "ace-window" '("ace-window-mode" "aw-")) (provide 'ace-window-autoloads)) "pfuture" ((pfuture-autoloads pfuture) (autoload 'pfuture-new "pfuture" "Create a new future process for command CMD.
 Any arguments after the command are interpreted as arguments to the command.
 This will return a process object with additional 'stderr and 'stdout
 properties, which can be read via (process-get process 'stdout) and
@@ -831,7 +951,7 @@ Note that CMD must be a *sequence* of strings, meaning
 this is wrong: (pfuture-new \"git status\")
 this is right: (pfuture-new \"git\" \"status\")
 
-(fn &rest CMD)" nil nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "pfuture" '("pfuture-"))) (provide 'pfuture-autoloads)) "hydra" ((hydra-examples hydra hydra-autoloads hydra-ox) (autoload 'defhydra "hydra" "Create a Hydra - a family of functions with prefix NAME.
+(fn &rest CMD)" nil nil) (register-definition-prefixes "pfuture" '("pfuture-")) (provide 'pfuture-autoloads)) "hydra" ((hydra-examples hydra hydra-autoloads hydra-ox) (autoload 'defhydra "hydra" "Create a Hydra - a family of functions with prefix NAME.
 
 NAME should be a symbol, it will be the prefix of all functions
 defined here.
@@ -882,7 +1002,7 @@ want to bind anything.  In that case, typically you will bind the
 generated NAME/body command.  This command is also the return
 result of `defhydra'.
 
-(fn NAME BODY &optional DOCSTRING &rest HEADS)" nil t) (function-put 'defhydra 'lisp-indent-function 'defun) (function-put 'defhydra 'doc-string-elt '3) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "hydra" '("defhydra" "hydra-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "hydra-examples" '("hydra-" "org-agenda-cts" "whitespace-mode"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "hydra-ox" '("hydra-ox"))) (provide 'hydra-autoloads)) "posframe" ((posframe posframe-autoloads posframe-benchmark) (autoload 'posframe-workable-p "posframe" "Test posframe workable status." nil nil) (autoload 'posframe-show "posframe" "Pop up a posframe to show STRING at POSITION.
+(fn NAME BODY &optional DOCSTRING &rest HEADS)" nil t) (function-put 'defhydra 'lisp-indent-function 'defun) (function-put 'defhydra 'doc-string-elt '3) (register-definition-prefixes "hydra" '("defhydra" "hydra-")) (register-definition-prefixes "hydra-examples" '("hydra-" "org-agenda-cts" "whitespace-mode")) (register-definition-prefixes "hydra-ox" '("hydra-ox")) (provide 'hydra-autoloads)) "posframe" ((posframe posframe-autoloads posframe-benchmark) (autoload 'posframe-workable-p "posframe" "Test posframe workable status." nil nil) (autoload 'posframe-show "posframe" "Pop up a posframe to show STRING at POSITION.
 
  (1) POSITION
 
@@ -1104,9 +1224,9 @@ An example parent frame poshandler function is:
 
 You can use `posframe-delete-all' to delete all posframes.
 
-(fn BUFFER-OR-NAME &key STRING POSITION POSHANDLER POSHANDLER-EXTRA-INFO WIDTH HEIGHT MAX-WIDTH MAX-HEIGHT MIN-WIDTH MIN-HEIGHT X-PIXEL-OFFSET Y-PIXEL-OFFSET LEFT-FRINGE RIGHT-FRINGE BORDER-WIDTH BORDER-COLOR INTERNAL-BORDER-WIDTH INTERNAL-BORDER-COLOR FONT FOREGROUND-COLOR BACKGROUND-COLOR RESPECT-HEADER-LINE RESPECT-MODE-LINE INITIALIZE NO-PROPERTIES KEEP-RATIO LINES-TRUNCATE OVERRIDE-PARAMETERS TIMEOUT REFRESH ACCEPT-FOCUS HIDEHANDLER REFPOSHANDLER &allow-other-keys)" nil nil) (autoload 'posframe-hide-all "posframe" "Hide all posframe frames." t nil) (autoload 'posframe-delete-all "posframe" "Delete all posframe frames and buffers." t nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "posframe" '("posframe-"))) (autoload 'posframe-benchmark "posframe-benchmark" "Benchmark tool for posframe." t nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "posframe-benchmark" '("posframe-benchmark-alist"))) (provide 'posframe-autoloads)) "cfrs" ((cfrs cfrs-autoloads) (autoload 'cfrs-read "cfrs" "Read a string using a pos-frame with given PROMPT and INITIAL-INPUT.
+(fn BUFFER-OR-NAME &key STRING POSITION POSHANDLER POSHANDLER-EXTRA-INFO WIDTH HEIGHT MAX-WIDTH MAX-HEIGHT MIN-WIDTH MIN-HEIGHT X-PIXEL-OFFSET Y-PIXEL-OFFSET LEFT-FRINGE RIGHT-FRINGE BORDER-WIDTH BORDER-COLOR INTERNAL-BORDER-WIDTH INTERNAL-BORDER-COLOR FONT FOREGROUND-COLOR BACKGROUND-COLOR RESPECT-HEADER-LINE RESPECT-MODE-LINE INITIALIZE NO-PROPERTIES KEEP-RATIO LINES-TRUNCATE OVERRIDE-PARAMETERS TIMEOUT REFRESH ACCEPT-FOCUS HIDEHANDLER REFPOSHANDLER &allow-other-keys)" nil nil) (autoload 'posframe-hide-all "posframe" "Hide all posframe frames." t nil) (autoload 'posframe-delete-all "posframe" "Delete all posframe frames and buffers." t nil) (register-definition-prefixes "posframe" '("posframe-")) (autoload 'posframe-benchmark "posframe-benchmark" "Benchmark tool for posframe." t nil) (register-definition-prefixes "posframe-benchmark" '("posframe-benchmark-alist")) (provide 'posframe-autoloads)) "cfrs" ((cfrs cfrs-autoloads) (autoload 'cfrs-read "cfrs" "Read a string using a pos-frame with given PROMPT and INITIAL-INPUT.
 
-(fn PROMPT &optional INITIAL-INPUT)" nil nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "cfrs" '("cfrs-"))) (provide 'cfrs-autoloads)) "treemacs" ((treemacs-themes treemacs-fringe-indicator treemacs-file-management treemacs-diagnostics treemacs-visuals treemacs-customization treemacs treemacs-interface treemacs-extensions treemacs-core-utils treemacs-icons treemacs-tags treemacs-project-follow-mode treemacs-hydras treemacs-tag-follow-mode treemacs-faces treemacs-compatibility treemacs-workspaces treemacs-peek-mode treemacs-async treemacs-mode treemacs-filewatch-mode treemacs-bookmarks treemacs-logging treemacs-dom treemacs-scope treemacs-persistence treemacs-mouse-interface treemacs-autoloads treemacs-rendering treemacs-follow-mode treemacs-header-line treemacs-macros) (autoload 'treemacs-version "treemacs" "Return the `treemacs-version'." t nil) (autoload 'treemacs "treemacs" "Initialise or toggle treemacs.
+(fn PROMPT &optional INITIAL-INPUT)" nil nil) (register-definition-prefixes "cfrs" '("cfrs-")) (provide 'cfrs-autoloads)) "treemacs" ((treemacs-themes treemacs-fringe-indicator treemacs-file-management treemacs-diagnostics treemacs-visuals treemacs-customization treemacs treemacs-interface treemacs-extensions treemacs-core-utils treemacs-icons treemacs-tags treemacs-project-follow-mode treemacs-hydras treemacs-tag-follow-mode treemacs-faces treemacs-compatibility treemacs-workspaces treemacs-peek-mode treemacs-async treemacs-mode treemacs-filewatch-mode treemacs-bookmarks treemacs-logging treemacs-dom treemacs-scope treemacs-persistence treemacs-mouse-interface treemacs-autoloads treemacs-rendering treemacs-follow-mode treemacs-header-line treemacs-macros) (autoload 'treemacs-version "treemacs" "Return the `treemacs-version'." t nil) (autoload 'treemacs "treemacs" "Initialise or toggle treemacs.
 - If the treemacs window is visible hide it.
 - If a treemacs buffer exists, but is not visible show it.
 - If no treemacs buffer exists for the current frame create and show it.
@@ -1153,7 +1273,7 @@ The project is determined first by projectile (if treemacs-projectile is
 installed), then by project.el, then by the current working directory.
 
 If the project is already registered with treemacs just move point to its root.
-An error message is displayed if the current buffer is not part of any project." t nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs" '("treemacs-version"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-async" '("treemacs-"))) (autoload 'treemacs-bookmark "treemacs-bookmarks" "Find a bookmark in treemacs.
+An error message is displayed if the current buffer is not part of any project." t nil) (register-definition-prefixes "treemacs" '("treemacs-version")) (register-definition-prefixes "treemacs-async" '("treemacs-")) (autoload 'treemacs-bookmark "treemacs-bookmarks" "Find a bookmark in treemacs.
 Only bookmarks marking either a file or a directory are offered for selection.
 Treemacs will try to find and focus the given bookmark's location, in a similar
 fashion to `treemacs-find-file'.
@@ -1165,7 +1285,7 @@ With a prefix argument ARG treemacs will also open the bookmarked location.
 (fn RECORD)" nil nil) (autoload 'treemacs-add-bookmark "treemacs-bookmarks" "Add the current node to Emacs' list of bookmarks.
 For file and directory nodes their absolute path is saved.  Tag nodes
 additionally also save the tag's position.  A tag can only be bookmarked if the
-treemacs node is pointing to a valid buffer position." t nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-bookmarks" '("treemacs--"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-compatibility" '("treemacs-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-core-utils" '("treemacs-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-customization" '("treemacs-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-diagnostics" '("treemacs-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-dom" '("treemacs-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-extensions" '("treemacs-"))) (autoload 'treemacs-delete-file "treemacs-file-management" "Delete node at point.
+treemacs node is pointing to a valid buffer position." t nil) (register-definition-prefixes "treemacs-bookmarks" '("treemacs--")) (register-definition-prefixes "treemacs-compatibility" '("treemacs-")) (register-definition-prefixes "treemacs-core-utils" '("treemacs-")) (register-definition-prefixes "treemacs-customization" '("treemacs-")) (register-definition-prefixes "treemacs-diagnostics" '("treemacs-")) (register-definition-prefixes "treemacs-dom" '("treemacs-")) (register-definition-prefixes "treemacs-extensions" '("treemacs-")) (autoload 'treemacs-delete-file "treemacs-file-management" "Delete node at point.
 A delete action must always be confirmed.  Directories are deleted recursively.
 By default files are deleted by moving them to the trash.  With a prefix ARG
 they will instead be wiped irreversibly.
@@ -1186,7 +1306,7 @@ itself, using $HOME when there is no path at or near point to grab." t nil) (aut
 Enter first the directory to create the new dir in, then the new dir's name.
 The pre-selection for what directory to create in is based on the \"nearest\"
 path to point - the containing directory for tags and files or the directory
-itself, using $HOME when there is no path at or near point to grab." t nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-file-management" '("treemacs-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-filewatch-mode" '("treemacs-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-follow-mode" '("treemacs-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-fringe-indicator" '("treemacs-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-header-line" '("treemacs-header-buttons-format"))) (autoload 'treemacs-common-helpful-hydra "treemacs-hydras" "Summon a helpful hydra to show you the treemacs keymap.
+itself, using $HOME when there is no path at or near point to grab." t nil) (register-definition-prefixes "treemacs-file-management" '("treemacs-")) (register-definition-prefixes "treemacs-filewatch-mode" '("treemacs-")) (register-definition-prefixes "treemacs-follow-mode" '("treemacs-")) (register-definition-prefixes "treemacs-fringe-indicator" '("treemacs-")) (register-definition-prefixes "treemacs-header-line" '("treemacs-header-buttons-format")) (autoload 'treemacs-common-helpful-hydra "treemacs-hydras" "Summon a helpful hydra to show you the treemacs keymap.
 
 This hydra will show the most commonly used keybinds for treemacs.  For the more
 advanced (probably rarely used keybinds) see `treemacs-advanced-helpful-hydra'.
@@ -1200,7 +1320,7 @@ the more commonly used keybinds see `treemacs-common-helpful-hydra'.
 
 The keybinds shown in this hydra are not static, but reflect the actual
 keybindings currently in use (including evil mode).  If the hydra is unable to
-find the key a command is bound to it will show a blank instead." t nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-hydras" '("treemacs-helpful-hydra"))) (autoload 'treemacs-resize-icons "treemacs-icons" "Resize the current theme's icons to the given SIZE.
+find the key a command is bound to it will show a blank instead." t nil) (register-definition-prefixes "treemacs-hydras" '("treemacs-helpful-hydra")) (autoload 'treemacs-resize-icons "treemacs-icons" "Resize the current theme's icons to the given SIZE.
 
 If SIZE is 'nil' the icons are not resized and will retain their default size of
 22 pixels.
@@ -1238,9 +1358,9 @@ be assigned which treemacs icon, for example
 '((c-mode . treemacs-icon-c)
   (c++-mode . treemacs-icon-cpp))
 
-(fn EXTENSIONS MODE-ICON-ALIST)" nil nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-icons" '("treemacs-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-interface" '("treemacs-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-logging" '("treemacs-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-macros" '("treemacs-"))) (autoload 'treemacs-mode "treemacs-mode" "A major mode for displaying the file system in a tree layout.
+(fn EXTENSIONS MODE-ICON-ALIST)" nil nil) (register-definition-prefixes "treemacs-icons" '("treemacs-")) (register-definition-prefixes "treemacs-interface" '("treemacs-")) (register-definition-prefixes "treemacs-logging" '("treemacs-")) (register-definition-prefixes "treemacs-macros" '("treemacs-")) (autoload 'treemacs-mode "treemacs-mode" "A major mode for displaying the file system in a tree layout.
 
-(fn)" t nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-mode" '("treemacs-"))) (autoload 'treemacs-leftclick-action "treemacs-mouse-interface" "Move focus to the clicked line.
+(fn)" t nil) (register-definition-prefixes "treemacs-mode" '("treemacs-")) (autoload 'treemacs-leftclick-action "treemacs-mouse-interface" "Move focus to the clicked line.
 Must be bound to a mouse click, or EVENT will not be supplied.
 
 (fn EVENT)" t nil) (autoload 'treemacs-doubleclick-action "treemacs-mouse-interface" "Run the appropriate double-click action for the current node.
@@ -1276,17 +1396,26 @@ and ignore any prefix argument.
 
 (fn &optional _)" t nil) (autoload 'treemacs-rightclick-menu "treemacs-mouse-interface" "Show a contextual right click menu based on click EVENT.
 
-(fn EVENT)" t nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-mouse-interface" '("treemacs--"))) (defvar treemacs-peek-mode nil "Non-nil if Treemacs-Peek mode is enabled.
+(fn EVENT)" t nil) (register-definition-prefixes "treemacs-mouse-interface" '("treemacs--")) (defvar treemacs-peek-mode nil "Non-nil if Treemacs-Peek mode is enabled.
 See the `treemacs-peek-mode' command
 for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `treemacs-peek-mode'.") (custom-autoload 'treemacs-peek-mode "treemacs-peek-mode" nil) (autoload 'treemacs-peek-mode "treemacs-peek-mode" "Minor mode that allows you to peek at buffers before deciding to open them.
 
-If called interactively, enable Treemacs-Peek mode if ARG is
-positive, and disable it if ARG is zero or negative.  If called
-from Lisp, also enable the mode if ARG is omitted or nil, and
-toggle it if ARG is `toggle'; disable the mode otherwise.
+This is a minor mode.  If called interactively, toggle the
+`Treemacs-Peek mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='treemacs-peek-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
 
 While the mode is active treemacs will automatically display the file at point,
 without leaving the treemacs window.
@@ -1301,17 +1430,27 @@ The peeked window can be scrolled using
 `treemacs-next/previous-line-other-window' and
 `treemacs-next/previous-page-other-window'
 
-(fn &optional ARG)" t nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-peek-mode" '("treemacs--"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-persistence" '("treemacs-"))) (defvar treemacs-project-follow-mode nil "Non-nil if Treemacs-Project-Follow mode is enabled.
+(fn &optional ARG)" t nil) (register-definition-prefixes "treemacs-peek-mode" '("treemacs--")) (register-definition-prefixes "treemacs-persistence" '("treemacs-")) (defvar treemacs-project-follow-mode nil "Non-nil if Treemacs-Project-Follow mode is enabled.
 See the `treemacs-project-follow-mode' command
 for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `treemacs-project-follow-mode'.") (custom-autoload 'treemacs-project-follow-mode "treemacs-project-follow-mode" nil) (autoload 'treemacs-project-follow-mode "treemacs-project-follow-mode" "Toggle `treemacs-only-current-project-mode'.
 
-If called interactively, enable Treemacs-Project-Follow mode if
-ARG is positive, and disable it if ARG is zero or negative.  If
-called from Lisp, also enable the mode if ARG is omitted or nil,
-and toggle it if ARG is `toggle'; disable the mode otherwise.
+This is a minor mode.  If called interactively, toggle the
+`Treemacs-Project-Follow mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='treemacs-project-follow-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
 
 This is a minor mode meant for those who do not care about treemacs' workspace
 features, or its preference to work with multiple projects simultaneously.  When
@@ -1333,7 +1472,7 @@ treemacs window must exist in the current scope.
 This mode requires at least Emacs version 27 since it relies on
 `window-buffer-change-functions' and `window-selection-change-functions'.
 
-(fn &optional ARG)" t nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-project-follow-mode" '("treemacs--"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-rendering" '("treemacs-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-scope" '("treemacs-"))) (autoload 'treemacs--flatten&sort-imenu-index "treemacs-tag-follow-mode" "Flatten current file's imenu index and sort it by tag position.
+(fn &optional ARG)" t nil) (register-definition-prefixes "treemacs-project-follow-mode" '("treemacs--")) (register-definition-prefixes "treemacs-rendering" '("treemacs-")) (register-definition-prefixes "treemacs-scope" '("treemacs-")) (autoload 'treemacs--flatten&sort-imenu-index "treemacs-tag-follow-mode" "Flatten current file's imenu index and sort it by tag position.
 The tags are sorted into the order in which they appear, regardless of section
 or nesting depth." nil nil) (defvar treemacs-tag-follow-mode nil "Non-nil if Treemacs-Tag-Follow mode is enabled.
 See the `treemacs-tag-follow-mode' command
@@ -1342,10 +1481,20 @@ Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `treemacs-tag-follow-mode'.") (custom-autoload 'treemacs-tag-follow-mode "treemacs-tag-follow-mode" nil) (autoload 'treemacs-tag-follow-mode "treemacs-tag-follow-mode" "Toggle `treemacs-tag-follow-mode'.
 
-If called interactively, enable Treemacs-Tag-Follow mode if ARG
-is positive, and disable it if ARG is zero or negative.  If
-called from Lisp, also enable the mode if ARG is omitted or nil,
-and toggle it if ARG is `toggle'; disable the mode otherwise.
+This is a minor mode.  If called interactively, toggle the
+`Treemacs-Tag-Follow mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='treemacs-tag-follow-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
 
 This acts as more fine-grained alternative to `treemacs-follow-mode' and will
 thus disable `treemacs-follow-mode' on activation.  When enabled treemacs will
@@ -1367,7 +1516,7 @@ it is enabled.  This will result in the cursor blinking seemingly pausing for a
 short time and giving the appearance of the tag follow action lasting much
 longer than it really does.
 
-(fn &optional ARG)" t nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-tag-follow-mode" '("treemacs--"))) (autoload 'treemacs--expand-file-node "treemacs-tags" "Open tag items for file BTN.
+(fn &optional ARG)" t nil) (register-definition-prefixes "treemacs-tag-follow-mode" '("treemacs--")) (autoload 'treemacs--expand-file-node "treemacs-tags" "Open tag items for file BTN.
 Recursively open all tags below BTN when RECURSIVE is non-nil.
 
 (fn BTN &optional RECURSIVE)" nil nil) (autoload 'treemacs--collapse-file-node "treemacs-tags" "Close node given by BTN.
@@ -1396,17 +1545,27 @@ Remove all open tag entries under BTN when RECURSIVE.
 
 (fn BTN &optional RECURSIVE)" nil nil) (autoload 'treemacs--goto-tag "treemacs-tags" "Go to the tag at BTN.
 
-(fn BTN)" nil nil) (autoload 'treemacs--create-imenu-index-function "treemacs-tags" "The `imenu-create-index-function' for treemacs buffers." nil nil) (function-put 'treemacs--create-imenu-index-function 'side-effect-free 't) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-tags" '("treemacs--"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-themes" '("treemacs-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-visuals" '("treemacs-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-workspaces" '("treemacs-"))) (provide 'treemacs-autoloads)) "lsp-treemacs" ((lsp-treemacs-themes lsp-treemacs lsp-treemacs-autoloads) (autoload 'lsp-treemacs-symbols "lsp-treemacs" "Show symbols view." t nil) (autoload 'lsp-treemacs-java-deps-list "lsp-treemacs" "Display java dependencies." t nil) (autoload 'lsp-treemacs-java-deps-follow "lsp-treemacs" nil t nil) (defvar lsp-treemacs-sync-mode nil "Non-nil if Lsp-Treemacs-Sync mode is enabled.
+(fn BTN)" nil nil) (autoload 'treemacs--create-imenu-index-function "treemacs-tags" "The `imenu-create-index-function' for treemacs buffers." nil nil) (function-put 'treemacs--create-imenu-index-function 'side-effect-free 't) (register-definition-prefixes "treemacs-tags" '("treemacs--")) (register-definition-prefixes "treemacs-themes" '("treemacs-")) (register-definition-prefixes "treemacs-visuals" '("treemacs-")) (register-definition-prefixes "treemacs-workspaces" '("treemacs-")) (provide 'treemacs-autoloads)) "lsp-treemacs" ((lsp-treemacs-themes lsp-treemacs lsp-treemacs-autoloads) (autoload 'lsp-treemacs-symbols "lsp-treemacs" "Show symbols view." t nil) (autoload 'lsp-treemacs-java-deps-list "lsp-treemacs" "Display java dependencies." t nil) (autoload 'lsp-treemacs-java-deps-follow "lsp-treemacs" nil t nil) (defvar lsp-treemacs-sync-mode nil "Non-nil if Lsp-Treemacs-Sync mode is enabled.
 See the `lsp-treemacs-sync-mode' command
 for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `lsp-treemacs-sync-mode'.") (custom-autoload 'lsp-treemacs-sync-mode "lsp-treemacs" nil) (autoload 'lsp-treemacs-sync-mode "lsp-treemacs" "Global minor mode for synchronizing lsp-mode workspace folders and treemacs projects.
 
-If called interactively, enable Lsp-Treemacs-Sync mode if ARG is
-positive, and disable it if ARG is zero or negative.  If called
-from Lisp, also enable the mode if ARG is omitted or nil, and
-toggle it if ARG is `toggle'; disable the mode otherwise.
+This is a minor mode.  If called interactively, toggle the
+`Lsp-Treemacs-Sync mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='lsp-treemacs-sync-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
 
 (fn &optional ARG)" t nil) (autoload 'lsp-treemacs-references "lsp-treemacs" "Show the references for the symbol at point.
 With a prefix argument, select the new window and expand the tree of references automatically.
@@ -1422,7 +1581,7 @@ With prefix 0 show sub-types.
 With prefix 1 show super-types.
 With prefix 2 show both.
 
-(fn DIRECTION)" t nil) (autoload 'lsp-treemacs-errors-list "lsp-treemacs" nil t nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-treemacs" '("lsp-treemacs-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-treemacs-themes" '("lsp-treemacs-theme"))) (provide 'lsp-treemacs-autoloads)) "dap-mode" ((dapui dap-gdb-lldb dap-codelldb dap-pwsh dap-node dap-launch dap-ruby dap-elixir dap-netcore dap-firefox dap-overlays dap-mode-autoloads dap-php dap-go dap-lldb dap-swi-prolog dap-utils dap-edge dap-cpptools dap-mouse dap-variables dap-erlang dap-hydra dap-mode dap-ui dap-chrome dap-python) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dap-chrome" '("dap-chrome-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dap-codelldb" '("dap-codelldb-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dap-cpptools" '("dap-cpptools-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dap-edge" '("dap-edge-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dap-elixir" '("dap-elixir--populate-start-file-args"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dap-erlang" '("dap-erlang--populate-start-file-args"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dap-firefox" '("dap-firefox-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dap-gdb-lldb" '("dap-gdb-lldb-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dap-go" '("dap-go-"))) (autoload 'dap-hydra "dap-hydra" "Run `dap-hydra/body'." t nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dap-hydra" '("dap-hydra"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dap-launch" '("dap-launch-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dap-lldb" '("dap-lldb-"))) (autoload 'dap-debug "dap-mode" "Run debug configuration DEBUG-ARGS.
+(fn DIRECTION)" t nil) (autoload 'lsp-treemacs-errors-list "lsp-treemacs" nil t nil) (register-definition-prefixes "lsp-treemacs" '("lsp-treemacs-")) (register-definition-prefixes "lsp-treemacs-themes" '("lsp-treemacs-theme")) (provide 'lsp-treemacs-autoloads)) "dap-mode" ((dapui dap-gdb-lldb dap-codelldb dap-pwsh dap-node dap-launch dap-ruby dap-elixir dap-netcore dap-firefox dap-overlays dap-mode-autoloads dap-php dap-go dap-lldb dap-swi-prolog dap-utils dap-edge dap-cpptools dap-mouse dap-variables dap-erlang dap-hydra dap-mode dap-ui dap-chrome dap-python) (register-definition-prefixes "dap-chrome" '("dap-chrome-")) (register-definition-prefixes "dap-codelldb" '("dap-codelldb-")) (register-definition-prefixes "dap-cpptools" '("dap-cpptools-")) (register-definition-prefixes "dap-edge" '("dap-edge-")) (register-definition-prefixes "dap-elixir" '("dap-elixir--populate-start-file-args")) (register-definition-prefixes "dap-erlang" '("dap-erlang--populate-start-file-args")) (register-definition-prefixes "dap-firefox" '("dap-firefox-")) (register-definition-prefixes "dap-gdb-lldb" '("dap-gdb-lldb-")) (register-definition-prefixes "dap-go" '("dap-go-")) (autoload 'dap-hydra "dap-hydra" "Run `dap-hydra/body'." t nil) (register-definition-prefixes "dap-hydra" '("dap-hydra")) (register-definition-prefixes "dap-launch" '("dap-launch-")) (register-definition-prefixes "dap-lldb" '("dap-lldb-")) (autoload 'dap-debug "dap-mode" "Run debug configuration DEBUG-ARGS.
 
 If DEBUG-ARGS is not specified the configuration is generated
 after selecting configuration template.
@@ -1438,10 +1597,19 @@ Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `dap-mode'.") (custom-autoload 'dap-mode "dap-mode" nil) (autoload 'dap-mode "dap-mode" "Global minor mode for DAP mode.
 
-If called interactively, enable Dap mode if ARG is positive, and
-disable it if ARG is zero or negative.  If called from Lisp, also
-enable the mode if ARG is omitted or nil, and toggle it if ARG is
-`toggle'; disable the mode otherwise.
+This is a minor mode.  If called interactively, toggle the `Dap
+mode' mode.  If the prefix argument is positive, enable the mode,
+and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='dap-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
 
 (fn &optional ARG)" t nil) (defvar dap-auto-configure-mode nil "Non-nil if Dap-Auto-Configure mode is enabled.
 See the `dap-auto-configure-mode' command
@@ -1450,34 +1618,62 @@ Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `dap-auto-configure-mode'.") (custom-autoload 'dap-auto-configure-mode "dap-mode" nil) (autoload 'dap-auto-configure-mode "dap-mode" "Auto configure dap minor mode.
 
-If called interactively, enable Dap-Auto-Configure mode if ARG is
-positive, and disable it if ARG is zero or negative.  If called
-from Lisp, also enable the mode if ARG is omitted or nil, and
-toggle it if ARG is `toggle'; disable the mode otherwise.
+This is a minor mode.  If called interactively, toggle the
+`Dap-Auto-Configure mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
 
-(fn &optional ARG)" t nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dap-mode" '("dap-"))) (defvar dap-tooltip-mode nil "Non-nil if Dap-Tooltip mode is enabled.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='dap-auto-configure-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t nil) (register-definition-prefixes "dap-mode" '("dap-")) (defvar dap-tooltip-mode nil "Non-nil if Dap-Tooltip mode is enabled.
 See the `dap-tooltip-mode' command
 for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `dap-tooltip-mode'.") (custom-autoload 'dap-tooltip-mode "dap-mouse" nil) (autoload 'dap-tooltip-mode "dap-mouse" "Toggle the display of GUD tooltips.
 
-If called interactively, enable Dap-Tooltip mode if ARG is
-positive, and disable it if ARG is zero or negative.  If called
-from Lisp, also enable the mode if ARG is omitted or nil, and
-toggle it if ARG is `toggle'; disable the mode otherwise.
+This is a minor mode.  If called interactively, toggle the
+`Dap-Tooltip mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
 
-(fn &optional ARG)" t nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dap-mouse" '("dap-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dap-netcore" '("dap-netcore-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dap-node" '("dap-node-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dap-overlays" '("dap-overlays-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dap-php" '("dap-php-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dap-pwsh" '("dap-pwsh-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dap-python" '("dap-python-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dap-ruby" '("dap-ruby-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dap-swi-prolog" '("dap-swi-prolog-"))) (defvar dap-ui-mode nil "Non-nil if Dap-Ui mode is enabled.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='dap-tooltip-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t nil) (register-definition-prefixes "dap-mouse" '("dap-")) (register-definition-prefixes "dap-netcore" '("dap-netcore-")) (register-definition-prefixes "dap-node" '("dap-node-")) (register-definition-prefixes "dap-overlays" '("dap-overlays-")) (register-definition-prefixes "dap-php" '("dap-php-")) (register-definition-prefixes "dap-pwsh" '("dap-pwsh-")) (register-definition-prefixes "dap-python" '("dap-python-")) (register-definition-prefixes "dap-ruby" '("dap-ruby-")) (register-definition-prefixes "dap-swi-prolog" '("dap-swi-prolog-")) (defvar dap-ui-mode nil "Non-nil if Dap-Ui mode is enabled.
 See the `dap-ui-mode' command
 for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `dap-ui-mode'.") (custom-autoload 'dap-ui-mode "dap-ui" nil) (autoload 'dap-ui-mode "dap-ui" "Displaying DAP visuals.
 
-If called interactively, enable Dap-Ui mode if ARG is positive,
-and disable it if ARG is zero or negative.  If called from Lisp,
-also enable the mode if ARG is omitted or nil, and toggle it if
-ARG is `toggle'; disable the mode otherwise.
+This is a minor mode.  If called interactively, toggle the
+`Dap-Ui mode' mode.  If the prefix argument is positive, enable
+the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='dap-ui-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
 
 (fn &optional ARG)" t nil) (autoload 'dap-ui-breakpoints-list "dap-ui" "List breakpoints." t nil) (defvar dap-ui-controls-mode nil "Non-nil if Dap-Ui-Controls mode is enabled.
 See the `dap-ui-controls-mode' command
@@ -1486,16 +1682,25 @@ Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `dap-ui-controls-mode'.") (custom-autoload 'dap-ui-controls-mode "dap-ui" nil) (autoload 'dap-ui-controls-mode "dap-ui" "Displaying DAP visuals.
 
-If called interactively, enable Dap-Ui-Controls mode if ARG is
-positive, and disable it if ARG is zero or negative.  If called
-from Lisp, also enable the mode if ARG is omitted or nil, and
-toggle it if ARG is `toggle'; disable the mode otherwise.
+This is a minor mode.  If called interactively, toggle the
+`Dap-Ui-Controls mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='dap-ui-controls-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
 
 (fn &optional ARG)" t nil) (autoload 'dap-ui-sessions "dap-ui" "Show currently active sessions." t nil) (autoload 'dap-ui-locals "dap-ui" nil t nil) (autoload 'dap-ui-show-many-windows "dap-ui" "Show auto configured feature windows." t nil) (autoload 'dap-ui-hide-many-windows "dap-ui" "Hide all debug windows when sessions are dead." t nil) (autoload 'dap-ui-repl "dap-ui" "Start an adapter-specific REPL.
 This could be used to evaluate JavaScript in a browser, to
-evaluate python in the context of the debugee, ...." t nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dap-ui" '("dap-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dap-utils" '("dap-utils-"))) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dap-variables" '("dap-variables-"))) (autoload 'dapui-loaded-sources "dapui" nil t nil) (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dapui" '("dapui-"))) (provide 'dap-mode-autoloads))))
+evaluate python in the context of the debugee, ...." t nil) (register-definition-prefixes "dap-ui" '("dap-")) (register-definition-prefixes "dap-utils" '("dap-utils-")) (register-definition-prefixes "dap-variables" '("dap-variables-")) (autoload 'dapui-loaded-sources "dapui" nil t nil) (register-definition-prefixes "dapui" '("dapui-")) (provide 'dap-mode-autoloads))))
 
-#s(hash-table size 65 test eq rehash-size 1.5 rehash-threshold 0.8125 data (org-elpa #s(hash-table size 65 test equal rehash-size 1.5 rehash-threshold 0.8125 data (version 11 "melpa" nil "gnu-elpa-mirror" nil "el-get" nil "emacsmirror-mirror" nil "straight" nil "embark" nil "rose-pine-emacs" nil "lsp-mode" nil "dash" nil "f" nil "ht" nil "spinner" nil "markdown-mode" nil "lv" nil "lsp-ui" nil "dap-mode" nil "bui" nil "s" nil "lsp-treemacs" nil "treemacs" nil "cl-lib" nil "ace-window" nil "avy" nil "pfuture" nil "hydra" nil "cfrs" nil "posframe" nil)) melpa #s(hash-table size 65 test equal rehash-size 1.5 rehash-threshold 0.8125 data (version 2 "gnu-elpa-mirror" nil "el-get" (el-get :type git :flavor melpa :files ("*.el" ("recipes" "recipes/el-get.rcp") "methods" "el-get-pkg.el") :host github :repo "dimitri/el-get") "emacsmirror-mirror" nil "straight" nil "embark" (embark :type git :flavor melpa :files ("embark.el" "embark.texi" "embark-pkg.el") :host github :repo "oantolin/embark") "rose-pine-emacs" nil "lsp-mode" (lsp-mode :type git :flavor melpa :files (:defaults "clients/*.el" "lsp-mode-pkg.el") :host github :repo "emacs-lsp/lsp-mode") "dash" (dash :type git :flavor melpa :files ("dash.el" "dash.texi" "dash-pkg.el") :host github :repo "magnars/dash.el") "f" (f :type git :flavor melpa :files ("f.el" "f-pkg.el") :host github :repo "rejeep/f.el") "ht" (ht :type git :flavor melpa :files ("ht.el" "ht-pkg.el") :host github :repo "Wilfred/ht.el") "spinner" nil "markdown-mode" (markdown-mode :type git :flavor melpa :host github :repo "jrblevin/markdown-mode") "lv" (lv :type git :flavor melpa :files ("lv.el" "lv-pkg.el") :host github :repo "abo-abo/hydra") "lsp-ui" (lsp-ui :type git :flavor melpa :files (:defaults "lsp-ui-doc.html" "resources" "lsp-ui-pkg.el") :host github :repo "emacs-lsp/lsp-ui") "dap-mode" (dap-mode :type git :flavor melpa :files (:defaults "icons" "dap-mode-pkg.el") :host github :repo "emacs-lsp/dap-mode") "bui" (bui :type git :flavor melpa :host github :repo "alezost/bui.el") "s" (s :type git :flavor melpa :files ("s.el" "s-pkg.el") :host github :repo "magnars/s.el") "lsp-treemacs" (lsp-treemacs :type git :flavor melpa :files (:defaults "icons" "lsp-treemacs-pkg.el") :host github :repo "emacs-lsp/lsp-treemacs") "treemacs" (treemacs :type git :flavor melpa :files (:defaults "Changelog.org" "icons" "src/elisp/treemacs*.el" "src/scripts/treemacs*.py" (:exclude "src/extra/*") "treemacs-pkg.el") :host github :repo "Alexander-Miller/treemacs") "cl-lib" nil "ace-window" (ace-window :type git :flavor melpa :host github :repo "abo-abo/ace-window") "avy" (avy :type git :flavor melpa :host github :repo "abo-abo/avy") "pfuture" (pfuture :type git :flavor melpa :host github :repo "Alexander-Miller/pfuture") "hydra" (hydra :type git :flavor melpa :files (:defaults (:exclude "lv.el") "hydra-pkg.el") :host github :repo "abo-abo/hydra") "cfrs" (cfrs :type git :flavor melpa :host github :repo "Alexander-Miller/cfrs") "posframe" (posframe :type git :flavor melpa :host github :repo "tumashu/posframe"))) gnu-elpa-mirror #s(hash-table size 65 test equal rehash-size 1.5 rehash-threshold 0.8125 data (version 3 "emacsmirror-mirror" nil "straight" nil "rose-pine-emacs" nil "spinner" (spinner :type git :host github :repo "emacs-straight/spinner" :files ("*" (:exclude ".git"))) "cl-lib" nil)) el-get #s(hash-table size 65 test equal rehash-size 1.5 rehash-threshold 0.8125 data (version 1 "emacsmirror-mirror" nil "straight" nil "rose-pine-emacs" nil "cl-lib" nil)) emacsmirror-mirror #s(hash-table size 65 test equal rehash-size 1.5 rehash-threshold 0.8125 data (version 2 "straight" (straight :type git :host github :repo "emacsmirror/straight") "rose-pine-emacs" nil "cl-lib" nil))))
+#s(hash-table size 65 test eq rehash-size 1.5 rehash-threshold 0.8125 data (org-elpa #s(hash-table size 65 test equal rehash-size 1.5 rehash-threshold 0.8125 data (version 11 "melpa" nil "gnu-elpa-mirror" nil "el-get" nil "emacsmirror-mirror" nil "straight" nil "embark" nil "lsp-mode" nil "dash" nil "f" nil "s" nil "ht" nil "spinner" nil "markdown-mode" nil "lv" nil "lsp-ui" nil "dap-mode" nil "bui" nil "lsp-treemacs" nil "treemacs" nil "cl-lib" nil "ace-window" nil "avy" nil "pfuture" nil "hydra" nil "cfrs" nil "posframe" nil)) melpa #s(hash-table size 65 test equal rehash-size 1.5 rehash-threshold 0.8125 data (version 2 "gnu-elpa-mirror" nil "el-get" (el-get :type git :flavor melpa :files ("*.el" ("recipes" "recipes/el-get.rcp") "methods" "el-get-pkg.el") :host github :repo "dimitri/el-get") "emacsmirror-mirror" nil "straight" nil "embark" (embark :type git :flavor melpa :files ("embark.el" "embark.texi" "embark-pkg.el") :host github :repo "oantolin/embark") "lsp-mode" (lsp-mode :type git :flavor melpa :files (:defaults "clients/*.el" "lsp-mode-pkg.el") :host github :repo "emacs-lsp/lsp-mode") "dash" (dash :type git :flavor melpa :files ("dash.el" "dash.texi" "dash-pkg.el") :host github :repo "magnars/dash.el") "f" (f :type git :flavor melpa :files ("f.el" "f-pkg.el") :host github :repo "rejeep/f.el") "s" (s :type git :flavor melpa :files ("s.el" "s-pkg.el") :host github :repo "magnars/s.el") "ht" (ht :type git :flavor melpa :files ("ht.el" "ht-pkg.el") :host github :repo "Wilfred/ht.el") "spinner" nil "markdown-mode" (markdown-mode :type git :flavor melpa :host github :repo "jrblevin/markdown-mode") "lv" (lv :type git :flavor melpa :files ("lv.el" "lv-pkg.el") :host github :repo "abo-abo/hydra") "lsp-ui" (lsp-ui :type git :flavor melpa :files (:defaults "lsp-ui-doc.html" "resources" "lsp-ui-pkg.el") :host github :repo "emacs-lsp/lsp-ui") "dap-mode" (dap-mode :type git :flavor melpa :files (:defaults "icons" "dap-mode-pkg.el") :host github :repo "emacs-lsp/dap-mode") "bui" (bui :type git :flavor melpa :host github :repo "alezost/bui.el") "lsp-treemacs" (lsp-treemacs :type git :flavor melpa :files (:defaults "icons" "lsp-treemacs-pkg.el") :host github :repo "emacs-lsp/lsp-treemacs") "treemacs" (treemacs :type git :flavor melpa :files (:defaults "Changelog.org" "icons" "src/elisp/treemacs*.el" "src/scripts/treemacs*.py" (:exclude "src/extra/*") "treemacs-pkg.el") :host github :repo "Alexander-Miller/treemacs") "cl-lib" nil "ace-window" (ace-window :type git :flavor melpa :host github :repo "abo-abo/ace-window") "avy" (avy :type git :flavor melpa :host github :repo "abo-abo/avy") "pfuture" (pfuture :type git :flavor melpa :host github :repo "Alexander-Miller/pfuture") "hydra" (hydra :type git :flavor melpa :files (:defaults (:exclude "lv.el") "hydra-pkg.el") :host github :repo "abo-abo/hydra") "cfrs" (cfrs :type git :flavor melpa :host github :repo "Alexander-Miller/cfrs") "posframe" (posframe :type git :flavor melpa :host github :repo "tumashu/posframe"))) gnu-elpa-mirror #s(hash-table size 65 test equal rehash-size 1.5 rehash-threshold 0.8125 data (version 3 "emacsmirror-mirror" nil "straight" nil "spinner" (spinner :type git :host github :repo "emacs-straight/spinner" :files ("*" (:exclude ".git"))) "cl-lib" nil)) el-get #s(hash-table size 65 test equal rehash-size 1.5 rehash-threshold 0.8125 data (version 1 "emacsmirror-mirror" nil "straight" nil "cl-lib" nil)) emacsmirror-mirror #s(hash-table size 65 test equal rehash-size 1.5 rehash-threshold 0.8125 data (version 2 "straight" (straight :type git :host github :repo "emacsmirror/straight") "cl-lib" nil))))
 
 ("org-elpa" "melpa" "gnu-elpa-mirror" "el-get" "emacsmirror-mirror" "straight" "emacs" "embark" "lsp-mode" "dash" "f" "s" "ht" "spinner" "markdown-mode" "lv" "lsp-ui" "dap-mode" "bui" "lsp-treemacs" "treemacs" "cl-lib" "ace-window" "avy" "pfuture" "hydra" "cfrs" "posframe")
 

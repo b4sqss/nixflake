@@ -1,132 +1,208 @@
 { config, lib, pkgs, ... }: {
-  programs.neovim = {
-    enable = true;
-    withPython3 = true;
-    vimAlias = true;
-    viAlias = true;
-    plugins = with pkgs.vimPlugins; [
-      vim-nix
-      nerdtree
-      nerdtree-git-plugin
-      vim-one
-      vim-devicons
-      vim-fugitive
-      goyo
-      nerdcommenter
-      hop-nvim
-      vim-orgmode
+	programs.neovim = {
+		enable = true;
+		withPython3 = true;
+		vimAlias = true;
+		viAlias = true;
+		plugins = with pkgs.vimPlugins; [
+			vim-nix
+			nerdtree
+			nerdtree-git-plugin
+			vim-one
+			vim-devicons
+			vim-fugitive
+			goyo
+			nerdcommenter
+			hop-nvim
+			vim-orgmode
+			syntastic
 
-      (nvim-treesitter.withPlugins (plugins: pkgs.tree-sitter.allGrammars))
+			fzf-vim
+			indent-blankline-nvim
 
-      vim-surround
-      vimagit
-      vimwiki
-      vim-commentary
-      vim-css-color
+			(nvim-treesitter.withPlugins (plugins: pkgs.tree-sitter.allGrammars))
 
-      nvim-cmp
-    ];
-    extraConfig = ''
-      set history=500
+			vim-surround
+			vimagit
+			vim-css-color
 
-        filetype indent plugin on
+			nvim-cmp
+			vim-polyglot
+			YouCompleteMe
 
-        let base16colorspace=256
-        set paste
-        set title
-        set number " relativenumber
-        set encoding=utf8
-        set ignorecase
-        set smartcase
-        set hlsearch
-        set mouse=a
-        set lazyredraw
-        set nobackup
-        set nowb
-        set noswapfile
-        set wildmenu
-        set cursorline
-        set clipboard=unnamedplus
+			coc-tsserver
+		];
+		extraConfig = ''
+			set history=500
 
-        set termguicolors
-        syntax on
-        " colorscheme base16-tomorrow-night
-        colorscheme one
-        set background=dark
+			filetype plugin indent on
+			syntax enable
 
-        " Hardcore mode, disable arrow keys.
-        " noremap <Up> <NOP>
-        " noremap <Down> <NOP>
-        " noremap <Left> <NOP>
-        " noremap <Right> <NOP>
+			let base16colorspace=256
+			set paste
+			set title
+			set number " relativenumber
+			set nocompatible
+			set encoding=utf8
+			set ignorecase
+			set smartcase
+			set hlsearch
+			set mouse=a
+			set lazyredraw
+			set nobackup
+			set nowb
+			set noswapfile
+			set wildmenu
+			set cursorline
+			set clipboard=unnamedplus
 
-        set undofile " Maintain undo history between sessions
-        set undodir=~/.cache/nvim/undodir
+			set tabstop=4 softtabstop=4 shiftwidth=4 autoindent     " tab width
 
-        set smarttab
-        " 1 tab == 4 spaces
-        set shiftwidth=4
-        " set tabstop=4
+			au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
-        " Linebreak
-        set lbr
+			set termguicolors
+			syntax on
+			" colorscheme base16-tomorrow-night
+			colorscheme one
+			set background=dark
 
-        set ai "Auto indent
-        set si "Smart indent
-        set wrap "Wrap lines
-        set matchpairs+=<:>
+			" Hardcore mode, disable arrow keys.
+			" noremap <Up> <NOP>
+			" noremap <Down> <NOP>
+			" noremap <Left> <NOP>
+			" noremap <Right> <NOP>
 
-        let mapleader = " "
+			set undofile " Maintain undo history between sessions
+			set undodir=~/.cache/nvim/undodir
 
-        map <C-t> :NERDTreeToggle<CR>
-        map <leader>t :NERDTreeToggle<CR>
-        let g:NERDTreeDirArrowExpandable = '▸'
-        let g:NERDTreeDirArrowCollapsible = '▾'
-        let NERDTreeShowHidden=0
+			let g:indent_blankline_use_treesitter = v:true
 
-        " Goyo plugin makes text more readable when writing prose:
-        map <leader>f :Goyo \| set bg=light \| set linebreak<CR>
+			" Linebreak
+			set lbr
 
-        map <;> :HopChar1
+			set si "Smart indent
+			set wrap "Wrap lines
+			set matchpairs+=<:>
 
-        " Quickly open a buffer
-        map <leader>q :e ~/buffer<cr>
-        map <leader>x :e ~/buffer.org<cr>
+			let g:syntastic_always_populate_loc_list = 1
+			let g:syntastic_auto_loc_list = 1
+			let g:syntastic_check_on_open = 1
+			let g:syntastic_check_on_wq = 0
 
-        map <leader>gdi :Gdiff<cr>
-        map <leader>gst :Git<cr>
-        map <leader>dup :diffupdate<cr>
+			let mapleader = " "
 
-        " Compile document, be it groff/LaTeX/markdown/etc.
-        map <leader>c :w! \| !compiler "<c-r>%"<CR>
+			map <C-t> :NERDTreeToggle<CR>
+			map <leader>t :NERDTreeToggle<CR>
+			let g:NERDTreeDirArrowExpandable = '▸'
+			let g:NERDTreeDirArrowCollapsible = '▾'
+			let NERDTreeShowHidden=0
 
-        " Open corresponding .pdf/.html or preview
-        map <leader>p :!opout <c-r>%<CR><CR>
+			let g:NERDSpaceDelims = 1
+			let g:NERDDefaultAlign = 'left'
+			map <M-/> :NERDCommenterToggle<CR>
 
-        " Always show the status line
-        set laststatus=2
+			map <C-c>o :Goyo <bar> <CR>
+			map <F5> :!pandoc % -o %:t:r.pdf<cr>
 
-        " Format the status line
-        set statusline=
-        set statusline+=%<\                       " cut at start
-        set statusline+=%2*[%n%H%M%R%W]%*\        " flags and buf no
-        set statusline+=%-40f\                    " path
-        set statusline+=%=%1*%y%*%*\              " file type
-        set statusline+=%{FugitiveStatusline()}   " git status
-        " set statusline+=%10((%l,%c)%)\            " line and column
-        " set statusline+=%P                        " percentage of file
+			" Spell checking
+			map <F6> :setlocal spell! spelllang=pt_br<CR>
+			map <F7> :setlocal spell! Spelllang=en_us<CR>
+			map <leader>ss :setlocal spell!<cr>
 
-      function! s:MyFollowSymlink()
-      silent! let s:fname = resolve(expand('%:p'))
-      silent! bwipeout
-      silent! exec "edit " .s:fname
-      endfunction
-      command! FollowSymlink call s:MyFollowSymlink()
+			map <;> :HopChar1
 
-      augroup followsymlink
-      autocmd!
-      autocmd BufReadPost * FollowSymlink
-      augroup END
-    '';
-  };
+			" Quickly open a buffer
+			map <leader>q :e ~/buffer<cr>
+			map <leader>x :e ~/buffer.org<cr>
+
+			map <leader>gdi :Gdiff<cr>
+			map <leader>gst :Git<cr>
+			map <leader>dup :diffupdate<cr>
+
+			" Compile document, be it groff/LaTeX/markdown/etc.
+			map <leader>c :w! \| !compiler "<c-r>%"<CR>
+
+			" Open corresponding .pdf/.html or preview
+			map <leader>p :!opout <c-r>%<CR><CR>
+
+			" Always show the status line
+			set laststatus=2
+
+			" Format the status line
+			set statusline=
+			set statusline+=%<\                       " cut at start
+			set statusline+=%2*[%n%H%M%R%W]%*\        " flags and buf no
+			set statusline+=%-40f\                    " path
+			set statusline+=%=%1*%y%*%*\              " file type
+			set statusline+=%{FugitiveStatusline()}   " git status
+			" set statusline+=%10((%l,%c)%)\            " line and column
+			" set statusline+=%P                        " percentage of file
+			set statusline+=%#warningmsg#
+			set statusline+=%{SyntasticStatuslineFlag()}
+
+			function! s:MyFollowSymlink()
+			silent! let s:fname = resolve(expand('%:p'))
+			silent! bwipeout
+			silent! exec "edit " .s:fname
+			endfunction
+			command! FollowSymlink call s:MyFollowSymlink()
+
+			augroup followsymlink
+			autocmd!
+			autocmd BufReadPost * FollowSymlink
+			augroup END
+		'';
+		coc = {
+			enable = true;
+			settings = {
+				"colorSupport" = true;
+				"snippetStatusText" = "Ⓢ ";
+				"formatOnSave" = true;
+				"suggest.noselect" = true;
+				"suggest.enablePreview" = true;
+				"suggest.enablePreselect" = false;
+				"suggest.disableKind" = true;
+
+				"diagnostic.displayByAle" = false;
+				"diagnostic.refreshOnInsertMode" = true;
+				"diagnostic.errorSign" = "✘";
+				"diagnostic.warningSign" = "⚠";
+				"diagnostic.infoSign" = "";
+				"diagnostic.hintSign" = "ஐ";
+				"diagnostic.checkCurrentLine" = true;
+				"diagnostic.virtualTextPrefix" = " ❯❯❯ ";
+				"diagnostic.virtualText" = true;
+				"diagnostic.enableMessage" = "never";
+
+				languageserver = {
+					haskell = {
+						command = "haskell-language-server-wrapper";
+						args = [ "--lsp" ];
+						rootPatterns = [
+							"*.cabal"
+							"stack.yaml"
+							"cabal.project"
+							"package.yaml"
+							"hie.yaml"
+						];
+						filetypes = [ "haskell" "lhaskell" ];
+					};
+					go = {
+						command = "gopls";
+						filetypes = [ "go" ];
+					};
+					ccls = {
+						command = "ccls";
+						filetypes = ["c" "cc" "cpp" "c++" "objc" "objcpp"];
+						initializationOptions.cache.directory = "/tmp/ccls";
+					};
+					nix = {
+						command = "rnix-lsp";
+						filetypes = [ "nix" ];
+					};
+				};
+
+			};
+		};
+	};
 }

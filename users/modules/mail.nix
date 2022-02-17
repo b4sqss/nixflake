@@ -1,5 +1,16 @@
 {config, pkgs, ...}: {
 
+  home.packages = with pkgs; [
+    thunderbird
+  ];
+
+  programs.neomutt = {
+    enable = true;
+    checkStatsInterval = 120;
+    editor = "nvim";
+    vimKeys = true;
+  };
+
   programs.gpg = {
     enable = true;
   };

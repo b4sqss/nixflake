@@ -9,18 +9,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # nur = {
-    #   url = "github:nix-community/NUR";
-    # };
-
-    #emacs-overlay = {
-    #url = "github:nix-community/emacs-overlay";
-    #inputs.nixpkgs.follows = "nixpkgs";
-    #};
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay";
+    };
 
   };
 
-  outputs = { nixpkgs, home-manager, ... }: 
+  outputs = { nixpkgs, home-manager, emacs-overlay, ... }@inputs: 
     let 
       system = "x86_64-linux";
 
@@ -39,7 +34,11 @@
           homeDirectory = "/home/basqs";
           stateVersion = "21.11";
           configuration = {
-            imports = [ ./users/home.nix ];
+            imports = [ 
+              ({ config, pkgs, ... }: { nixpkgs.overlays = [ emacs-overlay.overlay ]; })
+              ./users/home.nix 
+            ];
+            nixpkgs = { inherit (pkgs) config overlays; };
           };
         };
       };

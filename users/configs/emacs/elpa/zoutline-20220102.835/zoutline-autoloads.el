@@ -1,4 +1,4 @@
-;;; zoutline-autoloads.el --- automatically extracted autoloads
+;;; zoutline-autoloads.el --- automatically extracted autoloads  -*- lexical-binding: t -*-
 ;;
 ;;; Code:
 
@@ -9,11 +9,7 @@
 ;;;### (autoloads nil "zoutline" "zoutline.el" (0 0 0 0))
 ;;; Generated autoloads from zoutline.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "zoutline" '("zo-")))
-
-;;;***
-
-;;;### (autoloads nil nil ("zoutline-pkg.el") (0 0 0 0))
+(register-definition-prefixes "zoutline" '("zo-"))
 
 ;;;***
 
@@ -21,6 +17,6 @@
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
+;; coding: utf-8-emacs-unix
 ;; End:
 ;;; zoutline-autoloads.el ends here

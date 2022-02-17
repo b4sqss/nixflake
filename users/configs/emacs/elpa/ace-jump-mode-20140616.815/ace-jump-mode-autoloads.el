@@ -1,4 +1,4 @@
-;;; ace-jump-mode-autoloads.el --- automatically extracted autoloads
+;;; ace-jump-mode-autoloads.el --- automatically extracted autoloads  -*- lexical-binding: t -*-
 ;;
 ;;; Code:
 
@@ -51,7 +51,7 @@ You can constrol whether use the case sensitive via
 
 \(fn &optional PREFIX)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ace-jump-mode" '("ace-jump-" "aj-")))
+(register-definition-prefixes "ace-jump-mode" '("ace-jump-" "aj-"))
 
 ;;;***
 
@@ -59,6 +59,6 @@ You can constrol whether use the case sensitive via
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
+;; coding: utf-8-emacs-unix
 ;; End:
 ;;; ace-jump-mode-autoloads.el ends here

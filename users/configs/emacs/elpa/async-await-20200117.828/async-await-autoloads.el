@@ -1,4 +1,4 @@
-;;; async-await-autoloads.el --- automatically extracted autoloads
+;;; async-await-autoloads.el --- automatically extracted autoloads  -*- lexical-binding: t -*-
 ;;
 ;;; Code:
 
@@ -82,7 +82,7 @@ See \"For complex cases\" section in `make-autoload'.
 
 (advice-add 'make-autoload :around #'async-await-advice-make-autoload)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "async-await" '("async-await-")))
+(register-definition-prefixes "async-await" '("async-await-"))
 
 ;;;***
 
@@ -90,6 +90,6 @@ See \"For complex cases\" section in `make-autoload'.
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
+;; coding: utf-8-emacs-unix
 ;; End:
 ;;; async-await-autoloads.el ends here

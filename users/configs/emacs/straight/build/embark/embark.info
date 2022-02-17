@@ -492,24 +492,37 @@ File: embark.info,  Node: Quitting the minibuffer after an action,  Next: Runnin
 
 By default, if you call ‘embark-act’ from the minibuffer it quits the
 minibuffer after performing the action.  You can change this by setting
-the user option ‘embark-quit-after-action’ to ‘nil’.  That variable
-controls whether or not ‘embark-act’ quits the minibuffer when you call
-it without a prefix argument, and you can select the opposite behavior
-to what the variable says by calling ‘embark-act’ with ‘C-u’.  Note that
-both the variable ‘embark-quit-after-action’ and ‘C-u’ have no effect
-when you call ‘embark-act’ outside the minibuffer.
+the user option ‘embark-quit-after-action’ to ‘nil’.  Having
+‘embark-act’ _not_ quit the minibuffer can be useful to turn commands
+into little “thing managers”.  For example, you can use ‘find-file’ as a
+little file manager or ‘describe-package’ as a little package manager:
+you can run those commands, perform a series of actions, and then quit
+the command.
 
-   Having ‘embark-act’ _not_ quit the minibuffer can be useful to turn
-commands into little “thing managers”.  For example, you can use
-‘find-file’ as a little file manager or ‘describe-package’ as a little
-package manager: you can run those commands, perform a series of
-actions, and then quit the command.
+   If you want to control the quitting behavior in a fine-grained manner
+depending on the action, you can set ‘embark-quit-after-action’ to an
+alist, associating commands to either ‘t’ for quitting or ‘nil’ for not
+quitting.  When using an alist, you can use the special key ‘t’ to
+specify the default behavior.  For example, to specify that by default
+actions should not quit the minibuffer but that using ‘kill-buffer’ as
+an action should quit, you can use the following configuration:
+
+     (setq embark-quit-after-action '((kill-buffer . t) (t . nil)))
+
+   The variable ‘embark-quit-after-action’ only specifies a default,
+that is, it only controls whether or not ‘embark-act’ quits the
+minibuffer when you call it without a prefix argument, and you can
+select the opposite behavior to what the variable says by calling
+‘embark-act’ with ‘C-u’.  Also note that both the variable
+‘embark-quit-after-action’ and ‘C-u’ have no effect when you call
+‘embark-act’ outside the minibuffer.
 
    If you find yourself using the quitting and non-quitting variants of
-‘embark-act’ about equally often, you may prefer to have separate
-commands for them instead of a single command that you call with ‘C-u’
-half the time.  You could, for example, keep the default exiting
-behavior of ‘embark-act’ and define a non-quitting version as follows:
+‘embark-act’ about equally often, independently of the action, you may
+prefer to simply have separate commands for them instead of a single
+command that you call with ‘C-u’ half the time.  You could, for example,
+keep the default exiting behavior of ‘embark-act’ and define a
+non-quitting version as follows:
 
      (defun embark-act-noquit ()
        "Run action but don't quit the minibuffer afterwards."
@@ -1129,20 +1142,20 @@ Node: Advanced configuration18768
 Node: Showing information about available targets and actions19295
 Node: Selecting commands via completions instead of key bindings21904
 Node: Quitting the minibuffer after an action23508
-Node: Running some setup after injecting the target25269
-Node: Running hooks before or after an action28875
-Node: Creating your own keymaps33077
-Node: Defining actions for new categories of targets34064
-Node: New minibuffer target example - tab-bar tabs34833
-Ref: Telling Embark about commands that prompt for tabs by name35549
-Ref: Defining and configuring a keymap for tab actions38412
-Node: New target example in regular buffers - short Wikipedia links40166
-Node: How does Embark call the actions?42198
-Node: Non-interactive functions as actions46534
-Node: Embark Marginalia and Consult47887
-Node: Resources50580
-Node: Contributions51724
-Node: Acknowledgments52434
+Node: Running some setup after injecting the target25961
+Node: Running hooks before or after an action29567
+Node: Creating your own keymaps33769
+Node: Defining actions for new categories of targets34756
+Node: New minibuffer target example - tab-bar tabs35525
+Ref: Telling Embark about commands that prompt for tabs by name36241
+Ref: Defining and configuring a keymap for tab actions39104
+Node: New target example in regular buffers - short Wikipedia links40858
+Node: How does Embark call the actions?42890
+Node: Non-interactive functions as actions47226
+Node: Embark Marginalia and Consult48579
+Node: Resources51272
+Node: Contributions52416
+Node: Acknowledgments53126
 
 End Tag Table
 

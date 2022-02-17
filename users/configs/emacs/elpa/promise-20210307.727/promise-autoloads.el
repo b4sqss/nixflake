@@ -1,4 +1,4 @@
-;;; promise-autoloads.el --- automatically extracted autoloads
+;;; promise-autoloads.el --- automatically extracted autoloads  -*- lexical-binding: t -*-
 ;;
 ;;; Code:
 
@@ -72,14 +72,14 @@ as below.
 
 (function-put 'promise-chain 'lisp-indent-function '1)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "promise" '("promise")))
+(register-definition-prefixes "promise" '("promise"))
 
 ;;;***
 
 ;;;### (autoloads nil "promise-core" "promise-core.el" (0 0 0 0))
 ;;; Generated autoloads from promise-core.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "promise-core" '("promise-")))
+(register-definition-prefixes "promise-core" '("promise-"))
 
 ;;;***
 
@@ -87,7 +87,7 @@ as below.
 ;;;;;;  (0 0 0 0))
 ;;; Generated autoloads from promise-es6-extensions.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "promise-es6-extensions" '("promise-")))
+(register-definition-prefixes "promise-es6-extensions" '("promise-"))
 
 ;;;***
 
@@ -95,7 +95,7 @@ as below.
 ;;;;;;  (0 0 0 0))
 ;;; Generated autoloads from promise-rejection-tracking.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "promise-rejection-tracking" '("promise-")))
+(register-definition-prefixes "promise-rejection-tracking" '("promise-"))
 
 ;;;***
 
@@ -108,6 +108,6 @@ as below.
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
+;; coding: utf-8-emacs-unix
 ;; End:
 ;;; promise-autoloads.el ends here

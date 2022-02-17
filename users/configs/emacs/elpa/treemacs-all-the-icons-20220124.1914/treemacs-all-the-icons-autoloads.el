@@ -1,4 +1,4 @@
-;;; treemacs-all-the-icons-autoloads.el --- automatically extracted autoloads
+;;; treemacs-all-the-icons-autoloads.el --- automatically extracted autoloads  -*- lexical-binding: t -*-
 ;;
 ;;; Code:
 
@@ -10,7 +10,7 @@
 ;;;;;;  (0 0 0 0))
 ;;; Generated autoloads from treemacs-all-the-icons.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-all-the-icons" '("treemacs-all-the-icons-tab")))
+(register-definition-prefixes "treemacs-all-the-icons" '("treemacs-all-the-icons-tab"))
 
 ;;;***
 
@@ -18,6 +18,6 @@
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
+;; coding: utf-8-emacs-unix
 ;; End:
 ;;; treemacs-all-the-icons-autoloads.el ends here

@@ -1,4 +1,4 @@
-;;; leaf-autoloads.el --- automatically extracted autoloads
+;;; leaf-autoloads.el --- automatically extracted autoloads  -*- lexical-binding: t -*-
 ;;
 ;;; Code:
 
@@ -38,7 +38,7 @@ Symplify your `.emacs' configuration for package NAME with ARGS.
 
 (function-put 'leaf 'lisp-indent-function 'defun)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "leaf" '("leaf-")))
+(register-definition-prefixes "leaf" '("leaf-"))
 
 ;;;***
 
@@ -46,6 +46,6 @@ Symplify your `.emacs' configuration for package NAME with ARGS.
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
+;; coding: utf-8-emacs-unix
 ;; End:
 ;;; leaf-autoloads.el ends here

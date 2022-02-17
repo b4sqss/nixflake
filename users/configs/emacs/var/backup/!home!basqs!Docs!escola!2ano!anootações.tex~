@@ -1,0 +1,171 @@
+% Created 2022-02-08 Tue 14:26
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{Basques}
+\date{\today}
+\title{Anotações dos cadernos feitas no 2° ano do ensino médio}
+\hypersetup{
+ pdfauthor={Basques},
+ pdftitle={Anotações dos cadernos feitas no 2° ano do ensino médio},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 29.0.50 (Org mode 9.5.2)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Matematica}
+\label{sec:org7a938ff}
+\subsection{}
+\label{sec:orgad287da}
+\subsubsection{Analise combinatoria}
+\label{sec:orgcde8406}
+\begin{enumerate}
+\item Fatorial de um numero natural
+\label{sec:orgc400de4}
+
+Definição: $$ n! = n*(n-1)*(n-2)...*1 $$
+
+o fatorial de um número é esse numero multiplicado por todos os seus antecessores maiores que 0
+
+Ex: $$ 5! = 5*4*3*2*1 = 120$$
+
+\textbf{Importante:} $$ 0! = 1 $$ $$ 1! = 1$$
+
+Obs: $$ \frac{10!}{7!} = \frac{10*9*8*7!}{7!} = 10*9*8 = 720 $$
+$$ \frac{(n+1)!}{n} = \frac{(n+1)*n!}{n!} = n+1 $$
+\end{enumerate}
+\subsection{}
+\label{sec:org6b514b2}
+\section{Fisica}
+\label{sec:org53a3903}
+\subsection{}
+\label{sec:orgd3d1128}
+\subsubsection{Modelos planetários}
+\label{sec:orga1bad83}
+07/02/2022
+A astronomia é a área da fisica que estuda os corpos celestes.
+\begin{itemize}
+\item Modelo de Ptolomeu
+O modelo de Ptolomeu é um modelo geocentrico que reforçou as concepçẽs de aristoteles que afirmava que o movimento de um corpo só poderia occorrer caso uma força atuasse continuamente sobre ele. A igreja catolica também o aceitou. No entanto esse modelo não era capaz de
+\begin{itemize}
+\item explicar a \href{https://www.climatempo.com.br/noticia/2021/04/02/o-vai-e-vem-do-planeta-marte-8860}{laçada de marte}
+\item incorreto quanto a previsões de fenomenos climaticos e estações do ano.
+\end{itemize}
+\end{itemize}
+\subsection{}
+\label{sec:org199b32a}
+\section{Biologia}
+\label{sec:org37a5353}
+\subsection{}
+\label{sec:org9ff15c4}
+\subsubsection{Visão geral}
+\label{sec:org02fabe5}
+08/02/2022
+\begin{itemize}
+\item Ciencia que estuda os seres vivos em diversos ambitos
+\begin{itemize}
+\item Substancias, ions, compostos, que formam e interagem com os seres
+\item celulas, tecidos, orgãos, sistemas
+\item relação entre os seres vivos e deles com o meio
+\end{itemize}
+\item Ser vivo:
+\begin{itemize}
+\item Tem célula
+\item Tem metabolismo \{Conjunto das reações quimicas tipicas dos seres vivos\}
+\item Se reproduzem
+\item Tem hereditariedade \{Material genetico\}
+\item Sujeitos a evolução \{mudanças ao longo das gerações\}
+\end{itemize}
+\end{itemize}
+\subsection{}
+\label{sec:org385c0b0}
+\subsubsection{Conceitos basicos}
+\label{sec:orgc28a55b}
+07/02/2022
+\begin{enumerate}
+\item Autotrófico(autotrofo ou produtor)
+Organismo capaz de produzir o proprio alimento
+\item Heterotrofico(heterotrofo ou consumidor)
+Consome o alimento produzido por outros organismos, incapaz de produzir o seu proprio alimento
+\item Metabolismo
+Conjunto das reações quimicas
+\begin{itemize}
+\item Individuos jovens -> apresentam metabolismo acelerado
+\item Tecido muscular e nervoso -> apresentam metabolismo acelerado
+\end{itemize}
+\item Organismos aerobicos
+Utilizam o oxigenio no seu metabolismo
+\item Organismos anaerobicos
+Não utilizam o oxigenio no seu metabolismo
+\item Organismos acelulares (virus)
+Não são formados por celulas
+\item Organismos unicelulares (bacterias e protozoarios)
+Formados por 1 celula
+\item Organismos pluricelulares
+Formados por muitas celulas
+\item Celula procariota - protocelula
+Não apresenta carioteca ou membrana nuclear. Assim, o material genetico encontra-se disperso no citoplasma
+\item Celula eucariota - eucelula
+Apresenta carioteca ou membrana nuclear. O material genetico encontra-se localizado no interior de um nucleo verdadeiro ou individualizado
+\end{enumerate}
+\section{Português}
+\label{sec:org66da99c}
+\subsection{Introdução}
+\label{sec:org61edc2e}
+07/02/2022
+Genero textual
+
+discursivo -> comunicação
+
+(Um genero textual não discursivo seria onde a comunicação não acontece, exemplo texto em lingua estrangeira)
+\begin{enumerate}
+\item Modalidade
+\begin{itemize}
+\item Narração
+\item Descrição
+\item Dissertação
+\begin{itemize}
+\item Silogismo
+\item Tese - introdução
+\item antitese - desenvolvimento
+\item sintese - conclusão
+\end{itemize}
+\item Injunção
+\end{itemize}
+\item Dominio
+\begin{itemize}
+\item literario
+\item jornalistico
+\item juridico
+\item cientifico
+\end{itemize}
+\item Tipologia
+\begin{itemize}
+\item Cronica
+\item Noticia
+\item Conto
+
+Assunto - Mais generico
+
+Tema - aspecto do assunto
+
+Tese - ponto de vista
+
+Intencionalidade
+\end{itemize}
+\end{enumerate}
+\end{document}

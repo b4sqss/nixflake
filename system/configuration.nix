@@ -150,7 +150,6 @@ permit nopass :wheel as root cmd /run/current-system/sw/bin/nixos-rebuild
     htop 
     neovim
     wget
-    mu
     pulsemixer 
     ripgrep 
 
@@ -163,7 +162,6 @@ permit nopass :wheel as root cmd /run/current-system/sw/bin/nixos-rebuild
     dconf
 
     protontricks
-    # nix-gaming.packages.x86_64-linux.wine-tkg
 
     qemu_full
     virt-manager
@@ -173,9 +171,8 @@ permit nopass :wheel as root cmd /run/current-system/sw/bin/nixos-rebuild
     xorg.xf86inputevdev
     xorg.xf86inputsynaptics
     xorg.xf86inputlibinput
-    xmobar
 
-    w3m
+    lynx
 
     rsync
     nnn
@@ -195,8 +192,10 @@ permit nopass :wheel as root cmd /run/current-system/sw/bin/nixos-rebuild
   ];
 
   fonts.fonts = with pkgs; [
-    (nerdfonts.override { fonts = [ "JetBrainsMono" "SourceCodePro" "IBMPlexMono" "CascadiaCode" "Terminus" ]; })
+    (nerdfonts.override { fonts = [ "JetBrainsMono" "SourceCodePro" "IBMPlexMono" "CascadiaCode" "Terminus" "Iosevka" ]; })
     scientifica
+    iosevka
+    sarasa-gothic
     cozette
   ];
 
@@ -205,9 +204,9 @@ permit nopass :wheel as root cmd /run/current-system/sw/bin/nixos-rebuild
     package = pkgs.nixFlakes;
     gc = {
       automatic = true;
-      options = "--delete-older-than 14d";    };
+      options = "--delete-older-than 14d";
+      };
     autoOptimiseStore = true;
-    optimise.automatic = true;
   };
 
   # This value determines the NixOS release from which the default

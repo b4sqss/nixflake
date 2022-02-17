@@ -1,4 +1,4 @@
-;;; treemacs-magit-autoloads.el --- automatically extracted autoloads
+;;; treemacs-magit-autoloads.el --- automatically extracted autoloads  -*- lexical-binding: t -*-
 ;;
 ;;; Code:
 
@@ -10,7 +10,7 @@
 ;;;;;;  0))
 ;;; Generated autoloads from treemacs-magit.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-magit" '("treemacs-magit--")))
+(register-definition-prefixes "treemacs-magit" '("treemacs-magit--"))
 
 ;;;***
 
@@ -18,6 +18,6 @@
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
+;; coding: utf-8-emacs-unix
 ;; End:
 ;;; treemacs-magit-autoloads.el ends here

@@ -1,5 +1,5 @@
 let
-  clr = import ../theme/one.nix;
+  clr = import ../theme/solarized.nix;
 in
 
 {

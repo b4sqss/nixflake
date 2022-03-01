@@ -1,25 +1,29 @@
 {config, pkgs, ...}: let
-  clr = import ../theme/one.nix;
+  clr = import ../theme/solarized.nix;
 in {
   nixpkgs.config.allowUnfree = true;
 
   home.packages = with pkgs; [
+    ## Docs
     foliate
     qbittorrent
     sxiv 
     qimgv
-    inkscape 
+
+    ## Graphics
     gimp 
-    krita 
-    blender 
+    imagemagick
+    ffmpeg
 
-    ardour
-    audacity
+    ## Music
+    ardour audacity
+    spotify-unwrapped spotifyd spotify-tui
+    cmus
 
-    spotify-unwrapped spotify-tui
+    element-desktop
+    signal-desktop
+    rambox
     discord discocss
-
-    mpd
   ];
 
   programs.mpv = {
@@ -29,97 +33,11 @@ in {
       prefetch-playlist = "yes";
       profile = "protocol.https";
       screenshot-tag-colorspace = "yes";
-      screenshot-directory = "/home/basqs/Pictures/mpvshots";
+      screenshot-directory = "/home/basqs/Pics/mpvshots";
       screenshot-template = "%f-%wH.%wM.%wS.%w";
       screenshot-format = "png";
       keep-open = "yes";
     };
-  };
-
-  programs.ncmpcpp = {
-    enable = true;
-    package = pkgs.ncmpcpp.override { visualizerSupport = true; };
-    bindings = [
-      { key = "j"; command = "scroll_down"; }
-      { key = "k"; command = "scroll_up"; }
-      { key = "J"; command = [ "select_item" "scroll_down" ]; }
-      { key = "K"; command = [ "select_item" "scroll_up" ]; }
-    ];
-    settings = {
-      # General;
-      lyrics_directory = "/home/basqs/.cache/lyrics/";
-      external_editor = "vim";
-      message_delay_time = "1";
-      playlist_disable_highlight_delay = 1;
-      enable_window_title = "yes";
-      media_library_hide_album_dates = "yes";
-      connected_message_on_startup = "no";
-      space_add_mode = "add_remove";
-      ignore_diacritics = "yes";
-      screen_switcher_mode = "previous";
-      cyclic_scrolling = "no";
-      use_console_editor = "yes";
-      follow_now_playing_lyrics = "yes";
-      lines_scrolled = 1;
-
-      # Aesthetics;
-      user_interface = "classic";
-      playlist_display_mode = "columns";
-      song_columns_list_format = "(20)[4]{a} (25)[]{t} (20)[9]{b} (5)[]{l}";
-      song_status_format = "$8%a '%b' - %t$9";
-
-      colors_enabled = "yes";
-      discard_colors_if_item_is_selected = "yes";
-
-      header_visibility = "yes";
-      titles_visibility = "no";
-      statusbar_visibility = "yes";
-      display_remaining_time = "no";
-      browser_display_mode = "columns";
-      search_engine_display_mode = "columns";
-      playlist_editor_display_mode = "columns";
-
-      volume_color = "2";
-      statusbar_color = "4";
-      statusbar_time_color = "9";
-      header_window_color = "2";
-      main_window_color = "8";
-      empty_tag_color = "9";
-      color1 = "8";
-      color2 = "8";
-
-      now_playing_prefix = "$2$b";
-      now_playing_suffix = "$9$/b";
-      current_item_prefix = "$(2_1)$b";
-      current_item_suffix = "$/b$(end)";
-      current_item_inactive_column_prefix = "$(4_1)";
-      current_item_inactive_column_suffix = "$(end)";
-      state_line_color = "1";
-      state_flags_color = "4";
-      window_border_color = "9";
-      active_window_border = "9";
-      player_state_color = "9";
-
-      progressbar_color = "1"  ;
-      progressbar_look= "━━━";
-      #progressbar_look = "─╼ ";
-      progressbar_elapsed_color = "6";
-
-      # Visualizer settings;
-      visualizer_data_source = "/tmp/mpd.fifo";
-      visualizer_output_name = "visulaizer";
-      visualizer_in_stereo = "yes";
-      visualizer_type = "wave_filled";
-      visualizer_look = "┃┃";
-      visualizer_color = "9, yellow, red";
-      visualizer_fps = 30;
-    };
-  };
-
-  services.mpd = {
-    enable = true;
-    dataDir = "/home/basqs/.local/share/mpd";
-    musicDirectory = "/home/basqs/Music";
   };
 
   programs.newsboat = {
@@ -341,19 +259,6 @@ in {
 
       recolor = "true";
       recolor-keephue = "true";
-    };
-  };
-
-  services.spotifyd = {
-    enable = true;
-    settings = {
-      global = {
-        username = "jk43vcs9j36fn446gi97ucnhj";
-        password_cmd = "pass spotify/password";
-        device_name = "nix";
-        use_mpris = true;
-        bitrate = 160;
-      };
     };
   };
 }

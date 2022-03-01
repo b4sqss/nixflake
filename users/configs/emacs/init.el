@@ -10,13 +10,18 @@
 (setq standard-indent 4)
 (setq evil-shift-width tab-width)
 (setq comp-async-report-warnings-errors nil)
+(setq history-length 25)
+(setq use-dialog-box nil)
+(setq global-auto-revert-non-file-buffers t)
 
-
+(savehist-mode 1)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (tooltip-mode -1)
 (set-fringe-mode 10)
 (menu-bar-mode -1)
+(recentf-mode 1)
+(save-place-mode 1)
 (set-language-environment "UTF-8")
 (prefer-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
@@ -24,21 +29,21 @@
 (set-keyboard-coding-system 'utf-8)
 (set-face-bold-p 'bold nil)
 (set-face-attribute 'default nil
-                    :family "Iosevka"
-                    :height 140
-                    :width 'normal)
+		    :family "Iosevka"
+		    :height 140
+		    :width 'normal)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 (dolist (mode '(org-mode-hook
-                term-mode-hook))
+		term-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 (require 'package)
 
 (setq package-archives '(("melpa" ."https://melpa.org/packages/")
-                         ("org" . "https:/orgmode.org/elpa/")
-                         ("elpa" . "https://elpa.gnu.org/packages/")))
+			 ("org" . "https:/orgmode.org/elpa/")
+			 ("elpa" . "https://elpa.gnu.org/packages/")))
 
 (package-initialize)
 (unless package-archive-contents
@@ -57,16 +62,16 @@
       (bootstrap-version 5))
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
+	(url-retrieve-synchronously
+	 "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+	 'silent 'inhibit-cookies)
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
 (defun evil-hook ()
   (dolist (mode '(custom-mode
-                  vterm-mode))
+		  vterm-mode))
     (add-to-list 'evil-emacs-state-modes mode)))
 
 (use-package evil
@@ -148,16 +153,13 @@
 
 (use-package vertico
   :bind (:map vertico-map
-              ("C-j" . vertico-next)
-              ("C-k" . vertico-previous)
-              ("C-f" . vertico-exit))
+	      ("C-j" . vertico-next)
+	      ("C-k" . vertico-previous)
+	      ("C-f" . vertico-exit))
   :custom
   (vertico-cicle t)
   :init
   (vertico-mode))
-
-(use-package savehist
-  :init (savehist-mode))
 
 (use-package which-key
   :config
@@ -169,19 +171,19 @@
 
 (use-package consult
   :bind (("C-s" . consult-line)
-         ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
-         ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
-         ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
-         ("M-g e" . consult-compile-error)
-         ("M-g f" . consult-flycheck)               ;; Alternative: consult-flycheck
-         ("M-s G" . consult-git-grep)
-         ("M-s r" . consult-ripgrep))
+	 ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
+	 ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
+	 ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
+	 ("M-g e" . consult-compile-error)
+	 ("M-g f" . consult-flycheck)               ;; Alternative: consult-flycheck
+	 ("M-s G" . consult-git-grep)
+	 ("M-s r" . consult-ripgrep))
 
   :hook (completion-list-mode . consult-preview-at-point-mode)
 
   :init
   (setq register-preview-delay 0
-        register-preview-function #'consult-register-format)
+	register-preview-function #'consult-register-format)
   (advice-add #'register-preview :override #'consult-register-window)
   (advice-add #'completing-read-multiple :override #'consult-completing-read-multiple)
 
@@ -218,7 +220,7 @@
 
 (use-package vterm
   :custom (setq explicit-shell-file-name "zsh"
-                term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
+		term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
   :bind (("C-c e" . vterm)))
 
 (use-package vterm-toggle
@@ -227,16 +229,16 @@
 (setq eshell-prompt-regexp "^[^αλ\n]*[αλ] ")
 (setq eshell-prompt-function
       (lambda nil
-        (concat
-         (if (string= (eshell/pwd) (getenv "HOME"))
-             (propertize "~" 'face `(:foreground "#99CCFF"))
-           (replace-regexp-in-string
-            (getenv "HOME")
-            (propertize "~" 'face `(:foreground "#99CCFF"))
-            (propertize (eshell/pwd) 'face `(:foreground "#99CCFF"))))
-         (if (= (user-uid) 0)
-             (propertize " α " 'face `(:foreground "#FF6666"))
-           (propertize " λ " 'face `(:foreground "#A6E22E"))))))
+	(concat
+	 (if (string= (eshell/pwd) (getenv "HOME"))
+	     (propertize "~" 'face `(:foreground "#99CCFF"))
+	   (replace-regexp-in-string
+	    (getenv "HOME")
+	    (propertize "~" 'face `(:foreground "#99CCFF"))
+	    (propertize (eshell/pwd) 'face `(:foreground "#99CCFF"))))
+	 (if (= (user-uid) 0)
+	     (propertize " α " 'face `(:foreground "#FF6666"))
+	   (propertize " λ " 'face `(:foreground "#A6E22E"))))))
 
 (setq eshell-highlight-prompt nil) 
 
@@ -249,11 +251,11 @@
       user-full-name "Basques")
 
 (add-to-list 'gnus-secondary-select-methods '(nnimap "gmail"
-                                                     (nnimap-address "imap.gmail.com")  ; it could also be imap.googlemail.com if that's your server.
-                                                     (nnimap-server-port "imaps")
-                                                     (nnimap-stream ssl)
-                                                     (nnmail-expiry-target "nnimap+gmail:[Gmail]/Trash")  ; Move expired messages to Gmail's trash.
-                                                     (nnmail-expiry-wait immediate))) ; Mails marked as expired can be processed immediately.
+						     (nnimap-address "imap.gmail.com")  ; it could also be imap.googlemail.com if that's your server.
+						     (nnimap-server-port "imaps")
+						     (nnimap-stream ssl)
+						     (nnmail-expiry-target "nnimap+gmail:[Gmail]/Trash")  ; Move expired messages to Gmail's trash.
+						     (nnmail-expiry-wait immediate))) ; Mails marked as expired can be processed immediately.
 
 (setq smtpmail-smtp-server "smtp.gmail.com"
       smtpmail-smtp-service 587
@@ -264,7 +266,7 @@
   :commands (dired dired-jump)
   :bind (("C-x C-j" . dired-jump))
   :custom ((dired-listing-switches "-agho --group-directories-first")
-           (setq dired-omit-files "^\\.[^.].*")))
+	   (setq dired-omit-files "^\\.[^.].*")))
 
 (use-package all-the-icons-dired
   :hook (dired-mode . all-the-icons-dired-mode))
@@ -307,16 +309,16 @@
   :ensure t
   :init (dired-async-mode 1))
 
-  (setq auto-save-file-name-transforms
-        `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
+(setq auto-save-file-name-transforms
+      `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
 
-  (use-package crux
-    :bind (("C-c D" . crux-delete-file-and-buffer)))
+(use-package crux
+  :bind (("C-c D" . crux-delete-file-and-buffer)))
 
-  (use-package bug-hunter)
+(use-package bug-hunter)
 
-  (use-package olivetti
-    :bind ("C-c o" . olivetti-mode))
+(use-package olivetti
+  :bind ("C-c o" . olivetti-mode))
 
 ;; (use-package quelpa-use-package)
 ;; ;; Don't forget to run M-x eaf-install-dependencies
@@ -344,7 +346,7 @@
   (defun config-visit()
     (interactive)
     (find-file "~/.config/emacs/emacs.org"))
-   (global-set-key (kbd "C-c e") 'config-visit)
+  (global-set-key (kbd "C-c e") 'config-visit)
 
   (defun reload-config()
     (interactive)
@@ -359,28 +361,28 @@
 (setq dashboard-set-navigator t)
 (setq dashboard-show-shortcuts t)
 (setq dashboard-items '((recents  . 5)
-                        (bookmarks . 5)
-                        (agenda . 10)))
+			(bookmarks . 5)
+			(agenda . 10)))
 (setq dashboard-set-file-icons t)
 (setq dashboard-set-navigator t)
 (setq dashboard-navigator-buttons
       `(;; line1
-        ((,nil
-          "agenda"
-          "opens org-agenda"
-          (lambda (&rest _) (org-agenda))
-          'default)
-         (nil
-          "open the emacs.org"
-          "Opens the config file"
-          (lambda (&rest _) (config-visit))
-          'default)
-         (nil
-          "new scratch buffer"
-          "Opens a scratch buffer"
-          (lambda (&rest _) (create-scratch-buffer))
-          'default)
-         )))
+	((,nil
+	  "agenda"
+	  "opens org-agenda"
+	  (lambda (&rest _) (org-agenda))
+	  'default)
+	 (nil
+	  "open the emacs.org"
+	  "Opens the config file"
+	  (lambda (&rest _) (config-visit))
+	  'default)
+	 (nil
+	  "new scratch buffer"
+	  "Opens a scratch buffer"
+	  (lambda (&rest _) (create-scratch-buffer))
+	  'default)
+	 )))
 
 (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
 
@@ -408,10 +410,17 @@
   :init (mood-line-mode)(display-time-mode)(display-battery-mode))
 
 (use-package doom-themes :defer t)
-(use-package spacemacs-theme :defer t)
-(use-package nano-theme :defer t)
+  (use-package spacemacs-theme :defer t)
+  (use-package nano-theme :defer t)
 
-(consult-theme 'doom-one)
+  (consult-theme 'doom-solarized-dark-high-contrast)
+
+(defun toggle-theme ()
+  (interactive)
+  (if (eq (car custom-enabled-themes) 'doom-solarized-dark-high-contrast)
+      (consult-theme 'doom-solarized-light)
+    (consult-theme 'doom-solarized-dark-high-contrast)))
+(global-set-key [f5] 'toggle-theme)
 
 (defun org-mode-setup ()
   (org-indent-mode)

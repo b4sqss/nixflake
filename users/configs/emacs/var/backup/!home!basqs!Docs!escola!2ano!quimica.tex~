@@ -1,0 +1,70 @@
+% Created 2022-02-24 Thu 17:33
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{Basques}
+\date{\today}
+\title{Química}
+\hypersetup{
+ pdfauthor={Basques},
+ pdftitle={Química},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 29.0.50 (Org mode 9.5.2)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Funções}
+\label{sec:org8bdb7e6}
+\subsection{ácidos}
+\label{sec:orgbc1d431}
+\begin{itemize}
+\item São caracterizados por liberar \[H^+\]  ao serem diluidos em água (ionizam)
+\begin{itemize}
+\item O $$ H^+ $$ é um íon positivo, isto é, um cátion.
+\item Ele é um cation, pois, ao se separar perdeu um eletron($$e^-$$), o que o da uma carga positiva
+\item Ions são atomos com carga ou positiva(cations) ou negativa(anions)
+\end{itemize}
+\item São moleculares
+\begin{itemize}
+\item São formados por ligações covalentes
+\item Ligações covalentes são ligações entre 2 ametais
+\end{itemize}
+\item Conduzem corrente elétrica, dissolvidos em água, pois tem íons livres, os quais se movimentam levando a eletricidade.
+\item Exemplos de ácidos são:
+\begin{itemize}
+\item $$ HCl $$
+\item $$ H_2SO_4 $$
+\item $$ H_2S $$
+\item $$ HNO_3 $$
+\item Veja que todos começam com um H
+\end{itemize}
+\item Agora tente escrever a equação de ionização deles
+\begin{itemize}
+\item Exemplo: $$ HCl + H_2O $$ $$ H^+ + Cl^-  $$
+\end{itemize}
+\end{itemize}
+\subsection{Bases}
+\label{sec:orgf8e75cc}
+\begin{itemize}
+\item São caracterizados por liberar o anion  $$ OH^-$$ ao entrarem em contato com a água(dissociam).
+\item São substancias ionicas
+\begin{itemize}
+\item São formados por ligações ionicas: Metal + Ametal
+\item Nas ligações ionicas um atomo toma o eletron do outro
+\end{itemize}
+\end{itemize}
+\end{document}

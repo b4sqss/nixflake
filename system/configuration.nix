@@ -7,97 +7,112 @@ let
     export __VK_LAYER_NV_optimus=NVIDIA_only
     exec -a "$0" "$@"
   '';
-
 in {
-  imports = [
-    ./hardware-configuration.nix
-  ];
+  imports = [ ./hardware-configuration.nix ];
+
+  nix = {
+    package = pkgs.nixUnstable;
+    extraOptions = "experimental-features = nix-command flakes";
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 14d";
+    };
+    autoOptimiseStore = true;
+  };
+
+
+  users.users.basqs = {
+    shell = pkgs.zsh;
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" "libvirtd" ];
+  };
+  environment.pathsToLink = [ "/share/zsh" ]; # So that zsh completion works
+  environment.binsh = "${pkgs.dash}/bin/dash";
+
+  security.sudo.enable = false;
+  security.doas.enable = true;
+  security.doas.extraRules = [{
+    users = [ "basqs" ];
+    keepEnv = true;
+    persist = true;
+  }];
+  security.doas.extraConfig = ''
+permit nopass :wheel as root cmd reboot
+permit nopass :wheel as root cmd poweroff
+permit nopass :wheel as root cmd mount
+permit nopass :wheel as root cmd umount
+permit nopass :wheel as root cmd nixos-rebuild
+'';
+
 
   boot = {
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
+    kernelPackages = pkgs.linuxPackages_latest;
     kernelModules = [ "kvm-intel" "vfio-pci" "nvidia" ];
     kernelParams = [ "workqueue.power_efficient=y" "intel_iommu=on" "iommu=pt" ];
   };
+  # hardware.enableRedistributableFirmware = true; # fsf :ha:
 
   time.timeZone = "America/Sao_Paulo";
   i18n.defaultLocale = "en_US.UTF-8";
 
-  networking = {
-    hostName = "nixos";
-    networkmanager.enable = true;
-    networkmanager.wifi.powersave = true;
-    interfaces.enp60s0.useDHCP = true;
-    interfaces.wlp61s0.useDHCP = true;
-  };
-
-  powerManagement = {
+  sound.enable = false;
+  hardware.pulseaudio.enable = false;
+  services.pipewire = {
     enable = true;
-    powertop.enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    jack.enable = true;
   };
 
   services = {
     upower.enable = true;
     acpid.enable = true;
+  };
 
-    pipewire = {
+  services.cron = {
+    enable = true;
+    systemCronJobs = [
+      "0 0 * * 0      root    fstrim /"
+    ];
+  };
+
+  services.xserver = {
+    enable = true;
+    displayManager.sx.enable = true;
+    windowManager.bspwm = {
       enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-      jack.enable = true;
     };
-
-    journald.extraConfig = "MaxRetentionSec=2day";
-
-    cron = {
+    layout = "br";
+    xkbOptions = "caps:swapescape";
+    libinput = {
       enable = true;
-      systemCronJobs = [
-        "0 0 * * 0      root    fstrim /"
-      ];
+      touchpad.naturalScrolling = false;
     };
+  };
+  programs.dconf.enable = true;
+  # environment.pathsToLink = [ "/libexec" ]; 
 
-    xserver = {
-      enable = true;
-      displayManager.sddm.enable = false;
-      displayManager.sx.enable = true;
-      windowManager.xmonad = {
-        enable = true;
-        enableContribAndExtras = true;
-        extraPackages = hpkgs: [
-          hpkgs.xmonad
-          hpkgs.xmonad-contrib
-          hpkgs.xmonad-extras
-        ];
-      };
-
-      videoDrivers = [ "nvidia" ];
-      useGlamor = true;
-      deviceSection = ''
+  services.xserver = {
+    videoDrivers = [ "nvidia" ];
+    useGlamor = true;
+    deviceSection = ''
         Option "DRI" "2"
         Option "TearFree" "true"
       '';
-      layout = "br";
-      xkbOptions = "caps:swapescape";
-
-      libinput = {
-        enable = true;
-        touchpad.naturalScrolling = false;
-      };
-    };
-    blueman.enable = true;
   };
-
   hardware = {
     cpu.intel.updateMicrocode = true;
+    nvidia.modesetting.enable = true;
     nvidia.prime = {
       offload.enable = true;
       intelBusId = "PCI:0:2:0";
       nvidiaBusId = "PCI:1:0:0";
     };
-
     opengl = {
       enable = true;
       driSupport = true;
@@ -107,36 +122,9 @@ in {
         pkgs.intel-compute-runtime
       ];
     };
-    bluetooth.enable = true;
   };
 
   virtualisation.libvirtd.enable = true;
-
-
-environment.binsh = "${pkgs.dash}/bin/dash";
-
-  users.users.basqs = {
-    shell = pkgs.zsh;
-    isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "libvirtd" ];
-  };
-
-  # environment.pathsToLink = [ "/share/zsh" ]; # So that zsh completion works
-
-  security.sudo.enable = false;
-  security.doas.enable = true;
-  security.doas.extraRules = [{
-    users = [ "basqs" ];
-    keepEnv = true;
-    persist = true;
- }];
-  security.doas.extraConfig = ''
-permit nopass :wheel as root cmd /run/current-system/sw/bin/reboot
-permit nopass :wheel as root cmd /run/current-system/sw/bin/poweroff
-permit nopass :wheel as root cmd /run/current-system/sw/bin/mount
-permit nopass :wheel as root cmd /run/current-system/sw/bin/umount
-permit nopass :wheel as root cmd /run/current-system/sw/bin/nixos-rebuild
-'';
 
   documentation.dev.enable = true;
   documentation.man.enable = true;
@@ -146,75 +134,22 @@ permit nopass :wheel as root cmd /run/current-system/sw/bin/nixos-rebuild
 
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
-    # terminal stuff
-    htop 
-    neovim
-    wget
-    pulsemixer 
-    ripgrep 
+    sxhkd
+    bsp-layout
 
     mesa
     nvidia-offload
 
-    steam
-    lutris
-
-    dconf
-
-    protontricks
-
     qemu_full
     virt-manager
     libvirt
-
-    xorg.xf86videointel
-    xorg.xf86inputevdev
-    xorg.xf86inputsynaptics
-    xorg.xf86inputlibinput
-
-    lynx
-
-    rsync
-    nnn
-    gitAndTools.gitFull
-
-    clang
-    clang-tools
-    cppcheck
-    gcc
-    gnumake
-    cmake
-    valgrind
-    binutils
-    lld
-    llvm
-    ccls
   ];
 
   fonts.fonts = with pkgs; [
-    (nerdfonts.override { fonts = [ "JetBrainsMono" "SourceCodePro" "IBMPlexMono" "CascadiaCode" "Terminus" "Iosevka" ]; })
-    scientifica
+    font-awesome
     iosevka
-    sarasa-gothic
-    cozette
   ];
 
-  nix = {
-    extraOptions = "experimental-features = nix-command flakes";
-    package = pkgs.nixFlakes;
-    gc = {
-      automatic = true;
-      options = "--delete-older-than 14d";
-      };
-    autoOptimiseStore = true;
-  };
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "21.11"; # Did you read the comment?
+  system.stateVersion = "21.11";
   system.autoUpgrade.enable = true;
 }

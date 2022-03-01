@@ -1,0 +1,14 @@
+{ pkgs ? import <nixpkgs> {} }:
+pkgs.mkShell {
+name = "rustShell";
+buildInputs = with pkgs; [
+rustc cargo
+];
+};
+
+  RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
+
+  shellHook = ''
+  echo Welcome to rustShell
+  '';
+}

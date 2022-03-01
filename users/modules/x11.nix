@@ -1,5 +1,6 @@
 {configs, pkgs, ...}: {
 
+
   home.packages = with pkgs; [
     xwallpaper
     pamixer
@@ -8,13 +9,20 @@
     rofi
     dmenu
     xautolock
-    xcompmgr
     scrot 
     playerctl
-    xmobar
+    polybarFull
+    xsel
+    sxhkd
+    bsp-layout
   ];
-  
+
   xsession.windowManager = {
+    # i3 = {
+    #   enable = true;
+    #   package = pkgs.i3-gaps;
+    # };
+
     xmonad = {
       enable = true;
       enableContribAndExtras = true;
@@ -305,7 +313,7 @@ main = do
           ppUrgent = xmobarColor "#e06c75" "" . wrap "!" "!", -- Urgent workspace
           -- ppExtras = [windowCount], -- No. of windows current workspace
           ppOrder = \(ws : l : t : ex) -> [ws, l] ++ ex ++ [t]
-        }
+          }
       }
       `additionalKeysP` myKeys
 '';

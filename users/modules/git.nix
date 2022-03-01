@@ -32,10 +32,7 @@
   };
 
   home.packages = with pkgs; [
-    diff-so-fancy # git diff with colors
     git-crypt     # git files encryption
-    hub           # github command-line client
-    tig           # diff and commit view
   ];
 
 }

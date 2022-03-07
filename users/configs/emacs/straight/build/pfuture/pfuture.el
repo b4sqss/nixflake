@@ -1,1 +1,0 @@
-/home/basqs/.config/emacs/straight/repos/pfuture/pfuture.el

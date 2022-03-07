@@ -1,1 +1,0 @@
-/home/basqs/.config/emacs/straight/repos/spinner/spinner.el

@@ -1,1 +1,0 @@
-/home/basqs/.config/emacs/straight/repos/f.el/f.el

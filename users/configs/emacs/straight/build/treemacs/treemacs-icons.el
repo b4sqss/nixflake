@@ -1,1 +1,0 @@
-/home/basqs/.config/emacs/straight/repos/treemacs/src/elisp/treemacs-icons.el

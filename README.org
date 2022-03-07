@@ -12,4 +12,4 @@ Nothing to fancy either, but usefull
 The flake.nix is usefull foreasily building both configs(using the scripts) and also for updating both of them in a easier way.
 
 It looks like this when it's built:
-[[file:users/configs/screenshot.png]]
+[[file:hm/configs/screenshot.png]]

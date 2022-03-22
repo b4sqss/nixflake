@@ -131,6 +131,7 @@ shellAliases = {
   ls = "ls --group-directories-first --color";
   cp = "cp -iv";
   mv = "mv -iv";
+  mountusb = "sudo mount -t vfat -o rw,uid=basqs,gid=users /dev/sda1 /mnt/pendrive";
   sxiv = "sxiv -b";
   query_vim_pkgs = "nix-env -f '<nixpkgs>' -qaP -A vimPlugins";
   scu = "systemctl --user";
@@ -148,6 +149,7 @@ shellAliases = {
     pulsemixer
     ripgrep
     zip unzip
+    ncdu
     fd
     sl
     bc

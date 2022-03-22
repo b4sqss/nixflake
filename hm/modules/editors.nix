@@ -32,8 +32,10 @@ in {
 
     ## Documents
     texlive.combined.scheme-full
+    luarocks # for digestify
     pandoc
     unoconv
+    languagetool
 
     ## C
     clang bear gdb cmake llvmPackages.libcxx ccls rtags llvm gnumake

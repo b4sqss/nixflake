@@ -12,6 +12,7 @@ qimgv
 
 ## Graphics
 gimp
+krita
 imagemagick
 ffmpeg
 
@@ -187,6 +188,9 @@ discord discocss
                 { tags = [ "science" ] ;
                 url = "https://science.sciencemag.org/rss/twis.xml";
                 title = ""; }
+                { tags = [ "science" ] ;
+                url = "https://phys.org/rss-feed/";
+                title = "phys.org"; }
 
                 { tags = [ "noticias" ] ;
                 url = "";

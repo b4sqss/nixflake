@@ -2,6 +2,10 @@
 let
   clr = import ../theme/solarized.nix;
 in {
+  # needed for logseq
+nixpkgs.config.permittedInsecurePackages = [
+                "electron-13.6.9"
+              ];
   home.packages = with pkgs; [
     libnotify
     gtk3
@@ -18,9 +22,10 @@ tor-browser-bundle-bin
 qutebrowser
 
 ## GUI
+logseq
 anki
 nicotine-plus
-libreoffice
+libreoffice arkpandora_ttf #Arial font
     ];
 
     gtk = {

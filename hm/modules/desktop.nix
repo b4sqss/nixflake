@@ -26,6 +26,8 @@ logseq
 anki
 nicotine-plus
 libreoffice arkpandora_ttf #Arial font
+
+vscode-with-extensions
     ];
 
     gtk = {

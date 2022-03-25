@@ -53,8 +53,8 @@
 
     initExtra = ''
             autoload -U colors && colors	# Load colors
-            PS1="%{$fg[blue]%}%~%  %{$fg[yellow]%}% | "
-# PROMPT="%{$fg[yellow]%}-> %{$fg[red]%}[ %{$fg[blue]%}%1~%{$fg[red]%} ]%}%{$fg[yellow]%} :: %{$reset_color%}"
+            # PS1="%{$fg[blue]%}%~%  %{$fg[yellow]%}% | "
+      PS1="%{$fg[red]%}[ %{$fg[blue]%}%~%{$fg[red]%} ]%}%{$fg[yellow]%} :: %{$reset_color%}"
 
             _comp_options+=(globdots)		# Include hidden files.
 

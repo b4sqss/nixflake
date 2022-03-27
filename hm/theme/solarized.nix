@@ -21,7 +21,6 @@
   base15 = "#d33682"; # violet
 
 # Alacritty
-
   background = "#002b36";
   foreground = "#839496";
 

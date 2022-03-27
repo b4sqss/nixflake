@@ -161,9 +161,9 @@ libvirt
 ];
 
 fonts.fonts = with pkgs; [
-(nerdfonts.override { fonts = [ "CascadiaCode" "FiraCode" ]; })
 font-awesome
 iosevka
+sarasa-gothic
 uw-ttyp0
 ];
 

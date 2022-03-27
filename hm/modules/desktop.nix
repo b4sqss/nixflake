@@ -24,10 +24,7 @@ qutebrowser
 ## GUI
 logseq
 anki
-nicotine-plus
 libreoffice arkpandora_ttf #Arial font
-
-vscode-with-extensions
     ];
 
     gtk = {
@@ -104,7 +101,7 @@ package = pkgs.papirus-icon-theme;
         "*.color7" =  clr.white;
         "*.color15" = clr.white-br;
 
-        "URxvt.font" = "xft:Iosevka:size=12";
+        "URxvt.font" = "xft:Iosevka:size=10";
         "*.font" = "Iosevka";
       };
 
@@ -127,7 +124,7 @@ package = pkgs.papirus-icon-theme;
 ##		urlLauncher = "firefox";
 ##		underlineURLs = true;
 ##	};
-##	fonts = ["xft:Iosevka:Font:size=12"];
+##	fonts = ["xft:Iosevka:Font:size=10"];
 ##	iso14755 = false;
 ##	scroll.bar.enable = false;
 ##	keybindings = {

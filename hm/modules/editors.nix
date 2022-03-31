@@ -218,8 +218,13 @@ in {
           ])
           );
         };
+
+        home.file.".emacs.d/emacs.org".source = ../configs/emacs.org;
         xdg.configFile."emacs/emacs.org" = {
           source = ../configs/emacs.org;
           # recursive = true;
         };
+  xdg.userDirs.documents = "$HOME/Docs";
+  xdg.userDirs.music = "$HOME/Docs/Music";
+  xdg.userDirs.pictures = "$HOME/Pics";
       }

@@ -27,21 +27,21 @@ anki
 libreoffice arkpandora_ttf #Arial font
     ];
 
-    gtk = {
-      font = {
-        name = "Iosevka";
-        size = "10";
-      };
-      theme = {
-        name = "numix-solarized-gtk-theme";
-        package = pkgs.numix-solarized-gtk-theme;
-      };
-      iconTheme = {
-##name "papirus";
-package = pkgs.papirus-icon-theme;
-        };
-      };
-
+gtk = {
+  enable = true;
+  font = {
+    name = "Iosevka";
+    size = 10;
+  };
+  iconTheme = {
+    name = "Adwaita-dark";
+    package = pkgs.gnome3.adwaita-icon-theme;
+  };
+  theme = {
+    name = "Adwaita-dark";
+    package = pkgs.gnome3.adwaita-icon-theme;
+  };
+};
       xdg.mime.enable = true;
       xdg.mimeApps.enable = true;
       xdg.mimeApps.defaultApplications = {

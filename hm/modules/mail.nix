@@ -44,6 +44,6 @@
     package = pkgs.pass.withExtensions (exts: [ exts.pass-otp ]);
   };
 
-  programs.mbsync.enable = true;
-  home.file.".mbsyncrc".source = ../configs/mbsyncrc;
+  # programs.mbsync.enable = true;
+  # home.file.".mbsyncrc".source = ../configs/mbsyncrc;
 }

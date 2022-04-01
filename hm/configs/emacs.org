@@ -96,91 +96,523 @@ Some things that I like to setup
 * Keys
 ** evil
 #+begin_src emacs-lisp :tangle ./.emacs.d/init.el
-(defun evil-hook ()
-  (dolist (mode '(custom-mode
-                  vterm-mode))
-    (add-to-list 'evil-emacs-state-modes mode)))
+  (defun evil-hook ()
+    (dolist (mode '(custom-mode
+                    vterm-mode))
+      (add-to-list 'evil-emacs-state-modes mode)))
 
-(use-package evil
-  :init
-  (setq evil-want-integration t)
-  (setq evil-want-keybinding nil)
-  (setq evil-want-C-u-scroll t)
-  (setq evil-want-C-i-jump nil)
-  (setq evil-respect-visual-line-mode t)
-  (setq evil-undo-system 'undo-tree)
-  :config
-  (add-hook 'evil-mode-hook 'evil-hook)
-  (evil-mode 1)
+  (use-package evil
+    :init
+    (setq evil-want-integration t)
+    (setq evil-want-keybinding nil)
+    (setq evil-want-C-u-scroll t)
+    (setq evil-want-C-i-jump nil)
+    (setq evil-respect-visual-line-mode t)
+    (setq evil-undo-system 'undo-tree)
+    :config
+    (add-hook 'evil-mode-hook 'evil-hook)
+    (evil-mode 1)
 
-  (use-package ace-jump-mode)
-  (evil-global-set-key 'motion ";" 'ace-jump-mode)
-  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+    (use-package ace-jump-mode)
+    (evil-global-set-key 'motion ";" 'ace-jump-mode)
+    (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
-  (evil-set-initial-state 'messages-buffer-mode 'normal)
-  (evil-set-initial-state 'dashboard-mode 'normal))
+    (evil-set-initial-state 'messages-buffer-mode 'normal)
+    (evil-set-initial-state 'dashboard-mode 'normal))
 
-(use-package evil-collection
-  :config
-  (evil-collection-init))
+  (use-package evil-collection
+    :config
+    (evil-collection-init))
 
-(use-package undo-tree
-  :after evil
-  :init
-  (global-undo-tree-mode 1))
+  (use-package undo-tree
+    :after evil
+    :init
+    (global-undo-tree-mode 1))
 
-(use-package evil-nerd-commenter
-  :bind ("M-/" . evilnc-comment-or-uncomment-lines))
+  (use-package evil-nerd-commenter
+    :bind ("M-/" . evilnc-comment-or-uncomment-lines))
 
-(use-package evil-leader
-  :config
-  (global-evil-leader-mode)
-  (evil-leader/set-leader "<SPC>")
-  (evil-leader/set-key
-    ;; Files
-    "d" 'dired
-    "f" 'dired-jump
-    ;; Bufffers
-    "wc" 'evil-window-delete
-    "ws" 'evil-window-split
-    "wv" 'evil-window-vsplit
-    "wl"  'evil-window-next
-    "wh"  'evil-window-prev
-    ;; Org mode
-    "oc" 'org-edit-special
-    "ol" 'org-latex-previw
-    "oi" 'org-toggle-inline-images
-    "oa" 'org-agenda
-    "os" 'org-schedule
-    "o." 'org-toggle-checkbox
-    "ot" 'org-toggle-todo-and-fold
-    ;; Export
-    "oep" 'org-latex-export-to-pdf
-    "oeh" 'org-html-export-to-html
-    ;; Babel
-    "obs" 'org-babel-execute-src-block
-    "obb" 'org-babel-execute-buffer
-    "obl" 'org-babel-load-file
-    "obt" 'org-babel-tangle
-    ;; Help
-    "hh" 'help
-    "hk" 'helpful-key
-    "hv" 'helpful-variable
-    "hf" 'helpful-function
-    "hs" 'helpful-symbol
-    "hm" 'describe-mode
-    ;; Magit
-    "gs"  'magit-status
-    "gc"  'magit-commit
-    "gb"  'magit-branch
-    "gP"  'magit-push-current
-    "gf"  'magit-fetch
-    "gF"  'magit-fetch-all))
+  (use-package evil-leader
+    :config
+    (global-evil-leader-mode)
+    (evil-leader/set-leader "<SPC>")
+    (evil-leader/set-key
+      ;; Files
+      "d" 'dired
+      "f" 'dired-jump
+      ;; Bufffers
+      "wc" 'evil-window-delete
+      "ws" 'evil-window-split
+      "wv" 'evil-window-vsplit
+      "wl"  'evil-window-next
+      "wh"  'evil-window-prev
+      ;; Org mode
+      "oc" 'org-edit-special
+      "ol" 'org-latex-previw
+      "oi" 'org-toggle-inline-images
+      "oa" 'org-agenda
+      "os" 'org-schedule
+      "o." 'org-toggle-checkbox
+      "ot" 'org-toggle-todo-and-fold
+      ;; Export
+      "oep" 'org-latex-export-to-pdf
+      "oeh" 'org-html-export-to-html
+      ;; Babel
+      "obs" 'org-babel-execute-src-block
+      "obb" 'org-babel-execute-buffer
+      "obl" 'org-babel-load-file
+      "obt" 'org-babel-tangle
+      ;; Help
+      "hh" 'help
+      "hk" 'helpful-key
+      "hv" 'helpful-variable
+      "hf" 'helpful-function
+      "hs" 'helpful-symbol
+      "hm" 'describe-mode
+      ;; Magit
+      "gs"  'magit-status
+      "gc"  'magit-commit
+      "gb"  'magit-branch
+      "gP"  'magit-push-current
+      "gf"  'magit-fetch
+      "gF"  'magit-fetch-all))
 
-(use-package undo-tree
-  ;; :after evil
-  :init
-  (global-undo-tree-mode 1))
+  (use-package undo-tree
+    ;; :after evil
+    :init
+    (global-undo-tree-mode 1))
+
+#+end_src
+** General
+#+begin_src emacs-lisp :tangle ./.emacs.d/init.el
+;; (use-package general
+;;   :config
+
+;; (general-define-key
+;;  :states '(normal motion visual)
+;;  :keymaps 'override
+;;  :prefix "SPC"
+
+;;  ;; Top level functions
+;;  "/" '(jib/rg :which-key "ripgrep")
+;;  ";" '(spacemacs/deft :which-key "deft")
+;;  ":" '(projectile-find-file :which-key "p-find file")
+;;  "." '(counsel-find-file :which-key "find file")
+;;  "," '(counsel-recentf :which-key "recent files")
+;;  "TAB" '(switch-to-prev-buffer :which-key "previous buffer")
+;;  "SPC" '(counsel-M-x :which-key "M-x")
+;;  "q" '(save-buffers-kill-terminal :which-key "quit emacs")
+;;  "r" '(jump-to-register :which-key "registers")
+
+;; ;; "Applications"
+;; "a" '(nil :which-key "applications")
+;; "ao" '(org-agenda :which-key "org-agenda")
+;; "am" '(mu4e :which-key "mu4e")
+;; "aC" '(calc :which-key "calc")
+;; "ac" '(org-capture :which-key "org-capture")
+;; "aqq" '(org-ql-view :which-key "org-ql-view")
+;; "aqs" '(org-ql-search :which-key "org-ql-search")
+
+;; "ab" '(nil :which-key "browse url")
+;; "abf" '(browse-url-firefox :which-key "firefox")
+;; "abc" '(browse-url-chrome :which-key "chrome")
+;; "abx" '(xwidget-webkit-browse-url :which-key "xwidget")
+
+;; "ad" '(dired :which-key "dired")
+
+;; ;; Buffers
+;; "b" '(nil :which-key "buffer")
+;; "bb" '(counsel-switch-buffer :which-key "switch buffers")
+;; "bd" '(evil-delete-buffer :which-key "delete buffer")
+;; "bs" '(jib/switch-to-scratch-buffer :which-key "scratch buffer")
+;; "bm" '(jib/kill-other-buffers :which-key "kill other buffers")
+;; "bi" '(clone-indirect-buffer  :which-key "indirect buffer")
+;; "br" '(revert-buffer :which-key "revert buffer")
+
+;; ;; Files
+;; "f" '(nil :which-key "files")
+;; "fb" '(counsel-bookmark :which-key "bookmarks")
+;; "ff" '(counsel-find-file :which-key "find file")
+;; "fn" '(spacemacs/new-empty-buffer :which-key "new file")
+;; "fr" '(counsel-recentf :which-key "recent files")
+;; "fR" '(rename-file :which-key "rename file")
+;; "fs" '(save-buffer :which-key "save buffer")
+;; "fS" '(evil-write-all :which-key "save all buffers")
+;; "fo" '(reveal-in-osx-finder :which-key "reveal in finder")
+;; "fO" '(jib/open-buffer-file-mac :which-key "open buffer file")
+
+;; ;; Jake
+;; "j" '(nil :which-key "jake")
+;; "jb" '((lambda() (interactive)(find-file (concat jib/dropbox "org/work.org"))) :which-key "work.org")
+;; "jc" '((lambda() (interactive)(find-file (concat jib/dropbox "org/cpb.org"))) :which-key "cpb.org")
+
+;; "jr" '(restart-emacs :which-key "restart emacs")
+
+;; "jh" '(nil :which-key "hydras")
+;; "jht" '(jib-hydra-theme-switcher/body :which-key "themes")
+;; "jhf" '(jib-hydra-variable-fonts/body :which-key "mixed-pitch face")
+;; "jhw" '(jib-hydra-window/body :which-key "window control")
+
+;; "jm" '(nil :which-key "macros/custom commands")
+;; "jml" '(jib/listify :which-key "Listify")
+;; "jmL" '(jib|SubListify :which-key "SubListify")
+;; "jmo" '(jib/org-temp-export-html :which-key "org temp export region")
+
+;; "jk" '(nil :which-key "agenda/ql")
+;; "jkq" '((lambda () (interactive) (org-ql-view "Jake Work Full View")) :which-key "jake ql")
+
+;; ;; Help/emacs
+;; "h" '(nil :which-key "help/emacs")
+
+;; "hv" '(counsel-describe-variable :which-key "des. variable")
+;; "hb" '(counsel-descbinds :which-key "des. bindings")
+;; "hM" '(describe-mode :which-key "des. mode")
+;; "hf" '(counsel-describe-function :which-key "des. func")
+;; "hF" '(counsel-describe-face :which-key "des. face")
+;; "hk" '(describe-key :which-key "des. key")
+
+;; "hed" '(jib/edit-init :which-key "edit dotfile")
+
+;; "hm" '(nil :which-key "switch mode")
+;; "hme" '(emacs-lisp-mode :which-key "elisp mode")
+;; "hmo" '(org-mode :which-key "org mode")
+;; "hmt" '(text-mode :which-key "text mode")
+
+;; ;; Help/emacs
+;; "x" '(nil :which-key "text")
+;; "xC" '(jib/copy-whole-buffer-to-clipboard :which-key "copy whole buffer to clipboard")
+;; "xr" '(anzu-query-replace :which-key "find and replace")
+;; "xs" '(yas-insert-snippet :which-key "insert yasnippet")
+
+;; ;; Toggles
+;; "t" '(nil :which-key "toggles")
+;; "tT" '(toggle-truncate-lines :which-key "truncate lines")
+;; "tv" '(visual-line-mode :which-key "visual line mode")
+;; "tn" '(display-line-numbers-mode :which-key "display line numbers")
+;; "ta" '(mixed-pitch-mode :which-key "variable pitch mode")
+;; "tc" '(visual-fill-column-mode :which-key "visual fill column mode")
+;; "tt" '(counsel-load-theme :which-key "load theme")
+;; "tw" '(writeroom-mode :which-key "writeroom-mode")
+;; "tR" '(read-only-mode :which-key "read only mode")
+;; "tI" '(toggle-input-method :which-key "toggle input method")
+;; "tr" '(display-fill-column-indicator-mode :which-key "fill column indicator")
+;; "tm" '(hide-mode-line-mode :which-key "hide modeline mode")
+
+;; ;; Windows
+;; "w" '(nil :which-key "window")
+;; "wm" '(jib/toggle-maximize-buffer :which-key "maximize buffer")
+;; "wN" '(make-frame :which-key "make frame")
+;; "wd" '(evil-window-delete :which-key "delete window")
+;; "w-" '(jib/split-window-vertically-and-switch :which-key "split below")
+;; "w/" '(jib/split-window-horizontally-and-switch :which-key "split right")
+;; "wr" '(jib-hydra-window/body :which-key "hydra window")
+;; "wl" '(evil-window-right :which-key "evil-window-right")
+;; "wh" '(evil-window-left :which-key "evil-window-left")
+;; "wj" '(evil-window-down :which-key "evil-window-down")
+;; "wk" '(evil-window-up :which-key "evil-window-up")
+;; "wz" '(text-scale-adjust :which-key "text zoom")
+;; ) ;; End SPC prefix general.el block
+
+;; (general-def
+;;   :prefix ","
+;;   :states 'motion
+;;   :keymaps 'emacs-lisp-mode-map
+;;   "" nil
+;;   "e" '(nil :which-key "eval")
+;;   "es" '(eval-last-sexp :which-key "eval-sexp")
+;;   "er" '(eval-region :which-key "eval-region")
+;;   "eb" '(eval-buffer :which-key "eval-buffer")
+
+
+;;   "g" '(counsel-imenu :which-key "imenu")
+;;   "c" '(check-parens :which-key "check parens")
+;;   "I" '(indent-region :which-key "indent-region")
+;;   )
+
+;; (general-def
+;;     :states 'normal
+;;     :keymaps 'org-mode-map
+;;     "t" 'org-todo
+;;     "<return>" 'org-open-at-point-global
+;;     "K" 'org-shiftup
+;;     "J" 'org-shiftdown
+;;     )
+
+;;   (general-def
+;;     :states '(normal insert emacs)
+;;     :keymaps 'org-mode-map
+;;     "M-[" 'org-metaleft
+;;     "M-]" 'org-metaright
+;;     "C-M-=" 'ap/org-count-words
+;;     "s-r" 'org-refile
+;;     )
+
+;;   ;; Org-src - when editing an org source block
+;;   (general-def
+;;     :prefix ","
+;;     :states 'normal
+;;     :keymaps 'org-src-mode-map
+;;     "b" '(nil :which-key "org src")
+;;     "bc" 'org-edit-src-abort
+;;     "bb" 'org-edit-src-exit
+;;     )
+
+;; ;;  (define-key org-src-mode-map (kbd "C-c C-c") #'org-edit-src-exit)
+
+;; (general-define-key
+;;  :prefix ","
+;;  :states 'motion
+;;  :keymaps '(org-mode-map) ;; Available in org mode, org agenda
+;;  "" nil
+;;  "A" '(org-archive-subtree-default :which-key "org-archive")
+;;  "a" '(org-agenda :which-key "org agenda")
+;;  "6" '(org-sort :which-key "sort")
+;;  "c" '(org-capture :which-key "org-capture")
+;;  "s" '(org-schedule :which-key "schedule")
+;;  "S" '(jib/org-schedule-tomorrow :which-key "schedule")
+;;  "d" '(org-deadline :which-key "deadline")
+;;  "g" '(counsel-org-goto :which-key "goto heading")
+;;  "t" '(counsel-org-tag :which-key "set tags")
+;;  "p" '(org-set-property :which-key "set property")
+;;  "r" '(jib/org-refile-this-file :which-key "refile in file")
+;;  "e" '(org-export-dispatch :which-key "export org")
+;;  "B" '(org-toggle-narrow-to-subtree :which-key "toggle narrow to subtree")
+;;  "V" '(jib/org-set-startup-visibility :which-key "startup visibility")
+;;  "H" '(org-html-convert-region-to-html :which-key "convert region to html")
+
+;;  ;; org-babel
+;;  "b" '(nil :which-key "babel")
+;;  "bt" '(org-babel-tangle :which-key "org-babel-tangle")
+;;  "bb" '(org-edit-special :which-key "org-edit-special")
+;;  "bc" '(org-edit-src-abort :which-key "org-edit-src-abort")
+;;  "bk" '(org-babel-remove-result-one-or-many :which-key "org-babel-remove-result-one-or-many")
+
+;;  "x" '(nil :which-key "text")
+;;  "xb" (spacemacs|org-emphasize jib/org-bold ?*)
+;;  "xb" (spacemacs|org-emphasize jib/org-bold ?*)
+;;  "xc" (spacemacs|org-emphasize jib/org-code ?~)
+;;  "xi" (spacemacs|org-emphasize jib/org-italic ?/)
+;;  "xs" (spacemacs|org-emphasize jib/org-strike-through ?+)
+;;  "xu" (spacemacs|org-emphasize jib/org-underline ?_)
+;;  "xv" (spacemacs|org-emphasize jib/org-verbose ?~) ;; I realized that ~~ is the same and better than == (Github won't do ==)
+
+;;  ;; insert
+;;  "i" '(nil :which-key "insert")
+
+;;  "it" '(nil :which-key "tables")
+;;  "itt" '(org-table-create :which-key "create table")
+;;  "itl" '(org-table-insert-hline :which-key "table hline")
+
+;;  "il" '(org-insert-link :which-key "link")
+
+;;  ;; clocking
+;;  "c" '(nil :which-key "clocking")
+;;  "ci" '(org-clock-in :which-key "clock in")
+;;  "co" '(org-clock-out :which-key "clock out")
+;;  "cj" '(org-clock-goto :which-key "jump to clock")
+;;  )
+
+
+;; (general-define-key
+;;  :prefix ","
+;;  :states 'motion
+;;  :keymaps '(org-agenda-mode-map) ;; Available in org mode, org agenda
+;;  "" nil
+;;  "a" '(org-agenda :which-key "org agenda")
+;;  "c" '(org-capture :which-key "org-capture")
+;;  "s" '(org-agenda-schedule :which-key "schedule")
+;;  "d" '(org-agenda-deadline :which-key "deadline")
+;;  "t" '(org-agenda-set-tags :which-key "set tags")
+;;  ;; clocking
+;;  "c" '(nil :which-key "clocking")
+;;  "ci" '(org-agenda-clock-in :which-key "clock in")
+;;  "co" '(org-agenda-clock-out :which-key "clock out")
+;;  "cj" '(org-clock-goto :which-key "jump to clock")
+;;  )
+
+;; ;; All-mode keymaps
+;; (general-def
+;;   :keymaps 'override
+
+;;   ;; Emacs --------
+;;   "M-x" 'counsel-M-x
+;;   "ß" 'evil-window-next ;; option-s
+;;   "Í" 'other-frame ;; option-shift-s
+;;   "C-S-B" 'counsel-switch-buffer
+;;   "∫" 'counsel-switch-buffer ;; option-b
+;;   "s-o" 'jib-hydra-window/body
+
+;;   ;; Remapping normal help features to use Counsel version
+;;   "C-h v" 'counsel-describe-variable
+;;   "C-h o" 'counsel-describe-symbol
+;;   "C-h f" 'counsel-describe-function
+;;   "C-h F" 'counsel-describe-face
+
+;;   ;; Editing ------
+;;   "M-v" 'simpleclip-paste
+;;   "M-V" 'evil-paste-after ;; shift-paste uses the internal clipboard
+;;   "M-c" 'simpleclip-copy
+;;   "M-u" 'capitalize-dwim ;; Default is upcase-dwim
+;;   "M-U" 'upcase-dwim ;; M-S-u (switch upcase and capitalize)
+;;   "C-c u" 'jib/split-and-close-sentence
+
+;;   ;; Utility ------
+;;   "C-c c" 'org-capture
+;;   "C-c a" 'org-agenda
+;;   "C-s" 'counsel-grep-or-swiper ;; Large files will use grep (faster)
+;;   "s-\"" 'ispell-word ;; that's super-shift-'
+;;   "M-+" 'jib/calc-speaking-time
+
+;;   ;; super-number functions
+;;   "s-1" 'mw-thesaurus-lookup-dwim
+;;   "s-2" 'ispell-buffer
+;;   "s-3" 'revert-buffer
+;;   "s-4" '(lambda () (interactive) (counsel-file-jump nil jib/dropbox))
+;;   )
+
+;; ;; Non-insert mode keymaps
+;; (general-def
+;;   :states '(normal visual motion)
+;;   "gc" 'comment-dwim
+;;   "gC" 'comment-line
+;;   "j" 'evil-next-visual-line ;; I prefer visual line navigation
+;;   "k" 'evil-previous-visual-line ;; ""
+;;   "|" '(lambda () (interactive) (org-agenda nil "n")) ;; Opens my n custom org-super-agenda view
+;;   "C-|" '(lambda () (interactive) (org-agenda nil "m")) ;; Opens my m custom org-super-agenda view
+;;   )
+
+;; ;; Insert keymaps
+;; ;; Many of these are emulating standard Emacs bindings in Evil insert mode, such as C-a, or C-e.
+;; (general-def
+;;   :states '(insert)
+;;   "C-a" 'evil-beginning-of-visual-line
+;;   "C-e" 'evil-end-of-visual-line
+;;   "C-S-a" 'evil-beginning-of-line
+;;   "C-S-e" 'evil-end-of-line
+;;   "C-n" 'evil-next-visual-line
+;;   "C-p" 'evil-previous-visual-line
+;;   )
+
+;; ;; Xwidget ------
+;; (general-define-key :states 'normal :keymaps 'xwidget-webkit-mode-map
+;;                     "j" 'xwidget-webkit-scroll-up-line
+;;                     "k" 'xwidget-webkit-scroll-down-line
+;;                     "gg" 'xwidget-webkit-scroll-top
+;;                     "G" 'xwidget-webkit-scroll-bottom)
+
+;; ;; 'q' kills help buffers rather than just closing the window
+;; ;; (general-define-key :keymaps '(help-mode-map calendar-mode-map) "q" 'kill-this-buffer)
+
+;; ) ;; end general.el use-package
+#+end_src
+** hydra
+#+begin_src emacs-lisp :tangle ./.emacs.d/init.el
+(use-package hydra
+  :defer t)
+
+;; This Hydra lets me swich between variable pitch fonts. It turns off mixed-pitch
+;; WIP
+(defhydra hydra-variable-fonts (:pre (mixed-pitch-mode 0)
+                                     :post (mixed-pitch-mode 1))
+  ("t" (set-face-attribute 'variable-pitch nil :family "Times New Roman" :height 160) "Times New Roman")
+  ("g" (set-face-attribute 'variable-pitch nil :family "EB Garamond" :height 160 :weight 'normal) "EB Garamond")
+  ;; ("r" (set-face-attribute 'variable-pitch nil :font "Roboto" :weight 'medium :height 160) "Roboto")
+  ("n" (set-face-attribute 'variable-pitch nil :slant 'normal :weight 'normal :height 160 :width 'normal :foundry "nil" :family "Nunito") "Nunito")
+  )
+
+(defun load-theme (theme)
+  "Enhance `load-theme' by first disabling enabled themes."
+  (mapc #'disable-theme custom-enabled-themes)
+  (load-theme theme t))
+
+(defhydra hydra-theme-switcher (:hint nil)
+  "
+     Dark                ^Light^
+----------------------------------------------
+_1_ one              _z_ one-light
+_2_ vivendi          _x_ operandi
+_3_ molokai          _c_ jake-plain
+_4_ snazzy           _v_ flatwhite
+_5_ old-hope         _b_ opera-light
+_6_ henna                ^
+_7_ kaolin-galaxy        ^
+_8_ peacock              ^
+_9_ jake-plain-dark      ^
+_q_ quit                 ^
+^                        ^
+"
+
+  ;; Dark
+  ("1" (load-theme 'doom-one) "one")
+  ("2" (load-theme 'modus-vivendi) "modus-vivendi")
+  ("3" (load-theme 'doom-molokai) "molokai")
+  ("4" (load-theme 'doom-snazzy) "snazzy")
+  ("5" (load-theme 'doom-old-hope) "old-hope")
+  ("6" (load-theme 'doom-henna) "henna")
+  ("7" (load-theme 'kaolin-galaxy) "kaolin-galaxy")
+  ("8" (load-theme 'doom-peacock) "peacock")
+  ("9" (load-theme 'jake-doom-plain-dark) "jake-plain-dark")
+
+  ;; Light
+  ("z" (load-theme 'doom-one-light) "one-light")
+  ("x" (load-theme 'modus-operandi) "modus-operandi")
+  ("c" (load-theme 'jake-doom-plain) "jake-plain")
+  ("v" (load-theme 'doom-flatwhite) "flatwhite")
+  ("b" (load-theme 'doom-opera-light) "opera-light")
+  ("q" nil))
+
+;; I think I need to initialize windresize to use its commands
+(windresize)
+(windresize-exit)
+
+;; All-in-one window managment. Makes use of some custom functions,
+;; `ace-window' (for swapping), `windmove' (could probably be replaced
+;; by evil?) and `windresize'.
+;; inspired by https://github.com/jmercouris/configuration/blob/master/.emacs.d/hydra.el#L86
+(defhydra hydra-window (:hint nil)
+   "
+Movement      ^Split^            ^Switch^        ^Resize^
+----------------------------------------------------------------
+_M-<left>_  <   _/_ vertical      _b_uffer        _<left>_  <
+_M-<right>_ >   _-_ horizontal    _f_ind file     _<down>_  ↓
+_M-<up>_    ↑   _m_aximize        _s_wap          _<up>_    ↑
+_M-<down>_  ↓   _c_lose           _[_backward     _<right>_ >
+_q_uit          _e_qualize        _]_forward     ^
+^               ^               _K_ill         ^
+^               ^                  ^             ^
+"
+   ;; Movement
+   ("M-<left>" windmove-left)
+   ("M-<down>" windmove-down)
+   ("M-<up>" windmove-up)
+   ("M-<right>" windmove-right)
+
+   ;; Split/manage
+   ("-" split-window-vertically-and-switch)
+   ("/" split-window-horizontally-and-switch)
+   ("c" evil-window-delete)
+   ("d" evil-window-delete)
+   ("m" delete-other-windows)
+   ("e" balance-windows)
+
+   ;; Switch
+   ("b" counsel-switch-buffer)
+   ("f" counsel-find-file)
+   ("P" projectile-find-file)
+   ("s" ace-swap-window)
+   ("[" previous-buffer)
+   ("]" next-buffer)
+   ("K" kill-this-buffer)
+
+   ;; Resize
+   ("<left>" windresize-left)
+   ("<right>" windresize-right)
+   ("<down>" windresize-down)
+   ("<up>" windresize-up)
+
+
+   ("q" nil))
+
 #+end_src
 * Usage
 ** Commands / M-x
@@ -250,9 +682,16 @@ Some things that I like to setup
 ** Some help withkeys and definitions
 #+begin_src emacs-lisp :tangle ./.emacs.d/init.el
 (use-package which-key
-  :config
+  :diminish which-key-mode
+  :init
   (which-key-mode)
-  (setq which-key-idle-delay 0.2))
+  (which-key-setup-minibuffer)
+  :config
+  (setq which-key-idle-delay 0.3)
+  (setq which-key-prefix-prefix "◉ ")
+  (setq which-key-sort-order 'which-key-key-order-alpha
+        which-key-min-display-lines 2
+        which-key-max-display-columns 4))
 
 (use-package helpful
   :commands helpful-mode

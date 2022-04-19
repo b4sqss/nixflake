@@ -958,13 +958,37 @@ _q_uit          _e_qualize        _]_forward     ^
 #+end_src
 ** modeline
 #+begin_src emacs-lisp :tangle ./.emacs.d/init.el
+  ;; (use-package mood-line
+  ;;   :init (mood-line-mode))
 
-(use-package mood-line
-  :init (mood-line-mode))
+  ;; (setq display-time-format "%H:%M")
+  ;; (display-battery-mode)(display-time-mode)
 
-(setq display-time-format "%H:%M")
-(display-battery-mode)(display-time-mode)
+  ;; Disables showing system load in modeline, useless anyway
+  (setq display-time-default-load-average nil)
 
+  (line-number-mode)
+  (column-number-mode)
+  (display-time-mode -1)
+  (size-indication-mode -1)
+
+  (use-package doom-modeline
+    :init (doom-modeline-mode)
+    :config
+    (setq doom-modeline-buffer-file-name-style 'file-name ;; Just show file name (no path)
+          doom-modeline-enable-word-count t
+          doom-modeline-buffer-encoding nil
+          doom-modeline-icon t ;; Enable/disable all icons
+          doom-modeline-modal-icon nil ;; Icon for Evil mode
+          doom-modeline-major-mode-icon t
+          doom-modeline-major-mode-color-icon t
+          doom-modeline-bar-width 3))
+
+  ;; Configure modeline text height based on the computer I'm on.
+  ;; These variables are used in the Themes section to ensure the modeline
+  ;; stays the right size no matter what theme I use.
+    (setq doom-modeline-text-height 140)
+    (setq doom-modeline-height 1)
 #+end_src
 ** themes
 #+begin_src emacs-lisp :tangle ./.emacs.d/init.el

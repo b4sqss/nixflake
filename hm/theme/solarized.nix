@@ -24,21 +24,21 @@
   background = "#002b36";
   foreground = "#839496";
 
-  black =   "#073642";
+  black =   "#002b36";
   red =     "#dc322f";
   green =   "#859900";
   yellow =  "#b58900";
   blue =    "#268bd2";
   magenta = "#d33682";
   cyan =    "#2aa198";
-  white =   "#eee8d5";
+  white =   "#839496";
 
-  black-br =   "#002b36";
-  red-br =     "#cb4b16";
-  green-br =   "#586e75";
-  yellow-br =  "#657b83";
-  blue-br =    "#839496";
-  magenta-br = "#6c71c4";
-  cyan-br =    "#93a1a1";
+  black-br =   "#073642";
+  red-br =     "#dc322f";
+  green-br =   "#859900";
+  yellow-br =  "#b58900";
+  blue-br =    "#268bd2";
+  magenta-br = "#d33682";
+  cyan-br =    "#2aa198";
   white-br =   "#fdf6e3";
 }

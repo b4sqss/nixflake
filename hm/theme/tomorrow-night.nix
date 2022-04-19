@@ -1,6 +1,5 @@
 {
   trans = "#00000000";
-
   style = "black";
 
   base00 = "#1d1f21"; # darkest black
@@ -41,5 +40,5 @@
   blue-br =    "#81a2be";
   magenta-br = "#b294bb";
   cyan-br =    "#8abeb7";
-  white-br =   "#ffffff";
+  white-br =   "#eceff4";
 }

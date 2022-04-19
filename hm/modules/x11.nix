@@ -4,12 +4,11 @@ in {
 
   home.packages = with pkgs; [
     xwallpaper
+    pywal
     pamixer
-    i3lock-color
     brightnessctl
-    dmenu
-    xautolock
     scrot
+    dmenu
     playerctl
     xsel
   ];
@@ -32,7 +31,7 @@ in {
     enable = true;
     extraConfig = ''
 
-Config { font = "xft:Iosevka:weight=bold:pixelsize=14:antialias=true:hinting=true,fontawesome:pixelsize=14"
+Config { font = "xft:Iosevka:pixelsize=14:antialias=true:hinting=true,fontawesome:pixelsize=14"
        , bgColor = "#002b36"
        , fgColor = "#839496"
        , alpha = 255
@@ -47,7 +46,7 @@ Config { font = "xft:Iosevka:weight=bold:pixelsize=14:antialias=true:hinting=tru
        , allDesktops = True
        , overrideRedirect = True
        , commands = [
-                      Run Date "%H:%M" "date" 10
+                      Run Date "%a, %d %b %Y %H:%M" "date" 10
            , Run Battery [ "--template" , "<acstatus>"
                              , "--Low"      , "10"        -- units: %
                              , "--High"     , "80"        -- units: %
@@ -59,30 +58,23 @@ Config { font = "xft:Iosevka:weight=bold:pixelsize=14:antialias=true:hinting=tru
                                        , "-O", " <left>%"
                                        -- charged status
                                        , "-i", " <left>%" ] 50
+        ---, Run Com "pamixer" ["--get-volume-human"] "vol" 10
         , Run UnsafeStdinReader
          ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " %UnsafeStdinReader%}{%battery%  %date% "
+       , template = " %UnsafeStdinReader%}{ %battery%  %date% "
                                           }
       '';
   };
 
-  # xdg.configFile."nvim/lua" = {
-  #   source = ../configs/nvim;
-  #   recursive = true;
-  # };
-
-  # services.screen-locker = {
-  #   enable = true;
-  #   inactiveInterval = 30;
-  #   lockCmd = "${pkgs.betterlockscreen}/bin/betterlockscreen -l dim";
-  #   xautolockExtraOptions = [
-  #     "Xautolock.killer: systemctl suspend"
-  #   ];
-  # };
-  services.udiskie = {
+  services.screen-locker = {
     enable = true;
+    inactiveInterval = 30;
+    lockCmd = "${pkgs.betterlockscreen}/bin/betterlockscreen -l dim";
+    xautolock.extraOptions= [
+      "Xautolock.killer: systemctl suspend"
+    ];
   };
 
   xdg.configFile."sx/sxrc" = {

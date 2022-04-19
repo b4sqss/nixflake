@@ -45,8 +45,8 @@ import XMonad.Actions.DynamicWorkspaces(withNthWorkspace)
     -- Layouts
 --- import XMonad.Layout.Gaps
 import XMonad.Layout.SimplestFloat
-import XMonad.Layout.OneBig
 import XMonad.Layout.ResizableTile
+import XMonad.Layout.BinarySpacePartition
 
     -- Layouts modifiers
 import XMonad.Layout.LayoutModifier
@@ -71,9 +71,6 @@ myModMask = mod4Mask                    -- Sets modkey to super/windows key
 
 myTerminal :: String
 myTerminal = "alacritty"                       -- Sets default terminal
-
-myBrowser :: String
-myBrowser = "firefox"                  -- Sets firefox as browser for tree select
 
 myEditor :: String
 myEditor = "emacsclient -cn"    -- Sets vim as editor for tree select
@@ -109,6 +106,8 @@ myManageHook = (isDialog --> doF W.swapUp)                       -- Bring Dialog
                <+> insertPosition Below Newer                    -- Insert New Windows at the Bottom of Stack Area
                <+> composeAll
                [ (className =? "firefox" <&&> title =? "Library") --> doCenterFloat                             -- Float Firefox Downloads Window to Centre
+               , (className =? "mpv") --> doCenterFloat
+               , (className =? "sxiv") --> doCenterFloat
                , (className =? "Lxappearance") --> doCenterFloat                                                -- Float Lxappearance to Centre
                , isDialog --> doCenterFloat                                                                     -- Float Dialog Windows to Centre
                ]
@@ -140,7 +139,7 @@ myStartupHook :: X ()
 myStartupHook = do
           spawnOnce "xsetroot -cursor_name left_ptr &"                                -- Set Cursor
           spawnOnce "dunst &"                                                         -- Start Dunst Notification Daemon
-          -- spawnOnce "picom"
+          spawnOnce "picom"
           spawnOnce "xwallpaper --zoom ~/Pics/wallpapers/by_upload2_2560.jpg"
           spawnOnce "xautolock -time 15 -locker 'sh ~/.local/bin/lock.sh'"
           spawnOnce "emacs --daemon"
@@ -159,9 +158,7 @@ myLayoutHook = avoidStruts
                $ mkToggle (NBFULL ?? NOBORDERS ?? EOT)
                $ myDefaultLayout
                where
-                myDefaultLayout = smartBorders tall
-                                  ||| smartBorders oneBig
-                                  ||| noBorders monocle
+                myDefaultLayout = noBorders tall ||| bsp ||| noBorders monocle
 
 tall       = renamed [Replace "tall"]
              $ limitWindows 12
@@ -169,15 +166,9 @@ tall       = renamed [Replace "tall"]
              $ mySpacing 2
              $ ResizableTall 1 (3/100) (1/2) []
 
-oneBig     = renamed [Replace "oneBig"]
-             $ limitWindows 6
-             --- $ gaps [(L,10), (R,10), (U,10), (D,10)]
-             $ mySpacing 2
-             $ Mirror
-             $ mkToggle (single MIRROR)
-             $ mkToggle (single REFLECTX)
-             $ mkToggle (single REFLECTY)
-             $ OneBig (5/9) (8/12)
+bsp        = renamed [Replace "BSP"]
+             $ mySpacing 8
+             $ emptyBSP
 
 monocle    = renamed [Replace "monocle"]
              $ limitWindows 20
@@ -240,8 +231,8 @@ myKeys =
         , ("M-C-m", sendMessage $ Toggle NBFULL)                               -- Toggle Monocle Layout
         , ("M-S-<Space>", sendMessage NextLayout)                              -- Switch to next layout
         , ("M-C-n", sendMessage $ Toggle NOBORDERS)                            -- Toggles noborder
-        , ("M-C-f", sendMessage (Toggle NBFULL) >> sendMessage ToggleStruts)   -- Toggles fullscreen
-        , ("M-<Space>", withFocused toggleFloat)                               -- Toggle a window between floating and tiling states
+        , ("M-S-f", sendMessage (Toggle NBFULL) >> sendMessage ToggleStruts)   -- Toggles fullscreen
+        , ("M-t", withFocused toggleFloat)                               -- Toggle a window between floating and tiling states
         , ("M-S-x", sendMessage $ Toggle REFLECTX)                             -- Swap master/stack positions horizontally
         , ("M-S-y", sendMessage $ Toggle REFLECTY)                             -- Swap master/stack positions vertically
         , ("M1-S-m", sendMessage $ Toggle MIRROR)                              -- Toggle layout between vertical and horizontal states
@@ -257,11 +248,12 @@ myKeys =
         , ("M-b", sendMessage ToggleStruts)         -- Hide Xmobar
 
     -- Menus
-        , ("M-p", spawn "dmenu_run")          -- rofi drun(run applications)
+        , ("M-p", spawn "dmenu_run -i -p 'M-x' -fn Iosevka -sf '#002b36' -sb '#839496' -nf '#839496' -nb '#002b36'")          -- rofi drun(run applications)
 
     -- My Applications
         , ("M-<Return>", spawn myTerminal)       -- Terminal
         , ("M-o", spawn "firefox")                       -- Firefox browser
+        , ("M-S-o", spawn "qutebrowser")                       -- Firefox browser
         , ("M-w", spawn "brave")                       -- Firefox browser
         , ("M-z", spawn "zathura")                         -- Zathura pdf reader
 
@@ -274,6 +266,9 @@ myKeys =
         , ("<XF86AudioRaiseVolume>", spawn "pamixer -i 5")
 
         , ("<Print>", spawn "scrot  -e 'mv $f ~/Pics/screenshots'")
+
+        , ("M-C-5", spawn "dunstify -u CRIT 'gravando' -t 800 && ffmpeg -f x11grab -s 1920x1080 -i :1 $HOME/Docs/videos/$(date +'%d_%m_%Y_%I_%M').mp4")
+        , ("M-C-6", spawn "pkill ffmpeg && dunstify -u LOW 'screencast saved'")
 
         , ("M-a", spawn "emacsclient -cn")                           -- Emacs text editor
         , ("M-d", spawn "emacsclient -c -a 'emacs' --eval '(dired nil)'")
@@ -304,7 +299,7 @@ main = do
         , logHook            = dynamicLogWithPP xmobarPP
                         { ppOutput      = \x -> hPutStrLn xmproc x
                         , ppCurrent     = xmobarColor "#839496" "" -- . wrap "[" "]"   -- Current workspace in xmobar
-                        , ppHidden      = xmobarColor "#657b83" ""                  -- Hidden workspaces in xmobar
+                        , ppHidden      = xmobarColor "#586e75" ""                  -- Hidden workspaces in xmobar
                         , ppTitle       = xmobarColor "#839496" "" . shorten 75     -- Title of active window in xmobar
                         , ppLayout      = myLayoutPrinter
                         , ppSep         = " "

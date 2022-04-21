@@ -131,7 +131,7 @@ source $HOME/.config/nvim/configs/coc.vim
 source $HOME/.config/nvim/configs/snippets.vim
 source $HOME/.config/nvim/configs/keys.vim
 source $HOME/.config/nvim/configs/fzf.vim
-source $HOME/.config/nvim/configs/orgmode.vim
+source $HOME/.config/nvim/configs/text.vim
 let g:AutoPairsCenterLine = 0
 let g:AutoPairsMapSpace = 0
 let g:AutoPairsMapCR = 0
@@ -185,28 +185,6 @@ let g:c_syntax_for_h = 1
         };
       };
     };
-  };
-
-  programs.vim = {
-    enable = true;
-    plugins = with pkgs.vimPlugins; [
-      vimtex
-      ultisnips
-    ];
-    extraConfig = ''
-      set nocompatible
-      set nobackup
-
-      let g:tex_flavor='latex'
-      let g:vimtex_view_method='zathura'
-      let g:vimtex_quickfix_mode=0
-      set conceallevel=1
-      let g:tex_conceal='abdmg'
-
-      let g:UltiSnipsExpandTrigger = '<tab>'
-      let g:UltiSnipsJumpForwardTrigger = '<tab>'
-      let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
-    '';
   };
 
   programs.emacs = {

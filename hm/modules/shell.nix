@@ -216,8 +216,8 @@ shellAliases = {
   scu = "systemctl --user";
   sudo = "doas";
   start_nix_shell = "nix-shell --pure -E 'with import<nixpkgs> {}; callPackage ./. {}";
-  ytdl = "youtube-dl";
-  ytdla = "youtube-dl -x --audio-format mp3";
+  ytdl = "yt-dlp";
+  ytdla = "yt-dlp -x --audio-format mp3";
   fzf-yt = "nix-shell -p jq ueberzug && ytfzf";
 };
   };

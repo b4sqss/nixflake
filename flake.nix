@@ -46,7 +46,7 @@
           nixpkgs = { inherit (pkgs) config overlays; };
           home.packages = with pkgs; [
     ## terminal stuff
-    youtube-dl
+    yt-dlp
     pfetch
     rsync
     nnn

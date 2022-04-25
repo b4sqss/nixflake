@@ -17,6 +17,7 @@ in {
     ## Browsers
     firefox
     brave
+    ungoogled-chromium
     tor
     nyxt
     tor-browser-bundle-bin

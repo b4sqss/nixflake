@@ -73,7 +73,8 @@ myTerminal :: String
 myTerminal = "alacritty"                       -- Sets default terminal
 
 myEditor :: String
-myEditor = "emacsclient -cn"    -- Sets vim as editor for tree select
+myEditor = "emacsclient -c -n"
+-- myEditor = "emacsclient -c -n -e '(switch-to-buffer nil)'"    -- Sets vim as editor for tree select
 
 myBorderWidth :: Dimension
 myBorderWidth = 0                       -- Sets border width for windows
@@ -270,7 +271,7 @@ myKeys =
         , ("M-C-5", spawn "dunstify -u CRIT 'gravando' -t 800 && ffmpeg -f x11grab -s 1920x1080 -i :1 $HOME/Docs/videos/$(date +'%d_%m_%Y_%I_%M').mp4")
         , ("M-C-6", spawn "pkill ffmpeg && dunstify -u LOW 'screencast saved'")
 
-        , ("M-a", spawn "emacsclient -cn")                           -- Emacs text editor
+        , ("M-a", spawn myEditor)                           -- Emacs text editor
         , ("M-d", spawn "emacsclient -c -a 'emacs' --eval '(dired nil)'")
         , ("M-S-a", spawn "emacs")                           -- Emacs text editor
         ]

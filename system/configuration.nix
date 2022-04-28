@@ -83,6 +83,7 @@ in {
     networkmanager.enable = true;
     networkmanager.wifi.powersave = true;
     firewall.enable = false; # I had issues, for some reason
+    hostId = "6319fcc9";
   };
 
   services = {
@@ -151,6 +152,8 @@ in {
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     git
+
+    zfs
 
     mesa
     nvidia-offload

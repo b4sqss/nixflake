@@ -46,7 +46,7 @@ in {
 
     ## Haskell
     ghc ghcid
-    # haskell-language-server
+    haskell-language-server
 
     ## Js
     nodejs yarn nodePackages.npm nodePackages.typescript nodePackages.typescript-language-server deno

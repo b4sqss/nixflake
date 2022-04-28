@@ -13,6 +13,7 @@ qimgv
 ## Graphics
 gimp
 inkscape
+krita
 imagemagick
 ffmpeg
 

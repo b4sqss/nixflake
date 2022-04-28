@@ -9,6 +9,7 @@ in {
     brightnessctl
     scrot
     dmenu
+    betterlockscreen
     playerctl
     xsel
   ];
@@ -30,7 +31,6 @@ in {
   programs.xmobar = {
     enable = true;
     extraConfig = ''
-
 Config { font = "xft:Iosevka:pixelsize=14:antialias=true:hinting=true,fontawesome:pixelsize=14"
        , bgColor = "#002b36"
        , fgColor = "#839496"
@@ -46,11 +46,11 @@ Config { font = "xft:Iosevka:pixelsize=14:antialias=true:hinting=true,fontawesom
        , allDesktops = True
        , overrideRedirect = True
        , commands = [
-                      Run Date "%a, %d %b %Y %H:%M" "date" 10
+                      Run Date "%H:%M" "date" 10
+
            , Run Battery [ "--template" , "<acstatus>"
                              , "--Low"      , "10"        -- units: %
                              , "--High"     , "80"        -- units: %
-
                              , "--" -- battery specific options
                                        -- discharging status
                                        , "-o", "  <left>% - <timeleft>"
@@ -63,11 +63,9 @@ Config { font = "xft:Iosevka:pixelsize=14:antialias=true:hinting=true,fontawesom
          ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " %UnsafeStdinReader%}{ %battery%  %date% "
+       , template = " %UnsafeStdinReader% } { %battery% %date%"
                                           }
-      '';
-  };
-
+      '';  };
   services.screen-locker = {
     enable = true;
     inactiveInterval = 30;

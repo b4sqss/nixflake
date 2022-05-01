@@ -266,7 +266,7 @@ myKeys =
         , ("<XF86AudioLowerVolume>", spawn "pamixer -d 5")
         , ("<XF86AudioRaiseVolume>", spawn "pamixer -i 5")
 
-        , ("<Print>", spawn "scrot  -e 'mv $f ~/Pics/screenshots'")
+        , ("<Print>", spawn "import -window root ~/Pics/screenshots/$(date '+%Y-%d-%m-%H:%M').jpg")
 
         , ("M-C-5", spawn "dunstify -u CRIT 'gravando' -t 800 && ffmpeg -f x11grab -s 1920x1080 -i :1 $HOME/Docs/videos/$(date +'%d_%m_%Y_%I_%M').mp4")
         , ("M-C-6", spawn "pkill ffmpeg && dunstify -u LOW 'screencast saved'")

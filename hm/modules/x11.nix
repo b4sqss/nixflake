@@ -63,17 +63,9 @@ Config { font = "xft:Iosevka:pixelsize=14:antialias=true:hinting=true,fontawesom
          ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " %UnsafeStdinReader% } { %battery% %date%"
+       , template = " %UnsafeStdinReader% } { %battery%  %date%"
                                           }
       '';  };
-  services.screen-locker = {
-    enable = true;
-    inactiveInterval = 30;
-    lockCmd = "${pkgs.betterlockscreen}/bin/betterlockscreen -l dim";
-    xautolock.extraOptions= [
-      "Xautolock.killer: systemctl suspend"
-    ];
-  };
 
   xdg.configFile."sx/sxrc" = {
     executable = true;

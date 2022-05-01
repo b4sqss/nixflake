@@ -21,6 +21,7 @@ ffmpeg
 ardour audacity
 spotify-unwrapped spotifyd spotify-tui
 cmus
+cmusfm
 curseradio
 
 element-desktop

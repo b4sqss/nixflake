@@ -30,7 +30,7 @@ in {
     languagetool
     hunspell aspell aspellDicts.pt_BR
     coreutils
-
+emacs27Packages.exwm
     ## Documents
     texlive.combined.scheme-full
     luarocks # for digestify
@@ -211,10 +211,6 @@ let g:c_syntax_for_h = 1
     );
   };
 
-  home.file.".emacs.d/emacs.org".source = ../configs/emacs.org;
-  xdg.configFile."emacs/emacs.org" = {
-    source = ../configs/emacs.org;
-  };
   xdg.userDirs.documents = "$HOME/Docs";
   xdg.userDirs.music = "$HOME/Docs/Music";
   xdg.userDirs.pictures = "$HOME/Pics";

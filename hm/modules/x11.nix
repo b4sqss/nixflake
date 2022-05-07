@@ -4,10 +4,9 @@ in {
 
   home.packages = with pkgs; [
     xwallpaper
-    pywal
+    xautolock i3lock-color
     pamixer
     brightnessctl
-    scrot
     dmenu
     betterlockscreen
     playerctl
@@ -19,11 +18,6 @@ in {
     windowManager.xmonad = {
       enable = true;
       enableContribAndExtras = true;
-      # extraPackages = hp: [
-      #   hp.dbus
-      #   hp.monad-logger
-      #   hp.xmonad-contrib
-      # ];
       config = ../configs/xmonad.hs;
     };
   };
@@ -46,7 +40,7 @@ Config { font = "xft:Iosevka:pixelsize=14:antialias=true:hinting=true,fontawesom
        , allDesktops = True
        , overrideRedirect = True
        , commands = [
-                      Run Date "%H:%M" "date" 10
+                      Run Date " %B %d, %A   %H:%M" "date" 10
 
            , Run Battery [ "--template" , "<acstatus>"
                              , "--Low"      , "10"        -- units: %
@@ -58,12 +52,12 @@ Config { font = "xft:Iosevka:pixelsize=14:antialias=true:hinting=true,fontawesom
                                        , "-O", " <left>%"
                                        -- charged status
                                        , "-i", " <left>%" ] 50
-        ---, Run Com "pamixer" ["--get-volume-human"] "vol" 10
+        , Run Com "pamixer" ["--get-volume-human"] "vol" 10
         , Run UnsafeStdinReader
          ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " %UnsafeStdinReader% } { %battery%  %date%"
+       , template = " %UnsafeStdinReader% } { %battery%   %vol%  %date%"
                                           }
       '';  };
 

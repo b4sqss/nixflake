@@ -116,7 +116,7 @@
             export PATH=/home/basqs/.local/bin:$PATH
 
             if [ "$(tty)" = "/dev/tty1" ]; then
-               river
+               sx
             fi
 
                     [ -f $HOME/.nix-profile/etc/profile ] && source $HOME/.nix-profile/etc/profile
@@ -145,6 +145,8 @@
       ytdl = "yt-dlp";
       ytdla = "yt-dlp -x --audio-format mp3";
       fzf-yt = "nix-shell -p jq ueberzug && ytfzf";
+      grep = "grep --colour=auto";
+      du = "du -h -a --total";
     };
   };
   home.packages = with pkgs; [

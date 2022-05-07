@@ -138,8 +138,9 @@ setFullscreenSupport = withDisplay $ \dpy -> do
 -- My Startup Applications
 myStartupHook :: X ()
 myStartupHook = do
-          spawnOnce "xsetroot -cursor_name left_ptr &"                                -- Set Cursor
-          spawnOnce "dunst &"                                                         -- Start Dunst Notification Daemon
+          spawnOnce "xsetroot -cursor_name left_ptr &"
+          spawnOnce "xautolock -time 15 -locker 'sh ~/.local/bin/lock.sh'"
+          spawnOnce "dunst &"
           spawnOnce "picom"
           spawnOnce "xwallpaper --zoom ~/Pics/wallpapers/by_upload2_2560.jpg"
           spawnOnce "xautolock -time 15 -locker 'sh ~/.local/bin/lock.sh'"
@@ -273,6 +274,7 @@ myKeys =
 
         , ("M-a", spawn myEditor)                           -- Emacs text editor
         , ("M-d", spawn "emacsclient -c -a 'emacs' --eval '(dired nil)'")
+        , ("M-C-a", spawn "emacsclient -c -a 'emacs' --eval '(org-agenda-list nil)'")
         , ("M-S-a", spawn "emacs")                           -- Emacs text editor
         ]
 

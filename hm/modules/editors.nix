@@ -30,7 +30,6 @@ in {
     languagetool
     hunspell aspell aspellDicts.pt_BR
     coreutils
-emacs27Packages.exwm
     ## Documents
     texlive.combined.scheme-full
     luarocks # for digestify

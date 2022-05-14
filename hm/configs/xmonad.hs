@@ -43,7 +43,6 @@ import XMonad.Actions.FloatKeys
 import XMonad.Actions.DynamicWorkspaces(withNthWorkspace)
 
     -- Layouts
---- import XMonad.Layout.Gaps
 import XMonad.Layout.SimplestFloat
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.BinarySpacePartition
@@ -52,7 +51,6 @@ import XMonad.Layout.BinarySpacePartition
 import XMonad.Layout.LayoutModifier
 import XMonad.Hooks.InsertPosition
 import XMonad.Layout.Renamed (renamed, Rename(CutWordsLeft, Replace))
-import XMonad.Layout.Spacing
 import XMonad.Layout.NoBorders
 import XMonad.Layout.LimitWindows (limitWindows)
 import XMonad.Layout.WindowArranger (windowArrange, WindowArrangerMsg(..))
@@ -142,19 +140,15 @@ myStartupHook = do
           spawnOnce "xautolock -time 15 -locker 'sh ~/.local/bin/lock.sh'"
           spawnOnce "dunst &"
           spawnOnce "picom"
-          spawnOnce "xwallpaper --zoom ~/Pics/wallpapers/by_upload2_2560.jpg"
+          spawnOnce "xwallpaper --zoom ~/Pics/wallpapers/1634162439688.png"
           spawnOnce "xautolock -time 15 -locker 'sh ~/.local/bin/lock.sh'"
           spawnOnce "emacs --daemon"
           spawnOnce "xrdb ~/.Xresources"
-          setFullscreenSupport                                                        -- Adding Firefox Fullscreen Support
+          setFullscreenSupport -- Adding Firefox Fullscreen Support
 
 ------------------------------------------------------------------------
 ---LAYOUTS
 ------------------------------------------------------------------------
--- Below implementation makes it easier to use spacingRaw module to set required spacing just by changing the value of i.
-mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
-mySpacing i = spacingRaw True (Border i i i i) False (Border i i i i) True
-
 myLayoutHook = avoidStruts
                $ windowArrange
                $ mkToggle (NBFULL ?? NOBORDERS ?? EOT)
@@ -164,12 +158,9 @@ myLayoutHook = avoidStruts
 
 tall       = renamed [Replace "tall"]
              $ limitWindows 12
-             --- $ gaps [(L,10), (R,10), (U,10), (D,10)]
-             $ mySpacing 2
              $ ResizableTall 1 (3/100) (1/2) []
 
 bsp        = renamed [Replace "BSP"]
-             $ mySpacing 8
              $ emptyBSP
 
 monocle    = renamed [Replace "monocle"]
@@ -250,7 +241,7 @@ myKeys =
         , ("M-b", sendMessage ToggleStruts)         -- Hide Xmobar
 
     -- Menus
-        , ("M-p", spawn "dmenu_run -i -p 'M-x' -fn Iosevka -sf '#002b36' -sb '#839496' -nf '#839496' -nb '#002b36'")          -- rofi drun(run applications)
+        , ("M-p", spawn "dmenu_run -i -p 'M-x' -fn Iosevka -sf '#1d1f21' -sb '#c5c8c6' -nf '#c5c8c6' -nb '#1d1f21'")          -- rofi drun(run applications)
 
     -- My Applications
         , ("M-<Return>", spawn myTerminal)       -- Terminal
@@ -272,10 +263,10 @@ myKeys =
         , ("M-C-5", spawn "dunstify -u CRIT 'gravando' -t 800 && ffmpeg -f x11grab -s 1920x1080 -i :1 $HOME/Docs/videos/$(date +'%d_%m_%Y_%I_%M').mp4")
         , ("M-C-6", spawn "pkill ffmpeg && dunstify -u LOW 'screencast saved'")
 
-        , ("M-a", spawn myEditor)                           -- Emacs text editor
+        , ("M-a", spawn myEditor)
         , ("M-d", spawn "emacsclient -c -a 'emacs' --eval '(dired nil)'")
         , ("M-C-a", spawn "emacsclient -c -a 'emacs' --eval '(org-agenda-list nil)'")
-        , ("M-S-a", spawn "emacs")                           -- Emacs text editor
+        , ("M-S-a", spawn "emacs")
         ]
 
 ------------------------------------------------------------------------
@@ -301,9 +292,9 @@ main = do
         , borderWidth        = myBorderWidth
         , logHook            = dynamicLogWithPP xmobarPP
                         { ppOutput      = \x -> hPutStrLn xmproc x
-                        , ppCurrent     = xmobarColor "#839496" "" -- . wrap "[" "]"   -- Current workspace in xmobar
-                        , ppHidden      = xmobarColor "#586e75" ""                  -- Hidden workspaces in xmobar
-                        , ppTitle       = xmobarColor "#839496" "" . shorten 75     -- Title of active window in xmobar
+                        , ppCurrent     = xmobarColor "#c5c8c6" "" -- . wrap "[" "]"   -- Current workspace in xmobar
+                        , ppHidden      = xmobarColor "#969896" ""                  -- Hidden workspaces in xmobar
+                        , ppTitle       = xmobarColor "#c5c8c6" "" . shorten 75     -- Title of active window in xmobar
                         , ppLayout      = myLayoutPrinter
                         , ppSep         = " "
                         }

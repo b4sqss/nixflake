@@ -72,7 +72,6 @@
     ./hm/modules/mail.nix
     ./hm/modules/media.nix
     ./hm/modules/x11.nix
-    ./hm/modules/wayland.nix
     ./hm/modules/shell.nix
   ];
 };

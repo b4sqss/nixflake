@@ -1,5 +1,5 @@
 {configs, pkgs, ...}: let
-  clr = import ../theme/solarized.nix;
+  clr = import ../theme/tomorrow-night.nix;
 in {
 
   home.packages = with pkgs; [
@@ -26,8 +26,8 @@ in {
     enable = true;
     extraConfig = ''
 Config { font = "xft:Iosevka:pixelsize=14:antialias=true:hinting=true,fontawesome:pixelsize=14"
-       , bgColor = "#002b36"
-       , fgColor = "#839496"
+       , bgColor = "#1d1f21"
+       , fgColor = "#c5c8c6"
        , alpha = 255
        , position = Static {xpos = 0, ypos = 0, width = 1920, height = 20}
        , textOffset = -1
@@ -61,8 +61,9 @@ Config { font = "xft:Iosevka:pixelsize=14:antialias=true:hinting=true,fontawesom
                                           }
       '';  };
 
+
   xdg.configFile."sx/sxrc" = {
     executable = true;
-    text = " exec xmonad ";
+   text = " exec xmonad ";
   };
 }

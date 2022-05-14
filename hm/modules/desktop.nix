@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 let
-  clr = import ../theme/solarized.nix;
+  clr = import ../theme/tomorrow-night.nix;
 in {
   # needed for logseq
   nixpkgs.config.permittedInsecurePackages = [

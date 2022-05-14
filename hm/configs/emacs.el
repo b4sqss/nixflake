@@ -286,38 +286,35 @@
 ;; modeline
 ;; (setq display-time-format "%H:%M")
 ;; (display-battery-mode)(display-time-mode)
+(display-time-mode -1)
 (line-number-mode 1)
 (column-number-mode -1)
 (size-indication-mode -1)
+(display-battery-mode -1)
 
-;; (use-package powerline)
-;; (use-package spaceline)
-;; (use-package spaceline-config
-;;   :config
-;;   (remove-hook 'focus-out-hook 'powerline-unset-selected-window)
-;;   (setq-default
-;;    mode-line-format '("%e" (:eval (spaceline-ml-main)))
-;;    powerline-default-separator 'bar
-;;    powerline-height 20
-;;    spaceline-highlight-face-func 'spaceline-highlight-face-modified
-;;    spaceline-flycheck-bullet "• %s"
-;;    spaceline-separator-dir-left '(left . left)
-;;    spaceline-separator-dir-right '(right . right)))
-;; (spaceline-spacemacs-theme)
+(use-package powerline
+   :ensure t
+   :config
+   (setq powerline-default-separator 'nil
+	 powerline-display-buffer-size nil)
+   :init
+   (powerline-default-theme)
+   :hook
+   ('after-init-hook) . 'powerline-reset)
 
 ;; colortheme
 (use-package doom-themes :defer t)
 (use-package mindre-theme
   :straight (:host github :repo "erikbackman/mindre-theme"))
 
-(consult-theme 'doom-solarized-dark-high-contrast)
+(consult-theme 'doom-tomorrow-night)
 (set-mouse-color "DodgerBlue")
 
 (defun toggle-theme ()
   (interactive)
-  (if (eq (car custom-enabled-themes) 'doom-solarized-dark-high-contrast)
-      (consult-theme 'doom-solarized-light)
-    (consult-theme 'doom-solarized-dark-high-contrast)))
+  (if (eq (car custom-enabled-themes) 'doom-tomorrow-night)
+      (consult-theme 'doom-tomorrow-day)
+    (consult-theme 'doom-tomorrow-night)))
 (global-set-key [f5] 'toggle-theme)
 ;; org-mode
 (defun org-mode-setup ()
@@ -335,7 +332,12 @@
 
 (use-package org
   :hook (org-mode . org-mode-setup))
+
 (require 'org-tempo)
+
+(use-package org-agenda
+  :bind
+  ("C-c a" . org-agenda-list))
 
 ;; writting
 (use-package olivetti
@@ -370,9 +372,17 @@
       org-agenda-files '("~/Docs/org/agenda.org")
       org-directory  "~/Docs/org/"
       org-lowest-priority ?E
-      org-todo-keywords '((sequence "TODO(t)" "|" "DONE(d)")))
-;; (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
-;; (sequence "|" "CANCELED(c)")))
+      org-capture-templates '(("t" "Todo [inbox]" entry
+			       (file+headline "~/Docs/org/agenda.org" "Tarefas")
+			       "* TODO %i%?")
+			      ("c" "Todo [inbox]" entry
+			       (file+headline "~/Docs/org/agenda.org" "Lembretes")
+			       "* %i%?"))
+      org-todo-keywords '((sequence "TODO(t)" "|" "DONE(d)")
+			  (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
+			  (sequence "|" "CANCELED(c)")))
+
+(define-key global-map (kbd "C-c C-c") 'org-capture)
 
 (add-to-list 'org-structure-template-alist '("sh" . "src sh"))
 (add-to-list 'org-structure-template-alist '("scm" . "src scheme"))
@@ -713,13 +723,6 @@
 ;; 	(add-to-list 'erc-modules 'spelling)
 ;; 	(erc-services-mode 1)
 ;; 	(erc-update-modules))
-;; ;; Using frames instead of windows
-;;  (set 'pop-up-frames 'graphic-only)
-;; (set 'org-agenda-window-setup 'other-frame)
-;; (set 'org-src-window-setup 'other-frame)
-;; (set 'mouse-autoselect-window nil)
-;; (set 'focus-follows-mouse nil)
-;; (set 'frame-auto-hide-function 'delete-frame)
 (server-start)
 ;; functions
 (defun record-screen-start ()
@@ -733,7 +736,7 @@
   (interactive)
   (shell-command "pkill ffmpeg"))
 
-(defun music ()
+(defun cmus ()
   "cmus"
   (interactive)
   (run-in-vterm "cmus"))
@@ -742,12 +745,12 @@
   "deletes and restart the emacs server"
   (interactive)
   (server-force-delete)
-  (shell-command "emacs --daemon"))
+  (async-shell-command "emacs --daemon"))
 
-(defun make-dwm ()
-  "Compile dwm."
+(defun apply-user ()
+  "Reloads home-manager configuration"
   (interactive)
-  (async-shell-command "cd /home/diamond/src/dwm-flexipatch/; sudo make clean install"))
+  (async-shell-command "pushd /home/basqs/.nixfiles; nix build .#homeManagerConfigurations.basqs.activationPackage; ./result/activate; popd"))
 
 (defun cht.sh (query)
   "QUERY cht.sh"
@@ -770,7 +773,7 @@
 	  (set-buffer-modified-p nil)
 	  (message "File '%s' successfully renamed to '%s'"
 		   name (file-name-nondirectory new-name)))))))
-(defun my/delete-current-buffer-file ()
+(defun delete-current-buffer-file ()
   "Removes file connected to current buffer and kills buffer."
   (interactive)
   (let ((filename (buffer-file-name))

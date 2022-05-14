@@ -1,5 +1,5 @@
 {config, pkgs, ...}: let
-  clr = import ../theme/solarized.nix;
+  clr = import ../theme/tomorrow-night.nix;
 in {
   nixpkgs.config.allowUnfree = true;
 
@@ -19,6 +19,7 @@ ffmpeg
 
 ## Music
 ardour audacity
+sonic-pi
 spotify-unwrapped spotifyd spotify-tui
 cmus
 cmusfm

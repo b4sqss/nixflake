@@ -2,13 +2,12 @@
   description = "My system config";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-21.11";
-    # nixpkgs.url = "github:nixos/nixpkgs/release-21.11";
+    nixpkgs.url = "nixpkgs/nixos-22.05";
 
     nur.url = "github:nix-community/NUR";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-21.11";
+      url = "github:nix-community/home-manager/release-22.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -41,7 +40,7 @@
         inherit system pkgs;
         username = "basqs";
         homeDirectory = "/home/basqs";
-        stateVersion = "21.11";
+        stateVersion = "22.05";
         configuration = {
           nixpkgs = { inherit (pkgs) config overlays; };
           home.packages = with pkgs; [

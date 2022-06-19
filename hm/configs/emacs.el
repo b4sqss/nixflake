@@ -1,22 +1,30 @@
 ;; garbage collection
-(setq gc-cons-threshold 100000000)
+(setq gc-cons-threshold most-positive-fixnum)
 (setq read-process-output-max (* 1024 1024)) ;; 1mb
 ;; don't fill my directories with backups
 (setq backup-directory-alist `(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory))))
 ;; visual stuff
+(setq inhibit-startup-screen t)
 (setq visible-bell nil)
 (setq tab-width 4)
-(setq indent-tabs-mode nil)
-(setq standard-indent 4)
 (setq evil-shift-width tab-width)
-(setq comp-async-report-warnings-errors nil)
+;; (setq comp-async-report-warnings-errors nil)
 (setq history-length 25)
 (setq use-dialog-box nil)
 (setq global-auto-revert-non-file-buffers t)
 (setq make-backup-files nil)
 (setq auto-save-default nil)
+(setq frame-resize-pixelwise t)
 (setq-default frame-title-format '("" "%b"))
 ;; stuff
+(if (and (fboundp 'native-comp-available-p)
+         (native-comp-available-p))
+    (setq comp-deferred-compilation t
+          package-native-compile t)
+  (message "Native complation is *not* available, lsp performance will suffer..."))
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+(recentf-mode 1)
+(setq initial-buffer-choice (lambda () (recentf-open-more-files)))
 (savehist-mode 1)
 (global-auto-revert-mode 1)
 (global-hl-line-mode t)
@@ -26,6 +34,9 @@
 (set-fringe-mode 10)
 (menu-bar-mode -1)
 (save-place-mode 1)
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+(add-hook 'text-mode-hook 'display-line-numbers-mode)
+(global-set-key (kbd "<f9>") 'display-line-numbers-mode)
 (set-language-environment "UTF-8")
 (prefer-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
@@ -33,9 +44,11 @@
 (set-keyboard-coding-system 'utf-8)
 ;; (set-face-bold-p 'bold nil)
 (set-face-attribute 'default nil
-		    :family "Iosevka"
-		    :height 145
-		    :width 'normal)
+                    :family "Iosevka"
+                    :height 145
+                    :width 'normal)
+(setq user-full-name "Bernardo Basques"
+      user-mail-address "bequintao@gmail.com")
 ;; scroll
 (setq auto-window-vscroll nil)
 (customize-set-variable 'fast-but-imprecise-scrolling t)
@@ -46,14 +59,14 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 (dolist (mode '(org-mode-hook
-		term-mode-hook))
+                term-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 ;; package manager
 (require 'package)
 
 (setq package-archives '(("melpa" ."https://melpa.org/packages/")
-			 ("org" . "https:/orgmode.org/elpa/")
-			 ("elpa" . "https://elpa.gnu.org/packages/")))
+                         ("org" . "https:/orgmode.org/elpa/")
+                         ("elpa" . "https://elpa.gnu.org/packages/")))
 
 (package-initialize)
 (unless package-archive-contents
@@ -64,6 +77,8 @@
 
 (require 'use-package)
 (setq warning-suppress-types '((use-package) (use-package)))
+(setq warning-suppress-types '((comp)))
+(setq comp-deferred-compilation t)
 (setq use-package-always-ensure t)
 
 (defvar bootstrap-version)
@@ -72,28 +87,43 @@
       (bootstrap-version 5))
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
-	(url-retrieve-synchronously
-	 "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-	 'silent 'inhibit-cookies)
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
+(add-to-list 'load-path "~/.emacs.d/local")
+
+(use-package emacs-everywhere)
+
+(use-package diminish)
+
+(use-package gcmh
+  :diminish
+  :custom
+  (gcmh-idle-delay 1000)
+  (gcmh-high-cons-threshold (* 16 1024 1024)) ;; 16 MB
+  :hook (after-init . gcmh-mode))
+
+(setq-default shell-file-name "/bin/sh")
+
 (use-package auto-package-update
   :custom
   (setq auto-package-update-interval 7
-	auto-package-update-prompt-before-update t
-	auto-package-update-hide-results nil))
+        auto-package-update-prompt-before-update t
+        auto-package-update-hide-results nil))
 ;; evil mode
 (use-package evil
   :init
   (setq evil-want-integration t
-	evil-want-keybinding nil
-	evil-respect-visual-line-mode t
-	evil-undo-system 'undo-tree)
+        evil-want-keybinding nil
+        evil-respect-visual-line-mode t
+        evil-undo-system 'undo-tree)
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
   :config
-  (add-hook 'evil-mode-hook 'evil-hook)
+  ;; (add-hook 'evil-mode-hook 'evil-hook)
   (evil-mode 1))
 
 (use-package undo-tree
@@ -117,9 +147,9 @@
 ;; completion system
 (use-package vertico
   :bind (:map vertico-map
-	      ("C-j" . vertico-next)
-	      ("C-k" . vertico-previous)
-	      ("C-f" . vertico-exit))
+              ("C-j" . vertico-next)
+              ("C-k" . vertico-previous)
+              ("C-f" . vertico-exit))
   :custom (vertico-cicle t)
   :init (vertico-mode)
   :diminish vertico-mode)
@@ -132,17 +162,17 @@
   :diminish marginalia-mode)
 (use-package consult
   :bind (("C-s" . consult-line)
-	 ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
-	 ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
-	 ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
-	 ("M-g e" . consult-compile-error)
-	 ("M-s f" . consult-flycheck)               ;; Alternative: consult-flycheck
-	 ("M-s G" . consult-git-grep)
-	 ("M-s r" . consult-ripgrep))
+         ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
+         ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
+         ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
+         ("M-g e" . consult-compile-error)
+         ("M-s f" . consult-flycheck)               ;; Alternative: consult-flycheck
+         ("M-s G" . consult-git-grep)
+         ("M-s r" . consult-ripgrep))
   :hook (completion-list-mode . consult-preview-at-point-mode)
   :init
   (setq register-preview-delay 0
-	register-preview-function #'consult-register-format)
+        register-preview-function #'consult-register-format)
   (advice-add #'register-preview :override #'consult-register-window)
   (advice-add #'completing-read-multiple :override #'consult-completing-read-multiple)
   :config
@@ -174,58 +204,55 @@
 ;; vterm
 (use-package vterm
   :custom (setq explicit-shell-file-name "zsh"
-		term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
+                term-prompt-regexp "^[^#$%>\n]*[#$%>] *"
+  				vterm-kill-buffer-on-exit t)
   :bind (("C-c e" . vterm)))
 (use-package vterm-toggle
   :bind (("C-M-'" . vterm-toggle)))
+
 ;; eshell
 (setq eshell-prompt-regexp "^[^αλ\n]*[αλ] ")
 (setq eshell-prompt-function
       (lambda nil
-	(concat
-	 (if (string= (eshell/pwd) (getenv "HOME"))
-	     (propertize "~" 'face `(:foreground "#99CCFF"))
-	   (replace-regexp-in-string
-	    (getenv "HOME")
-	    (propertize "~" 'face `(:foreground "#99CCFF"))
-	    (propertize (eshell/pwd) 'face `(:foreground "#99CCFF"))))
-	 (if (= (user-uid) 0)
-	     (propertize " α " 'face `(:foreground "#FF6666"))
-	   (propertize " λ " 'face `(:foreground "#A6E22E"))))))
+        (concat
+         (if (string= (eshell/pwd) (getenv "HOME"))
+             (propertize "~" 'face `(:foreground "#99CCFF"))
+           (replace-regexp-in-string
+            (getenv "HOME")
+            (propertize "~" 'face `(:foreground "#99CCFF"))
+            (propertize (eshell/pwd) 'face `(:foreground "#99CCFF"))))
+         (if (= (user-uid) 0)
+             (propertize " α " 'face `(:foreground "#FF6666"))
+           (propertize " λ " 'face `(:foreground "#A6E22E"))))))
+
 (setq eshell-highlight-prompt nil)
+
 (defalias 'open 'find-file-other-window)
 (defalias 'clean 'eshell/clear-scrollback)
+
+(defun eshell/sudo-open (filename)
+  "Open a file as root in Eshell."
+  (let ((qual-filename (if (string-match "^/" filename)
+                           filename
+                         (concat (expand-file-name (eshell/pwd)) "/" filename))))
+    (switch-to-buffer
+     (find-file-noselect
+      (concat "/sudo::" qual-filename)))))
+
 (defun eshell-other-window ()
   "Create or visit an eshell buffer."
   (interactive)
   (if (not (get-buffer "*eshell*"))
       (progn
-	(split-window-sensibly (selected-window))
-	(other-window 1)
-	(eshell))
+        (split-window-sensibly (selected-window))
+        (other-window 1)
+        (eshell))
     (switch-to-buffer-other-window "*eshell*")))
 
 (global-set-key (kbd "<s-C-return>") 'eshell-other-window)
-;; minibuffer commands
+
 (global-set-key (kbd "C-c s") 'async-shell-command)
-;; openwith
-(use-package openwith
-  :custom
-  (setq openwith-associations
-        `((,(openwith-make-extension-regexp
-             '("mpg" "mpeg" "mp3" "mp4"
-               "avi" "wmv" "wav" "mov" "flv"
-               "ogm" "ogg" "mkv"))
-           "mpv"
-           (file))
-          (,(openwith-make-extension-regexp
-             '("doc" "xls" "ppt" "odt" "ods" "odg" "odp"))
-           "libreoffice"
-           (file))
-          (,(openwith-make-extension-regexp
-             '("pdf" "ps" "ps.gz" "dvi"))
-           "zathura"
-           (file)))))
+
 ;; async
 (use-package async
   :ensure t
@@ -239,7 +266,7 @@
   :commands (dired dired-jump)
   :bind (("C-x C-j" . dired-jump))
   :custom ((dired-listing-switches "-agho --group-directories-first")
-	   (setq dired-omit-files "^\\.[^.].*"))
+           (setq dired-omit-files "^\\.[^.].*"))
   :config (customize-set-variable 'global-auto-revert-non-file-buffers t))
 
 (use-package all-the-icons-dired
@@ -247,42 +274,53 @@
 
 (use-package dired-git)
 
-(use-package dired-sidebar
-  :bind (("C-c t" . dired-sidebar-toggle-sidebar)))
-
 (use-package dired-hide-dotfiles
   :hook (dired-mode . dired-hide-dotfiles-mode)
   :config
   (evil-collection-define-key 'normal 'dired-mode-map
     "H" 'dired-hide-dotfiles-mode))
+
 ;; git
 (use-package magit
   :bind ("C-M-;" . magit-status)
   :commands (magit-status magit-get-current-branch))
-;; dashboard
-(use-package dashboard
-  :diminish dashboard-mode
-  :config (dashboard-setup-startup-hook)
-  (setq dashboard-center-content t
-	dashboard-set-navigator t
-	dashboard-show-shortcuts t
-	dashboard-items '((recents  . 5)
-			  (bookmarks . 5)
-			  (agenda . 10))
-	dashboard-set-file-icons t
-	dashboard-set-navigator t
-	initial-buffer-choice (lambda () (get-buffer "*dashboard*"))))
-;; colors/icons
-(use-package all-the-icons)
 
-(use-package rainbow-delimiters
-  :hook (prog-mode . rainbow-delimiters-mode)
-  :diminish rainbow-delimiters-mode)
+;;indentation
+(setq-default tab-width 4)
+(setq-default indent-tabs-mode nil) ;; spaces instead of tabs
+(setq-default standard-indent 4)
+(setq c-basic-offset tab-width)
+(setq-default electric-indent-inhibit t)
+(setq backward-delete-char-untabify-method 'nil)
 
 (use-package highlight-indent-guides
-  :config (setq highlight-indent-guides-method 'bitmap)
-  :hook (prog-mode . highlight-indent-guides-mode)
-  :diminish highlight-indent-guides-mode)
+  :diminish highlight-indent-guides-mode
+  :hook ((prog-mode . (lambda ()
+                        (highlight-indent-guides-mode)
+                        (highlight-indent-guides-auto-set-faces))))
+  :config
+  (setq highlight-indent-guides-method 'character
+        highlight-indent-guides-responsive 'stack
+        highlight-indent-guides-delay 0))
+
+;; rainbow
+(use-package rainbow-mode
+  :diminish
+  :init
+  (add-hook 'prog-mode-hook 'rainbow-mode))
+
+(use-package rainbow-delimiters
+  :diminish
+  :init
+  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+
+(use-package beacon
+  :diminish
+  :init
+  (beacon-mode 1))
+
+(use-package highlight-numbers
+  :hook (prog-mode . highlight-numbers-mode))
 ;; modeline
 ;; (setq display-time-format "%H:%M")
 ;; (display-battery-mode)(display-time-mode)
@@ -293,21 +331,27 @@
 (display-battery-mode -1)
 
 (use-package powerline
-   :ensure t
-   :config
-   (setq powerline-default-separator 'nil
-	 powerline-display-buffer-size nil)
-   :init
-   (powerline-default-theme)
-   :hook
-   ('after-init-hook) . 'powerline-reset)
+  :ensure t
+  :config
+  (setq powerline-default-separator 'nil
+        powerline-display-buffer-size nil)
+  :init
+  (powerline-default-theme)
+  :hook
+  ('after-init-hook) . 'powerline-reset)
 
 ;; colortheme
 (use-package doom-themes :defer t)
 (use-package mindre-theme
   :straight (:host github :repo "erikbackman/mindre-theme"))
-
-(consult-theme 'doom-tomorrow-night)
+(use-package nano-theme)
+(defun apply-nano-theme (appearance)
+  "Load theme, taking current system APPEARANCE into consideration."
+  (mapc #'disable-theme custom-enabled-themes)
+  (pcase appearance
+    ('light (nano-light))
+    ('dark (nano-dark))))
+;; (load-theme 'doom-tomorrow-night t)
 (set-mouse-color "DodgerBlue")
 
 (defun toggle-theme ()
@@ -316,36 +360,49 @@
       (consult-theme 'doom-tomorrow-day)
     (consult-theme 'doom-tomorrow-night)))
 (global-set-key [f5] 'toggle-theme)
+
+(use-package dimmer
+  :hook (after-init . dimmer-mode)
+  :config
+  (setq dimmer-fraction 0.5
+        dimmer-adjustment-mode :foreground
+        dimmer-use-colorspace :rgb
+        dimmer-watch-frame-focus-events nil)
+  (dimmer-configure-which-key)
+  (dimmer-configure-magit)
+  (dimmer-configure-posframe))
 ;; org-mode
-(defun org-mode-setup ()
-  (org-indent-mode)
-  (auto-fill-mode 0)
-  (visual-line-mode 1)
-  (setq org-hide-emphasis-markers t
-	truncate-lines t
-	evil-auto-indent nil
-	left-margin-width 2
-	right-margin-width 2)
-  (olivetti-mode 1)
-  (set-window-margins (selected-window) 1 1)
-  (diminish org-indent-mode))
 
 (use-package org
-  :hook (org-mode . org-mode-setup))
+  :config
+  (setq org-startup-with-inline-images t)
+  :hook (org-mode . (org-indent-mode
+                     prettify-symbols-mode
+                     org-toggle-prettty-entities
+                     olivetti-mode
+                     setq org-hide-emphasis-markers t
+                     truncate-lines t
+                     evil-auto-indent nil)))
 
 (require 'org-tempo)
 
-(use-package org-agenda
-  :bind
-  ("C-c a" . org-agenda-list))
+(define-key global-map (kbd "C-c a") 'org-agenda-list)
+
+(use-package idle-org-agenda
+  :after org-agenda
+  :ensure t
+  :config (idle-org-agenda-mode))
 
 ;; writting
-(use-package olivetti
-  :diminish olivetti-mode
-  :bind ("C-c o" . olivetti-mode))
+;; (use-package olivetti
+;;   :diminish olivetti-mode
+;;   :bind ("C-c o" . olivetti-mode))
 
-;; (setq ispell-program-name "aspell")
-;; (setq ispell-change-dictionary "pt_BR")
+(use-package writeroom-mode
+  :bind ("C-c o" . writeroom-mode))
+
+(setq ispell-program-name "aspell")
+(setq ispell-change-dictionary "pt_BR")
 ;; (defun text-mode-hook-setup ()
 ;;   ;; Turn off RUN-TOGETHER option when spell check text-mode
 ;;   (setq-local ispell-extra-args (flyspell-detect-ispell-args)))
@@ -354,6 +411,19 @@
 ;;   (add-hook hook (lambda ()
 ;; 		   (flyspell-mode 1)
 ;; 		   (visual-line-mode 1))))
+
+(use-package flyspell
+  :diminish flyspell-mode)
+
+(use-package guess-language
+  :config
+  (setq guess-language-languages '(en pt))
+  (setq guess-language-min-paragraph-length 10)
+  :hook
+  (text-mode . guess-language-mode))
+
+(add-hook 'text-mode-hook 'flyspell-mode)
+(add-hook 'org-mode-hook 'flyspell-mode)
 
 (setq org-ellipsis " ▾"
       org-hide-emphasis-markers t
@@ -373,14 +443,14 @@
       org-directory  "~/Docs/org/"
       org-lowest-priority ?E
       org-capture-templates '(("t" "Todo [inbox]" entry
-			       (file+headline "~/Docs/org/agenda.org" "Tarefas")
-			       "* TODO %i%?")
-			      ("c" "Todo [inbox]" entry
-			       (file+headline "~/Docs/org/agenda.org" "Lembretes")
-			       "* %i%?"))
+                               (file+headline "~/Docs/org/agenda.org" "Tarefas")
+                               "* TODO %i%?")
+                              ("c" "Todo [inbox]" entry
+                               (file+headline "~/Docs/org/agenda.org" "Lembretes")
+                               "* %i%?"))
       org-todo-keywords '((sequence "TODO(t)" "|" "DONE(d)")
-			  (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
-			  (sequence "|" "CANCELED(c)")))
+                          (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
+                          (sequence "|" "CANCELED(c)")))
 
 (define-key global-map (kbd "C-c C-c") 'org-capture)
 
@@ -411,15 +481,15 @@
        (headline           `(:inherit default :weight bold :foreground ,base-font-color)))
 
   (custom-theme-set-faces 'user
-			  `(org-level-8 ((t (,@headline ))))
-			  `(org-level-7 ((t (,@headline ))))
-			  `(org-level-6 ((t (,@headline ))))
-			  `(org-level-5 ((t (,@headline ))))
-			  `(org-level-4 ((t (,@headline , :height 1.1))))
-			  `(org-level-3 ((t (,@headline , :height 1.25))))
-			  `(org-level-2 ((t (,@headline , :height 1.5))))
-			  `(org-level-1 ((t (,@headline , :height 1.75))))
-			  `(org-document-title ((t (,@headline , :height 1.5 :underline nil))))))
+                          `(org-level-8 ((t (,@headline ))))
+                          `(org-level-7 ((t (,@headline ))))
+                          `(org-level-6 ((t (,@headline ))))
+                          `(org-level-5 ((t (,@headline ))))
+                          `(org-level-4 ((t (,@headline , :height 1.1))))
+                          `(org-level-3 ((t (,@headline , :height 1.25))))
+                          `(org-level-2 ((t (,@headline , :height 1.5))))
+                          `(org-level-1 ((t (,@headline , :height 1.75))))
+                          `(org-document-title ((t (,@headline , :height 2.0 :underline nil))))))
 (require 'org-habit)
 (add-to-list 'org-modules 'org-habit)
 (setq org-habit-graph-column 60)
@@ -438,27 +508,27 @@
   :custom
   (org-roam-directory "~/Docs/org/roam")
   :bind (("C-c n l" . org-roam-buffer-toggle)
-	 ("C-c n f" . org-roam-node-find)
-	 ("C-c n i" . org-roam-node-insert)
-	 ("C-c n d n" . org-roam-dailies-capture-today))
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n i" . org-roam-node-insert)
+         ("C-c n d n" . org-roam-dailies-capture-today))
   :config (org-roam-setup))
 (setq org-roam-v2-ack t)
 (setq org-roam-dailies-directory "journal/")
 (defun org/prettify-set ()
   (interactive)
   (setq prettify-symbols-alist
-	'(("#+begin_src" . "→")
-	  ("#+BEGIN_SRC" . "→")
-	  ("#+end_src" . "←")
-	  ("#+END_SRC" . "←")
-	  ("#+begin_example" . "")
-	  ("#+BEGIN_EXAMPLE" . "")
-	  ("#+end_example" . "")
-	  ("#+END_EXAMPLE" . "")
-	  ("#+results:" . "")
-	  ("#+RESULTS:" . ""))))
+        '(("#+begin_src" . "→")
+          ("#+BEGIN_SRC" . "→")
+          ("#+end_src" . "←")
+          ("#+END_SRC" . "←")
+          ("#+begin_example" . "")
+          ("#+BEGIN_EXAMPLE" . "")
+          ("#+end_example" . "")
+          ("#+END_EXAMPLE" . "")
+          ("#+results:" . "")
+          ("#+RESULTS:" . ""))))
 (add-hook 'org-mode-hook 'org/prettify-set)
-(global-prettify-symbols-mode)
+;; (global-prettify-symbols-mode)
 ;;org exports
 ;; (use-package ox-latex)
 ;; (with-eval-after-load 'ox-latex
@@ -477,6 +547,19 @@
 (use-package ox-reveal)
 (use-package pandoc)
 (use-package ox-pandoc)
+
+(add-to-list 'org-odt-convert-processes
+             '("gnumeric" "/usr/bin/env ssconvert %i %o"))
+
+(defun org-table-export-to-spreadsheet (arg)
+  "Export org table to spreadsheet formats, e.g. `ods', `xls', `xlsx'."
+  (interactive "sFormat: ")
+  (let* ((source-file  (file-name-sans-extension (buffer-file-name  (current-buffer))))
+         (csv-file (concat source-file ".csv")))
+    (org-table-export csv-file "orgtbl-to-csv")
+    (org-odt-convert csv-file arg)))
+
+
 ;; pdf
 (use-package pdf-tools
   :mode "\\.pdf\\'"
@@ -505,15 +588,14 @@
 (use-package lsp-mode
   :straight t
   :hook ((c-mode          ; clangd
-	  c++-mode        ; clangd
-	  c-or-c++-mode   ; clangd
-	  go-mode 	  ; golang
-	  js-mode         ; ts-ls (tsserver wrapper)
-	  typescript-mode ; ts-ls (tsserver wrapper)
-	  python-mode     ; pyright
-	  web-mode        ; ts-ls/HTML/CSS
-	  haskell-mode    ; haskell-language-server
-	  ) . lsp-deferred)
+          c++-mode        ; clangd
+          c-or-c++-mode   ; clangd
+          js-mode         ; ts-ls (tsserver wrapper)
+          typescript-mode ; ts-ls (tsserver wrapper)
+          python-mode     ; pyright
+          web-mode        ; ts-ls/HTML/CSS
+          haskell-mode    ; haskell-language-server
+          ) . lsp-deferred)
   :bind
   ("C-c l n" . lsp-ui-find-next-reference)
   ("C-c l p" . lsp-ui-find-prev-reference)
@@ -536,7 +618,7 @@
   (setq lsp-enable-imenu nil)
   (setq lsp-enable-snippet nil)
   (setq completion-styles '(orderless)
-	completion-category-defaults nil)
+        completion-category-defaults nil)
   (setq lsp-idle-delay 0.2))
 
 
@@ -545,10 +627,10 @@
   :hook (lsp-mode . lsp-ui-mode)
   :config
   (setq lsp-ui-sideline-enable t
-	lsp-ui-sideline-show-code-actions
-	lsp-ui-doc-enable t
-	lsp-ui-doc-delay 0.2
-	lsp-ui-flycheck-enable t))
+        lsp-ui-sideline-show-code-actions
+        lsp-ui-doc-enable t
+        lsp-ui-doc-delay 0.2
+        lsp-ui-flycheck-enable t))
 ;;; debug
 (use-package dap-mode
   :straight t
@@ -562,21 +644,36 @@
   :hook (after-init . global-flycheck-mode)
   :custom
   (flycheck-check-syntax-automatically '(save mode-enabled)))
+;; tree-siter
+(use-package tree-sitter
+  :ensure t
+  :config
+  ;; activate tree-sitter on any buffer containing code for which it has a parser available
+  (global-tree-sitter-mode)
+  ;; you can easily see the difference tree-sitter-hl-mode makes for python, ts or tsx
+  ;; by switching on and off
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
+(use-package tree-sitter-langs
+  :ensure t
+  :after tree-sitter)
 ;; company
 (use-package company
   :diminish company-mode
   :bind
   (:map company-active-map
-	("C-n". company-select-next)
-	("C-p". company-select-previous))
+        ("C-n". company-select-next)
+        ("C-p". company-select-previous))
+  (:map lsp-mode-map
+        ("<tab>" . company-indent-or-complete-common))
   :config
   (setq company-dabbrev-other-buffers t
-	company-dabbrev-code-other-buffers t
-	company-show-numbers t
-	company-idle-delay 0)
+        company-dabbrev-code-other-buffers t
+        company-show-numbers t
+        company-dabbrev-ignore-case t
+        company-idle-delay 0)
   :hook ((prog-mode . company-mode)
-	 (org-mode . company-mode)
-	 (company-mode . yas-minor-mode)))
+         (company-mode . yas-minor-mode)))
 
 (use-package company-irony)
 
@@ -589,14 +686,14 @@
   :custom (lsp-eldoc-render-all t))
 ;; snippets
 (use-package yasnippet
-  :commands yas-minor-mode
   :diminish yas-minor-mode
   :config
-  (yas-global-mode 1))
-(use-package yasnippet-snippets
-  :ensure t)
-(use-package auto-yasnippet
-  :ensure t)
+  (yas-global-mode 1)
+  (use-package yasnippet-snippets
+    :ensure t)
+  (use-package auto-yasnippet
+    :ensure t)
+  (yas-reload-all))
 ;; C
 (use-package ccls
   :hook (lsp)
@@ -616,28 +713,27 @@
     :commands irony-eldoc
     :init (add-hook 'irony-mode-hook 'irony-eldoc)))
 ;; Go
-(use-package go-mode
-  :mode "\\.go\\'"
-  (defun my/go-mode-hook()
-    ;;(setq-default tab-width 2)
-    (add-hook 'before-save-hook 'gofmt-before-save)
-    (set (make-local-variable 'compile-command)
-	 "go test"))
-  :hook ((go-mode . my/go-mode-hook)))
-(use-package go-snippets)
-(use-package flycheck-golangci-lint)
+;; (use-package go-mode
+;;   :mode "\\.go\\'"
+;;   (defun go-mode-hook()
+;;     ;;(setq-default tab-width 2)
+;;     (add-hook 'before-save-hook 'gofmt-before-save))
+;;   :hook ((go-mode . go-mode-hook)))
+;; (use-package go-snippets)
+;; (use-package flycheck-golangci-lint)
 ;; python
 (use-package python-mode
-  :ensure t)
-;; :custom
-;; (python-shell-interpreter "python3")
-;; (dap-python-executable "python3")
-;; (dap-python-debugger 'debugpy)
-;; :config
-;; (use-package dap-python))
-(use-package pyvenv
+  :ensure t
+  :custom
+  (python-shell-interpreter "python3")
+  ;; (dap-python-executable "python3")
+  ;; (dap-python-debugger 'debugpy)
   :config
-  (pyvenv-mode 1))
+  ;; (use-package dap-python)
+  (use-package lsp-pyright)
+  (use-package pyvenv
+    :config
+    (pyvenv-mode 1)))
 ;; js/ts
 (use-package js2-mode
   :custom
@@ -658,9 +754,9 @@
 (use-package web-beautify
   :defer t
   :bind (:map web-mode-map
-	      ("C-c b" . web-beautify-html)
-	      :map js2-mode-map
-	      ("C-c b" . web-beautify-js)))
+              ("C-c b" . web-beautify-html)
+              :map js2-mode-map
+              ("C-c b" . web-beautify-js)))
 ;; lisp
 (use-package lispy
   :diminish lispy-mode
@@ -668,7 +764,7 @@
 (use-package lispyville
   :diminish lispyville-mode
   :hook (lispy-mode . lispyville-mode))
-(use-package geiser-mit)
+;; (use-package geiser-mit)
 ;; sml
 (use-package sml-mode
   :mode "\\.sml\\'")
@@ -723,8 +819,18 @@
 ;; 	(add-to-list 'erc-modules 'spelling)
 ;; 	(erc-services-mode 1)
 ;; 	(erc-update-modules))
-(server-start)
+;; (server-start)
 ;; functions
+(defun config-visit()
+  (interactive)
+  (find-file "~/.emacs.d/config.org"))
+(global-set-key (kbd "C-c e") 'config-visit)
+
+(defun config-reload ()
+  "Reloads ~/.emacs.d/config.org at runtine"
+  (interactive)
+  (org-babel-load-file (expand-file-name "~/.emacs.d/config.org")))
+(global-set-key (kbd "C-c r") 'config-reload)
 (defun record-screen-start ()
   "Record screen to .mkv"
   (interactive)
@@ -761,31 +867,52 @@
   "Renames current buffer and file it is visiting."
   (interactive)
   (let ((name (buffer-name))
-	(filename (buffer-file-name)))
+        (filename (buffer-file-name)))
     (if (not (and filename (file-exists-p filename)))
-	(error "Buffer '%s' is not visiting a file!" name)
+        (error "Buffer '%s' is not visiting a file!" name)
       (let ((new-name (read-file-name "New name: " filename)))
-	(if (get-buffer new-name)
-	    (error "A buffer named '%s' already exists!" new-name)
-	  (rename-file filename new-name 1)
-	  (rename-buffer new-name)
-	  (set-visited-file-name new-name)
-	  (set-buffer-modified-p nil)
-	  (message "File '%s' successfully renamed to '%s'"
-		   name (file-name-nondirectory new-name)))))))
+        (if (get-buffer new-name)
+            (error "A buffer named '%s' already exists!" new-name)
+          (rename-file filename new-name 1)
+          (rename-buffer new-name)
+          (set-visited-file-name new-name)
+          (set-buffer-modified-p nil)
+          (message "File '%s' successfully renamed to '%s'"
+                   name (file-name-nondirectory new-name)))))))
 (defun delete-current-buffer-file ()
   "Removes file connected to current buffer and kills buffer."
   (interactive)
   (let ((filename (buffer-file-name))
-	(buffer (current-buffer))
-	(name (buffer-name)))
+        (buffer (current-buffer))
+        (name (buffer-name)))
     (if (not (and filename (file-exists-p filename)))
-	(ido-kill-buffer)
+        (ido-kill-buffer)
       (when (yes-or-no-p "Are you sure you want to remove this file? ")
-	(delete-file filename)
-	(kill-buffer buffer)
-	(message "File '%s' successfully removed" filename)))))
+        (delete-file filename)
+        (kill-buffer buffer)
+        (message "File '%s' successfully removed" filename)))))
 
 (use-package no-littering)
 (setq gc-cons-threshold (* 50 1000 1000))
 (provide 'init)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("db5b906ccc66db25ccd23fc531a213a1afb500d717125d526d8ff67df768f2fc" "f0eb51d80f73b247eb03ab216f94e9f86177863fb7e48b44aacaddbfe3357cf1" "98fada4d13bcf1ff3a50fceb3ab1fea8619564bb01a8f744e5d22e8210bfff7b" default)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-document-title ((t (:inherit default :weight bold :foreground "#c5c8c6" :height 2.0 :underline nil))))
+ '(org-level-1 ((t (:inherit default :weight bold :foreground "#c5c8c6" :height 1.75))))
+ '(org-level-2 ((t (:inherit default :weight bold :foreground "#c5c8c6" :height 1.5))))
+ '(org-level-3 ((t (:inherit default :weight bold :foreground "#c5c8c6" :height 1.25))))
+ '(org-level-4 ((t (:inherit default :weight bold :foreground "#c5c8c6" :height 1.1))))
+ '(org-level-5 ((t (:inherit default :weight bold :foreground "#c5c8c6"))))
+ '(org-level-6 ((t (:inherit default :weight bold :foreground "#c5c8c6"))))
+ '(org-level-7 ((t (:inherit default :weight bold :foreground "#c5c8c6"))))
+ '(org-level-8 ((t (:inherit default :weight bold :foreground "#c5c8c6")))))

@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
 pushd ~/.nixfiles
-doas nixos-rebuild switch --flake .#
+nixos-rebuild build --flake .#
+doas ./result/activate 
 popd

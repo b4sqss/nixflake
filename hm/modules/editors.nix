@@ -36,7 +36,8 @@ in {
     pandoc
     unoconv
     languagetool
-
+    gnumeric
+    sbcl
     ## C
     clang bear gdb cmake llvmPackages.libcxx ccls rtags llvm gnumake
 
@@ -45,7 +46,7 @@ in {
 
     ## Haskell
     ghc ghcid
-    haskell-language-server
+    # haskell-language-server
 
     ## Js
     nodejs yarn nodePackages.npm nodePackages.typescript nodePackages.typescript-language-server deno
@@ -54,13 +55,16 @@ in {
     go gopls
 
     ## Scheme
-    scheme-manpages mitscheme
+    # scheme-manpages mitscheme
 
     ## Zig
     zls zig
 
     ## Sml
     smlnj
+
+    ## Emacs everywhere
+    xdotool xorg.xwininfo xclip
   ];
 
   programs.neovim = {
@@ -136,54 +140,54 @@ let g:AutoPairsMapSpace = 0
 let g:AutoPairsMapCR = 0
 let g:c_syntax_for_h = 1
 '';
-    coc = {
-      enable = true;
-      settings = {
-        "hover.target" = "float";
-        "coc.preferences.currentFunctionSymbolAutoUpdate" = true;
-        "coc.source.word.filetypes" = [
-          "latex"
-          "tex"
-          "markdown"
-          "markdown.pandoc"
-        ];
-        "coc.source.dictionary.filetypes" = [
-          "latex"
-          "tex"
-          "markdown"
-          "markdown.pandoc"
-        ];
-        "coc.preferences.formatOnSaveFiletypes" = [
-          "java"
-          "c"
-          "cpp"
-          "jsonc"
-          "sql"
-          "python"
-          "html"
-          "php"
-        ];
-        "diagnostic.warningSign" = "!!";
-        "diagnostic.enableSign" = false;
-        "diagnostic.refreshOnInsertMode" = true;
-        "diagnostic.messageTarget" = "float";
-        "signature.target" = "echo";
-        "session.directory" = "~/.config/nvim/sessions";
-        "session.saveOnVimLeave" = false;
-        "suggest.noselect" = false;
-        "suggest.snippetIndicator" = "►";
-        "suggest.floatEnable" = false;
-        "suggest.autoTrigger" = "always";
-        "suggest.echodocSupport" = true;
-        "suggest.acceptSuggestionOnCommitCharacter" = true;
-        "snippets.extends" = {
-          "cpp" = "c";
-          "html" = "php";
-          "php" = "html";
-          "markdown.pandoc" = "tex";
-        };
-      };
-    };
+    # coc = {
+    #   enable = true;
+    #   settings = {
+    #     "hover.target" = "float";
+    #     "coc.preferences.currentFunctionSymbolAutoUpdate" = true;
+    #     "coc.source.word.filetypes" = [
+    #       "latex"
+    #       "tex"
+    #       "markdown"
+    #       "markdown.pandoc"
+    #     ];
+    #     "coc.source.dictionary.filetypes" = [
+    #       "latex"
+    #       "tex"
+    #       "markdown"
+    #       "markdown.pandoc"
+    #     ];
+    #     "coc.preferences.formatOnSaveFiletypes" = [
+    #       "java"
+    #       "c"
+    #       "cpp"
+    #       "jsonc"
+    #       "sql"
+    #       "python"
+    #       "html"
+    #       "php"
+    #     ];
+    #     "diagnostic.warningSign" = "!!";
+    #     "diagnostic.enableSign" = false;
+    #     "diagnostic.refreshOnInsertMode" = true;
+    #     "diagnostic.messageTarget" = "float";
+    #     "signature.target" = "echo";
+    #     "session.directory" = "~/.config/nvim/sessions";
+    #     "session.saveOnVimLeave" = false;
+    #     "suggest.noselect" = false;
+    #     "suggest.snippetIndicator" = "►";
+    #     "suggest.floatEnable" = false;
+    #     "suggest.autoTrigger" = "always";
+    #     "suggest.echodocSupport" = true;
+    #     "suggest.acceptSuggestionOnCommitCharacter" = true;
+    #     "snippets.extends" = {
+    #       "cpp" = "c";
+    #       "html" = "php";
+    #       "php" = "html";
+    #       "markdown.pandoc" = "tex";
+    #     };
+    #   };
+    # };
   };
 
   programs.emacs = {
@@ -192,19 +196,19 @@ let g:c_syntax_for_h = 1
     extraPackages = (epkgs:
       (with epkgs.melpaPackages; [
         vterm
+        dashboard
         magit
         no-littering
         consult
         orderless
-        org-ql
         pandoc
         ox-reveal
         org-roam
+        org-bullets
         lsp-mode
         lsp-ui
         company
         flycheck
-        geiser
         pdf-tools
       ])
     );

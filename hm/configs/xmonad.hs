@@ -266,6 +266,7 @@ myKeys =
         , ("M-a", spawn myEditor)
         , ("M-d", spawn "emacsclient -c -a 'emacs' --eval '(dired nil)'")
         , ("M-C-a", spawn "emacsclient -c -a 'emacs' --eval '(org-agenda-list nil)'")
+        , ("M-e", spawn "emacsclient --eval '(emacs-everywhere)'")
         , ("M-S-a", spawn "emacs")
         ]
 

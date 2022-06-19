@@ -109,7 +109,7 @@ cm() {
 		zplug = {
 			enable = true;
 			plugins = [
-				{ name = "aloxaf/fzf-tab"; }
+				# { name = "aloxaf/fzf-tab"; }
 				{ name = "zdharma-continuum/fast-syntax-highlighting"; }
 				{ name = "chisui/zsh-nix-shell"; }
 			];
@@ -166,6 +166,10 @@ cm() {
 		fd
 		sl
 		bc
+    yt-dlp
+    pfetch
+    rsync
+    nnn
 	];
 	programs.tmux = {
 		enable = true;

@@ -65,6 +65,7 @@ in {
 
     ## Emacs everywhere
     xdotool xorg.xwininfo xclip
+
   ];
 
   programs.neovim = {

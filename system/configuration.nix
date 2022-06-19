@@ -207,8 +207,9 @@ in {
 		fonts = with pkgs; [
 			font-awesome
 			iosevka
-			ibm-plex
-		];
+      ibm-plex
+      emacs-all-the-icons-fonts
+    ];
 	};
 
 	system.stateVersion = "22.05";

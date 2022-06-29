@@ -42,7 +42,7 @@ in {
     clang bear gdb cmake llvmPackages.libcxx ccls rtags llvm gnumake
 
     ## Python
-    python39 python39Packages.pip nodePackages.pyright
+    python39 python39Packages.pip nodePackages.pyright python39Packages.matplotlib
 
     ## Haskell
     ghc ghcid
@@ -65,142 +65,38 @@ in {
 
     ## Emacs everywhere
     xdotool xorg.xwininfo xclip
+    haskellPackages.citeproc
 
+    mu
+    isync
+    (pkgs.writeShellScriptBin "mail-init" ''
+      ${pkgs.mu} init --maildir="~/Mail" --my-address="bequintao@gmail.com"
+      ${pkgs.mu} index
+    '')
+    (pkgs.writeShellScriptBin "mail-sync" ''
+      ${pkgs.isync}/bin/mbsync -a
+    '')
   ];
-
-  programs.neovim = {
-    enable = true;
-    vimdiffAlias = true;
-    withNodeJs = true;
-    withPython3 = true;
-    withRuby = true;
-    extraPython3Packages = (ps: with ps; [
-      pyx
-      pynvim
-    ]);
-    package = pkgs.neovim-nightly;
-    extraConfig = ''
-"      lua require("init")
-let g:markdown_fenced_languages = [
-\ 'html',
-\ 'python',
-\ 'bash=sh',
-\ 'java',
-\ 'c',
-\ 'cpp',
-\ 'php',
-\ 'sql',
-\ 'js=javascript',
-\ 'pro=prolog',
-\ 'vim',
-\ 'help',
-\ ]
-let g:pandoc#syntax#codeblocks#embeds#langs = [
-\ "php",
-\ "html",
-\ "bash=sh",
-\ "java",
-\ "c",
-\ "cpp",
-\ "python",
-\ "sql",
-\ "js=javascript",
-\ 'pro=prolog',
-\ 'vim',
-\ 'help',
-\ ]
-let g:markdown_syntax_conceal = 1
-let g:markdown_minlines = 100
-let g:tex_flavor='latex'
-let g:vimtex_compiler_latexmk = {
-\ 'executable' : 'latexmk',
-\ 'options' : [
-\ '-shell-escape',
-\ '-verbose',
-\ '-file-line-error',
-\ '-synctex=1',
-\ '-interaction=nonstopmode',
-\ ],
-\}
-"let ch_syntax_for_h = 1
-augroup pandoc_syntax
-au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
-augroup END
-autocmd BufEnter,BufNewFile,BufFilePre,BufRead *.md :syntax sync fromstart
-source $HOME/.config/nvim/configs/plugins.vim
-source $HOME/.config/nvim/configs/basic.vim
-source $HOME/.config/nvim/configs/appearance.vim
-source $HOME/.config/nvim/configs/statusline.vim
-source $HOME/.config/nvim/configs/coc.vim
-source $HOME/.config/nvim/configs/snippets.vim
-source $HOME/.config/nvim/configs/keys.vim
-source $HOME/.config/nvim/configs/fzf.vim
-source $HOME/.config/nvim/configs/text.vim
-let g:AutoPairsCenterLine = 0
-let g:AutoPairsMapSpace = 0
-let g:AutoPairsMapCR = 0
-let g:c_syntax_for_h = 1
-'';
-    # coc = {
-    #   enable = true;
-    #   settings = {
-    #     "hover.target" = "float";
-    #     "coc.preferences.currentFunctionSymbolAutoUpdate" = true;
-    #     "coc.source.word.filetypes" = [
-    #       "latex"
-    #       "tex"
-    #       "markdown"
-    #       "markdown.pandoc"
-    #     ];
-    #     "coc.source.dictionary.filetypes" = [
-    #       "latex"
-    #       "tex"
-    #       "markdown"
-    #       "markdown.pandoc"
-    #     ];
-    #     "coc.preferences.formatOnSaveFiletypes" = [
-    #       "java"
-    #       "c"
-    #       "cpp"
-    #       "jsonc"
-    #       "sql"
-    #       "python"
-    #       "html"
-    #       "php"
-    #     ];
-    #     "diagnostic.warningSign" = "!!";
-    #     "diagnostic.enableSign" = false;
-    #     "diagnostic.refreshOnInsertMode" = true;
-    #     "diagnostic.messageTarget" = "float";
-    #     "signature.target" = "echo";
-    #     "session.directory" = "~/.config/nvim/sessions";
-    #     "session.saveOnVimLeave" = false;
-    #     "suggest.noselect" = false;
-    #     "suggest.snippetIndicator" = "►";
-    #     "suggest.floatEnable" = false;
-    #     "suggest.autoTrigger" = "always";
-    #     "suggest.echodocSupport" = true;
-    #     "suggest.acceptSuggestionOnCommitCharacter" = true;
-    #     "snippets.extends" = {
-    #       "cpp" = "c";
-    #       "html" = "php";
-    #       "php" = "html";
-    #       "markdown.pandoc" = "tex";
-    #     };
-    #   };
-    # };
-  };
 
   programs.emacs = {
     enable = true;
-    package = pkgs.emacsGit;
+    package = pkgs.emacsNativeComp;
     extraPackages = (epkgs:
       (with epkgs.melpaPackages; [
         vterm
+        evil
         dashboard
         magit
+        docker
         no-littering
         consult
+        company
+        yasnippet
+        lsp-pyright
+        apheleia
+        web-mode
+        web-beautify
+        lispy lispyville
         orderless
         pandoc
         ox-reveal
@@ -215,7 +111,102 @@ let g:c_syntax_for_h = 1
     );
   };
 
-  xdg.userDirs.documents = "$HOME/Docs";
-  xdg.userDirs.music = "$HOME/Docs/Music";
-  xdg.userDirs.pictures = "$HOME/Pics";
+  programs.neovim = {
+    enable = true;
+    viAlias = true;
+    vimAlias = true;
+    vimdiffAlias = true;
+    extraConfig = ''
+set nocompatible
+
+filetype plugin indent on  " Load plugins according to detected filetype.
+syntax on                  " Enable syntax highlighting.
+
+set autoindent             " Indent according to previous line.
+set expandtab              " Use spaces instead of tabs.
+set softtabstop =4         " Tab key indents by 4 spaces.
+set shiftwidth  =4         " >> indents by 4 spaces.
+set shiftround             " >> indents to next multiple of 'shiftwidth'.
+
+set backspace   =indent,eol,start  " Make backspace work as you would expect.
+set hidden                 " Switch between buffers without having to save first.
+set laststatus  =2         " Always show statusline.
+set display     =lastline  " Show as much as possible of the last line.
+
+set mouse=a
+
+set showmode               " Show current mode in command-line.
+set showcmd                " Show already typed keys when more are expected.
+
+set incsearch              " Highlight while searching with / or ?.
+set hlsearch               " Keep matches highlighted.
+
+set ttyfast                " Faster redrawing.
+set lazyredraw             " Only redraw when necessary.
+
+set splitbelow             " Open new windows below the current window.
+set splitright             " Open new windows right of the current window.
+
+set cursorline             " Find the current line quickly.
+set wrapscan               " Searches wrap around end-of-file.
+set report      =0         " Always report changed lines.
+set synmaxcol   =200       " Only highlight the first 200 columns.
+
+set list                   " Show non-printable characters.
+if has('multi_byte') && &encoding ==# 'utf-8'
+  let &listchars = 'tab:▸ ,extends:❯,precedes:❮,nbsp:±'
+else
+  let &listchars = 'tab:> ,extends:>,precedes:<,nbsp:.'
+endif
+
+  "set shell=usr/bin/env zsh
+
+" Put all temporary files under the same directory.
+" https://github.com/mhinz/vim-galore#temporary-files
+set backup
+set backupdir   =$HOME/.vim/files/backup/
+set backupext   =-vimbackup
+set backupskip  =
+set directory   =$HOME/.vim/files/swap//
+set updatecount =100
+set undofile
+set undodir     =$HOME/.vim/files/undo/
+set history=500
+set viminfo     ='100,n$HOME/.vim/files/info/viminfo
+
+set list listchars=tab:▸\ ,extends:›,precedes:‹,nbsp:·,trail:·",eol:¬
+set termguicolors
+set background=dark
+colorscheme ayu-mirage
+set cursorline
+set t_Co=256
+
+let mapleader=" "
+
+nnoremap <M-j> :resize -2<CR>
+nnoremap <M-k> :resize +2<CR>
+nnoremap <M-l> :vertical resize -2<CR>
+nnoremap <M-h> :vertical resize +2<CR>
+
+nnoremap <C-x>3 :vsplit<CR>
+nnoremap <C-x>2 :split<CR>
+nnoremap <C-x>0 :close<CR>
+
+tnoremap <C-w> <C-\><C-n><C-w>
+
+nnoremap <Leader>b :Buffers<CR>
+
+map <leader>s :e ~/scratch.org<CR>
+
+'';
+    plugins = with pkgs.vimPlugins; [
+      fzf-vim
+      neovim-ayu
+      vim-nix
+    ];
+  };
+
+  xdg.userDirs.documents = "$HOME/Documents";
+  xdg.userDirs.music = "$HOME/Documents/Music";
+  xdg.userDirs.pictures = "$HOME/Pictures";
 }

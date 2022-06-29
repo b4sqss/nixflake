@@ -2,10 +2,6 @@
 let
   clr = import ../theme/tomorrow-night.nix;
 in {
-  # needed for logseq
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-13.6.9"
-  ];
   home.packages = with pkgs; [
     libnotify
     gtk3
@@ -13,6 +9,8 @@ in {
     gtk_engines
     gsettings-desktop-schemas
     lxappearance
+    nordic
+    arc-icon-theme
 
     ## Browsers
     firefox
@@ -23,7 +21,6 @@ in {
     tor-browser-bundle-bin
 
     ## GUI
-    logseq
     anki
     libreoffice arkpandora_ttf #Arial font
   ];

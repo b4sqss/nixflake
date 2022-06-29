@@ -11,24 +11,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    flake-utils.url = "github:numtide/flake-utils";
+
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    neovim-overlay = {
-      url = "github:nix-community/neovim-nightly-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    base16 = {
-      url = "github:shaunsingh/base16.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    # IBM-Carbon-Theme (see IBM-design: colors)
-    base16-carbon-dark = {
-      url = "github:shaunsingh/base16-carbon-dark";
-      flake = false;
     };
   };
 
@@ -57,7 +44,6 @@
                 nixpkgs.overlays = with inputs; [
                   emacs-overlay.overlay
                   nur.overlay
-                  neovim-overlay.overlay
                 ];
               })
               ./hm/modules/desktop.nix

@@ -140,7 +140,7 @@ myStartupHook = do
           spawnOnce "xautolock -time 15 -locker 'sh ~/.local/bin/lock.sh'"
           spawnOnce "dunst &"
           spawnOnce "picom"
-          spawnOnce "xwallpaper --zoom ~/Pics/wallpapers/1634162439688.png"
+          spawnOnce "xwallpaper --zoom ~/Pictures/wallpapers/1634162439688.png"
           spawnOnce "xautolock -time 15 -locker 'sh ~/.local/bin/lock.sh'"
           spawnOnce "emacs --daemon"
           spawnOnce "xrdb ~/.Xresources"
@@ -258,9 +258,9 @@ myKeys =
         , ("<XF86AudioLowerVolume>", spawn "pamixer -d 5")
         , ("<XF86AudioRaiseVolume>", spawn "pamixer -i 5")
 
-        , ("<Print>", spawn "import -window root ~/Pics/screenshots/$(date '+%Y-%d-%m-%H:%M').jpg")
+        , ("<Print>", spawn "import -window root ~/Pictures/screenshots/$(date '+%Y-%d-%m-%H:%M').jpg")
 
-        , ("M-C-5", spawn "dunstify -u CRIT 'gravando' -t 800 && ffmpeg -f x11grab -s 1920x1080 -i :1 $HOME/Docs/videos/$(date +'%d_%m_%Y_%I_%M').mp4")
+        , ("M-C-5", spawn "dunstify -u CRIT 'gravando' -t 800 && ffmpeg -f x11grab -s 1920x1080 -i :1 $HOME/Documents/videos/$(date +'%d_%m_%Y_%I_%M').mp4")
         , ("M-C-6", spawn "pkill ffmpeg && dunstify -u LOW 'screencast saved'")
 
         , ("M-a", spawn myEditor)

@@ -143,7 +143,8 @@ cm() {
 			mv = "mv -iv";
 			mountusb = "sudo mount -t vfat -o rw,uid=basqs,gid=users /dev/sda1 /mnt/pendrive";
 			sxiv = "sxiv -b";
-			query_vim_pkgs = "nix-env -f '<nixpkgs>' -qaP -A vimPlugins";
+			query_vim_pkgs = "nix-env -f '<nixpkgs>' -qaP -A vimPlugins | fzf";
+			query_emacs_pkgs = "nix-env -f '<nixpkgs>' -qaP -A emacsPackages | fzf";
 			scu = "systemctl --user";
 			sudo = "doas";
 			start_nix_shell = "nix-shell --pure -E 'with import<nixpkgs> {}; callPackage ./. {}";

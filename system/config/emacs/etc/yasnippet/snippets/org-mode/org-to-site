@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: export to site
+# key: <site
+# --
+#+TITLE: ${1:TITLE}
+:PROPERTIES:
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="~/Documents/org/org.css"/>
+:END:
+
+$0

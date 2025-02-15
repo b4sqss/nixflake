@@ -1,0 +1,45 @@
+# -*- mode: snippet -*-
+# name: Create title
+# key: <title
+# --
+
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{minted}
+\usepackage{geometry}
+\geometry{a4paper, left=20mm, right=20mm, top=20mm}
+\usepackage[skip=8pt, indent=15pt]{parskip}
+\usepackage{lmodern} % Ensures we have the right
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[table, xcdraw]{xcolor}
+\usepackage[brazil, american]{babel}
+\author{${1:Nome}}
+\date{${2:data}}
+\title{${3:título}}
+\hypersetup{
+ pdfauthor={Bernardo Basques Quintão},
+ pdftitle={Atividade fatoração LU},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 29.4 (Org mode 9.6.15)},
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+
+$0
+
+\end{document}

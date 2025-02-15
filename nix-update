@@ -1,4 +1,0 @@
-#!/usr/bin/env zsh
-pushd ~/.nixfiles
-nix flake update
-popd

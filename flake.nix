@@ -1,71 +1,33 @@
 {
-  description = "My system config";
+  description = "Nixos config flake";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-22.05";
-
-    nur.url = "github:nix-community/NUR";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-22.05";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    flake-utils.url = "github:numtide/flake-utils";
-
-    emacs-overlay = {
-      url = "github:nix-community/emacs-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    zen-browser.url = "github:MarceColl/zen-browser-flake";
   };
 
-  outputs = { nixpkgs, home-manager, emacs-overlay, ... }@inputs:
-    let
-      system = "x86_64-linux";
-
-      pkgs = import nixpkgs {
-        inherit system;
-        config = { allowUnfree = true;};
-      };
-
-      lib = nixpkgs.lib;
-
-    in {
-      homeManagerConfigurations = {
-        basqs = home-manager.lib.homeManagerConfiguration {
-          inherit system pkgs;
-          username = "basqs";
-          homeDirectory = "/home/basqs";
-          stateVersion = "22.05";
-          configuration = {
-            nixpkgs = { inherit (pkgs) config overlays; };
-            imports = [
-              ({ config, pkgs, ... }: {
-                nixpkgs.overlays = with inputs; [
-                  emacs-overlay.overlay
-                  nur.overlay
-                ];
-              })
-              ./hm/modules/desktop.nix
-              ./hm/modules/editors.nix
-              ./hm/modules/git.nix
-              ./hm/modules/mail.nix
-              ./hm/modules/media.nix
-              ./hm/modules/x11.nix
-              ./hm/modules/shell.nix
-            ];
-          };
-        };
-      };
-
-      nixosConfigurations = {
-        nixos = lib.nixosSystem {
-          inherit system;
-          specialArgs = inputs;
-          modules = [
-            ./system/configuration.nix
-          ];
-        };
-      };
+  outputs = { self, nixpkgs, ... }@inputs:
+  let
+    system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${system};
+  in
+  {
+    nixosConfigurations.default = nixpkgs.lib.nixosSystem {
+      specialArgs = {inherit inputs;};
+      modules = [
+        ./system/configuration.nix
+        inputs.home-manager.nixosModules.home-manager {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+        }
+        inputs.home-manager.nixosModules.default
+      ];
     };
+  };
 }

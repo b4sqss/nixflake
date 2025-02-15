@@ -1,0 +1,6 @@
+#-*- mode: snippet -*-
+# name: fractions
+# key: fr
+# --
+
+\frac{${1:numerador}}{${2:denominador}}$0

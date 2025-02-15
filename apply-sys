@@ -1,5 +1,0 @@
-#!/usr/bin/env zsh
-pushd ~/.nixfiles
-nixos-rebuild build --flake .#
-doas ./result/activate 
-popd

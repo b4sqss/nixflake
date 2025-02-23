@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: org to latex
+# key: <latex
+# --
+
+#+TITLE: ${1:Title}
+#+DATE:
+:PROPERTIES:
+#+SETUPFILE: ~/org/latexsetup.org
+#+LATEX_CLASS: article
+#+LATEX_OPTIONS: [letterpaper]
+#+LATEX_HEADER: \usepackage[brazil]{babel}
+#+OPTIONS: toc:nil
+:END:
+
+$0

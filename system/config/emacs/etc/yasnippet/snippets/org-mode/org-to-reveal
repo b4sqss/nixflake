@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: org-reveal
+# key: <reveal
+# --
+#+TITLE: ${1:Titulo se individual}
+:REVEAL_PROPERTIES:
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+REVEAL_REVEAL_JS_VERSION: 4
+#+REVEAL_THEME: simple
+#+OPTIONS: timestamp:nil num:nil toc:nil
+# #+REVEAL_TITLE_SLIDE: <h2> ${2:Se for em Grupo} </h2> <br> Bernardo Basques
+:END:
+
+$0

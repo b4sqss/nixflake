@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Create title
+# key: s
+# --
+
+\section{${1:nome da sessão}}
+$0

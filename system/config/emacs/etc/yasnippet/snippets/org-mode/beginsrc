@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: beginsrc
+# key: <src
+# --
+
+#+begin_src ${1:language} :tangle ${2:tangled file}
+$0
+#+end_src

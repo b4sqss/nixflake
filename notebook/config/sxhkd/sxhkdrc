@@ -82,8 +82,8 @@ super + g
 super + {f,t}
 	bspc node -t {fullscreen,tiled}
 
-#super + {_,shift + space}
-#	bspc node focused -t \~floating
+super + shift + space
+	bspc node -t floating
 # set the node flags
 super + ctrl + {m,x,y,z}
 	bspc node -g {marked,locked,sticky,private}

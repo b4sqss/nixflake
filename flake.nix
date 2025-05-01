@@ -8,8 +8,9 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    zen-browser.url = "github:MarceColl/zen-browser-flake";
+    xremap = {
+      url = "github:xremap/nix-flake";
+    };
   };
 
   outputs = { self, nixpkgs, ... }@inputs:
@@ -18,15 +19,23 @@
     pkgs = nixpkgs.legacyPackages.${system};
   in
   {
-    nixosConfigurations.default = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.notebook = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [
-        ./system/configuration.nix
+        ./notebook/configuration.nix
         inputs.home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
         }
         inputs.home-manager.nixosModules.default
+        inputs.xremap.nixosModules.default {
+            services.xremap.config.modmap = [
+    {
+      name = "barra";
+      remap = {"KEY_RIGHTCTRL" = "KEY_RO";};
+      }
+  ];
+        }
       ];
     };
   };

@@ -34,7 +34,7 @@
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (save-place-mode 1)
-(global-hl-line-mode 1)
+;; (global-hl-line-mode 1) ;; highlight the current line
 (blink-cursor-mode 0)
 (global-visual-line-mode t)
 ;; (global-display-line-numbers-mode 1)
@@ -43,16 +43,17 @@
 ;; (global-set-key (kbd "<f9>") 'display-line-numbers-mode)
 (put 'narrow-to-region 'disabled nil)
 
-(global-set-key (kbd "M-C-5") #'query-replace-regexp)
-
 ;; font
 (set-face-attribute 'default nil
                     :family "Iosevka"
                     :height 145
                     :width 'normal)
 
+(setq mixed-pitch-set-height nil)
+
 ;; remember files I visit
 (recentf-mode 1)
+(setq recentf-max-saved-items 75)
 ;; (setq initial-buffer-choice (lambda () (org-todo-list)))
 (setq history-length 30)
 
@@ -151,6 +152,8 @@
   :bind(("C-s" . consult-line)
         ("C-M-l" . consult-imenu)
         ("C-x b" . consult-buffer)
+        ("C-c r" . consult-recent-file)
+        ("C-c b" . consult-bookmark)
         ("C-r" . consult-history)))
 
 (use-package marginalia
@@ -377,7 +380,7 @@
          ("C-c t" . org-todo-list)))
 
 (setq
- org-ellipsis "▾"
+ ;; org-ellipsis "▾"
  org-startup-indented t
  org-pretty-entities t
  org-hide-emphasis-markers t
@@ -389,7 +392,9 @@
  org-src-preserve-indentation nil
  org-startup-with-inline-images t
  org-directory "~/org"
- org-agenda-files (quote ("~/org"))
+ org-agenda-files (quote ("~/org/agenda.org" "~/org/mult.org" "~/org/refile-iphone.org"))
+ org-agenda-use-time-grid t
+org-agenda-remove-tags t
  org-lowest-priority ?E
  org-capture-templates `(
                          ("f" "faculdade" entry (file+headline "~/org/agenda.org" "Faculdade")
@@ -397,12 +402,13 @@
                          ("m" "mult"entry (file+headline "~/org/agenda.org" "Mult")
                           "* TODO [#A] %? :mult:")
                          ("a" "alemão" entry (file+headline "~/org/agenda.org" "Alemão")
-                          "* TODO %?")
+                          "* TODO %? :alemão:")
+                         ("t" "tarefas do dia" entry (file+datetree "~/org/tarefas.org")
+                          "* %t \n%?" :empty-lines 0)
+                         ("l" "ler/pesquisar" entry (file+headline "~/org/agenda.org" "Outros")
+                          "* %x \n")
                          ("o" "outros" entry (file+headline "~/org/agenda.org" "Outros")
                           "* TODO %?"))
- org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
-                     (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
-                     (sequence "|" "CANCELED(c)"))
  ;; org-modules    '(org-crypt
  ;;                  org-habit
  ;;                  org-bookmark
@@ -413,7 +419,6 @@
  org-outline-path-complete-in-steps nil
  org-refile-use-outline-path t
  org-habit-graph-column 60)
- ;; (org-agenda-skip-entry-if 'nottodo 'done)
 
 (use-package org-sidebar
   :bind ("C-c s" . org-sidebar-tree-toggle))
@@ -467,59 +472,6 @@
         org-roam-ui-update-on-save t
         org-roam-ui-open-on-start t))
 
-;; (let* ((base-font-color     (face-foreground 'default nil 'default))
-;;        (headline           `(:inherit default :weight bold :foreground ,base-font-color)))
-;;   (custom-theme-set-faces 'user
-;;                           `(org-level-8 ((t (,@headline ))))
-;;                           `(org-level-7 ((t (,@headline ))))
-;;                           `(org-level-6 ((t (,@headline ))))
-;;                           `(org-level-5 ((t (,@headline ))))
-;;                           `(org-level-4 ((t (,@headline , :height 1.1))))
-;;                           `(org-level-3 ((t (,@headline , :height 1.25))))
-;;                           `(org-level-2 ((t (,@headline , :height 1.5))))
-;;                           `(org-level-1 ((t (,@headline , :height 1.75))))
-;;                           `(org-document-title ((t (,@headline , :height 2.0 :underline nil))))))
-
-;; (setq face-remapping-alist '(;; Headers - outlines match org
-;;                              (outline-1 org-level-1)
-;;                              (outline-2 org-level-2)
-;;                              (outline-3 org-level-3)
-
-;;                              ;; Modeline - invis. active, monochrome inactive
-;;                              (powerline-active1        mode-line)
-;;                              (powerline-active2        mode-line)
-;;                              (spaceline-highlight-face mode-line)
-
-;;                              (powerline-active0        mode-line)
-;;                              (mode-line-active         mode-line)
-;;                              (mode-line-inactive       mode-line)
-;;                              (powerline-inactive0      mode-line)
-;;                              (powerline-inactive1      mode-line)
-;;                              (powerline-inactive2      mode-line)
-;;                              ))
-
-;; (setq display/headers/common '(:underline t :inherit nil))
-;; (setq display/headers/solarized-light
-;;       `((org-level-1
-;;          ,@display/headers/common
-;;          :height 1.35
-;;          :foreground "#a71d31")
-;;         (org-level-2
-;;          ,@display/headers/common
-;;          :height 1.25
-;;          :foreground "#8D6B94")
-;;         (org-level-3
-;;          ,@display/headers/common
-;;          :height 1.15)))
-
-;;;;; Org-blocks
-
-(setq display/org-blocks/common '(:italic nil :underline nil :box t))
-(setq display/org-blocks
-      `((org-block-begin-line
-         ,@display/org-blocks/common)
-        (org-block-end-line
-         ,@display/org-blocks/common)))
 
 (defun org-archive-done-tasks ()
   (interactive)
@@ -533,20 +485,20 @@
   :hook
   (org-mode . org-appear-mode))
 
-(use-package org-bullets
-  :ensure t
-  :init
-  (setq org-bullets-bullet-list '("❯" "❯❯" "❯❯❯" "❯❯❯❯" "❯❯❯❯❯"))
-  :config
-  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+;; (use-package org-bullets ;; not working for some reason
+;;   :ensure t
+;;   :init
+;;   (setq org-bullets-bullet-list '("❯" "❯❯" "❯❯❯" "❯❯❯❯" "❯❯❯❯❯"))
+;;   :config
+;;   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
 ;; Org agenda
 (setq org-agenda-start-day "+0d"
-;;       org-agenda-skip-timestamp-if-done t
-;;       org-agenda-skip-schedule-if-done t
-;;       org-agenda-skip-deadline-if-done t
-;;       ;; Edit settings
-;;       org-auto-align-tags
+      ;;       org-agenda-skip-timestamp-if-done t
+      ;;       org-agenda-skip-schedule-if-done t
+      ;;       org-agenda-skip-deadline-if-done t
+      ;;       ;; Edit settings
+      ;;       org-auto-align-tags
       org-tags-column 0
       org-catch-invisible-edits 'show-and-error
       org-insert-heading-respect-content t
@@ -564,19 +516,189 @@
                 (when (and window (not (one-window-p window)))
                   (delete-window window)))))
 
-(setq org-agenda-use-time-grid nil)
-(use-package org-modern)
-(global-org-modern-mode 1)
+(setq org-adapt-indentation t
+      org-hide-leading-stars t
+      org-hide-emphasis-markers t
+      org-pretty-entities t)
+(use-package olivetti-mode)
+(setq org-src-fontify-natively t
+	  org-src-tab-acts-natively t
+      org-edit-src-content-indentation 0)
+(add-hook 'org-mode-hook 'visual-line-mode)
+;; (add-hook 'org-mode-hook 'olivetti-mode)
+(setq org-lowest-priority ?F)  ;; Gives us priorities A through F
+(setq org-default-priority ?E) ;; If an item has no priority, it is considered [#E].
 
-(org-super-agenda-mode 1)
+(setq org-todo-keywords
+      '((sequence
+		 "NEXT(n)" "TODO(t)" ; Needs further action
+		 "|"
+		 "DONE(d)")
+        (sequence
+         "LER(l)" "LENDO"
+         "|"
+         "DONE(d)")))                           ; Needs no action currently
+
+;; (setq org-todo-keyword-faces
+;;       '(("TODO"      :inherit (org-todo region) :foreground "#A3BE8C" :weight bold)
+;; 		("LER"     :inherit (org-todo region) :foreground "#81A1C1" :weight bold)
+;; 		("NEXT"      :inherit (org-todo region) :foreground "#EBCB8B" :weight bold)
+;; 		("DONE"      :inherit (org-todo region) :foreground "#30343d" :weight bold)))
+
+(use-package org-modern
+  :config
+  (setq
+   org-auto-align-tags t
+   org-tags-column 0
+   org-fold-catch-invisible-edits 'show-and-error
+   org-special-ctrl-a/e t
+   org-insert-heading-respect-content t
+
+   ;; Agenda styling
+   org-agenda-tags-column 0
+   org-agenda-block-separator ?─
+   org-agenda-time-grid
+   '((daily today require-timed)
+	 (800 1000 1200 1400 1600 1800 2000)
+	 " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄")
+   org-agenda-current-time-string
+   "⭠ now ─────────────────────────────────────────────────")
+
+  (global-org-modern-mode))
+
+
+;; (use-package org-superstar
+;;   :config
+;;   (setq org-superstar-leading-bullet " ")
+;;   (setq org-superstar-special-todo-items t) ;; Makes TODO header bullets into boxes
+;;   (setq org-superstar-todo-bullet-alist '(("TODO" . 9744)
+;;                                           ("DONE" . 9744)
+;;                                           ("READ" . 9744)
+;;                                           ("IDEA" . 9744)
+;;                                           ("WAITING" . 9744)
+;;                                           ("CANCELLED" . 9744)
+;;                                           ("PROJECT" . 9744)
+;;                                           ("POSTPONED" . 9744)))
+;;   )
+
+
+
 (defun org-super-agenda-list ()
   (let ((org-super-agenda-groups
-         '((:auto-group t))))
+                     '(
+                       ;; Filter where tag is CRITICAL
+                       (:name "Faculdade"
+                              :tag "faculdade"
+                              :order 0
+                              )
+                       ;; Filter where TODO state is IN-PROGRESS
+                       (:name "Mult"
+                              :tag "mult"
+                              :order 1
+                              )
+                       ;; Filter where TODO state is BLOCKED or where the tag is obstacle
+                       (:name "IC"
+                              :and (:tag "ic" :todo "TODO")
+                              :order 2
+                              )
+                       ;; Filter where tag is @research
+                       (:name "Pesquisar / ler depois"
+                              :todo "LER"
+                              :order 3
+                              )
+                       ;; Filter where tag is @write_future_ticket
+                       (:name "Lembretes"
+                              :and (:todo "TODO" :not(:todo "NEXT"))
+                              :order 4
+                              )
+                       )))
     (org-agenda-list)))
 
-(setq org-super-agenda-groups '((:auto-group t)))
-
 (use-package org-super-agenda)
+(org-super-agenda-mode 1)
+(setq org-super-agenda-groups
+                     '(
+                       ;; Filter where tag is CRITICAL
+                       (:name "Faculdade"
+                              :tag "faculdade"
+                              :order 0
+                              )
+                       ;; Filter where TODO state is IN-PROGRESS
+                       (:name "Mult"
+                              :tag "mult"
+                              :order 1
+                              )
+                       ;; Filter where TODO state is BLOCKED or where the tag is obstacle
+                       (:name "IC"
+                              :and (:tag "ic" :todo "TODO")
+                              :order 2
+                              )
+                       (:name "Alemão"
+                              :tag "alemão"
+                              :order 3)
+                       ;; Filter where tag is @research
+                       (:name "Pesquisar / ler depois"
+                              :order 4
+                              )
+                       ;; Filter where tag is @write_future_ticket
+                       (:name "Lembretes"
+                              :and (:todo "TODO" :not(:todo "NEXT"))
+                              :order 5
+                              )
+                       (:discard (:anything))
+                       ))
+
+(setq org-agenda-custom-commands
+      '(
+        ("b" "bezo agenda"
+         (
+          (alltodo ""
+                   (
+                    ;; Remove tags to make the view cleaner
+                    (org-agenda-remove-tags t)
+                    (org-agenda-prefix-format "  %t  %s")
+                    (org-agenda-overriding-header "TAREFAS")
+
+                    ;; Define the super agenda groups (sorts by order)
+                    (org-super-agenda-groups
+                     '(
+                       ;; Filter where tag is CRITICAL
+                       (:name "Faculdade"
+                              :tag "faculdade"
+                              :order 0
+                              )
+                       ;; Filter where TODO state is IN-PROGRESS
+                       (:name "Mult"
+                              :tag "mult"
+                              :order 1
+                              )
+                       ;; Filter where TODO state is BLOCKED or where the tag is obstacle
+                       (:name "IC"
+                              :and (:tag "ic" :todo "TODO")
+                              :order 2
+                              )
+                       ;; Filter where tag is @research
+                       (:name "Pesquisar / ler depois"
+                              :order 3
+                              )
+                       ;; Filter where tag is @write_future_ticket
+                       (:name "Lembretes"
+                              :and (:todo "TODO" :not(:todo "NEXT"))
+                              :order 4
+                              )
+                       )
+                     )
+                    )
+                   )
+                    (agenda ""
+                  (
+                   (org-agenda-remove-tags t)
+                   (org-agenda-span 7)
+                   )
+                  )
+
+          ))
+        ))
 
 
 ;;(let ((org-super-agenda-groups
@@ -603,17 +725,6 @@
 	    (set-window-parameter nil 'min-margins '(0 . 0))
 	    (set-window-margins nil margin-width margin-width)))))
 
-(define-minor-mode center-document-mode
-  "Toggle centered text layout in the current buffer."
-  :lighter " Centered"
-  :group 'editing
-  (if center-document-mode
-      (add-hook 'window-configuration-change-hook #'center-document--adjust-margins 'append 'local)
-    (remove-hook 'window-configuration-change-hook #'center-document--adjust-margins 'local))
-  (center-document--adjust-margins))
-
-(add-hook 'org-mode-hook #'center-document-mode)
-
 ;; (use-package org-modern
 ;;   :hook
 ;;   (org-mode . global-org-modern-mode))
@@ -630,36 +741,6 @@
    (plist-put org-format-latex-options :scale 1)
    (plist-put org-format-latex-options :foreground 'auto)
    (plist-put org-format-latex-options :background 'auto)))
-
-;; Distraction-free writing
-(defun ews-distraction-free ()
-  "Distraction-free writing environment using Olivetti package."
-  (interactive)
-  (if (equal olivetti-mode nil)
-      (progn
-        (window-configuration-to-register 1)
-        (delete-other-windows)
-        (text-scale-set 2)
-        (olivetti-mode t))
-    (progn
-      (if (eq (length (window-list)) 1)
-          (jump-to-register 1))
-      (olivetti-mode 0)
-      (text-scale-set 0))))
-
-(use-package olivetti
-  :demand t
-  :bind
-  (("<f9>" . ews-distraction-free)))
-
-(dolist (face '(window-divider
-                window-divider-first-pixel
-                window-divider-last-pixel))
-  (face-spec-reset-face face)
-  (set-face-foreground face (face-attribute 'default :background)))
-(set-face-background 'fringe (face-attribute 'default :background))
-
-
 
 ;;org babel
 (org-babel-do-load-languages
@@ -687,6 +768,20 @@
     (while (re-search-forward "VTODO" nil t)
       (replace-match "VEVENT"))
     (save-buffer)))
+
+(use-package writeroom-mode
+  :bind (("C-c w" . writeroom-mode)))
+
+(define-minor-mode center-document-mode
+  "Toggle centered text layout in the current buffer."
+  :lighter " Centered"
+  :group 'editing
+  (if center-document-mode
+      (add-hook 'window-configuration-change-hook #'center-document--adjust-margins 'append 'local)
+    (remove-hook 'window-configuration-change-hook #'center-document--adjust-margins 'local))
+  (center-document--adjust-margins))
+
+(add-hook 'org-mode-hook #'center-document-mode)
 
 ;; auto-tangle
 (defun tangle-all-org-on-save-h ()
@@ -860,9 +955,7 @@
   :after company-mode
   :config
   (company-emoji-init))
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; 80 Java
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (setq eldoc-echo-area-use-multiline-p nil)
 (use-package eglot
   :config
@@ -921,3 +1014,45 @@
 (add-to-list 'auto-mode-alist '("\\.env\\'" . conf-mode))
 (add-to-list 'auto-mode-alist '("\\.kv\\'" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . js-mode))
+
+(use-package nix-mode)
+(use-package sxhkdrc-mode)
+
+(use-package markdown-mode)
+(use-package ess)
+
+(use-package notmuch
+  :ensure t
+  :bind (("C-c m" . notmuch))
+  :config
+  (setq notmuch-saved-searches '((:name "Unread"
+                                        :query "tag:inbox and tag:unread"
+                                        :count-query "tag:inbox and tag:unread"
+                                        :sort-order newest-first)
+                                 (:name "Inbox"
+                                        :query "tag:inbox"
+                                        :count-query "tag:inbox"
+                                        :sort-order newest-first)
+                                 (:name "Archive"
+                                        :query "tag:archive"
+                                        :count-query "tag:archive"
+                                        :sort-order newest-first)
+                                 (:name "Sent"
+                                        :query "tag:sent or tag:replied"
+                                        :count-query "tag:sent or tag:replied"
+                                        :sort-order newest-first)
+                                 (:name "Trash"
+                                        :query "tag:deleted"
+                                        :count-query "tag:deleted"
+                                        :sort-order newest-first))))
+(use-package consult-notmuch)
+(use-package notmuch-indicator)
+
+(add-hook 'notmuch-hello-mode-hook
+          '(lambda ()
+             (run-with-timer 0 600  ;; every 5 min fetch email
+                             '(lambda ()
+                                (if
+                                    (get-buffer "*notmuch-hello*")  ;; if notmuch buffer exists fetch email
+                                    (async-shell-command "pushd /home/tp/Mail/normal.gmail; gmi sync; popd; notmuch new"))
+                                (cancel-function-timers "no-output-shell-run")))))  ;; cancel timer if buffer does not exist

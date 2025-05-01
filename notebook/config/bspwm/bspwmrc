@@ -37,4 +37,5 @@ dunst &
 xsetroot -cursor_name left_ptr &
 kanata -c ~/.config/kanata/config.kbd &
 nm-applet &
-clight --no-backlight --no-screen --lat="-19.91" --lon="-43.93" &
+#clight --no-backlight --no-screen --lat="-19.91" --lon="-43.93" &
+redshift -l '-19.91:-43.93' &

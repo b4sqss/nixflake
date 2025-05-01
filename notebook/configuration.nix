@@ -5,6 +5,8 @@
 { config, pkgs, inputs, ... }:
 
 {
+  # Enable flakes
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   imports =
     [ # Include the results of the hardware scan.
@@ -12,29 +14,24 @@
       inputs.home-manager.nixosModules.default
     ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.kernelModules = [ "amdgpu" ];
+  boot = {
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
+    initrd.kernelModules = [ "amdgpu" ];
+    # initrd.luks.devices.cryptroot.device = "/dev/disk/by-uuid/2EEC612FEC60F30F";
+  };
 
-  networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
+  # Wifi and stuff
+  networking = {
+    hostName = "nixos"; # Define your hostname.
+    networkmanager.enable = true;
+  };
 
   # Set your time zone.
   time.timeZone = "America/Sao_Paulo";
-
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "pt_BR.UTF-8";
     LC_IDENTIFICATION = "pt_BR.UTF-8";
@@ -46,86 +43,78 @@
     LC_TELEPHONE = "pt_BR.UTF-8";
     LC_TIME = "pt_BR.UTF-8";
   };
-
-  services.tlp= {
-    enable = true;
-    settings = {
-      CPU_BOOST_ON_BAT = 0;
-      CPU_BOOST_ON_AC = 1;
-      DISK_IDLE_SECS_ON_AC= 0;
-      DISK_IDLE_SECS_ON_BAT= 2;
-      MAX_LOST_WORK_SECS_ON_AC= 15;
-      MAX_LOST_WORK_SECS_ON_BAT= 60;
-      SCHED_POWERSAVE_ON_AC= 0;
-      SCHED_POWERSAVE_ON_BAT= 1;
-      START_CHARGE_THRESH_BAT0 = 70;
-      STOP_CHARGE_THRESH_BAT0 = 80;
-      USB_AUTOSUSPEND = 1;
-      USB_BLACKLIST_WWAN= 1;
-      WOL_DISABLE = 1;
-      USB_BLACKLIST_BTUSB = 0;
-      USB_BLACKLIST_PHONE = 0;
-      DEVICES_TO_DISABLE_ON_LAN_CONNECT = "wifi wwan";
-      DEVICES_TO_DISABLE_ON_WIFI_CONNECT = "wwan";
-      DEVICES_TO_DISABLE_ON_WWAN_CONNECT = "wifi";
-      DEVICES_TO_ENABLE_ON_LAN_DISCONNECT = "wifi wwan";
-      DEVICES_TO_ENABLE_ON_WIFI_DISCONNECT = "";
-      DEVICES_TO_ENABLE_ON_WWAN_DISCONNECT = "";
-    };
-  };
-  services.thermald.enable = true; # keep my battery controlled
-  powerManagement.enable = true;
-  powerManagement.cpuFreqGovernor = "powersave"; # keep my cpu frequency controlled
-
-  services.power-profiles-daemon.enable = false;
-
-  services = {
-    upower.enable = true;
-    acpid.enable = true;
-  };
-
-  services.cron = {
-    enable = true;
-    systemCronJobs = [
-      "0 0 * * 0      root    fstrim /"
-    ];
-  };
-
-  virtualisation.docker = {
-    enable = true;
-    enableOnBoot = true;
-    autoPrune.enable = true;
-  };
-
-services.ollama = {
-  enable = true;
-    acceleration = "rocm";
-};
-
-  # Enable the X11 windowing system.
-  programs.xwayland.enable = true;
-  services.displayManager.ly.enable = true;
-  services.xserver = {
-    enable = true;
-    ## desktopManager.plasma5.enable = true;
-    ## displayManager.startx.enable = true;
-  windowManager.bspwm.enable = true;
-  videoDrivers = [ "amdgpu" ];
-  };
-  programs.dconf.enable = true;
-
-
-  # Configure keymap in X11
-   services.xserver.xkb = {
-     layout = "br";
-     variant = "thinkpad";
-   };
-
   # Configure console keymap
   console.keyMap = "br-abnt2";
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
+  # Taking care of the battery
+  powerManagement.enable = true;
+  services = {
+    thermald.enable = true;
+    auto-cpufreq.enable = true;
+    auto-cpufreq.settings = {
+      battery = {
+        governor = "powersave";
+        turbo = "never";
+        enable_thresholds = true;
+        start_treshold = 60;
+        stop_threshold = 75;
+      };
+      charger = {
+        governor = "performance";
+        turbo = "auto";
+      };
+    };
+
+    # Taking care of my ssd
+    cron = {
+      enable = true;
+      systemCronJobs = [
+        "0 0 * * 0      root    fstrim /"
+      ];
+    };
+
+    # Trying out self-hosting
+    nextcloud = {
+      enable = false;
+      package = pkgs.nextcloud30;
+      hostName = "localhost";
+      config.adminpassFile = "/etc/nextcloud-admin-pass";
+      config.dbtype = "sqlite";
+    };
+
+    # AI
+    ollama = {
+      enable = false;
+      acceleration = "rocm";
+    };
+
+    # GUI and xserver
+    xserver = {
+      enable = true;
+      ## desktopManager.plasma5.enable = true;
+      displayManager.sx.enable = true;
+      windowManager.bspwm.enable = true;
+      videoDrivers = [ "amdgpu" ];
+      xkb = {
+        layout = "br";
+        variant = "thinkpad";
+      };
+    };
+
+
+    # Enable printing
+    printing.enable = true;
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+    };
+  };
+
+  #   virtualisation.docker = {
+  #     enable = true;
+  #     enableOnBoot = true;
+  #     autoPrune.enable =
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -154,6 +143,7 @@ services.ollama = {
         permit nopass :wheel as root cmd xremap
   '';
 
+  programs.dconf.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
@@ -191,7 +181,7 @@ services.ollama = {
 
   services.seatd = {
     enable = true;
-};
+  };
 
   programs.zsh = {
     enable = true;
@@ -207,10 +197,10 @@ services.ollama = {
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
 
   # List services that you want to enable:
 
@@ -241,12 +231,17 @@ services.ollama = {
     ];
   };
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.11"; # Did you read the comment?
+  # Auto updates
   system.autoUpgrade.enable = true;
+  system.autoUpgrade.dates = "weekly";
+
+  # Auto cleanup
+  nix.gc = {
+    automatic = true;
+    dates = "daily";
+    options = "--delete-older-than 10d";
+  };
+  nix.settings.auto-optimise-store = true;
+
+  system.stateVersion = "24.11";
 }

@@ -9,7 +9,7 @@
 ## red = "#ff7a93"
 ## white = "#acb0d0"
 ## yellow = "#ff9e64"
-## 
+##
 ## [colors.normal]
 ## black = "#32344a"
 ## blue = "#7aa2f7"
@@ -19,7 +19,7 @@
 ## red = "#f7768e"
 ## white = "#787c99"
 ## yellow = "#e0af68"
-## 
+##
 ## [colors.primary]
 ## background = "#1a1b26"
 ## foreground = "#a9b1d6"
@@ -32,7 +32,7 @@
 ## [colors.primary]
 ## background = '#001a1d'
 ## foreground = '#839496'
-## 
+##
 ## # Normal colors
 ## [colors.normal]
 ## black   = '#073642'
@@ -43,7 +43,7 @@
 ## magenta = '#d33682'
 ## cyan    = '#2aa198'
 ## white   = '#eee8d5'
-## 
+##
 ## # Bright colors
 ## [colors.bright]
 ## black   = '#4c4c4c'
@@ -60,7 +60,7 @@
 ## [colors.primary]
 ## background = '#fdf6e3'
 ## foreground = '#586e75'
-## 
+##
 ## # Normal colors
 ## [colors.normal]
 ## black   = '#073642'
@@ -71,7 +71,7 @@
 ## magenta = '#d33682'
 ## cyan    = '#2aa198'
 ## white   = '#eee8d5'
-## 
+##
 ## # Bright colors
 ## [colors.bright]
 ## black   = '#002b36'
@@ -146,7 +146,7 @@ white   = '#ebdbb2'
 blinking = "on"
 
 [font]
-size = 10.0
+size = 15.0
 
 [font.normal]
 family = "Iosevka"

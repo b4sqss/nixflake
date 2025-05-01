@@ -4,6 +4,8 @@ export LS_COLORS
 export XKB_DEFAULT_OPTIONS=caps:ctrl_modifier
 export XKB_DEFAULT_LAYOUT=br
 
-# if [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
-#   exec river
-# fi
+if [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
+  exec river
+fi
+
+# [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && sx

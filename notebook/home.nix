@@ -1,5 +1,4 @@
 { config, pkgs, inputs, ... }:
-
 {
   # Informações básicas
   home.username = "tp";
@@ -12,30 +11,45 @@
     hunspell hunspellDicts.pt_BR hunspellDicts.en_US
     rsync cyrus-sasl-xoauth2 gsasl cyrus_sasl isync offlineimap
     texlive.combined.scheme-full
-    zip unzip
+    pandoc
+    zip unzip unrar-wrapper
     tealdeer
     ffmpeg-full
     tmux
+    manix
+    wlr-randr jq
+    imagemagick yt-dlp
+
+    ## Mail
+    isync lieer notmuch
 
     ## GUI
-    gimp okular brave pcmanfm lxappearance imv gtk4 libreoffice arkpandora_ttf qbittorrent
+    gimp okular evince masterpdfeditor brave pcmanfm dolphin lxappearance imv gtk4 libreoffice arkpandora_ttf qbittorrent
     vlc
+    ladybird
+    cameractrls guvcview
+    obs-studio
+    nextcloud-client
 
     freecad qcad
+    calibre foliate
+    chemtool marvin
 
     ## PROGRAMMING
     pyright python3Full python312Packages.pip python312Packages.pyngrok
     nodejs typescript-language-server typescript
     clang ccls gnumake libtool
     zls zig
-    nil
+    nil nixfmt-rfc-style
     arduino-ide
-    R
+    R multimarkdown
+    pinentry-emacs
+    # pinentry-all
     ## DESKTOP UTILITIES
-    bemenu  clightd grim slurp seatd maim xclip networkmanagerapplet
+    bemenu redshift grim slurp seatd maim xclip networkmanagerapplet
+    swaybg clight waybar swaynotificationcenter
     sxhkd sx picom polybar feh dunst rofi kanata dmenu pulseaudio polybar-pulseaudio-control brightnessctl
-
-    inputs.zen-browser.packages."${system}".specific
+    appflowy affine
   ];
 
   # Serviços
@@ -107,9 +121,9 @@
       size = 12;
     };
     iconTheme = {
-      name = "WhiteSur-light";
-      # package = pkgs.breeze-icons;
-      package = pkgs.whitesur-icon-theme;
+      name = "Breeze";
+      package = pkgs.breeze-icons;
+      # package = pkgs.whitesur-icon-theme;
     };
     theme = {
       name = "Breeze-Dark";
@@ -119,6 +133,7 @@
       name = "Breeze";
     };
   };
+
 
   # Programas padrões
   xdg.mime.enable = true;
@@ -154,25 +169,26 @@
   };
 
   # Alternativa ao stow
-  xdg.configFile = {
-    "alacritty/alacritty.toml".source = ./config/alacritty.toml;
-    "tmux".source = ./config/tmux;
+  home.file = {
+    ".zshrc".source = "${config.home.homeDirectory}/nixflake/notebook/config/zsh/.zshrc";
+    ".zprofile".source = "${config.home.homeDirectory}/nixflake/notebook/config/zsh/.zprofile";
+    ".p10k.zsh".source = "${config.home.homeDirectory}/nixflake/notebook/config/zsh/.p10k.zsh";
 
-    "nvim".source = ./config/nvim;
-    "emacs".source = ./config/emacs;
+    ".config/alacritty/alacritty.toml".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/alacritty.toml";
+    ".config/tmux".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/tmux";
 
-    "bspwm".source = ./config/bspwm;
-    "sxhkd".source = ./config/sxhkd;
-    "polybar".source = ./config/polybar;
-    "dunst".source = ./config/dunst;
-};
+    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/nvim";
+    ".config/emacs/init.el".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/emacs/init.el";
+    ".config/emacs/etc/yasnippet".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/emacs/etc/yasnippet";
 
-  home.file= {
-    ".zshrc".source = ./config/zsh/.zshrc;
-    ".zprofile".source = ./config/zsh/.zprofile;
-    ".p10k.zsh".source = ./config/zsh/.p10k.zsh;
+    ".config/bspwm".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/bspwm";
+    ".config/sxhkd".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/sxhkd";
+    ".config/polybar".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/polybar";
+    ".config/dunst".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/dunst";
+    ".config/sx".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/sx";
   };
 
   home.stateVersion = "24.11";
   programs.home-manager.enable = true;
+
 }

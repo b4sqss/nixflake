@@ -1,0 +1,5 @@
+modmap:
+  - name: barra # Optional
+    remap: # Required
+      # Replace a key with another
+      KEY_RIGHTCTRL: KEY_RO

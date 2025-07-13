@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: org to latex
-# key: <latex
+# key: <la
 # --
 
 #+TITLE: ${1:Title}

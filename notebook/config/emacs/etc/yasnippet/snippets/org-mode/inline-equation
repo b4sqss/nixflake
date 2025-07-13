@@ -3,4 +3,8 @@
 # key: eq
 # --
 
-\\( $0 \\)
+\begin{equation*}
+${1:Equação}
+\end{equation*}
+
+$0

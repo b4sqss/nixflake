@@ -96,19 +96,18 @@ alias dops="docker ps"
 alias dlog="docker logs"
 alias dlogf="docker logs -f"
 
-bindkey -s '^o' 'fzf-cd\n'
+bindkey -s '^o' 'cd $(find * -type d | fzf)\n'
 bindkey -s '^k' 'fzf-kill\n'
-bindkey -s '^a' 'bc -lq\n'
 
 alias ga="git add"
 alias gc="git commit"
 alias gcm="git commit -m"
 alias gs="git status"
 alias gsb="git status -sb"
+alias ls="exa --group-directories-first"
 alias l="ls -lF"
 alias la="l -a"
 alias ll="ls -l"
-alias ls="ls --group-directories-first --color"
 alias cp="cp -iv"
 alias mv="mv -iv"
 alias sxiv="sxiv -b"

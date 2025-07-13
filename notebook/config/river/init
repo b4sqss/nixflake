@@ -18,9 +18,11 @@
 ##     }
 ## start_audio &
 
-riverctl map normal Super Return spawn 'alacritty'
+riverctl map normal Super Return spawn 'kitty'
 
-riverctl map normal Super Space spawn "bemenu-run -i -p '' --fn 'IosevkaNerdFont 14' --hb '#ebdbb2' --hf '#282828' --nb '#282828' --nf '#ebdbb2' --tb '#282828' --tf '#ebdbb2' --ab '#282828' --af '#ebdbb2' --cb '#282828' --cf '#ebdbb2' --fb '#282828' --ff '#ebdbb2' --fbb '#282828' --fbf '#ebdbb2' -l 10 -W 0.5"
+riverctl map normal Super Space spawn "rofi -show drun"
+
+# riverctl map normal Super Space spawn "bemenu-run -i -p '' --fn 'IosevkaNerdFont 14' --hb '#ebdbb2' --hf '#282828' --nb '#282828' --nf '#ebdbb2' --tb '#282828' --tf '#ebdbb2' --ab '#282828' --af '#ebdbb2' --cb '#282828' --cf '#ebdbb2' --fb '#282828' --ff '#ebdbb2' --fbb '#282828' --fbf '#ebdbb2' -l 10 -W 0.5"
 
 riverctl map normal Super+Shift L spawn "swaylock --screenshots --clock --indicator --indicator-radius 100 --indicator-thickness 7 --effect-blur 7x5  --effect-vignette 0.5:0.5 --ring-color 444b6a --key-hl-color a9b1d6 --line-color 00000000 --inside-color 1a1b2688 --separator-color 00000000 --text-color a9b1d6 --grace 2 --fade-in 0.2 --font IosevkaNerdFont"
 
@@ -56,6 +58,7 @@ riverctl map normal Super+Control L send-to-output previous
 #riverctl map normal Super Return zoom
 
 # Super+H and Super+L to decrease/increase the main ratio of rivertile(1)
+riverctl map normal Super+Shift W spawn "kill waybar && waybar"
 riverctl map normal Super H send-layout-cmd rivertile "main-ratio -0.05"
 riverctl map normal Super L send-layout-cmd rivertile "main-ratio +0.05"
 
@@ -152,6 +155,7 @@ riverctl map normal None XF86AudioMute         spawn 'pulsemixer --toggle-mute'
 
 riverctl map normal None Print spawn 'grim ~/Pictures/screenshots/$(date "+%Y-%d-%m-%H:%M:%S").png'
 riverctl map normal Shift Print spawn 'slurp | grim -g - ~/Pictures/screenshots/$(date "+%Y-%d-%m-%H:%M").png'
+riverctl map normal Super S spawn 'slurp | grim -g - - | wl-copy'
 
 # Set background and border color
 riverctl background-color 0x1a1b26
@@ -187,7 +191,7 @@ riverctl spawn 'clight --no-backlight --no-screen --lat="-19.91" --lon="-43.93"'
 riverctl spawn 'emacs --daemon'
 riverctl spawn 'waybar'
 riverctl spawn 'swaync'
-riverctl spawn 'wlr-randr --output $(wlr-randr --json | jq ".[0].name" -r) --mode 1920x1080 --transform 90'
+riverctl spawn 'if [[ $(wlr-randr --json | jq ".[0].model" -r) = "ARZOPA" ]]; then wlr-randr --output $(wlr-randr --json | jq ".[0].name" -r) --mode 1920x1080 --transform 90; fi'
 riverctl input pointer-1267-12691-ELAN06C7:00_04F3:3193_Touchpad tap enabled &
 
 
@@ -198,5 +202,6 @@ riverctl map normal Super E spawn "emacsclient --eval '(emacs-everywhere)'"
 riverctl map normal Super P spawn "okular"
 riverctl map normal Super+Shift P spawn "foliate"
 riverctl map normal Super+Shift F spawn "dolphin"
-riverctl map normal Super O spawn "firefox"
+riverctl map normal Super O spawn "zen"
 riverctl map normal Super+Shift O spawn "brave"
+riverctl map normal Super+Shift W spawn "pkill waybar && waybar"

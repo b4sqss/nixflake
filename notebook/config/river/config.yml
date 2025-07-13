@@ -3,3 +3,8 @@ modmap:
     remap: # Required
       # Replace a key with another
       KEY_RIGHTCTRL: KEY_RO
+  - name: caps
+    remap:
+        CapsLock:
+            alone: Esc
+            held: CONTROL_L

@@ -127,6 +127,30 @@
 (setq warning-suppress-types '((use-package) (comp)))
 (setq comp-deferred-compilation t)
 
+(use-package evil
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
+  (setq evil-want-C-u-scroll t)
+  (setq evil-want-C-i-jump nil)
+  (setq evil-undo-system 'undo-tree)
+  :config
+  (evil-mode 1)
+  (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+  (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
+
+  ;; Use visual line motions even outside of visual-line-mode buffers
+  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+
+  (evil-set-initial-state 'messages-buffer-mode 'normal)
+  (evil-set-initial-state 'dashboard-mode 'normal))
+
+(use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init))
+
 (use-package vertico
   :init (vertico-mode)
   :custom (setq vertico-cycle t))
@@ -195,7 +219,7 @@
   :hook (dired-mode . dired-hide-dotfiles-mode)
   :config
   (evil-collection-define-key 'normal 'dired-mode-map
-                              "H" 'dired-hide-dotfiles-mode))
+    "H" 'dired-hide-dotfiles-mode))
 
 ;; getting help
 (use-package which-key
@@ -270,6 +294,9 @@
   (use-package auto-yasnippet
     :ensure t)
   (yas-reload-all))
+(use-package doom-snippets
+  :after yasnippet
+  :straight (doom-snippets :type git :host github :repo "doomemacs/snippets" :files ("*.el" "*")))
 
 ;; indentation
 (setq-default tab-width 4)
@@ -330,7 +357,7 @@
 (use-package doom-themes
   ;; :init (load-theme 'doom-tokyo-night t))
   ;; :init (load-theme 'modus-operandi t))
-  :init (load-theme 'doom-gruvbox t))
+  :init (load-theme 'doom-nord t))
 
 (defun toggle-theme()
   (interactive)
@@ -394,13 +421,13 @@
  org-directory "~/org"
  org-agenda-files (quote ("~/org/agenda.org" "~/org/mult.org" "~/org/refile-iphone.org"))
  org-agenda-use-time-grid t
-org-agenda-remove-tags t
+ org-agenda-remove-tags t
  org-lowest-priority ?E
  org-capture-templates `(
                          ("f" "faculdade" entry (file+headline "~/org/agenda.org" "Faculdade")
-                          "* TODO [#A] %? :faculdade:")
+                          "* TODO %? :faculdade:")
                          ("m" "mult"entry (file+headline "~/org/agenda.org" "Mult")
-                          "* TODO [#A] %? :mult:")
+                          "* TODO %? :mult:")
                          ("a" "alemão" entry (file+headline "~/org/agenda.org" "Alemão")
                           "* TODO %? :alemão:")
                          ("t" "tarefas do dia" entry (file+datetree "~/org/tarefas.org")
@@ -585,68 +612,68 @@ org-agenda-remove-tags t
 
 (defun org-super-agenda-list ()
   (let ((org-super-agenda-groups
-                     '(
-                       ;; Filter where tag is CRITICAL
-                       (:name "Faculdade"
-                              :tag "faculdade"
-                              :order 0
-                              )
-                       ;; Filter where TODO state is IN-PROGRESS
-                       (:name "Mult"
-                              :tag "mult"
-                              :order 1
-                              )
-                       ;; Filter where TODO state is BLOCKED or where the tag is obstacle
-                       (:name "IC"
-                              :and (:tag "ic" :todo "TODO")
-                              :order 2
-                              )
-                       ;; Filter where tag is @research
-                       (:name "Pesquisar / ler depois"
-                              :todo "LER"
-                              :order 3
-                              )
-                       ;; Filter where tag is @write_future_ticket
-                       (:name "Lembretes"
-                              :and (:todo "TODO" :not(:todo "NEXT"))
-                              :order 4
-                              )
-                       )))
+         '(
+           ;; Filter where tag is CRITICAL
+           (:name "Faculdade"
+                  :tag "faculdade"
+                  :order 0
+                  )
+           ;; Filter where TODO state is IN-PROGRESS
+           (:name "Mult"
+                  :tag "mult"
+                  :order 1
+                  )
+           ;; Filter where TODO state is BLOCKED or where the tag is obstacle
+           (:name "IC"
+                  :and (:tag "ic" :todo "TODO")
+                  :order 2
+                  )
+           ;; Filter where tag is @research
+           (:name "Pesquisar / ler depois"
+                  :todo "LER"
+                  :order 3
+                  )
+           ;; Filter where tag is @write_future_ticket
+           (:name "Lembretes"
+                  :and (:todo "TODO" :not(:todo "NEXT"))
+                  :order 4
+                  )
+           )))
     (org-agenda-list)))
 
 (use-package org-super-agenda)
 (org-super-agenda-mode 1)
 (setq org-super-agenda-groups
-                     '(
-                       ;; Filter where tag is CRITICAL
-                       (:name "Faculdade"
-                              :tag "faculdade"
-                              :order 0
-                              )
-                       ;; Filter where TODO state is IN-PROGRESS
-                       (:name "Mult"
-                              :tag "mult"
-                              :order 1
-                              )
-                       ;; Filter where TODO state is BLOCKED or where the tag is obstacle
-                       (:name "IC"
-                              :and (:tag "ic" :todo "TODO")
-                              :order 2
-                              )
-                       (:name "Alemão"
-                              :tag "alemão"
-                              :order 3)
-                       ;; Filter where tag is @research
-                       (:name "Pesquisar / ler depois"
-                              :order 4
-                              )
-                       ;; Filter where tag is @write_future_ticket
-                       (:name "Lembretes"
-                              :and (:todo "TODO" :not(:todo "NEXT"))
-                              :order 5
-                              )
-                       (:discard (:anything))
-                       ))
+      '(
+        ;; Filter where tag is CRITICAL
+        (:name "Faculdade"
+               :tag "faculdade"
+               :order 0
+               )
+        ;; Filter where TODO state is IN-PROGRESS
+        (:name "Mult"
+               :tag "mult"
+               :order 1
+               )
+        ;; Filter where TODO state is BLOCKED or where the tag is obstacle
+        (:name "IC"
+               :and (:tag "ic" :todo "TODO")
+               :order 2
+               )
+        (:name "Alemão"
+               :tag "alemão"
+               :order 3)
+        ;; Filter where tag is @research
+        (:name "Pesquisar / ler depois"
+               :order 4
+               )
+        ;; Filter where tag is @write_future_ticket
+        (:name "Lembretes"
+               :and (:todo "TODO" :not(:todo "NEXT"))
+               :order 5
+               )
+        (:discard (:anything))
+        ))
 
 (setq org-agenda-custom-commands
       '(
@@ -690,7 +717,7 @@ org-agenda-remove-tags t
                      )
                     )
                    )
-                    (agenda ""
+          (agenda ""
                   (
                    (org-agenda-remove-tags t)
                    (org-agenda-span 7)
@@ -851,17 +878,28 @@ org-agenda-remove-tags t
 
 (global-prettify-symbols-mode)
 
+(use-package cdlatex) ;;cdlatex-command-help para ver a lista de abreviações
+(use-package latexmk)
+(use-package xenops)
+(use-package evil-tex)
 (use-package auctex
   :custom
-  (setq TeX-auto-save t)
-  (setq TeX-parse-self t)
+  (setq TeX-auto-save t
+        TeX-parse-self t
+        TeX-PDF-mode t
+        TeX-electric-sub-and-superscript t)
+
   (setq-default TeX-master nil)
   ;; :hook
   ;; (LaTeX-mode . TeX-fold-mode)
   )
-
+(add-hook 'TeX-mode-hook 'flyspell-mode); Enable Flyspell mode for TeX modes such as AUCTeX. Highlights all misspelled words.
 (add-hook 'LaTeX-mode-hook (lambda ()
                              (TeX-fold-mode 1)))
+(add-hook 'LaTeX-mode-hook #'turn-on-cdlatex)
+(add-hook 'LaTeX-mode-hook #'xenops-mode)
+(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+(add-hook 'LaTeX-mode-hook #'evil-tex-mode)
 
 ;; Use pdf-tools to open PDF files
 (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
@@ -962,6 +1000,8 @@ org-agenda-remove-tags t
   (setq eglot-report-progress nil)
   :bind
   (("M-RET" . eglot-code-actions)))
+
+(setq lsp-tex-server 'digestif)
 
 ;; Python
 

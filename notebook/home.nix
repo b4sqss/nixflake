@@ -6,50 +6,51 @@
 
   # Programas
   home.packages = with pkgs; [
+    inputs.zen-browser.packages.${pkgs.system}.default
     ## CLI
-    fd fzf ripgrep htop btop gotop zinit pulsemixer pavucontrol pamixer i3lock playerctl libnotify nnn
+    fd fzf ripgrep htop btop zinit pulsemixer pavucontrol playerctl libnotify nnn blueberry
+
     hunspell hunspellDicts.pt_BR hunspellDicts.en_US
-    rsync cyrus-sasl-xoauth2 gsasl cyrus_sasl isync offlineimap
     texlive.combined.scheme-full
     pandoc
     zip unzip unrar-wrapper
     tealdeer
     ffmpeg-full
-    tmux
     manix
     wlr-randr jq
     imagemagick yt-dlp
+    mprocs dua just eza
+    yazi hyperfine
+    zellij tmux
 
     ## Mail
     isync lieer notmuch
 
     ## GUI
-    gimp okular evince masterpdfeditor brave pcmanfm dolphin lxappearance imv gtk4 libreoffice arkpandora_ttf qbittorrent
-    vlc
-    ladybird
+    gimp inkscape okular zathura latexrun evince masterpdfeditor brave pcmanfm dolphin kdePackages.qtsvg     libsForQt5.qtstyleplugin-kvantum
+    libsForQt5.qt5ct lxappearance imv gtk4 libreoffice-qt arkpandora_ttf qbittorrent
     cameractrls guvcview
     obs-studio
-    nextcloud-client
 
     freecad qcad
     calibre foliate
-    chemtool marvin
+    marvin
+    dropbox-cli
 
     ## PROGRAMMING
-    pyright python3Full python312Packages.pip python312Packages.pyngrok
+    pyright python3Full python312Packages.pip python312Packages.pyngrok python312Packages.scrapy
     nodejs typescript-language-server typescript
     clang ccls gnumake libtool
     zls zig
+    julia
+    lua lua54Packages.luarocks tree-sitter
     nil nixfmt-rfc-style
-    arduino-ide
     R multimarkdown
-    pinentry-emacs
-    # pinentry-all
+
     ## DESKTOP UTILITIES
-    bemenu redshift grim slurp seatd maim xclip networkmanagerapplet
-    swaybg clight waybar swaynotificationcenter
-    sxhkd sx picom polybar feh dunst rofi kanata dmenu pulseaudio polybar-pulseaudio-control brightnessctl
-    appflowy affine
+    grim slurp seatd maim wl-clipboard wlogout networkmanagerapplet
+    swaybg clight brightnessctl waybar swaynotificationcenter
+    sx rofi pulseaudio
   ];
 
   # Serviços
@@ -66,6 +67,18 @@
       ];
     };
 
+    neovim = {
+      enable = true;
+      withPython3 = true;
+
+      extraPython3Packages = (ps: with ps; [
+        pynvim
+        unidecode
+        black
+        isort
+      ]);
+    };
+
     mpv = {
       enable = true;
       package = (
@@ -77,10 +90,63 @@
       );
     };
 
-	  zoxide = {
-		  enable = true;
-		  enableZshIntegration = true;
-	  };
+    zoxide = {
+      enable = true;
+      enableNushellIntegration = true;
+      enableZshIntegration = true;
+    };
+
+    kitty = {
+      enable = true;
+      font = {
+        name = "Iosevka Nerd Font";
+        size = 15;
+      };
+      settings = {
+        enable_audio_bell = false;
+        confirm_os_window_close = 0;
+      };
+
+      shellIntegration.enableZshIntegration = true;
+      themeFile = "Nord";
+    };
+
+    nushell = { enable = true;
+                extraConfig = ''
+                let carapace_completer = {|spans|
+                    carapace $spans.0 nushell ...$spans | from json
+                                         }
+            $env.config = {
+show_banner: false,
+             completions: {
+case_sensitive: false # case-sensitive completions
+                    quick: true    # set to false to prevent auto-selecting completions
+                    partial: true    # set to false to prevent partial filling of the prompt
+                    algorithm: "fuzzy"    # prefix or fuzzy
+                    external: {
+# set to false to prevent nushell looking into $env.PATH to find more suggestions
+enable: true
+# set to lower can improve completion performance at the cost of omitting some options
+            max_results: 100
+            completer: $carapace_completer # check 'carapace_completer'
+                    }
+             }
+                                         }
+            $env.PATH = ($env.PATH |
+                    split row (char esep) |
+                    prepend /home/tp/.local/bin/ |
+                    append /usr/bin/env
+                          )
+                '';
+                shellAliases = {
+                  vi = "nvim";
+                  vim = "nvim";
+                  nano = "nvim";
+                };
+              };
+    carapace.enable = true;
+    carapace.enableNushellIntegration = true;
+
 
     git = {
       package = pkgs.gitAndTools.gitFull;
@@ -113,27 +179,48 @@
     };
   };
 
+
   # Aparência
   gtk = {
     enable = true;
-    font = {
-      name = "Iosevka";
-      size = 12;
-    };
-    iconTheme = {
-      name = "Breeze";
-      package = pkgs.breeze-icons;
-      # package = pkgs.whitesur-icon-theme;
-    };
     theme = {
       name = "Breeze-Dark";
-      package = pkgs.breeze-gtk;
+      package = pkgs.libsForQt5.breeze-gtk;
+    };
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.catppuccin-papirus-folders.override {
+        flavor = "mocha";
+        accent = "lavender";
+      };
     };
     cursorTheme = {
       name = "Breeze";
     };
+    gtk3 = {
+      extraConfig.gtk-application-prefer-dark-theme = true;
+    };
+    };
+
+  qt = {
+    enable = true;
+    platformTheme = "gtk";
+    style = {
+      name = "gtk2";
+      package = pkgs.libsForQt5.breeze-qt5;
+    };
   };
 
+  xdg = {
+    portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal
+        xdg-desktop-portal-gtk
+      ];
+      config.common.default = "*";
+    };
+  };
 
   # Programas padrões
   xdg.mime.enable = true;
@@ -143,13 +230,13 @@
     "image/png" = "imv.desktop";
 
     "application/pdf" = "org.kde.okular.desktop";
-    "application/epub+zip" = "org.kde.okular.desktop";
+    "application/epub+zip" = "com.github.johnfactotum.Foliate.desktop";
 
-    "text/html" = "firefox.desktop";
-    "x-scheme-handler/http" = "firefox.desktop";
-    "x-scheme-handler/https" = "firefox.desktop";
-    "x-scheme-handler/about" = "firefox.desktop";
-    "x-scheme-handler/unknown" = "firefox.desktop";
+    "text/html" = "zen.desktop";
+    "x-scheme-handler/http" = "zen.desktop";
+    "x-scheme-handler/https" = "zen.desktop";
+    "x-scheme-handler/about" = "zen.desktop";
+    "x-scheme-handler/unknown" = "zen.desktop";
 
     "application/x-bittorrent" = "org.qbittorrent.qBittorrent.desktop";
     "x-scheme-handler/magnet" = "org.qbittorrent.qBittorrent.desktop";
@@ -177,12 +264,12 @@
     ".config/alacritty/alacritty.toml".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/alacritty.toml";
     ".config/tmux".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/tmux";
 
-    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/nvim";
+    # ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/nvim";
     ".config/emacs/init.el".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/emacs/init.el";
     ".config/emacs/etc/yasnippet".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/emacs/etc/yasnippet";
 
     ".config/river".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/river";
-    ".config/waybar".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/waybar";
+    # ".config/waybar".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/waybar";
     ".config/swaync".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/swaync";
   };
 

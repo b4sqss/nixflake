@@ -50,6 +50,7 @@
   powerManagement.enable = true;
   services = {
     thermald.enable = true;
+    power-profiles-daemon.enable = false;
     auto-cpufreq.enable = true;
     auto-cpufreq.settings = {
       battery = {
@@ -73,27 +74,22 @@
       ];
     };
 
-    # Trying out self-hosting
-    nextcloud = {
-      enable = false;
-      package = pkgs.nextcloud30;
-      hostName = "localhost";
-      config.adminpassFile = "/etc/nextcloud-admin-pass";
-      config.dbtype = "sqlite";
-    };
-
     # AI
     ollama = {
       enable = false;
       acceleration = "rocm";
     };
 
+    mysql = {
+      enable = false;
+      package = pkgs.mariadb;
+    };
+
     # GUI and xserver
     xserver = {
       enable = true;
-      ## desktopManager.plasma5.enable = true;
       displayManager.sx.enable = true;
-      windowManager.bspwm.enable = true;
+      # desktopManager.plasma5.enable = true;
       videoDrivers = [ "amdgpu" ];
       xkb = {
         layout = "br";
@@ -101,6 +97,7 @@
       };
     };
 
+    # displayManager.ly.enable = true;
 
     # Enable printing
     printing.enable = true;
@@ -111,10 +108,13 @@
     };
   };
 
-  #   virtualisation.docker = {
-  #     enable = true;
-  #     enableOnBoot = true;
-  #     autoPrune.enable =
+    virtualisation.docker = {
+      enable = false;
+      enableOnBoot = true;
+      autoPrune.enable = true;
+      };
+
+  hardware.bluetooth.enable = true;
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -135,13 +135,13 @@
     persist = true;
   }];
   security.doas.extraConfig = ''
-        permit nopass :wheel as root cmd reboot
-        permit nopass :wheel as root cmd poweroff
-        permit nopass :wheel as root cmd mount
-        permit nopass :wheel as root cmd umount
-        permit nopass :wheel as root cmd nixos-rebuild
-        permit nopass :wheel as root cmd xremap
-  '';
+    permit nopass :wheel as root cmd reboot
+    permit nopass :wheel as root cmd poweroff
+    permit nopass :wheel as root cmd mount
+    permit nopass :wheel as root cmd umount
+    permit nopass :wheel as root cmd nixos-rebuild
+    permit nopass :wheel as root cmd xremap
+    '';
 
   programs.dconf.enable = true;
 
@@ -224,10 +224,11 @@
     };
 
     packages = with pkgs; [
-      font-awesome
       iosevka
+      font-awesome
       ibm-plex
       emacs-all-the-icons-fonts
+      nerd-fonts.iosevka
     ];
   };
 

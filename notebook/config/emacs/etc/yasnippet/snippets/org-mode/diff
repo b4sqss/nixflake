@@ -1,0 +1,6 @@
+#-*- mode: snippet -*-
+# name: derivadas
+# key: d
+# --
+
+\frac{d ${1:}}{d ${2:variável}}$0

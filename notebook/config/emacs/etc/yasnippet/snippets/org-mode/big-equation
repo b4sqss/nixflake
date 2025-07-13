@@ -1,6 +1,10 @@
 # -*- mode: snippet -*-
 # name: big-equation
-# key: Eq
+# key: al
 # --
 
-\\[ $0 \\]
+\begin{align*}
+${1:Equação}
+\end{align*}
+
+$0

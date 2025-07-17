@@ -159,25 +159,23 @@
   users.users.tp = {
     shell = pkgs.zsh;
     isNormalUser = true;
-    description = "bernardo";
+    description = "thinkpad";
     extraGroups = [ "networkmanager" "wheel" "docker" "seat" "uinput" "dialout"];
     packages = with pkgs; [
-      thunderbird firefox neovim river bemenu alacritty git swaynotificationcenter
-      home-manager cmake
+        home-manager
     ];
 
+  };
+  home-manager = {
+      extraSpecialArgs = {inherit inputs;};
+      users = {
+        "tp" = import ./home.nix;
+    };
   };
   environment.pathsToLink = ["/share/zsh"];
   environment.binsh = "${pkgs.dash}/bin/dash";
 
   nixpkgs.config.allowUnfree = true;
-
-  home-manager = {
-    extraSpecialArgs = {inherit inputs;};
-    users = {
-      "tp" = import ./home.nix;
-    };
-  };
 
   services.seatd = {
     enable = true;
@@ -191,7 +189,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     # vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget neovim firefox spotify
+    wget neovim
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

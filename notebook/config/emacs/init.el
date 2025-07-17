@@ -854,8 +854,8 @@
         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 
 ;; (setq latex-run-command "xelatex")
-;; (setq-default org-latex-pdf-process
-;;     (list "latexmk -pdflatex='%latex -shell-escape -interaction nonstopmode' -pdf -output-directory=%o %f"))
+(setq-default org-latex-pdf-process
+    (list "latexmk -pdflatex='%latex -shell-escape -interaction nonstopmode' -pdf -output-directory=%o %f"))
 ;; pdf
 (use-package pdf-tools
   :mode "\\.pdf\\'"
@@ -879,6 +879,21 @@
 (global-prettify-symbols-mode)
 
 (use-package cdlatex) ;;cdlatex-command-help para ver a lista de abreviações
+  (add-to-list 'cdlatex-command-alist '("pmat" "Insert pmatrix env"
+                                       "\\begin{bmatrix} ? \\end{bmatrix}"
+                                       lazytab-position-cursor-and-edit
+                                       nil nil t))
+
+  (add-to-list 'cdlatex-command-alist '("pdv" "Insert partial derivative"
+                                       "\\pdv{?}{}"
+                                       lazytab-position-cursor-and-edit
+                                       nil nil t))
+
+  (add-to-list 'cdlatex-command-alist '("odv" "Insert derivative"
+                                       "\\odv{?}{}"
+                                       lazytab-position-cursor-and-edit
+                                       nil nil t))
+
 (use-package latexmk)
 (use-package xenops)
 (use-package evil-tex)
@@ -1060,6 +1075,13 @@
 
 (use-package markdown-mode)
 (use-package ess)
+
+(use-package evil-ledger
+  :ensure t
+  :after ledger-mode
+  :config
+  (setq evil-ledger-sort-key "S")
+  (add-hook 'ledger-mode-hook #'evil-ledger-mode))
 
 (use-package notmuch
   :ensure t

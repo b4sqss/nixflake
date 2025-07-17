@@ -27,6 +27,7 @@
     isync lieer notmuch
 
     ## GUI
+    thunderbird river
     gimp inkscape okular zathura latexrun evince masterpdfeditor brave pcmanfm dolphin kdePackages.qtsvg     libsForQt5.qtstyleplugin-kvantum
     libsForQt5.qt5ct lxappearance imv gtk4 libreoffice-qt arkpandora_ttf qbittorrent
     cameractrls guvcview
@@ -36,6 +37,7 @@
     calibre foliate
     marvin
     dropbox-cli
+    ledger hledger
 
     ## PROGRAMMING
     pyright python3Full python312Packages.pip python312Packages.pyngrok python312Packages.scrapy
@@ -43,6 +45,7 @@
     clang ccls gnumake libtool
     zls zig
     julia
+    cmake
     lua lua54Packages.luarocks tree-sitter
     nil nixfmt-rfc-style
     R multimarkdown
@@ -175,6 +178,7 @@ enable: true
         core.editor = "emacs";
         protocol.keybase.allow = "always";
         pull.rebase = "false";
+        safe.directory = "/home/tp/nixflake";
       };
     };
   };
@@ -204,7 +208,7 @@ enable: true
 
   qt = {
     enable = true;
-    platformTheme = "gtk";
+    platformTheme.name = "gtk";
     style = {
       name = "gtk2";
       package = pkgs.libsForQt5.breeze-qt5;
@@ -261,15 +265,14 @@ enable: true
     ".zprofile".source = "${config.home.homeDirectory}/nixflake/notebook/config/zsh/.zprofile";
     ".p10k.zsh".source = "${config.home.homeDirectory}/nixflake/notebook/config/zsh/.p10k.zsh";
 
-    ".config/alacritty/alacritty.toml".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/alacritty.toml";
     ".config/tmux".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/tmux";
 
-    # ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/nvim";
+    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/nvim";
     ".config/emacs/init.el".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/emacs/init.el";
     ".config/emacs/etc/yasnippet".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/emacs/etc/yasnippet";
 
     ".config/river".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/river";
-    # ".config/waybar".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/waybar";
+    ".config/waybar".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/waybar";
     ".config/swaync".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/swaync";
   };
 

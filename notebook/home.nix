@@ -23,25 +23,29 @@
     yazi hyperfine
     zellij tmux
 
+    winetricks wineWowPackages.waylandFull
+
     ## Mail
     isync lieer notmuch
 
     ## GUI
-    thunderbird river
-    gimp inkscape okular zathura latexrun evince masterpdfeditor brave pcmanfm dolphin kdePackages.qtsvg     libsForQt5.qtstyleplugin-kvantum
-    libsForQt5.qt5ct lxappearance imv gtk4 libreoffice-qt arkpandora_ttf qbittorrent
-    cameractrls guvcview
+    thunderbird ladybird
+    gimp inkscape okular zathura latexrun brave pcmanfm dolphin kdePackages.qtsvg libsForQt5.qtstyleplugin-kvantum
+    libsForQt5.qt5ct imv gtk4 libreoffice-qt arkpandora_ttf qbittorrent
+    cameractrls
     obs-studio
+    lutris
 
     freecad qcad
     calibre foliate
     marvin
     dropbox-cli
-    ledger hledger
+    hledger
 
     ## PROGRAMMING
     pyright python3Full python312Packages.pip python312Packages.pyngrok python312Packages.scrapy
     nodejs typescript-language-server typescript
+    jdk21
     clang ccls gnumake libtool
     zls zig
     julia
@@ -49,11 +53,14 @@
     lua lua54Packages.luarocks tree-sitter
     nil nixfmt-rfc-style
     R multimarkdown
+    kdenlive
 
     ## DESKTOP UTILITIES
+    river
     grim slurp seatd maim wl-clipboard wlogout networkmanagerapplet
-    swaybg clight brightnessctl waybar swaynotificationcenter
+    swaybg wlsunset brightnessctl waybar swaynotificationcenter
     sx rofi pulseaudio
+    xmobar xclip
   ];
 
   # Serviços

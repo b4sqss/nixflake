@@ -187,7 +187,7 @@ rivertile -view-padding 0 -outer-padding 0 -main-ratio 0.5 &
 
 
 riverctl spawn 'swaybg -m fill -i ~/Pictures/wallpapers/1694053508715626.png'
-riverctl spawn 'clight --no-backlight --no-screen --lat="-19.91" --lon="-43.93"'
+riverctl spawn 'wlsunset -l -20 -L -44'
 riverctl spawn 'emacs --daemon'
 riverctl spawn 'waybar'
 riverctl spawn 'swaync'

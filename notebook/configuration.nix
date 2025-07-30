@@ -86,10 +86,20 @@
     };
 
     # GUI and xserver
+
     xserver = {
       enable = true;
-      displayManager.sx.enable = true;
-      # desktopManager.plasma5.enable = true;
+      desktopManager.gnome.enable = true;
+      displayManager.gdm.enable = true;
+      # displayManager.sx.enable = true;
+      # displayManager.session = [{
+      #   manage = "window";
+      #   name = "river";
+      #   start = ''
+      #   river &
+      #   waitPID=$!
+      # '';
+      # }];
       videoDrivers = [ "amdgpu" ];
       xkb = {
         layout = "br";
@@ -108,11 +118,11 @@
     };
   };
 
-    virtualisation.docker = {
-      enable = false;
-      enableOnBoot = true;
-      autoPrune.enable = true;
-      };
+  virtualisation.docker = {
+    enable = false;
+    enableOnBoot = true;
+    autoPrune.enable = true;
+  };
 
   hardware.bluetooth.enable = true;
 
@@ -162,14 +172,14 @@
     description = "thinkpad";
     extraGroups = [ "networkmanager" "wheel" "docker" "seat" "uinput" "dialout"];
     packages = with pkgs; [
-        home-manager
+      home-manager
     ];
 
   };
   home-manager = {
-      extraSpecialArgs = {inherit inputs;};
-      users = {
-        "tp" = import ./home.nix;
+    extraSpecialArgs = {inherit inputs;};
+    users = {
+      "tp" = import ./home.nix;
     };
   };
   environment.pathsToLink = ["/share/zsh"];
@@ -190,6 +200,7 @@
   environment.systemPackages = with pkgs; [
     # vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget neovim
+    river
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

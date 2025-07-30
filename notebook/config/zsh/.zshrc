@@ -56,10 +56,6 @@ zstyle ':fzf-tab:complete:zoxide:*' fzf-preview 'ls --color $realpath'
 
 _comp_options+=(globdots)
 
-# snippet
-zinit snippet OMZP::git
-zinit snippet OMZP::archlinux
-
 # fzf
 eval "$(fzf --zsh)"
 setopt autocd
@@ -125,8 +121,9 @@ export EDITOR="nvim"
 export MANPAGER="nvim +Man!"
 export FZF_DEFAULT_COMMAND="rg --files"
 export FZF_DEFAULT_OPTS="-m --border"
-export PATH="/home/basqs/.cargo/bin:$PATH"
-export PATH="/home/basqs/.local/bin:$PATH"
+export PATH="~/.cargo/bin:$PATH"
+export PATH="~/.local/bin:$PATH"
+export LEDGER_FILE="/home/tp/Sync/financas/hledger.journal"
 
 # nnn config
 export BLK="0B"

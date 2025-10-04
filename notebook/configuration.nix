@@ -85,21 +85,34 @@
       package = pkgs.mariadb;
     };
 
-    # GUI and xserver
+    postgresql = {
+      enable = true;
+      ensureDatabases = [ "Mult" ];
+      settings = {
+        port = 5432;
+      };
+      authentication = pkgs.lib.mkOverride 10 ''
+    local all       all     trust
+# TYPE  DATABASE  USER      ADDRESS           METHOD
+# Regra para permitir que o usuário 'tp' se conecte à base 'Mult' localmente
+host    Mult      tp        127.0.0.1/32      scram-sha-256
+host    Mult      tp        ::1/128           scram-sha-256
 
+# Regra para permitir que o usuário 'tp' se conecte de qualquer máquina na rede local
+host    Mult      tp        192.168.1.0/24      scram-sha-256
+
+    '';
+    };
+
+    udev.packages = [ pkgs.android-udev-rules ];
+
+    # GUI and xserver
+    desktopManager.gnome.enable = true;
+    displayManager.gdm.enable = true;
+    displayManager.gdm.wayland = true;
     xserver = {
       enable = true;
-      desktopManager.gnome.enable = true;
-      displayManager.gdm.enable = true;
-      # displayManager.sx.enable = true;
-      # displayManager.session = [{
-      #   manage = "window";
-      #   name = "river";
-      #   start = ''
-      #   river &
-      #   waitPID=$!
-      # '';
-      # }];
+      displayManager.sx.enable = true;
       videoDrivers = [ "amdgpu" ];
       xkb = {
         layout = "br";
@@ -119,8 +132,8 @@
   };
 
   virtualisation.docker = {
-    enable = false;
-    enableOnBoot = true;
+    enable = true;
+    enableOnBoot = false;
     autoPrune.enable = true;
   };
 
@@ -154,10 +167,17 @@
     '';
 
   programs.dconf.enable = true;
+  programs.hyprland = {
+      enable = true;
+      xwayland.enable = true;
+  };
+  programs.river= {
+      enable = true;
+      xwayland.enable = true;
+  };
 
-  # Enable touchpad support (enabled default in most desktopManager).
+# Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
-
 
   documentation.dev.enable = true;
   documentation.man.enable = true;
@@ -165,22 +185,22 @@
   documentation.nixos.enable = true;
   environment.extraOutputsToInstall = [ "info" "man" "devman" ];
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+# Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.tp = {
-    shell = pkgs.zsh;
-    isNormalUser = true;
-    description = "thinkpad";
-    extraGroups = [ "networkmanager" "wheel" "docker" "seat" "uinput" "dialout"];
-    packages = with pkgs; [
-      home-manager
-    ];
+      shell = pkgs.zsh;
+      isNormalUser = true;
+      description = "thinkpad";
+      extraGroups = [ "networkmanager" "wheel" "docker" "seat" "uinput" "dialout"];
+      packages = with pkgs; [
+          home-manager
+      ];
 
   };
   home-manager = {
-    extraSpecialArgs = {inherit inputs;};
-    users = {
-      "tp" = import ./home.nix;
-    };
+      extraSpecialArgs = {inherit inputs;};
+      users = {
+          "tp" = import ./home.nix;
+      };
   };
   environment.pathsToLink = ["/share/zsh"];
   environment.binsh = "${pkgs.dash}/bin/dash";
@@ -188,68 +208,68 @@
   nixpkgs.config.allowUnfree = true;
 
   services.seatd = {
-    enable = true;
+      enable = true;
   };
 
   programs.zsh = {
-    enable = true;
+      enable = true;
   };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+# List packages installed in system profile. To search, run:
+# $ nix search wget
   environment.systemPackages = with pkgs; [
-    # vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget neovim
-    river
+# vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      wget neovim
+          river
   ];
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
+# Some programs need SUID wrappers, can be configured further or are
+# started in user sessions.
+# programs.mtr.enable = true;
   programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
+      enable = true;
+      enableSSHSupport = true;
   };
 
-  # List services that you want to enable:
+# List services that you want to enable:
 
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+# Enable the OpenSSH daemon.
+# services.openssh.enable = true;
 
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+# Open ports in the firewall.
+# networking.firewall.allowedTCPPorts = [ ... ];
+# networking.firewall.allowedUDPPorts = [ ... ];
+# Or disable the firewall altogether.
+# networking.firewall.enable = false;
 
   fonts = {
-    fontconfig = {
-      enable = true;
-      defaultFonts = {
-        monospace = [ "Iosevka" ];
-        serif = [ "IBM Plex Serif" ];
-        sansSerif = [ "IBM Plex Sans" ];
+      fontconfig = {
+          enable = true;
+          defaultFonts = {
+              monospace = [ "Iosevka" ];
+              serif = [ "IBM Plex Serif" ];
+              sansSerif = [ "IBM Plex Sans" ];
+          };
       };
-    };
 
-    packages = with pkgs; [
-      iosevka
-      font-awesome
-      ibm-plex
-      emacs-all-the-icons-fonts
-      nerd-fonts.iosevka
-    ];
+      packages = with pkgs; [
+          iosevka
+              font-awesome
+              ibm-plex
+              emacs-all-the-icons-fonts
+              nerd-fonts.iosevka
+      ];
   };
 
-  # Auto updates
+# Auto updates
   system.autoUpgrade.enable = true;
   system.autoUpgrade.dates = "weekly";
 
-  # Auto cleanup
+# Auto cleanup
   nix.gc = {
-    automatic = true;
-    dates = "daily";
-    options = "--delete-older-than 10d";
+      automatic = true;
+      dates = "daily";
+      options = "--delete-older-than 10d";
   };
   nix.settings.auto-optimise-store = true;
 

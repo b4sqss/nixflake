@@ -71,6 +71,13 @@ soffice --convert-to pdf $@;
 rm $@
 }
 
+flac2mp3() {
+for file in *.flac; do
+    filename=${file::-5}
+    ffmpeg -i "$file" -ab 192k "$filename.mp3"
+    done
+}
+
 nnn-cd () {
     # Block nesting of nnn in subshells
     [ "${NNNLVL:-0}" -eq 0 ] || {

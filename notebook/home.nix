@@ -7,6 +7,10 @@
   # Programas
   home.packages = with pkgs; [
     inputs.zen-browser.packages.${pkgs.system}.default
+    inputs.winapps.packages."${system}".winapps
+    inputs.winapps.packages."${system}".winapps-launcher # optional
+    freerdp
+
     ## CLI
     fd fzf ripgrep htop btop zinit pulsemixer pavucontrol playerctl libnotify nnn blueberry
 
@@ -25,25 +29,29 @@
 
     winetricks wineWowPackages.waylandFull
 
+    poppler-utils
+
     ## Mail
     isync lieer notmuch
 
     ## GUI
-    thunderbird ladybird
-    gimp inkscape okular zathura latexrun brave pcmanfm dolphin kdePackages.qtsvg libsForQt5.qtstyleplugin-kvantum
-    libsForQt5.qt5ct imv gtk4 libreoffice-qt arkpandora_ttf qbittorrent
+    gnomeExtensions.tiling-shell
+    thunderbird ladybird obsidian
+    gimp inkscape kdePackages.okular zathura latexrun brave firefox pcmanfm kdePackages.dolphin imv gtk4 libreoffice-qt arkpandora_ttf qbittorrent
     cameractrls
     obs-studio
     lutris
-
+    tidal-hifi strawberry
     freecad qcad
     calibre foliate
     marvin
     dropbox-cli
     hledger
+    unciv
 
     ## PROGRAMMING
-    pyright python3Full python312Packages.pip python312Packages.pyngrok python312Packages.scrapy
+    pyright #python3Full python312Packages.pip python312Packages.pyngrok python312Packages.scrapy
+    jupyter-all
     nodejs typescript-language-server typescript
     jdk21
     clang ccls gnumake libtool
@@ -53,10 +61,10 @@
     lua lua54Packages.luarocks tree-sitter
     nil nixfmt-rfc-style
     R multimarkdown
-    kdenlive
+    kdePackages.kdenlive
 
     ## DESKTOP UTILITIES
-    river
+    river hyprland
     grim slurp seatd maim wl-clipboard wlogout networkmanagerapplet
     swaybg wlsunset brightnessctl waybar swaynotificationcenter
     sx rofi pulseaudio
@@ -211,7 +219,7 @@ enable: true
     gtk3 = {
       extraConfig.gtk-application-prefer-dark-theme = true;
     };
-    };
+  };
 
   qt = {
     enable = true;
@@ -242,6 +250,12 @@ enable: true
 
     "application/pdf" = "org.kde.okular.desktop";
     "application/epub+zip" = "com.github.johnfactotum.Foliate.desktop";
+
+    # "application/vnd.openxmlformats-officedocument.presentationml.presentation" = "libreoffice"
+    # "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = "libreoffice"
+    # "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+    # " = "libreoffice"
+
 
     "text/html" = "zen.desktop";
     "x-scheme-handler/http" = "zen.desktop";

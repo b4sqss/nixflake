@@ -26,7 +26,7 @@
               truncate-partial-width-windows nil
               truncate-lines nil)
 
-(setq default-frame-alist '((undecorated . t)))
+;; (setq default-frame-alist '((undecorated . t)))
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (tooltip-mode -1)
@@ -1069,6 +1069,8 @@
 (add-to-list 'auto-mode-alist '("\\.env\\'" . conf-mode))
 (add-to-list 'auto-mode-alist '("\\.kv\\'" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . js-mode))
+
+(use-package ein)
 
 (use-package nix-mode)
 (use-package sxhkdrc-mode)

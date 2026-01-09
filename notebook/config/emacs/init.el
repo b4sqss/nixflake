@@ -359,6 +359,9 @@
   ;; :init (load-theme 'modus-operandi t))
   :init (load-theme 'doom-nord t))
 
+(straight-use-package
+    '(everforest :type git :host github :repo "Theory-of-Everything/everforest-emacs"))
+
 (defun toggle-theme()
   (interactive)
   (if (eq (car custom-enabled-themes) 'doom-tokyo-night)
@@ -856,6 +859,17 @@
 ;; (setq latex-run-command "xelatex")
 (setq-default org-latex-pdf-process
     (list "latexmk -pdflatex='%latex -shell-escape -interaction nonstopmode' -pdf -output-directory=%o %f"))
+
+;; obsidian for syncing
+(use-package obsidian
+  :config
+   (global-obsidian-mode t)
+  (obsidian-backlinks-mode t)
+  :custom
+  ;; location of obsidian vault
+  (obsidian-directory "~/Documents/obsidian/")
+  (obsidian-daily-note "~/Documents/obsidian/Diário/"))
+
 ;; pdf
 (use-package pdf-tools
   :mode "\\.pdf\\'"

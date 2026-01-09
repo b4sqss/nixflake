@@ -189,9 +189,11 @@ rivertile -view-padding 0 -outer-padding 0 -main-ratio 0.5 &
 riverctl spawn 'swaybg -m fill -i ~/Pictures/wallpapers/1694053508715626.png'
 riverctl spawn 'wlsunset -l -20 -L -44'
 riverctl spawn 'emacs --daemon'
-riverctl spawn 'waybar'
+# riverctl spawn 'waybar'
+riverctl spawn 'eww open bar'
 riverctl spawn 'swaync'
 riverctl spawn 'if [[ $(wlr-randr --json | jq ".[0].model" -r) = "ARZOPA" ]]; then wlr-randr --output $(wlr-randr --json | jq ".[0].name" -r) --mode 1920x1080 --transform 90; fi'
+# riverctl spawn 'wl-paste -t text -w xclip -selection clipboard'
 riverctl input pointer-1267-12691-ELAN06C7:00_04F3:3193_Touchpad tap enabled &
 
 

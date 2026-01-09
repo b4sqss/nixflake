@@ -130,7 +130,9 @@ export FZF_DEFAULT_COMMAND="rg --files"
 export FZF_DEFAULT_OPTS="-m --border"
 export PATH="~/.cargo/bin:$PATH"
 export PATH="~/.local/bin:$PATH"
-export LEDGER_FILE="/home/tp/Sync/financas/hledger.journal"
+export LEDGER_FILE="/home/tp/Documents/obsidian/hledger/2025.journal"
+export LIBVIRT_DEFAULT_URI="qemu:///system"
+export GOOGLE_CLOUD_PROJECT="lexical-aileron-458919-s3"
 
 # nnn config
 export BLK="0B"

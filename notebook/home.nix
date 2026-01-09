@@ -9,10 +9,10 @@
     inputs.zen-browser.packages.${pkgs.system}.default
     inputs.winapps.packages."${system}".winapps
     inputs.winapps.packages."${system}".winapps-launcher # optional
-    freerdp
+    freerdp dialog netcat-gnu iproute2 dive podman-tui podman-compose docker-compose
 
     ## CLI
-    fd fzf ripgrep htop btop zinit pulsemixer pavucontrol playerctl libnotify nnn blueberry
+    fd fzf ripgrep htop btop zinit pulsemixer pamixer pavucontrol playerctl libnotify nnn blueberry gemini-cli
 
     hunspell hunspellDicts.pt_BR hunspellDicts.en_US
     texlive.combined.scheme-full
@@ -33,20 +33,21 @@
 
     ## Mail
     isync lieer notmuch
+    veusz gnuplot labplot
 
     ## GUI
     gnomeExtensions.tiling-shell
-    thunderbird ladybird obsidian
+    thunderbird ladybird obsidian zotero
     gimp inkscape kdePackages.okular zathura latexrun brave firefox pcmanfm kdePackages.dolphin imv gtk4 libreoffice-qt arkpandora_ttf qbittorrent
     cameractrls
     obs-studio
-    lutris
+    lutris steam
     tidal-hifi strawberry
     freecad qcad
     calibre foliate
     marvin
     dropbox-cli
-    hledger
+    hledger hledger-web hledger-utils hledger-iadd hledger-ui
     unciv
 
     ## PROGRAMMING
@@ -66,7 +67,7 @@
     ## DESKTOP UTILITIES
     river hyprland
     grim slurp seatd maim wl-clipboard wlogout networkmanagerapplet
-    swaybg wlsunset brightnessctl waybar swaynotificationcenter
+    swaybg wlsunset brightnessctl waybar eww ristate swaynotificationcenter
     sx rofi pulseaudio
     xmobar xclip
   ];

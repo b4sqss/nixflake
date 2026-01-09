@@ -131,13 +131,19 @@ host    Mult      tp        192.168.1.0/24      scram-sha-256
     };
   };
 
-  virtualisation.docker = {
-    enable = true;
-    enableOnBoot = false;
-    autoPrune.enable = true;
-  };
+  hardware = {
+    bluetooth.enable = true;
 
-  hardware.bluetooth.enable = true;
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+    };
+
+    amdgpu.amdvlk = {
+      enable = true;
+      support32Bit.enable = true;
+    };
+  };
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -167,16 +173,12 @@ host    Mult      tp        192.168.1.0/24      scram-sha-256
     '';
 
   programs.dconf.enable = true;
-  programs.hyprland = {
-      enable = true;
-      xwayland.enable = true;
-  };
   programs.river= {
-      enable = true;
-      xwayland.enable = true;
+    enable = true;
+    # xwayland.enable = true;
   };
 
-# Enable touchpad support (enabled default in most desktopManager).
+  # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
   documentation.dev.enable = true;
@@ -185,22 +187,46 @@ host    Mult      tp        192.168.1.0/24      scram-sha-256
   documentation.nixos.enable = true;
   environment.extraOutputsToInstall = [ "info" "man" "devman" ];
 
-# Define a user account. Don't forget to set a password with ‘passwd’.
+# virtualisation.libvirtd = {
+#   enable = true;
+#   qemu = {
+#     package = pkgs.qemu_kvm;
+#     runAsRoot = true;
+#     swtpm.enable = true;
+#     ovmf = { # not needed in NixOS 25.11 since https://github.com/NixOS/nixpkgs/pull/421549
+#       enable = true;
+#       packages = [(pkgs.OVMF.override {
+#         secureBoot = true;
+#         tpmSupport = true;
+#       }).fd];
+#     };
+#   };
+# };
+
+  virtualisation.docker = {
+    enable = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
+
+  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.tp = {
-      shell = pkgs.zsh;
-      isNormalUser = true;
-      description = "thinkpad";
-      extraGroups = [ "networkmanager" "wheel" "docker" "seat" "uinput" "dialout"];
-      packages = with pkgs; [
-          home-manager
-      ];
+    shell = pkgs.zsh;
+    isNormalUser = true;
+    description = "thinkpad";
+    extraGroups = [ "networkmanager" "wheel" "docker" "libvirtd" "kvm" "seat" "uinput" "dialout"];
+    packages = with pkgs; [
+      home-manager
+    ];
 
   };
   home-manager = {
-      extraSpecialArgs = {inherit inputs;};
-      users = {
-          "tp" = import ./home.nix;
-      };
+    extraSpecialArgs = {inherit inputs;};
+    users = {
+      "tp" = import ./home.nix;
+    };
   };
   environment.pathsToLink = ["/share/zsh"];
   environment.binsh = "${pkgs.dash}/bin/dash";
@@ -208,68 +234,69 @@ host    Mult      tp        192.168.1.0/24      scram-sha-256
   nixpkgs.config.allowUnfree = true;
 
   services.seatd = {
-      enable = true;
+    enable = true;
   };
 
   programs.zsh = {
-      enable = true;
+    enable = true;
   };
 
-# List packages installed in system profile. To search, run:
-# $ nix search wget
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
   environment.systemPackages = with pkgs; [
-# vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-      wget neovim
-          river
+    # vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    distrobox
+    wget neovim
+    river
   ];
 
-# Some programs need SUID wrappers, can be configured further or are
-# started in user sessions.
-# programs.mtr.enable = true;
+  # Some programs need SUID wrappers, can be configured further or are
+  # started in user sessions.
+  # programs.mtr.enable = true;
   programs.gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
+    enable = true;
+    enableSSHSupport = true;
   };
 
-# List services that you want to enable:
+  # List services that you want to enable:
 
-# Enable the OpenSSH daemon.
-# services.openssh.enable = true;
+  # Enable the OpenSSH daemon.
+  # services.openssh.enable = true;
 
-# Open ports in the firewall.
-# networking.firewall.allowedTCPPorts = [ ... ];
-# networking.firewall.allowedUDPPorts = [ ... ];
-# Or disable the firewall altogether.
-# networking.firewall.enable = false;
+  # Open ports in the firewall.
+  # networking.firewall.allowedTCPPorts = [ ... ];
+  # networking.firewall.allowedUDPPorts = [ ... ];
+  # Or disable the firewall altogether.
+  # networking.firewall.enable = false;
 
   fonts = {
-      fontconfig = {
-          enable = true;
-          defaultFonts = {
-              monospace = [ "Iosevka" ];
-              serif = [ "IBM Plex Serif" ];
-              sansSerif = [ "IBM Plex Sans" ];
-          };
+    fontconfig = {
+      enable = true;
+      defaultFonts = {
+        monospace = [ "Iosevka" ];
+        serif = [ "IBM Plex Serif" ];
+        sansSerif = [ "IBM Plex Sans" ];
       };
+    };
 
-      packages = with pkgs; [
-          iosevka
-              font-awesome
-              ibm-plex
-              emacs-all-the-icons-fonts
-              nerd-fonts.iosevka
-      ];
+    packages = with pkgs; [
+      iosevka
+      font-awesome
+      ibm-plex
+      emacs-all-the-icons-fonts
+      nerd-fonts.iosevka
+    ];
   };
 
-# Auto updates
+  # Auto updates
   system.autoUpgrade.enable = true;
   system.autoUpgrade.dates = "weekly";
 
-# Auto cleanup
+  # Auto cleanup
   nix.gc = {
-      automatic = true;
-      dates = "daily";
-      options = "--delete-older-than 10d";
+    automatic = true;
+    dates = "daily";
+    options = "--delete-older-than 10d";
   };
   nix.settings.auto-optimise-store = true;
 

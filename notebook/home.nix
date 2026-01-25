@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, self, ... }:
 {
   # Informações básicas
   home.username = "tp";
@@ -6,15 +6,15 @@
 
   # Programas
   home.packages = with pkgs; [
-    inputs.zen-browser.packages.${pkgs.system}.default
-    inputs.winapps.packages."${system}".winapps
-    inputs.winapps.packages."${system}".winapps-launcher # optional
+    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+    inputs.winapps.packages.${pkgs.stdenv.hostPlatform.system}.winapps
+    inputs.winapps.packages.${pkgs.stdenv.hostPlatform.system}.winapps-launcher # optional
     freerdp dialog netcat-gnu iproute2 dive podman-tui podman-compose docker-compose
 
     ## CLI
     fd fzf ripgrep htop btop zinit pulsemixer pamixer pavucontrol playerctl libnotify nnn blueberry gemini-cli
 
-    hunspell hunspellDicts.pt_BR hunspellDicts.en_US
+        hunspell hunspellDicts.pt_BR hunspellDicts.en_US hunspellDicts.de_DE
     texlive.combined.scheme-full
     pandoc
     zip unzip unrar-wrapper
@@ -26,8 +26,13 @@
     mprocs dua just eza
     yazi hyperfine
     zellij tmux
+    gdu
 
     winetricks wineWowPackages.waylandFull
+    playonlinux
+    winboat
+
+    virt-manager
 
     poppler-utils
 
@@ -58,15 +63,17 @@
     clang ccls gnumake libtool
     zls zig
     julia
+    #dwsim
     cmake
     lua lua54Packages.luarocks tree-sitter
-    nil nixfmt-rfc-style
+    nil nixfmt
     R multimarkdown
     kdePackages.kdenlive
 
     ## DESKTOP UTILITIES
-    river hyprland
+    river-classic hyprland
     grim slurp seatd maim wl-clipboard wlogout networkmanagerapplet
+    mpv-unwrapped
     swaybg wlsunset brightnessctl waybar eww ristate swaynotificationcenter
     sx rofi pulseaudio
     xmobar xclip
@@ -96,17 +103,6 @@
         black
         isort
       ]);
-    };
-
-    mpv = {
-      enable = true;
-      package = (
-        pkgs.mpv-unwrapped.wrapper {
-          mpv = pkgs.mpv-unwrapped.override {
-            ffmpeg = pkgs.ffmpeg-full;
-          };
-        }
-      );
     };
 
     zoxide = {
@@ -168,11 +164,9 @@ enable: true
 
 
     git = {
-      package = pkgs.gitAndTools.gitFull;
+      package = pkgs.gitFull;
       #lazygit
       enable = true;
-      userName = "b4sqss";
-      userEmail = "basqs@tutanota.com";
       ignores = [
         "**/.~*"
         "*.swp"
@@ -183,14 +177,18 @@ enable: true
         ".direnv"
         ".ccls-cache/"
       ];
-      aliases = {
-        co = "checkout";
-        ci = "commit";
-        s = "status";
-        st = "status";
-        cl = "clone";
-      };
-      extraConfig = {
+      settings = {
+        user = {
+          name = "b4sqss";
+          email = "basqs@tutanota.com";
+        };
+        alias = {
+          co = "checkout";
+          ci = "commit";
+          s = "status";
+          st = "status";
+          cl = "clone";
+        };
         core.editor = "emacs";
         protocol.keybase.allow = "always";
         pull.rebase = "false";
@@ -204,15 +202,17 @@ enable: true
   gtk = {
     enable = true;
     theme = {
-      name = "Breeze-Dark";
-      package = pkgs.libsForQt5.breeze-gtk;
+      # name = "Breeze-Dark";
+      # package = pkgs.libsForQt5.breeze-gtk;
+      name = "Qogir-Dark";
+      package = pkgs.qogir-theme;
     };
     iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.catppuccin-papirus-folders.override {
-        flavor = "mocha";
-        accent = "lavender";
-      };
+       name = "Papirus-Dark";
+       package = pkgs.catppuccin-papirus-folders.override {
+         flavor = "mocha";
+         accent = "lavender";
+       };
     };
     cursorTheme = {
       name = "Breeze";
@@ -227,7 +227,7 @@ enable: true
     platformTheme.name = "gtk";
     style = {
       name = "gtk2";
-      package = pkgs.libsForQt5.breeze-qt5;
+      package = pkgs.kdePackages.breeze;
     };
   };
 
@@ -258,11 +258,11 @@ enable: true
     # " = "libreoffice"
 
 
-    "text/html" = "zen.desktop";
-    "x-scheme-handler/http" = "zen.desktop";
-    "x-scheme-handler/https" = "zen.desktop";
-    "x-scheme-handler/about" = "zen.desktop";
-    "x-scheme-handler/unknown" = "zen.desktop";
+    "text/html" = "firefox.desktop";
+    "x-scheme-handler/http" = "firefox.desktop";
+    "x-scheme-handler/https" = "firefox.desktop";
+    "x-scheme-handler/about" = "firefox.desktop";
+    "x-scheme-handler/unknown" = "firefox.desktop";
 
     "application/x-bittorrent" = "org.qbittorrent.qBittorrent.desktop";
     "x-scheme-handler/magnet" = "org.qbittorrent.qBittorrent.desktop";
@@ -283,19 +283,19 @@ enable: true
 
   # Alternativa ao stow
   home.file = {
-    ".zshrc".source = "${config.home.homeDirectory}/nixflake/notebook/config/zsh/.zshrc";
-    ".zprofile".source = "${config.home.homeDirectory}/nixflake/notebook/config/zsh/.zprofile";
-    ".p10k.zsh".source = "${config.home.homeDirectory}/nixflake/notebook/config/zsh/.p10k.zsh";
+    ".zshrc".source = "${self}/notebook/config/zsh/.zshrc";
+    ".zprofile".source = "${self}/notebook/config/zsh/.zprofile";
+    ".p10k.zsh".source = "${self}/notebook/config/zsh/.p10k.zsh";
 
-    ".config/tmux".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/tmux";
+    ".config/tmux".source = config.lib.file.mkOutOfStoreSymlink "${self}/notebook/config/tmux";
 
-    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/nvim";
-    ".config/emacs/init.el".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/emacs/init.el";
-    ".config/emacs/etc/yasnippet".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/emacs/etc/yasnippet";
+    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${self}/notebook/config/nvim";
+    ".config/emacs/init.el".source = config.lib.file.mkOutOfStoreSymlink "${self}/notebook/config/emacs/init.el";
+    ".config/emacs/etc/yasnippet".source = config.lib.file.mkOutOfStoreSymlink "${self}/notebook/config/emacs/etc/yasnippet";
 
-    ".config/river".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/river";
-    ".config/waybar".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/waybar";
-    ".config/swaync".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixflake/notebook/config/swaync";
+    ".config/river".source = config.lib.file.mkOutOfStoreSymlink "${self}/notebook/config/river";
+    ".config/waybar".source = config.lib.file.mkOutOfStoreSymlink "${self}/notebook/config/waybar";
+    ".config/swaync".source = config.lib.file.mkOutOfStoreSymlink "${self}/notebook/config/swaync";
   };
 
   home.stateVersion = "24.11";

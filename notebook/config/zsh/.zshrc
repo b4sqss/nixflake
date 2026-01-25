@@ -133,6 +133,7 @@ export PATH="~/.local/bin:$PATH"
 export LEDGER_FILE="/home/tp/Documents/obsidian/hledger/2025.journal"
 export LIBVIRT_DEFAULT_URI="qemu:///system"
 export GOOGLE_CLOUD_PROJECT="lexical-aileron-458919-s3"
+export LIBVIRT_DEFAULT_URI="qemu:///system"
 
 # nnn config
 export BLK="0B"

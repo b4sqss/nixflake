@@ -11,7 +11,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.default
+      # inputs.home-manager.nixosModules.default
     ];
 
   # Bootloader.
@@ -75,36 +75,10 @@
     };
 
     # AI
-    ollama = {
-      enable = false;
-      acceleration = "rocm";
-    };
-
-    mysql = {
-      enable = false;
-      package = pkgs.mariadb;
-    };
-
-    postgresql = {
-      enable = true;
-      ensureDatabases = [ "Mult" ];
-      settings = {
-        port = 5432;
-      };
-      authentication = pkgs.lib.mkOverride 10 ''
-    local all       all     trust
-# TYPE  DATABASE  USER      ADDRESS           METHOD
-# Regra para permitir que o usuário 'tp' se conecte à base 'Mult' localmente
-host    Mult      tp        127.0.0.1/32      scram-sha-256
-host    Mult      tp        ::1/128           scram-sha-256
-
-# Regra para permitir que o usuário 'tp' se conecte de qualquer máquina na rede local
-host    Mult      tp        192.168.1.0/24      scram-sha-256
-
-    '';
-    };
-
-    udev.packages = [ pkgs.android-udev-rules ];
+    # ollama = {
+    #   enable = false;
+    #   acceleration = "rocm";
+    # };
 
     # GUI and xserver
     desktopManager.gnome.enable = true;
@@ -129,6 +103,12 @@ host    Mult      tp        192.168.1.0/24      scram-sha-256
       nssmdns4 = true;
       openFirewall = true;
     };
+
+    fprintd = {
+      enable = true;
+      tod.enable = true;
+      tod.driver = pkgs.libfprint-2-tod1-goodix;
+    };
   };
 
   hardware = {
@@ -138,16 +118,10 @@ host    Mult      tp        192.168.1.0/24      scram-sha-256
       enable = true;
       enable32Bit = true;
     };
-
-    amdgpu.amdvlk = {
-      enable = true;
-      support32Bit.enable = true;
-    };
   };
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -173,7 +147,7 @@ host    Mult      tp        192.168.1.0/24      scram-sha-256
     '';
 
   programs.dconf.enable = true;
-  programs.river= {
+  programs.river-classic= {
     enable = true;
     # xwayland.enable = true;
   };
@@ -187,24 +161,17 @@ host    Mult      tp        192.168.1.0/24      scram-sha-256
   documentation.nixos.enable = true;
   environment.extraOutputsToInstall = [ "info" "man" "devman" ];
 
-# virtualisation.libvirtd = {
-#   enable = true;
-#   qemu = {
-#     package = pkgs.qemu_kvm;
-#     runAsRoot = true;
-#     swtpm.enable = true;
-#     ovmf = { # not needed in NixOS 25.11 since https://github.com/NixOS/nixpkgs/pull/421549
-#       enable = true;
-#       packages = [(pkgs.OVMF.override {
-#         secureBoot = true;
-#         tpmSupport = true;
-#       }).fd];
-#     };
-#   };
-# };
+  virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd.qemu = {
+    swtpm.enable = true;
+  };
+  virtualisation.spiceUSBRedirection.enable = true;
+
+  virtualisation.podman.enable = true;
 
   virtualisation.docker = {
     enable = true;
+    # extraOptions = [ "--security-opt seccomp=unconfined" ];
     rootless = {
       enable = true;
       setSocketVariable = true;
@@ -222,12 +189,12 @@ host    Mult      tp        192.168.1.0/24      scram-sha-256
     ];
 
   };
-  home-manager = {
-    extraSpecialArgs = {inherit inputs;};
-    users = {
-      "tp" = import ./home.nix;
-    };
-  };
+  # home-manager = {
+  #   extraSpecialArgs = {inherit inputs;};
+  #   users = {
+  #     "tp" = import ./home.nix;
+  #   };
+  # };
   environment.pathsToLink = ["/share/zsh"];
   environment.binsh = "${pkgs.dash}/bin/dash";
 
@@ -247,7 +214,7 @@ host    Mult      tp        192.168.1.0/24      scram-sha-256
     # vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     distrobox
     wget neovim
-    river
+    river-classic
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

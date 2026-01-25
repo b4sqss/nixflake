@@ -353,6 +353,17 @@
       doom-modeline-buffer-encoding nil)
 (display-battery-mode)
 
+(use-package dashboard
+  :ensure t
+  :config
+  (dashboard-setup-startup-hook))
+(setq initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name)))
+(setq dashboard-items '((recents   . 5)
+                        (bookmarks . 5)
+                        (projects  . 5)
+                        (agenda    . 5)
+                        (registers . 5)))
+
 ;; colortheme
 (use-package doom-themes
   ;; :init (load-theme 'doom-tokyo-night t))
@@ -384,9 +395,9 @@
 ;;   (dimmer-configure-magit)
 ;;   (dimmer-configure-posframe))
 
-(add-hook 'server-after-make-frame-hook '(lambda ()
-                                           (org-todo-list)
-                                           (delete-other-windows)))
+;; (add-hook 'server-after-make-frame-hook '(lambda ()
+;;                                            (org-todo-list)
+;;                                            (delete-other-windows)))
 
 ;; openwith
 (use-package openwith
@@ -860,15 +871,15 @@
 (setq-default org-latex-pdf-process
     (list "latexmk -pdflatex='%latex -shell-escape -interaction nonstopmode' -pdf -output-directory=%o %f"))
 
-;; obsidian for syncing
-(use-package obsidian
-  :config
-   (global-obsidian-mode t)
-  (obsidian-backlinks-mode t)
-  :custom
-  ;; location of obsidian vault
-  (obsidian-directory "~/Documents/obsidian/")
-  (obsidian-daily-note "~/Documents/obsidian/Diário/"))
+;; ;; obsidian for syncing
+;; (use-package obsidian
+;;   :config
+;;    (global-obsidian-mode t)
+;;   (obsidian-backlinks-mode t)
+;;   :custom
+;;   ;; location of obsidian vault
+;;   (obsidian-directory "~/Documents/obsidian/")
+;;   (obsidian-daily-note "~/Documents/obsidian/Diário/"))
 
 ;; pdf
 (use-package pdf-tools

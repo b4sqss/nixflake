@@ -147,30 +147,34 @@
 }
 
 /* Workspaces stuff */
-#tags {
-    font-weight: bold; /* Somewhy the bar-wide setting is ignored*/
-    padding: 0;
-    /*color: #999;*/
-    font-size: 1em;
-    background: @nord_bg_blue;
-    color: @light;
+#workspaces {
+    background: @nord_bg_blue
 }
-
-#tags button.occupied, #workspaces bytton.occupied{
-    background-color: #434C5E;
-    color: @light;
-}
-
-#tags button.focused, #workspaces button.focused{
-  background-color: @light;
-  color: @bg;
-}
-
-#tags button:hover {
+#workspaces button:hover {
+  color: @fg;
   box-shadow: inherit;
   text-shadow: inherit;
 }
 
+#workspaces button {
+  padding: 0 5px;
+  color: #434C5E;
+  margin: 4px 0 4px 0;
+  transition: color 200ms ease-in-out;
+}
+
+#workspaces button.selected {
+  color: #5E81AC;
+}
+
+#workspaces button.active {
+  color: #D8DEE9;
+  background: @workspacesfocused;
+}
+
+#workspaces button.urgent {
+  color: #BF616A;
+}
 #window {
     margin-right: 80px;
     margin-left: 80px;

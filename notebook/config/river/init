@@ -24,8 +24,9 @@ riverctl map normal Super Space spawn "rofi -show drun"
 
 # riverctl map normal Super Space spawn "bemenu-run -i -p '' --fn 'IosevkaNerdFont 14' --hb '#ebdbb2' --hf '#282828' --nb '#282828' --nf '#ebdbb2' --tb '#282828' --tf '#ebdbb2' --ab '#282828' --af '#ebdbb2' --cb '#282828' --cf '#ebdbb2' --fb '#282828' --ff '#ebdbb2' --fbb '#282828' --fbf '#ebdbb2' -l 10 -W 0.5"
 
-riverctl map normal Super+Shift L spawn "swaylock --screenshots --clock --indicator --indicator-radius 100 --indicator-thickness 7 --effect-blur 7x5  --effect-vignette 0.5:0.5 --ring-color 444b6a --key-hl-color a9b1d6 --line-color 00000000 --inside-color 1a1b2688 --separator-color 00000000 --text-color a9b1d6 --grace 2 --fade-in 0.2 --font IosevkaNerdFont"
+# riverctl map normal Super+Shift L spawn "swaylock --screenshots --clock --indicator --indicator-radius 100 --indicator-thickness 7 --effect-blur 7x5  --effect-vignette 0.5:0.5 --ring-color 444b6a --key-hl-color a9b1d6 --line-color 00000000 --inside-color 1a1b2688 --separator-color 00000000 --text-color a9b1d6 --grace 2 --fade-in 0.2 --font IosevkaNerdFont"
 
+riverctl map normal Super+Shift L spawn "hyprlock"
 # Super+Q to close the focused view
 riverctl map normal Super Q close
 
@@ -189,12 +190,17 @@ rivertile -view-padding 0 -outer-padding 0 -main-ratio 0.5 &
 riverctl spawn 'swaybg -m fill -i ~/Pictures/wallpapers/1694053508715626.png'
 riverctl spawn 'wlsunset -l -20 -L -44'
 riverctl spawn 'emacs --daemon'
-# riverctl spawn 'waybar'
-riverctl spawn 'eww open bar'
+riverctl spawn 'waybar'
+riverctl spawn 'hypridle'
+#riverctl spawn 'eww open bar'
 riverctl spawn 'swaync'
 riverctl spawn 'if [[ $(wlr-randr --json | jq ".[0].model" -r) = "ARZOPA" ]]; then wlr-randr --output $(wlr-randr --json | jq ".[0].name" -r) --mode 1920x1080 --transform 90; fi'
 # riverctl spawn 'wl-paste -t text -w xclip -selection clipboard'
 riverctl input pointer-1267-12691-ELAN06C7:00_04F3:3193_Touchpad tap enabled &
+
+riverctl spawn "export 'XDG_CURRENT_DESKTOP=river'"
+
+riverctl spawn "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP DISPLAY"
 
 
 riverctl map normal Super A spawn "emacsclient -c -n"
@@ -204,6 +210,6 @@ riverctl map normal Super E spawn "emacsclient --eval '(emacs-everywhere)'"
 riverctl map normal Super P spawn "okular"
 riverctl map normal Super+Shift P spawn "obsidian"
 riverctl map normal Super+Shift F spawn "pcmanfm"
-riverctl map normal Super O spawn "zen"
+riverctl map normal Super O spawn "firefox"
 riverctl map normal Super+Shift O spawn "brave"
 riverctl map normal Super+Shift W spawn "pkill waybar && waybar"

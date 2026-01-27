@@ -71,11 +71,11 @@
     kdePackages.kdenlive
 
     ## DESKTOP UTILITIES
-    river-classic hyprland
+    river-classic hyprland lightlocker hypridle hyprlock wlopm hyprpaper hyprsunset
     grim slurp seatd maim wl-clipboard wlogout networkmanagerapplet
     mpv-unwrapped
     swaybg wlsunset brightnessctl waybar eww ristate swaynotificationcenter
-    sx rofi pulseaudio
+    sx rofi pulseaudio wofi
     xmobar xclip
   ];
 
@@ -237,6 +237,7 @@ enable: true
       extraPortals = with pkgs; [
         xdg-desktop-portal
         xdg-desktop-portal-gtk
+        xdg-desktop-portal-hyprland
       ];
       config.common.default = "*";
     };
@@ -287,9 +288,10 @@ enable: true
     ".zprofile".source = "${self}/notebook/config/zsh/.zprofile";
     ".p10k.zsh".source = "${self}/notebook/config/zsh/.p10k.zsh";
 
-    ".config/tmux".source = config.lib.file.mkOutOfStoreSymlink "${self}/notebook/config/tmux";
-
-    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${self}/notebook/config/nvim";
+    ".config/nvim/init.lua".source = config.lib.file.mkOutOfStoreSymlink "${self}/notebook/config/nvim/init.lua";
+    ".config/nvim/lua".source = config.lib.file.mkOutOfStoreSymlink "${self}/notebook/config/nvim/lua";
+    ".config/nvim/snippets".source = config.lib.file.mkOutOfStoreSymlink "${self}/notebook/config/nvim/snippets";
+    ".config/nvim/after".source = config.lib.file.mkOutOfStoreSymlink "${self}/notebook/config/nvim/after";
     ".config/emacs/init.el".source = config.lib.file.mkOutOfStoreSymlink "${self}/notebook/config/emacs/init.el";
     ".config/emacs/etc/yasnippet".source = config.lib.file.mkOutOfStoreSymlink "${self}/notebook/config/emacs/etc/yasnippet";
 

@@ -1,11 +1,9 @@
 {
     "layer": "bottom", // Waybar at top layer
     "position": "bottom", // Waybar position (top|bottom|left|right)
-    // "height": 25, // Waybar height (to be removed for auto height)
+    "height": 32, // Waybar height (to be removed for auto height)
     // Archived modules
-    // "custom/gpu", "bluetooth",  "custom/weather", "temperature", "sway/window"
-    // Choose the order of the modules
-    "modules-left": ["river/tags" ],
+    "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock" ],
     "modules-right": [ "pulseaudio", "bluetooth", "cpu", "memory", "battery", "network", "tray", "custom/notification", "custom/power" ],
     // Modules configuration
@@ -19,14 +17,13 @@
         },
         "on-click": "blueberry"
     },
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        },
-        "tooltip": "true"
-    },
+  "hyprland/window": {
+    "separate-outputs": false
+  },
+  "hyprland/workspaces": {
+    "on-click": "activate",
+    "sort-by-number": true,
+  },
     "tray": {
         //"icon-size": 11,
         "spacing": 5

@@ -120,8 +120,11 @@ alias fzf-yt="nix-shell -p jq ueberzug && ytfzf"
 alias grep="grep --colour=auto"
 alias dirdu="du -ah . | sort -hr | head -n 20"
 alias vim="nvim"
-alias icloud-download="ICLOUD_EMAIL=bernardoquintao@icloud.com icloud-download"
 alias sudo="doas"
+alias pyenv="nix shell github:GuillaumeDesforges/fix-python && source .venv/bin/activate && fix-python --venv .venv"
+
+alias openfoam="apptainer run -f docker://microfluidica/openfoam:latest"
+alias paraview="QT_STYLE_OVERRIDE=Fusion && paraview"
 
 # exports
 export EDITOR="nvim"

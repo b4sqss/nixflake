@@ -10,27 +10,38 @@
 
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      # inputs.home-manager.nixosModules.default
+    ./hardware-configuration.nix
+# inputs.home-manager.nixosModules.default
     ];
 
-  # Bootloader.
-  boot = {
-    loader.systemd-boot.enable = true;
-    loader.efi.canTouchEfiVariables = true;
-    initrd.kernelModules = [ "amdgpu" ];
-    # initrd.luks.devices.cryptroot.device = "/dev/disk/by-uuid/2EEC612FEC60F30F";
+# Bootloader.
+  boot.loader = {
+    grub = {
+      enable = true;
+      devices = [ "nodev" ];
+      efiSupport = true;
+      useOSProber = true;
+#theme = "${self}/notebook/config/grub/dedsec";
+      dedsec-theme = {
+        enable = true;
+        style = "sitedown";
+        icon = "color";
+        resolution = "1080p";
+      };
+    };
+    efi.canTouchEfiVariables = true;
   };
+  boot.initrd.kernelModules = [ "amdgpu" ];
 
-  # Wifi and stuff
+# Wifi and stuff
   networking = {
     hostName = "nixos"; # Define your hostname.
-    networkmanager.enable = true;
+      networkmanager.enable = true;
   };
 
-  # Set your time zone.
+# Set your time zone.
   time.timeZone = "America/Sao_Paulo";
-  # Select internationalisation properties.
+# Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "pt_BR.UTF-8";
@@ -43,10 +54,10 @@
     LC_TELEPHONE = "pt_BR.UTF-8";
     LC_TIME = "pt_BR.UTF-8";
   };
-  # Configure console keymap
+# Configure console keymap
   console.keyMap = "br-abnt2";
 
-  # Taking care of the battery
+# Taking care of the battery
   powerManagement.enable = true;
   services = {
     thermald.enable = true;
@@ -66,7 +77,7 @@
       };
     };
 
-    # Taking care of my ssd
+# Taking care of my ssd
     cron = {
       enable = true;
       systemCronJobs = [
@@ -74,13 +85,16 @@
       ];
     };
 
-    # AI
-    # ollama = {
-    #   enable = false;
-    #   acceleration = "rocm";
-    # };
+# Clock
+    chrony.enable = true;
 
-    # GUI and xserver
+# AI
+# ollama = {
+#   enable = false;
+#   acceleration = "rocm";
+# };
+
+# GUI and xserver
     desktopManager.gnome.enable = true;
     displayManager.gdm.enable = true;
     displayManager.gdm.wayland = true;
@@ -94,9 +108,9 @@
       };
     };
 
-    # displayManager.ly.enable = true;
+# displayManager.ly.enable = true;
 
-    # Enable printing
+# Enable printing
     printing.enable = true;
     avahi = {
       enable = true;
@@ -120,17 +134,18 @@
     };
   };
 
-  # Enable sound with pipewire.
+# Enable sound with pipewire.
   services.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
+# If you want to use JACK applications, uncomment this
     jack.enable = true;
   };
-  security.sudo.enable = false;
+  security.sudo.enable = true;
+  security.pam.services.login.enableGnomeKeyring = true;
   security.doas.enable = true;
   security.doas.extraRules = [{
     users = [ "basqs" ];
@@ -149,11 +164,11 @@
   programs.dconf.enable = true;
   programs.river-classic= {
     enable = true;
-    # xwayland.enable = true;
+# xwayland.enable = true;
   };
   programs.hyprland.enable = true;
 
-  # Enable touchpad support (enabled default in most desktopManager).
+# Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
   documentation.dev.enable = true;
@@ -172,14 +187,14 @@
 
   virtualisation.docker = {
     enable = true;
-    # extraOptions = [ "--security-opt seccomp=unconfined" ];
+# extraOptions = [ "--security-opt seccomp=unconfined" ];
     rootless = {
       enable = true;
       setSocketVariable = true;
     };
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+# Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.tp = {
     shell = pkgs.zsh;
     isNormalUser = true;
@@ -190,12 +205,12 @@
     ];
 
   };
-  # home-manager = {
-  #   extraSpecialArgs = {inherit inputs;};
-  #   users = {
-  #     "tp" = import ./home.nix;
-  #   };
-  # };
+# home-manager = {
+#   extraSpecialArgs = {inherit inputs;};
+#   users = {
+#     "tp" = import ./home.nix;
+#   };
+# };
   environment.pathsToLink = ["/share/zsh"];
   environment.binsh = "${pkgs.dash}/bin/dash";
 
@@ -209,33 +224,33 @@
     enable = true;
   };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+# List packages installed in system profile. To search, run:
+# $ nix search wget
   environment.systemPackages = with pkgs; [
-    # vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+# vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     distrobox
-    wget neovim
-    river-classic
+      wget neovim
+      river-classic
   ];
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
+# Some programs need SUID wrappers, can be configured further or are
+# started in user sessions.
+# programs.mtr.enable = true;
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
   };
 
-  # List services that you want to enable:
+# List services that you want to enable:
 
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+# Enable the OpenSSH daemon.
+# services.openssh.enable = true;
 
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+# Open ports in the firewall.
+  networking.firewall.allowedTCPPorts = [ 53317 ];
+  networking.firewall.allowedUDPPorts = [ 53317 ];
+# Or disable the firewall altogether.
+# networking.firewall.enable = false;
 
   fonts = {
     fontconfig = {
@@ -249,18 +264,18 @@
 
     packages = with pkgs; [
       iosevka
-      font-awesome
-      ibm-plex
-      emacs-all-the-icons-fonts
-      nerd-fonts.iosevka
+        font-awesome
+        ibm-plex
+        emacs-all-the-icons-fonts
+        nerd-fonts.iosevka
     ];
   };
 
-  # Auto updates
+# Auto updates
   system.autoUpgrade.enable = true;
   system.autoUpgrade.dates = "weekly";
 
-  # Auto cleanup
+# Auto cleanup
   nix.gc = {
     automatic = true;
     dates = "daily";

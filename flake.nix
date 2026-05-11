@@ -3,14 +3,23 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     zen-browser.url = "github:youwen5/zen-browser-flake";
-    winapps.url = "github:winapps-org/winapps";
     xremap.url = "github:xremap/nix-flake";
+    nix4nvchad = {
+      url = "github:nix-community/nix4nvchad";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    dedsec-grub-theme = {
+      url = gitlab:VandalByte/dedsec-grub-theme;
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... } @ inputs:
+  outputs = { self, nixpkgs, home-manager, dedsec-grub-theme, ... } @ inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -22,6 +31,7 @@
         specialArgs = { inherit inputs self; };
         modules = [
           home-manager.nixosModules.home-manager
+            dedsec-grub-theme.nixosModule
           ./notebook/configuration.nix
 
           inputs.xremap.nixosModules.default {

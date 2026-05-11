@@ -30,7 +30,7 @@
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (tooltip-mode -1)
-(set-fringe-mode -1)
+(set-fringe-mode 0)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (save-place-mode 1)
@@ -69,7 +69,7 @@
 (customize-set-variable 'scroll-preserve-screen-position t)
 
 ;; margins
-(setq-default left-margin-width 1 right-margin-width 1)
+;; (setq-default left-margin-width 1 right-margin-width 1)
 
 ;; I don't like writing yes/no
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -561,7 +561,6 @@
       org-hide-leading-stars t
       org-hide-emphasis-markers t
       org-pretty-entities t)
-(use-package olivetti-mode)
 (setq org-src-fontify-natively t
 	  org-src-tab-acts-natively t
       org-edit-src-content-indentation 0)
@@ -746,29 +745,21 @@
 ;;       '((:auto-group t))))
 ;;  (org-agenda-list))
 
-
-(defvar center-document-desired-width 90
-  "The desired width of a document centered in the window.")
-
-(defun center-document--adjust-margins ()
-  ;; Reset margins first before recalculating
-  (set-window-parameter nil 'min-margins nil)
-  (set-window-margins nil nil)
-
-  ;; Adjust margins if the mode is on
-  (when center-document-mode
-    (let ((margin-width (max 0
-			                 (truncate
-			                  (/ (- (window-width)
-				                    center-document-desired-width)
-				                 2.0)))))
-      (when (> margin-width 0)
-	    (set-window-parameter nil 'min-margins '(0 . 0))
-	    (set-window-margins nil margin-width margin-width)))))
-
 ;; (use-package org-modern
 ;;   :hook
 ;;   (org-mode . global-org-modern-mode))
+
+(use-package olivetti
+  :ensure t
+  :bind ("C-c o" . olivetti-mode) ;; Atalho opcional
+  :config
+  (setq olivetti-body-width 0.75)   ;; Define a largura do texto (igual ao seu desired-width anterior)
+  (setq olivetti-minimum-body-width 50) ;; Segurança para telas pequenas
+  (setq olivetti-recall-visual-line-mode-entry-state t))
+
+;; Se quiser ativar automaticamente no LaTeX (já que o erro ocorreu num .tex) ou Org:
+(add-hook 'org-mode-hook 'olivetti-mode)
+(add-hook 'LaTeX-mode-hook 'olivetti-mode)
 
 ;; LaTeX previews
 (use-package org-fragtog
@@ -812,17 +803,6 @@
 
 (use-package writeroom-mode
   :bind (("C-c w" . writeroom-mode)))
-
-(define-minor-mode center-document-mode
-  "Toggle centered text layout in the current buffer."
-  :lighter " Centered"
-  :group 'editing
-  (if center-document-mode
-      (add-hook 'window-configuration-change-hook #'center-document--adjust-margins 'append 'local)
-    (remove-hook 'window-configuration-change-hook #'center-document--adjust-margins 'local))
-  (center-document--adjust-margins))
-
-(add-hook 'org-mode-hook #'center-document-mode)
 
 ;; auto-tangle
 (defun tangle-all-org-on-save-h ()
@@ -897,6 +877,14 @@
   :ensure t
   :config
   :hook (pdf-view-mode . pdf-view-restore-mode))
+
+(use-package calibredb
+  :config
+  (setq calibredb-root-dir "~/Documents/Calibre Library")
+  ;; for folder driver metadata: it should be .metadata.calibre
+  (setq calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir))
+  (setq calibredb-library-alist '(("~/Documents/Calibre Library" (name . "Calibre")))))
+
 
 (use-package smartparens
   :config (require 'smartparens-config))
@@ -1109,39 +1097,3 @@
   :config
   (setq evil-ledger-sort-key "S")
   (add-hook 'ledger-mode-hook #'evil-ledger-mode))
-
-(use-package notmuch
-  :ensure t
-  :bind (("C-c m" . notmuch))
-  :config
-  (setq notmuch-saved-searches '((:name "Unread"
-                                        :query "tag:inbox and tag:unread"
-                                        :count-query "tag:inbox and tag:unread"
-                                        :sort-order newest-first)
-                                 (:name "Inbox"
-                                        :query "tag:inbox"
-                                        :count-query "tag:inbox"
-                                        :sort-order newest-first)
-                                 (:name "Archive"
-                                        :query "tag:archive"
-                                        :count-query "tag:archive"
-                                        :sort-order newest-first)
-                                 (:name "Sent"
-                                        :query "tag:sent or tag:replied"
-                                        :count-query "tag:sent or tag:replied"
-                                        :sort-order newest-first)
-                                 (:name "Trash"
-                                        :query "tag:deleted"
-                                        :count-query "tag:deleted"
-                                        :sort-order newest-first))))
-(use-package consult-notmuch)
-(use-package notmuch-indicator)
-
-(add-hook 'notmuch-hello-mode-hook
-          '(lambda ()
-             (run-with-timer 0 600  ;; every 5 min fetch email
-                             '(lambda ()
-                                (if
-                                    (get-buffer "*notmuch-hello*")  ;; if notmuch buffer exists fetch email
-                                    (async-shell-command "pushd /home/tp/Mail/normal.gmail; gmi sync; popd; notmuch new"))
-                                (cancel-function-timers "no-output-shell-run")))))  ;; cancel timer if buffer does not exist
